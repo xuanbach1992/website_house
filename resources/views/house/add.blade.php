@@ -30,11 +30,11 @@
             </div>
             <div class="form-group">
                 <label for="exampleFormControlInput1"><h6>Ảnh phòng : </h6></label>
-                <input type="file" class="form-control" >
+                <input type="file" class="form-control">
             </div>
             <div class="form-group">
                 <label for="exampleFormControlTextarea1"><h6>Mô tả : </h6></label>
-                <textarea class="form-control"  rows="3"></textarea>
+                <textarea class="form-control" rows="3"></textarea>
             </div>
             <div class="form-group">
                 <label for="exampleFormControlInput1"><h6>Giá tiền theo đêm : </h6></label>
