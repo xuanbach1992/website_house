@@ -20,7 +20,7 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::prefix('/user')->group(function () {
+Route::prefix('/users')->group(function () {
     Route::get('/', 'HomeController@index')->name('home');
     Route::post('/edit', 'HomeController@editShow')->name('user.edit');
 });
