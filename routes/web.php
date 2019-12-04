@@ -1,8 +1,8 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
-use Illuminate\Support\Facades\Auth;
 
 Route::get('/', function () {
     return view('welcome');
@@ -11,8 +11,8 @@ Route::get('/', function () {
 Auth::routes();
 
 
-Route::prefix('houses')->group(function (){
-    Route::get('/create','HouseController@create')->name('house.showFormCreate');
+Route::prefix('/houses')->group(function (){
+    Route::get('/','HouseController@create')->name('house.showFormCreate');
     Route::post('/create','HouseController@add')->name('house.add');
   });
 
