@@ -10,6 +10,7 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-//Route::prefix('house')->group(function (){
-//    Route::get('/create','')
-//});
+Route::prefix('house')->group(function (){
+    Route::get('/create','HouseController@create');
+
+});
