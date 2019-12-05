@@ -25,7 +25,7 @@
     <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
         <div class="container">
             <a class="navbar-brand" href="{{ url('/') }}">
-                {{ config('app.name', 'Laravel') }}
+               Home
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                     aria-controls="navbarSupportedContent" aria-expanded="false"
@@ -55,7 +55,7 @@
                         <li class="nav-item dropdown">
                             <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                {{ Auth::user()->name }} <span class="caret"></span>
+                                {{ \Illuminate\Support\Facades\Auth::user()->name }} <span class="caret"></span>
                             </a>
 
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
@@ -64,7 +64,7 @@
                                                      document.getElementById('logout-form').submit();">
                                     {{ __('Logout') }}
                                 </a>
-                                <a class="dropdown-item" href="{{ route('user.edit') }}"
+                                <a class="dropdown-item" href="{{ route('user.edit',\Illuminate\Support\Facades\Auth::user()->id)}}"
                                         onclick="event.preventDefault();
                                                      document.getElementById('edit_user').submit();">
                                     {{ __('Edit Profile') }}
@@ -74,7 +74,7 @@
                                       style="display: none;">
                                     @csrf
                                 </form>
-                                <form id="edit_user" action="{{ route('user.edit') }}" method="POST"
+                                <form id="edit_user" action="{{ route('user.edit',\Illuminate\Support\Facades\Auth::user()->id)}}" method="POST"
                                       style="display: none;">
                                     @csrf
                                 </form>

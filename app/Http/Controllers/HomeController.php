@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -26,8 +27,19 @@ class HomeController extends Controller
         return view('home');
     }
 
-    public function editShow()
+    public function showFormEdit($id)
     {
-        dd(1);
+        $user = User::findOrFail($id);
+        return view('user.edit', compact('user'));
+    }
+
+    public function updateSuccess(Request $request, $id)
+    {
+        $user = User::findOrFail($id);
+        $user->name = $request->name;
+        $user->phone = $request->phone;
+        $user->address = $request->address;
+        $user->save();
+        return redirect('/users');
     }
 }
