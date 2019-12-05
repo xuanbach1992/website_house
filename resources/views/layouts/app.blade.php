@@ -169,6 +169,7 @@
         </div>
     </div>
 
+
     <div class="modal fade" id="exampleModalLong_1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
          aria-hidden="true">
         <div class="modal-dialog" role="document">
@@ -180,7 +181,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form id="form-change-password" role="form" method="POST" action="{{ url('/user/credentials') }}"
+                    <form id="form-change-password" role="form" method="POST" action="{{ route('user.editPass') }}"
                           novalidate class="form-horizontal">
                         @csrf
                         <div>
