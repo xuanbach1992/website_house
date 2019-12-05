@@ -28,9 +28,9 @@ class HouseValidationRequest extends FormRequest
             'address' => 'required',
             'house_type' => 'required',
             'room_type' => 'required',
-            'bedrooms' => 'required',
-            'bathroom' => 'required',
-            'price' => 'required'
+            'bedrooms' => 'required|integer',
+            'bathroom' => 'required|integer',
+            'price' => 'required|integer'
         ];
     }
 
@@ -42,8 +42,11 @@ class HouseValidationRequest extends FormRequest
             'house_type.required' => 'Kiểu nhà không được bỏ trống',
             'room_type.required' => 'Kiểu phòng không được bỏ trống',
             'bedrooms.required' => 'Số phòng ngủ không được bỏ trống',
+            'bedrooms.integer' => 'Phải nhập dữ liệu số',
             'bathroom.required' => 'Số phòng tắm không được bỏ trống',
+            'bathroom.integer' => 'Phải nhập dữ liệu số',
             'price.required' => 'Giá tiền không được bỏ trống',
+            'price.integer' => 'Phải nhập dữ liệu số'
         ];
     }
 }
