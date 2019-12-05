@@ -2,6 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 
+use Illuminate\Support\Facades\Auth;
+
+
 Route::get('/', function () {
     return view('welcome');
 });
@@ -9,13 +12,13 @@ Route::get('/', function () {
 Auth::routes();
 
 
-Route::prefix('house')->group(function (){
-    Route::get('/create','HouseController@create')->name('house.showFormCreate');
+Route::prefix('/houses')->group(function (){
+    Route::get('/','HouseController@create')->name('house.showFormCreate');
     Route::post('/create','HouseController@add')->name('house.add');
   });
 
 Route::prefix('/users')->group(function () {
     Route::get('/', 'HomeController@index')->name('home');
-    Route::post('/edit', 'HomeController@editShow')->name('user.edit');
-
+    Route::post('/{id}/edit', 'HomeController@showFormEdit')->name('user.edit');
+    Route::post('/{id}/update','HomeController@updateSuccess')->name('user.update');
 });
