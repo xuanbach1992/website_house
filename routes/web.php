@@ -17,7 +17,7 @@ Route::prefix('/houses')->group(function (){
   });
 
 Route::prefix('/users')->group(function () {
-    Route::get('/', 'HomeController@index')->name('home');
+//    Route::get('/', 'HomeController@index')->name('home');
     Route::post('/{id}/edit', 'HomeController@showFormEdit')->name('user.edit');
     Route::post('/{id}/update','HomeController@updateSuccess')->name('user.update');
 });

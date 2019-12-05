@@ -24,7 +24,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        return view('/');
     }
 
     public function showFormEdit($id)
@@ -40,6 +40,6 @@ class HomeController extends Controller
         $user->phone = $request->phone;
         $user->address = $request->address;
         $user->save();
-        return redirect('/users');
+        return redirect('/');
     }
 }
