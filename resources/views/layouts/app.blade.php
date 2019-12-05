@@ -169,6 +169,7 @@
         </div>
     </div>
 
+
     <div class="modal fade" id="exampleModalLong_1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
          aria-hidden="true">
         <div class="modal-dialog" role="document">
@@ -180,25 +181,31 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form action="">
+                    <form id="form-change-password" role="form" method="POST" action="{{ route('user.editPass') }}"
+                          novalidate class="form-horizontal">
                         @csrf
-                        <div class="form-group">
-                            <label>Email address</label>
-                            <input type="password" class="form-control">
+                        <div>
+                            <label class="control-label">Current Password</label>
+                            <div class="form-group">
+                                <input type="password" class="form-control" id="current-password"
+                                       name="current-password" placeholder="Password">
+                            </div>
+                            <div class="form-group">
+                                <label>New Password</label>
+                                <input type="password" class="form-control" id="password" name="password"
+                                       placeholder="Password">
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label">Re-enter Password</label>
+                                <input type="password" class="form-control" id="password_confirmation"
+                                       name="password_confirmation" placeholder="Re-enter Password">
+                            </div>
                         </div>
-                        <div class="form-group">
-                            <label>Password</label>
-                            <input type="password" class="form-control">
-                        </div>
-                        <div class="form-group">
-                            <label>Password</label>
-                            <input type="password" class="form-control">
+                        <div class="modal-footer form-group">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                            <button type="submit" class="btn btn-primary">Save changes</button>
                         </div>
                     </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                    <button type="submit" class="btn btn-primary">Save changes</button>
                 </div>
             </div>
         </div>
