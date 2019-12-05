@@ -1,34 +1,22 @@
 @extends('layouts.app')
 @section('content')
-    <form>
+    <form method="post" action="{{route('user.update',$user->id)}}">
         @csrf
         <div class="form-group">
             <label>Email address</label>
             <input type="email" class="form-control" disabled value="{{$user->email}}">
         </div>
         <div class="form-group">
-            <label for="exampleFormControlSelect1">Example select</label>
-            <select class="form-control" id="exampleFormControlSelect1">
-                <option>1</option>
-                <option>2</option>
-                <option>3</option>
-                <option>4</option>
-                <option>5</option>
-            </select>
+            <label>User Name</label>
+            <input type="text" class="form-control" name="name" value="{{$user->name}}">
         </div>
         <div class="form-group">
-            <label for="exampleFormControlSelect2">Example multiple select</label>
-            <select multiple class="form-control" id="exampleFormControlSelect2">
-                <option>1</option>
-                <option>2</option>
-                <option>3</option>
-                <option>4</option>
-                <option>5</option>
-            </select>
+            <label>Phone</label>
+            <input type="text" class="form-control" name="phone" value="{{$user->phone}}">
         </div>
         <div class="form-group">
-            <label for="exampleFormControlTextarea1">Example textarea</label>
-            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+            <label>Address</label>
+            <textarea class="form-control" rows="3" name="address">{{$user->address}}</textarea>
         </div>
         <div>
             <button class="btn btn-primary" type="submit">Update</button>

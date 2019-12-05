@@ -29,7 +29,17 @@ class HomeController extends Controller
 
     public function showFormEdit($id)
     {
-        $user = User::findorFail($id);
-        return view('user.edit',compact('user'));
+        $user = User::findOrFail($id);
+        return view('user.edit', compact('user'));
+    }
+
+    public function updateSuccess(Request $request, $id)
+    {
+        $user = User::findOrFail($id);
+        $user->name = $request->name;
+        $user->phone = $request->phone;
+        $user->address = $request->address;
+        $user->save();
+        return redirect('/users');
     }
 }
