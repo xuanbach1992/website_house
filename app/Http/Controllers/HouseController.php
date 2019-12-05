@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\House;
+use App\Http\Requests\HouseValidationRequest;
 use Illuminate\Http\Request;
 
 class HouseController extends Controller
@@ -11,7 +12,7 @@ class HouseController extends Controller
         return view('house.add');
     }
 
-    public function add(Request $request){
+    public function add(HouseValidationRequest $request){
         $house = new House();
         $house->name = $request->name;
         $house->address = $request->address;

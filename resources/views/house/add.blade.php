@@ -5,40 +5,89 @@
         <form method="post" action="{{route('house.add')}}">
             @csrf
             <div class="form-group">
-                <label for="exampleFormControlInput1"><h6>Tên chủ nhà : </h6></label>
-                <input type="text" class="form-control" name="name" placeholder="Nhập tên chủ nhà">
+                <label><h6>Tên chủ nhà : </h6></label>
+                <input type="text" class="form-control
+                @if($errors->has('name'))
+                        border-danger
+                @endif
+                " name="name" placeholder="Nhập tên chủ nhà">
+                @if($errors->has('name'))
+                    <p style="color: red;">{{$errors->first('name')}}</p>
+                @endif
             </div>
             <div class="form-group">
-                <label for="exampleFormControlInput1"><h6>Loại nhà : </h6></label>
-                <input type="text" class="form-control" name="house_type" placeholder="Nhập loại nhà">
+                <label><h6>Loại nhà : </h6></label>
+                <input type="text" class="form-control
+                @if($errors->has('house_type'))
+                        border-danger
+                @endif
+                " name="house_type" placeholder="Nhập loại nhà">
+                @if($errors->has('house_type'))
+                    <p style="color: red;">{{$errors->first('house_type')}}</p>
+                @endif
             </div>
             <div class="form-group">
-                <label for="exampleFormControlInput1"><h6>Loại phòng : </h6></label>
-                <input type="text" class="form-control" name="room_type" placeholder="Nhập loại phòng">
+                <label><h6>Loại phòng : </h6></label>
+                <input type="text" class="form-control
+                @if($errors->has('room_type'))
+                        border-danger
+                @endif
+                " name="room_type" placeholder="Nhập loại phòng">
+                @if($errors->has('room_type'))
+                    <p style="color: red;">{{$errors->first('room_type')}}</p>
+                @endif
             </div>
             <div class="form-group">
-                <label for="exampleFormControlInput1"><h6>Địa chỉ : </h6></label>
-                <input type="text" class="form-control" name="address" placeholder="Nhập địa chỉ">
+                <label><h6>Địa chỉ : </h6></label>
+                <input type="text" class="form-control
+                @if($errors->has('address'))
+                        border-danger
+                @endif
+                " name="address" placeholder="Nhập địa chỉ">
+                @if($errors->has('address'))
+                    <p style="color: red;">{{$errors->first('address')}}</p>
+                @endif
             </div>
             <div class="form-group">
-                <label for="exampleFormControlInput1"><h6>Số lượng phòng ngủ : </h6></label>
-                <input type="text" class="form-control" name="bedrooms" placeholder="Nhập số phòng ngủ">
+                <label><h6>Số lượng phòng ngủ : </h6></label>
+                <input type="text" class="form-control
+                @if($errors->has('bedrooms'))
+                        border-danger
+                @endif
+                " name="bedrooms" placeholder="Nhập số phòng ngủ">
+                @if($errors->has('bedrooms'))
+                    <p style="color: red;">{{$errors->first('bedrooms')}}</p>
+                @endif
             </div>
             <div class="form-group">
-                <label for="exampleFormControlInput1"><h6>Số lượng phòng tắm : </h6></label>
-                <input type="text" class="form-control" name="bathroom" placeholder="Nhập số phòng tắm">
+                <label><h6>Số lượng phòng tắm : </h6></label>
+                <input type="text" class="form-control
+                @if($errors->has('bathroom'))
+                        border-danger
+                @endif
+                " name="bathroom" placeholder="Nhập số phòng tắm">
+                @if($errors->has('bathroom'))
+                    <p style="color: red;">{{$errors->first('bathroom')}}</p>
+                @endif
             </div>
             <div class="form-group">
-                <label for="exampleFormControlInput1"><h6>Ảnh phòng : </h6></label>
+                <label><h6>Ảnh phòng : </h6></label>
                 <input type="file" class="form-control">
             </div>
             <div class="form-group">
-                <label for="exampleFormControlTextarea1"><h6>Mô tả : </h6></label>
+                <label><h6>Mô tả : </h6></label>
                 <textarea class="form-control" name="description" rows="3"></textarea>
             </div>
             <div class="form-group">
-                <label for="exampleFormControlInput1"><h6>Giá tiền theo đêm : </h6></label>
-                <input type="text" class="form-control" name="price" placeholder="Nhập giá phòng">
+                <label><h6>Giá tiền theo đêm : </h6></label>
+                <input type="text" class="form-control
+                @if($errors->has('price'))
+                        border-danger
+                @endif
+                " name="price" placeholder="Nhập giá phòng">
+                @if($errors->has('price'))
+                    <p style="color: red;">{{$errors->first('price')}}</p>
+                @endif
             </div>
             <div class="form-group">
                 <button class="btn btn-primary">Create</button>

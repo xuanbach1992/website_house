@@ -38,12 +38,12 @@ class HouseValidationRequest extends FormRequest
     {
         return [
             'name.required' => 'Tên không được bỏ trống',
-            'address' => 'Địa chỉ không được bỏ trống',
-            'house_type' => 'Kiểu nhà không được bỏ trống',
-            'room_type' => 'Kiểu phòng không được bỏ trống',
-            'bedrooms' => 'Số phòng ngủ không được bỏ trống',
-            'bathroom' => 'Số phòng tắm không được bỏ trống',
-            'price' => 'Giá tiền không được bỏ trống',
+            'address.required' => 'Địa chỉ không được bỏ trống',
+            'house_type.required' => 'Kiểu nhà không được bỏ trống',
+            'room_type.required' => 'Kiểu phòng không được bỏ trống',
+            'bedrooms.required' => 'Số phòng ngủ không được bỏ trống',
+            'bathroom.required' => 'Số phòng tắm không được bỏ trống',
+            'price.required' => 'Giá tiền không được bỏ trống',
         ];
     }
 }
