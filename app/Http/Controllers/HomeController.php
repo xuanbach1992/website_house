@@ -49,12 +49,12 @@ class HomeController extends Controller
     public function admin_credential_rules(array $data)
     {
         $messages = [
-            'current-password.required' => 'Please enter current password',
+            'current_password.required' => 'Please enter current password',
             'password.required' => 'Please enter password',
         ];
 
         $validator = Validator::make($data, [
-            'current-password' => 'required',
+            'current_password' => 'required',
             'password' => 'required|same:password',
             'password_confirmation' => 'required|same:password',
         ], $messages);
@@ -64,35 +64,27 @@ class HomeController extends Controller
 
     public function postCredentials(Request $request)
     {
-        if(Auth::check())
-        {
-            $request_data = $request->All();
-            $validator = $this->admin_credential_rules($request_data);
-            if($validator->fails())
-            {
-                return response()->json(array('error' => $validator->getMessageBag()->toArray()), 400);
-            }
-            else
-            {
-                $current_password = Auth::user()->password;
-                if(Hash::check($request_data['current-password'], $current_password))
-                {
-                    $user_id = Auth::user()->id;
-                    $obj_user = User::find($user_id);
-                    $obj_user->password = Hash::make($request_data['password']);;
-                    $obj_user->save();
-                    return redirect()->to('/');
+        if ($request->ajax()) {
+            if (Auth::check()) {
+                $request_data = $request->All();
+                $validator = $this->admin_credential_rules($request_data);
+                if ($validator->fails()) {
+                    return response()->json(array('error' => $validator->getMessageBag()->toArray()));
+                } else {
+                    $current_password = Auth::user()->password;
+                    if (Hash::check($request_data['current_password'], $current_password)) {
+                        $obj_user = Auth::user();
+                        $obj_user->password = Hash::make($request_data['password']);;
+                        $obj_user->save();
+                        return response()->json(array('success' => "thanh cong"));
+                    } else {
+                        $error = array('current-password' => 'Please enter correct current password');
+                        return response()->json(array('error' => $error));
+                    }
                 }
-                else
-                {
-                    $error = array('current-password' => 'Please enter correct current password');
-                    return response()->json(array('error' => $error), 400);
-                }
+//            } else {
+//                return redirect()->to('/');
             }
-        }
-        else
-        {
-            return redirect()->to('/');
         }
     }
 }
