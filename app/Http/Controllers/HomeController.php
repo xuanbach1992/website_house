@@ -87,4 +87,24 @@ class HomeController extends Controller
             }
         }
     }
+
+    public function indexTest(){
+        return view('page.home');
+    }
+
+    public function productTest(){
+        return view('page.product');
+    }
+
+    public function contactTest(){
+        return view('page.contact');
+    }
+
+    public function blogTest(){
+        return view('page.blog');
+    }
+
+    public function aboutTest(){
+        return view('page.about');
+    }
 }
