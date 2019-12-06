@@ -170,7 +170,6 @@
         </div>
     </div>
 
-    <p class="alert alert-danger text-message"></p>
     <div class="modal fade" id="exampleModalLong_1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
          aria-hidden="true">
         <div class="modal-dialog" role="document">
@@ -180,40 +179,31 @@
 
                 </div>
                 <div class="modal-body">
-                    {{--                    <form id="form-change-password" role="form" method="POST" action="{{ route('user.editPass') }}"--}}
-                    {{--                          novalidate class="form-horizontal">--}}
-                    @csrf
-                    <div>
-                        <label class="control-label">Current Password</label>
-                        <div class="form-group">
-                            <input type="password" class="form-control" id="current_password"
-                                   name="current-password" placeholder="Password">
-
+                    <form id="form-change-password" role="form" method="POST" action="{{ route('user.change_pass') }}"
+                          novalidate class="form-horizontal">
+                        @csrf
+                        <div>
+                            <label class="control-label">Current Password</label>
+                            <div class="form-group">
+                                <input type="password" class="form-control" id="current_password"
+                                       name="current-password" placeholder="Password">
+                            </div>
+                            <div class="form-group">
+                                <label>New Password</label>
+                                <input type="password" class="form-control" id="password" name="password"
+                                       placeholder="Password">
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label">Re-enter Password</label>
+                                <input type="password" class="form-control" id="password_confirmation"
+                                       name="password_confirmation" placeholder="Re-enter Password">
+                            </div>
                         </div>
-                        <div class="form-group">
-                            <label>New Password</label>
-                            <input type="password" class="form-control" id="passwordNew" name="password"
-                                   placeholder="Password">
+                        <div class="modal-footer form-group">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                            <button type="submit" class="btn btn-primary">Save changes</button>
                         </div>
-                        <div class="form-group">
-                            <label class="control-label">Re-enter Password</label>
-                            <input type="password" class="form-control" id="password_confirmation"
-                                   name="password_confirmation" placeholder="Re-enter Password">
-                        </div>
-                    </div>
-                    {{--                        <div class="alert alert-success hide">--}}
-                    {{--                        </div>--}}
-                    <div class="modal-footer form-group">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">Cancel</span>
-                        </button>
-                        <button type="button" class="btn btn-primary" id="change_password" data-dismiss="modal">Save
-                            changes
-                        </button>
-                        {{--                            <button type="submit" class="btn btn-primary" id="change_password">Save changes</button>--}}
-                    </div>
-
-                    {{--                    </form>--}}
+                    </form>
                 </div>
             </div>
         </div>

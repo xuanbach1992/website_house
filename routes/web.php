@@ -19,7 +19,7 @@ Route::prefix('/houses')->group(function (){
 
 Route::prefix('/users')->group(function () {
 //    Route::get('/', 'HomeController@index')->name('home');
-    Route::post('/change_pass','HomeController@postCredentials')->name('user.editPass');
+    Route::post('/change_pass','HomeController@postCredentials')->name('user.change_pass');
     Route::post('/{id}/edit', 'HomeController@showFormEdit')->name('user.edit');
     Route::post('/{id}/update','HomeController@updateSuccess')->name('user.update');
 
