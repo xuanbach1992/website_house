@@ -23,3 +23,10 @@ Route::prefix('/users')->group(function () {
     Route::post('/{id}/update','HomeController@updateSuccess')->name('user.update');
     Route::post('/editPass','HomeController@postCredentials')->name('user.editPass');
 });
+
+//code template
+Route::get('/testIndex','HomeController@indexTest')->name('index');
+Route::get('/testProduct','HomeController@productTest')->name('product');
+Route::get('/testContact','HomeController@contactTest')->name('contact');
+Route::get('/blogTest','HomeController@blogTest')->name('blog');
+Route::get('/about','HomeController@aboutTest')->name('about');
