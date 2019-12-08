@@ -80,7 +80,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form id="form-change-password" role="form" method="POST" action="{{ route('user.editPass') }}"
+                    <form id="form-change-password" role="form" method="POST" action="{{ route('user.change_pass') }}"
                           novalidate class="form-horizontal">
                         @csrf
                         <div>
