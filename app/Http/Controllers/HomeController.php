@@ -49,12 +49,12 @@ class HomeController extends Controller
     public function admin_credential_rules(array $data)
     {
         $messages = [
-            'current-password.required' => 'Please enter current password',
+            'current_password.required' => 'Please enter current password',
             'password.required' => 'Please enter password',
         ];
 
         $validator = Validator::make($data, [
-            'current-password' => 'required',
+            'current_password' => 'required',
             'password' => 'required|same:password',
             'password_confirmation' => 'required|same:password',
         ], $messages);

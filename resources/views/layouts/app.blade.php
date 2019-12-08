@@ -12,6 +12,14 @@
 
     <link rel="stylesheet" href="{{asset('source/fonts/icomoon/style.css')}}">
 
+    <title>{{ config('app.name', 'Laravel') }}</title>
+
+    <!-- Scripts -->
+    <script src="{{ asset('js/app.js') }}" defer></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="{{asset('js/ajax.js')}}"></script>
+
+
     <link rel="stylesheet" href="{{asset('source/css/bootstrap.min.css')}}">
     <link rel="stylesheet" href="{{asset('source/css/bootstrap-datepicker.css')}}">
     <link rel="stylesheet" href="{{asset('source/css/jquery.fancybox.min.css')}}">
@@ -31,12 +39,15 @@
 <body data-spy="scroll" data-target=".site-navbar-target" data-offset="300">
 
 
+
 <div class="site-wrap" id="home-section">
 
     <div class="site-mobile-menu site-navbar-target">
         <div class="site-mobile-menu-header">
             <div class="site-mobile-menu-close mt-3">
                 <span class="icon-close2 js-menu-toggle"></span>
+
+
             </div>
         </div>
         <div class="site-mobile-menu-body"></div>
