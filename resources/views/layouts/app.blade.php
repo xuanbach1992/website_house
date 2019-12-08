@@ -5,6 +5,7 @@
     <title>Realtors &mdash; Website Template by Colorlib</title>
     <meta charset="utf-8">
     <base href="{{asset('')}}">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <link href="https://fonts.googleapis.com/css?family=DM+Sans:300,400,700&display=swap" rel="stylesheet">
@@ -18,6 +19,9 @@
     <link rel="stylesheet" href="{{asset('source/css/owl.theme.default.min.css')}}">
     <link rel="stylesheet" href="{{asset('source/fonts/flaticon/font/flaticon.css')}}">
     <link rel="stylesheet" href="{{asset('source/css/aos.css')}}">
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
     <!-- MAIN CSS -->
     <link rel="stylesheet" href="{{asset('source/css/style.css')}}">
@@ -89,6 +93,9 @@
 <script src="{{asset('source/js/aos.js')}}"></script>
 
 <script src="{{asset('source/js/main.js')}}"></script>
+<script src="{{ asset('js/app.js') }}" defer></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="{{asset('js/ajax.js')}}"></script>
 
 </body>
 
