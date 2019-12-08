@@ -15,13 +15,9 @@
 {{--                    @endauth--}}
 {{--                </div>--}}
 {{--            @endif--}}
-
-            <div class="content">
-                <div class="title m-b-md">
-                    Welcome to the website
-                </div>
-
-            </div>
 {{--        </div>--}}
+<div class="container">
+   @include('page.product')
+</div>
     @endsection
 
