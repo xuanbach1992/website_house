@@ -129,7 +129,8 @@
                         <li><a href="{{route('blog')}}" class="nav-link">Blog</a></li>
                         <li><a href="{{route('contact')}}" class="nav-link">Liên Hệ</a></li>
 
-                                <li class="nav-item">
+
+                        <li class="nav-item">
                                     @guest
                                     <a class="nav-link" href="{{ route('login') }}" data-toggle="modal"
                                        data-target="#exampleModalLong_2">
@@ -141,7 +142,8 @@
                                     </li>
                                 @endif
                             @else
-                                <li class="nav-item dropdown">
+                            <li><a href="{{route('house.showFormCreate')}}" class="nav-link">Create Home</a></li>
+                            <li class="nav-item dropdown">
                                     <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                         {{ \Illuminate\Support\Facades\Auth::user()->name }} <span class="caret"></span>
