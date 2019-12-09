@@ -86,8 +86,8 @@
                         <div>
                             <label class="control-label">Current Password</label>
                             <div class="form-group">
-                                <input type="password" class="form-control" id="current-password"
-                                       name="current-password" placeholder="Password">
+                                <input type="password" class="form-control" id="current_password"
+                                       name="current_password" placeholder="Password">
                             </div>
                             <div class="form-group">
                                 <label>New Password</label>
