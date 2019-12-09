@@ -25,6 +25,7 @@ class CreateHousesTable extends Migration
             $table->integer('bathroom')->nullable();
             $table->longText('description')->nullable();
             $table->integer('price')->nullable();
+            $table->string('image')->nullable();
 
             $table->timestamps();
         });
