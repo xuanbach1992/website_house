@@ -1,16 +1,14 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
 use Illuminate\Support\Facades\Auth;
 
-
-Route::get('/', function () {
-    return view('welcome');
-})->name('home');
+//không dùng
+//Route::get('/', function () {
+//    return view('page.home');
+//})->name('home');
 
 Auth::routes();
-
 
 Route::prefix('/houses')->group(function (){
     Route::get('/','HouseController@create')->name('house.showFormCreate');
@@ -26,8 +24,8 @@ Route::prefix('/users')->group(function () {
 });
 
 //code template
-Route::get('/testIndex','HomeController@indexTest')->name('index');
-Route::get('/testProduct','HomeController@productTest')->name('product');
-Route::get('/testContact','HomeController@contactTest')->name('contact');
-Route::get('/blogTest','HomeController@blogTest')->name('blog');
+Route::get('/','HomeController@indexTest')->name('index');
+Route::get('/product','HomeController@productTest')->name('product');
+Route::get('/contact','HomeController@contactTest')->name('contact');
+Route::get('/blog','HomeController@blogTest')->name('blog');
 Route::get('/about','HomeController@aboutTest')->name('about');

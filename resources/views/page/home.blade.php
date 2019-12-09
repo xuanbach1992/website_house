@@ -225,13 +225,12 @@
         </div>
     </div>
 
-
     <!--Sản phẩm-->
     <div class="site-section bg-black block-14">
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-md-6 text-center">
-                    <h3 class="heading-29201 text-center text-white">Latest Properties</h3>
+                    <h3 class="heading-29201 text-center text-white">Những sản phẩm mới</h3>
 
                     <p class="mb-5 text-white">Perspiciatis quidem, harum provident, repellat sint officia quos fugit tempora id deleniti.</p>
                 </div>
@@ -257,8 +256,8 @@
                     <a href="property-single.html" class="d-block"><img src="source/images/img_2.jpg" alt="Image" class="img-fluid"></a>
                     <div class="text">
                         <div class="d-flex justify-content-between mb-3">
-                            <div class="sq d-flex align-items-center"><span class="wrap-icon icon-fullscreen
-"></span> <span>2911 Sq Ft.</span></div>
+                            <div class="sq d-flex align-items-center"><span class="wrap-icon icon-fullscreen"></span>
+                                <span>2911 Sq Ft.</span></div>
                             <div class="bed d-flex align-items-center"><span class="wrap-icon icon-bed"></span> <span>2.</span></div>
                             <div class="bath d-flex align-items-center"><span class="wrap-icon icon-bath"></span> <span>2</span></div>
                         </div>
@@ -271,8 +270,8 @@
                     <a href="property-single.html" class="d-block"><img src="source/images/img_3.jpg" alt="Image" class="img-fluid"></a>
                     <div class="text">
                         <div class="d-flex justify-content-between mb-3">
-                            <div class="sq d-flex align-items-center"><span class="wrap-icon icon-fullscreen
-"></span> <span>2911 Sq Ft.</span></div>
+                            <div class="sq d-flex align-items-center"><span class="wrap-icon icon-fullscreen">
+                                </span> <span>2911 Sq Ft.</span></div>
                             <div class="bed d-flex align-items-center"><span class="wrap-icon icon-bed"></span> <span>2.</span></div>
                             <div class="bath d-flex align-items-center"><span class="wrap-icon icon-bath"></span> <span>2</span></div>
                         </div>
@@ -286,8 +285,8 @@
                     <a href="property-single.html" class="d-block"><img src="source/images/img_1.jpg" alt="Image" class="img-fluid"></a>
                     <div class="text">
                         <div class="d-flex justify-content-between mb-3">
-                            <div class="sq d-flex align-items-center"><span class="wrap-icon icon-fullscreen
-"></span> <span>2911 Sq Ft.</span></div>
+                            <div class="sq d-flex align-items-center"><span class="wrap-icon icon-fullscreen"></span>
+                                <span>2911 Sq Ft.</span></div>
                             <div class="bed d-flex align-items-center"><span class="wrap-icon icon-bed"></span> <span>2.</span></div>
                             <div class="bath d-flex align-items-center"><span class="wrap-icon icon-bath"></span> <span>2</span></div>
                         </div>
@@ -300,8 +299,8 @@
                     <a href="property-single.html" class="d-block"><img src="source/images/img_2.jpg" alt="Image" class="img-fluid"></a>
                     <div class="text">
                         <div class="d-flex justify-content-between mb-3">
-                            <div class="sq d-flex align-items-center"><span class="wrap-icon icon-fullscreen
-"></span> <span>2911 Sq Ft.</span></div>
+                            <div class="sq d-flex align-items-center"><span class="wrap-icon icon-fullscreen">
+                                </span> <span>2911 Sq Ft.</span></div>
                             <div class="bed d-flex align-items-center"><span class="wrap-icon icon-bed"></span> <span>2.</span></div>
                             <div class="bath d-flex align-items-center"><span class="wrap-icon icon-bath"></span> <span>2</span></div>
                         </div>
@@ -314,8 +313,8 @@
                     <a href="property-single.html" class="d-block"><img src="source/images/img_3.jpg" alt="Image" class="img-fluid"></a>
                     <div class="text">
                         <div class="d-flex justify-content-between mb-3">
-                            <div class="sq d-flex align-items-center"><span class="wrap-icon icon-fullscreen
-"></span> <span>2911 Sq Ft.</span></div>
+                            <div class="sq d-flex align-items-center"><span class="wrap-icon icon-fullscreen"></span>
+                                <span>2911 Sq Ft.</span></div>
                             <div class="bed d-flex align-items-center"><span class="wrap-icon icon-bed"></span> <span>2.</span></div>
                             <div class="bath d-flex align-items-center"><span class="wrap-icon icon-bath"></span> <span>2</span></div>
                         </div>
@@ -325,8 +324,6 @@
                 </div>
 
             </div>
-
-
         </div>
     </div>
 

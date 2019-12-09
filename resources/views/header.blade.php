@@ -123,13 +123,14 @@
                 <span class="d-inline-block d-lg-none"><a href="#" class="text-white site-menu-toggle js-menu-toggle py-5 text-white"><span class="icon-menu h3 text-white"></span></a></span>
                 <nav class="site-navigation text-right ml-auto d-none d-lg-block" role="navigation">
                     <ul class="site-menu main-menu js-clone-nav ml-auto ">
-                        <li class="active"><a href="/" class="nav-link">Trang chủ</a></li>
+                        <li class="active"><a href="{{route('index')}}" class="nav-link">Trang chủ</a></li>
                         <li><a href="{{route('product')}}" class="nav-link">Sản phẩm</a></li>
                         <li><a href="{{route('about')}}" class="nav-link">Giới thiệu</a></li>
                         <li><a href="{{route('blog')}}" class="nav-link">Blog</a></li>
                         <li><a href="{{route('contact')}}" class="nav-link">Liên Hệ</a></li>
 
-                                <li class="nav-item">
+
+                        <li class="nav-item">
                                     @guest
                                     <a class="nav-link" href="{{ route('login') }}" data-toggle="modal"
                                        data-target="#exampleModalLong_2">
@@ -141,7 +142,8 @@
                                     </li>
                                 @endif
                             @else
-                                <li class="nav-item dropdown">
+                            <li><a href="{{route('house.showFormCreate')}}" class="nav-link">Create Home</a></li>
+                            <li class="nav-item dropdown">
                                     <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                         {{ \Illuminate\Support\Facades\Auth::user()->name }} <span class="caret"></span>
