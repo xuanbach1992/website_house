@@ -8,6 +8,11 @@ use Illuminate\Http\Request;
 
 class HouseController extends Controller
 {
+    public function listProduct(){
+        $product = House::paginate(6);
+        return view('product',compact('product'));
+    }
+
     public function create(){
         return view('house.add');
     }
@@ -16,12 +21,23 @@ class HouseController extends Controller
         $house = new House();
         $house->name = $request->name;
         $house->address = $request->address;
+
         $house->house_type = $request->house_type;
         $house->room_type = $request->room_type;
         $house->bedrooms = $request->bedrooms;
+
         $house->bathroom = $request->bathroom;
         $house->description = $request->description;
         $house->price = $request->price;
+
+        if (!$request->hasFile('image')){
+            $house->image = $request->image;
+        }else{
+            $image = $request->file('image');
+            $path = $image->store('image','public');
+            $house->image = $path;
+        }
+
         $house->save();
 
         return redirect()->route('index');

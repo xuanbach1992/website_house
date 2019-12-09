@@ -4,7 +4,7 @@
     <div class="card bg-light mb-3">
         <div class="card-header" ><h4><b style="color: #71bc42">Create Home</b></h4></div>
         <div class="card-body">
-            <form method="post" action="{{route('house.add')}}">
+            <form method="post" action="{{route('house.add')}}" enctype="multipart/form-data">
                 @csrf
                 <div class="row col-md-12">
                     <div class="col-md-6">
@@ -78,11 +78,11 @@
                         </div>
                         <div class="form-group">
                             <label><h6>Ảnh phòng : </h6></label>
-                            <input type="file" class="form-control">
+                            <input type="file" name="image" class="custom-file">
                         </div>
                         <div class="form-group">
                             <label><h6>Mô tả : </h6></label>
-                            <textarea class="form-control" name="description" rows="6"></textarea>
+                            <textarea class="form-control" name="description" rows="7"></textarea>
                         </div>
                         <div class="form-group">
                             <label><h6>Giá tiền theo đêm : </h6></label>
