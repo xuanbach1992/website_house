@@ -62,12 +62,6 @@ class HomeController extends Controller
         return redirect()->route('index');
     }
 
-
-
-//    public function productTest(){
-//        return view('page.product');
-//    }
-
     public function contactTest(){
         return view('page.contact');
     }

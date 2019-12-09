@@ -3,16 +3,16 @@
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
-
-//Route::get('/', function () {
-//    return view('page.home');
-//})->name('index');
+//route khoong qua controller
+Route::get('/', function () {
+    return view('page.home');
+})->name('index');
 
 Auth::routes();
 
 Route::prefix('/houses')->group(function (){
-    Route::get('/','HouseController@create')->name('house.showFormCreate');
-    Route::post('/create','HouseController@add')->name('house.add');
+    Route::get('/','HouseController@create')->name('house.showFormCreate')->middleware('auth');;
+    Route::post('/create','HouseController@add')->name('house.add')->middleware('auth');;
   });
 
 Route::prefix('/users')->group(function () {
@@ -25,7 +25,7 @@ Route::prefix('/users')->group(function () {
 });
 
 //code template
-Route::get('/','HomeController@index')->name('index');
+//Route::get('/','HomeController@index')->name('index');
 Route::get('/product','HouseController@listHouses')->name('product');
 
 Route::get('/contact','HomeController@contactTest')->name('contact');
