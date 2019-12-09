@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>Realtors &mdash; Website Template by Colorlib</title>
+    <title>Website cho thue nha</title>
     <meta charset="utf-8">
     <base href="{{asset('')}}">
     <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -15,9 +15,8 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script src="{{asset('js/ajax.js')}}"></script>
+
 
 
     <link rel="stylesheet" href="{{asset('source/css/bootstrap.min.css')}}">
@@ -69,7 +68,7 @@
 
 <!--homepage content-->
 {{--có 5 thẻ ở đây để hiển thị nội dung . --}}
-    <main class="py-4">
+    <main style="margin-top: 160px;">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
@@ -87,6 +86,7 @@
 
 </div>
 
+<script src="{{asset('js/ajax.js')}}"></script>
 <script src="{{asset('source/js/jquery-3.3.1.min.js')}}"></script>
 <script src="{{asset('source/js/jquery-migrate-3.0.0.js')}}"></script>
 <script src="{{asset('source/js/popper.min.js')}}"></script>
@@ -102,9 +102,7 @@
 <script src="{{asset('source/js/aos.js')}}"></script>
 
 <script src="{{asset('source/js/main.js')}}"></script>
-<script src="{{ asset('js/app.js') }}" defer></script>
-<script src="{{asset('https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js')}}"></script>
-<script src="{{asset('js/ajax.js')}}"></script>
+<script src="{{asset('js/app.js') }}" defer></script>
 
 </body>
 

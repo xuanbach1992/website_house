@@ -71,7 +71,7 @@
 </div>
 
 
-<header class="site-navbar site-navbar-target" role="banner">
+<header class="site-navbar site-navbar-target" role="banner" style="background-color:#1f6fb2;position: fixed;">
     <div class="container">
         @if(\Illuminate\Support\Facades\Session::has('success'))
             <div>
@@ -96,10 +96,11 @@
                 <nav class="site-navigation text-right ml-auto d-none d-lg-block" role="navigation">
                     <ul class="site-menu main-menu js-clone-nav ml-auto ">
                         <li class="active"><a href="/" class="nav-link">Trang chủ</a></li>
-                        <li><a href="{{route('product')}}" class="nav-link">Sản phẩm</a></li>
+                        <li><a href="{{route('product')}}" class="nav-link" >Sản phẩm</a></li>
                         <li><a href="{{route('about')}}" class="nav-link">Giới thiệu</a></li>
                         <li><a href="{{route('blog')}}" class="nav-link">Blog</a></li>
-                        <li><a href="{{route('contact')}}" class="nav-link">Liên Hệ</a></li>
+                        <li><a href="#"  id="product" class="nav-link">Liên Hệ</a></li>
+
 
 
                         <li class="nav-item">

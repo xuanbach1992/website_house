@@ -12,7 +12,7 @@
         </div>
     </div>
 
-    <div class="realestate-tabpane pb-5">
+    <div class="realestate-tabpane pb-5 " id="demo">
         <div class="container tab-content">
             <div class="tab-pane active" id="for-rent" role="tabpanel" aria-labelledby="rent-tab">
 
