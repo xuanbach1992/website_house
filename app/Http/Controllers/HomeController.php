@@ -26,11 +26,10 @@ class HomeController extends Controller
      * @return \Illuminate\Contracts\Support\Renderable
      */
 
-// không dùng đến function index
-//    public function index()
-//    {
-//        return view('/');
-//    }
+    public function index(){
+        return view('page.home');
+    }
+
     public function showChangePass(){
         return view('user.change_pass');
     }
@@ -50,60 +49,6 @@ class HomeController extends Controller
         return redirect('/');
     }
 
-//    public function admin_credential_rules(array $data)
-//    {
-//        $messages = [
-//            'current_password.required' => 'Please enter current password',
-//            'password.required' => 'Please enter password',
-//        ];
-//
-//        $validator = Validator::make($data, [
-//            'current_password' => 'required',
-//            'password' => 'required|same:password',
-//            'password_confirmation' => 'required|same:password',
-//        ], $messages);
-//
-//        return $validator;
-//    }
-
-//    public function postCredentials(Request $request)
-//    {
-//        if(Auth::check())
-//        {
-//            $request_data = $request->All();
-//            $validator = $this->admin_credential_rules($request_data);
-//            if($validator->fails())
-//            {
-//                return response()->json(array('error' => $validator->getMessageBag()->toArray()), 400);
-//            }
-//            else
-//            {
-//                $current_password = Auth::user()->password;
-//                if(Hash::check($request_data['current_password'], $current_password))
-//                {
-//                    $user_id = Auth::user()->id;
-//                    $obj_user = User::find($user_id);
-//                    $obj_user->password = Hash::make($request_data['password']);;
-//                    $obj_user->save();
-//                    return redirect()->to('/');
-//                }
-//                else
-//                {
-//                    $error = array('current_password' => 'Please enter correct current password');
-//                    return response()->json(array('error' => $error), 400);
-//                }
-//            }
-//        }
-//        else
-//        {
-//            return redirect()->to('/');
-//        }
-//    }
-    public function index()
-    {
-        return view('changePassword');
-    }
-
     public function changePassword(Request $request)
     {
         $request->validate([
@@ -112,18 +57,16 @@ class HomeController extends Controller
             'new_confirm_password' => ['same:new_password'],
         ]);
 
-        User::find(auth()->user()->id)->update(['password'=> Hash::make($request->new_password)]);
-
+        User::find(auth()->user()->id)->update(['password' => Hash::make($request->new_password)]);
         $request->session()->flash('success','Doi pass thanh cong');
-       return redirect()->route('index');
-    }
-    public function indexTest(){
-        return view('page.home');
+        return redirect()->route('index');
     }
 
-    public function productTest(){
-        return view('page.product');
-    }
+
+
+//    public function productTest(){
+//        return view('page.product');
+//    }
 
     public function contactTest(){
         return view('page.contact');

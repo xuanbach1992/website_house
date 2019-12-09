@@ -3,10 +3,10 @@
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
-//không dùng
-Route::get('/', function () {
-    return view('page.home');
-})->name('index');
+
+//Route::get('/', function () {
+//    return view('page.home');
+//})->name('index');
 
 Auth::routes();
 
@@ -25,8 +25,9 @@ Route::prefix('/users')->group(function () {
 });
 
 //code template
-//Route::get('/','HomeController@indexTest')->name('index');
-Route::get('/product','HomeController@productTest')->name('product');
+Route::get('/','HomeController@index')->name('index');
+Route::get('/product','HouseController@listHouses')->name('product');
+
 Route::get('/contact','HomeController@contactTest')->name('contact');
 Route::get('/blog','HomeController@blogTest')->name('blog');
 Route::get('/about','HomeController@aboutTest')->name('about');
