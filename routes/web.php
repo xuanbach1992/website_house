@@ -4,9 +4,9 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
 //không dùng
-//Route::get('/', function () {
-//    return view('page.home');
-//})->name('home');
+Route::get('/', function () {
+    return view('page.home');
+})->name('index');
 
 Auth::routes();
 
@@ -17,14 +17,15 @@ Route::prefix('/houses')->group(function (){
 
 Route::prefix('/users')->group(function () {
 //    Route::get('/', 'HomeController@index')->name('home');
-    Route::post('/change_pass','HomeController@postCredentials')->name('user.change_pass');
+    Route::get('change-password', 'HomeController@showChangePass')->name('showChangePassword');
+    Route::post('change-password', 'HomeController@changePassword')->name('change.password');
     Route::post('/{id}/edit', 'HomeController@showFormEdit')->name('user.edit');
     Route::post('/{id}/update','HomeController@updateSuccess')->name('user.update');
 
 });
 
 //code template
-Route::get('/','HomeController@indexTest')->name('index');
+//Route::get('/','HomeController@indexTest')->name('index');
 Route::get('/product','HomeController@productTest')->name('product');
 Route::get('/contact','HomeController@contactTest')->name('contact');
 Route::get('/blog','HomeController@blogTest')->name('blog');
