@@ -25,10 +25,12 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index()
-    {
-        return view('/');
-    }
+
+// không dùng đến function index
+//    public function index()
+//    {
+//        return view('/');
+//    }
 
     public function showFormEdit($id)
     {

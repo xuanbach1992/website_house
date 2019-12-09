@@ -15,7 +15,7 @@
                         {{--<div class="bath d-flex align-items-center"><span class="wrap-icon icon-bath"></span> <span>2</span></div>--}}
                         <div class="bed d-flex align-items-center"><span>BTH</span></div>
                     </div>
-                    <p><a href="{{route('about')}}" class="btn btn-primary text-white px-4 py-3">Learn More</a></p>
+                    <p><a href="{{route('house.showFormCreate')}}" class="btn btn-primary text-white px-4 py-3">Create Home</a></p>
                 </div>
                 <!---->
             </div>

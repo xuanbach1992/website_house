@@ -18,13 +18,13 @@ class HouseController extends Controller
         $house->address = $request->address;
         $house->house_type = $request->house_type;
         $house->room_type = $request->room_type;
-        $house->bedrooms = $request->bedroomsl;
+        $house->bedrooms = $request->bedrooms;
         $house->bathroom = $request->bathroom;
         $house->description = $request->description;
         $house->price = $request->price;
         $house->save();
 
-        return redirect()->route('home');
+        return redirect()->route('index');
 
     }
 
