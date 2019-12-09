@@ -77,7 +77,7 @@ class HomeController extends Controller
             else
             {
                 $current_password = Auth::user()->password;
-                if(Hash::check($request_data['current-password'], $current_password))
+                if(Hash::check($request_data['current_password'], $current_password))
                 {
                     $user_id = Auth::user()->id;
                     $obj_user = User::find($user_id);
@@ -87,7 +87,7 @@ class HomeController extends Controller
                 }
                 else
                 {
-                    $error = array('current-password' => 'Please enter correct current password');
+                    $error = array('current_password' => 'Please enter correct current password');
                     return response()->json(array('error' => $error), 400);
                 }
             }
