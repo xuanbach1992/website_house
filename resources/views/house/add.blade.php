@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="card bg-light mb-3">
-        <div class="card-header">Create Home</div>
+        <div class="card-header" ><h4><b style="color: #71bc42">Create Home</b></h4></div>
         <div class="card-body">
             <form method="post" action="{{route('house.add')}}">
                 @csrf
@@ -97,7 +97,8 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <button class="btn btn-primary">Create</button>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<button class="btn btn-primary">Create</button>&nbsp;&nbsp;
+                        <a class="btn btn-warning" href="{{route('index')}}">Back</a>
                     </div>
                 </div>
             </form>
