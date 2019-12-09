@@ -98,13 +98,13 @@ class HomeController extends Controller
         }
     }
 
-    public function indexTest(){
+    public function index(){
         return view('page.home');
     }
 
-    public function productTest(){
-        return view('page.product');
-    }
+//    public function productTest(){
+//        return view('page.product');
+//    }
 
     public function contactTest(){
         return view('page.contact');
