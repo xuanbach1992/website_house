@@ -62,10 +62,15 @@
                         </div>
 
                         <div class="form-group row mb-0">
-                            <div class="col-md-6 offset-md-4">
+                            <div class="col-md-2 offset-md-4">
                                 <button type="submit" class="btn btn-primary">
                                     {{ __('Register') }}
                                 </button>
+                            </div>
+                            <div class="col-md-1 " >
+                                <a  class="btn btn-secondary" href="/">
+                                    Cancel
+                                </a>
                             </div>
                         </div>
                     </form>

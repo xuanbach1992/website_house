@@ -68,62 +68,34 @@
             </div>
         </div>
     </div>
-
-    <div class="modal fade" id="exampleModalLong_1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
-         aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalScrollableTitle">Change password</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <form id="form-change-password" role="form" method="POST" action="{{ route('user.change_pass') }}"
-                          novalidate class="form-horizontal">
-                        @csrf
-                        <div>
-                            <label class="control-label">Current Password</label>
-                            <div class="form-group">
-                                <input type="password" class="form-control" id="current_password"
-                                       name="current_password" placeholder="Password">
-                            </div>
-                            <div class="form-group">
-                                <label>New Password</label>
-                                <input type="password" class="form-control" id="password" name="password"
-                                       placeholder="Password">
-                            </div>
-                            <div class="form-group">
-                                <label class="control-label">Re-enter Password</label>
-                                <input type="password" class="form-control" id="password_confirmation"
-                                       name="password_confirmation" placeholder="Re-enter Password">
-                            </div>
-                        </div>
-                        <div class="modal-footer form-group">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                            <button type="submit" class="btn btn-primary">Save changes</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
 </div>
+
+
 <header class="site-navbar site-navbar-target" role="banner">
     <div class="container">
+        @if(\Illuminate\Support\Facades\Session::has('success'))
+            <div>
+                <div class="alert alert-success alert-block">
+                    <button type="button" class="close" data-dismiss="alert">×</button>
+                    <strong>{{ \Illuminate\Support\Facades\Session::get('success') }}</strong>
+                </div>
+            </div>
+        @endif
         <div class="row align-items-center position-relative">
             <div class="col-3 ">
                 <div class="site-logo">
                     <a href="{{route('index')}}">Realtors</a>
                 </div>
             </div>
+
             <div class="col-9  text-right">
 
-                <span class="d-inline-block d-lg-none"><a href="#" class="text-white site-menu-toggle js-menu-toggle py-5 text-white"><span class="icon-menu h3 text-white"></span></a></span>
+                <span class="d-inline-block d-lg-none"><a href="#"
+                                                          class="text-white site-menu-toggle js-menu-toggle py-5 text-white"><span
+                            class="icon-menu h3 text-white"></span></a></span>
                 <nav class="site-navigation text-right ml-auto d-none d-lg-block" role="navigation">
                     <ul class="site-menu main-menu js-clone-nav ml-auto ">
-                        <li class="active"><a href="{{route('index')}}" class="nav-link">Trang chủ</a></li>
+                        <li class="active"><a href="/" class="nav-link">Trang chủ</a></li>
                         <li><a href="{{route('product')}}" class="nav-link">Sản phẩm</a></li>
                         <li><a href="{{route('about')}}" class="nav-link">Giới thiệu</a></li>
                         <li><a href="{{route('blog')}}" class="nav-link">Blog</a></li>
@@ -131,58 +103,68 @@
 
 
                         <li class="nav-item">
-                                    @guest
-                                    <a class="nav-link" href="{{ route('login') }}" data-toggle="modal"
-                                       data-target="#exampleModalLong_2">
-                                        {{ __('Login') }}</a>
-                                </li>
-                                @if (Route::has('register'))
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                                    </li>
-                                @endif
-                            @else
+                            @guest
+                                <a class="nav-link" href="{{ route('login') }}" data-toggle="modal"
+                                   data-target="#exampleModalLong_2">
+                                    {{ __('Login') }}</a>
+                        </li>
+                        @if (Route::has('register'))
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                            </li>
+                        @endif
+                        @else
                             <li><a href="{{route('house.showFormCreate')}}" class="nav-link">Create Home</a></li>
                             <li class="nav-item dropdown">
-                                    <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
-                                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                        {{ \Illuminate\Support\Facades\Auth::user()->name }} <span class="caret"></span>
+                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
+                                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                    {{ \Illuminate\Support\Facades\Auth::user()->name }} <span class="caret"></span>
+                                </a>
+
+                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="{{ route('logout') }}"
+                                       onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                        {{ __('Logout') }}
                                     </a>
 
-                                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                        <a class="dropdown-item" href="{{ route('logout') }}"
-                                           onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                            {{ __('Logout') }}
-                                        </a>
-
-                                        <a class="dropdown-item"
-                                           href="{{ route('user.edit',\Illuminate\Support\Facades\Auth::user()->id)}}"
-                                           onclick="event.preventDefault();
+                                    <a class="dropdown-item"
+                                       href="{{ route('user.edit',\Illuminate\Support\Facades\Auth::user()->id)}}"
+                                       onclick="event.preventDefault();
                                                      document.getElementById('edit_user').submit();">
-                                            {{ __('Edit Profile') }}
-                                        </a>
+                                        {{ __('Edit Profile') }}
+                                    </a>
 
-                                        <a class="dropdown-item"
-                                           data-toggle="modal" data-target="#exampleModalLong_1">
-                                            Change Password
-                                        </a>
+                                    <a class="dropdown-item"
+                                       href="{{ route('showChangePassword',\Illuminate\Support\Facades\Auth::user()->id)}}"
+                                       onclick="event.preventDefault();
+                                                     document.getElementById('change_pass').submit();">
+                                        {{ __('Change password') }}
+                                    </a>
 
-                                        <form id="logout-form" action="{{ route('logout') }}" method="POST"
-                                              style="display: none;">
-                                            @csrf
-                                        </form>
-                                        <form id="edit_user"
-                                              action="{{ route('user.edit',\Illuminate\Support\Facades\Auth::user()->id)}}"
-                                              method="POST"
-                                              style="display: none;">
-                                            @csrf
-                                        </form>
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                                          style="display: none;">
+                                        @csrf
+                                    </form>
+
+                                    <form id="edit_user"
+                                          action="{{ route('user.edit',\Illuminate\Support\Facades\Auth::user()->id)}}"
+                                          method="POST"
+                                          style="display: none;">
+                                        @csrf
+                                    </form>
+
+                                    <form id="change_pass"
+                                          action="{{ route('showChangePassword',\Illuminate\Support\Facades\Auth::user()->id)}}"
+                                          method="GET"
+                                          style="display: none;">
+                                        @csrf
+                                    </form>
 
 
-                                    </div>
-                                </li>
-                            @endguest
+                                </div>
+                            </li>
+                        @endguest
                     </ul>
 
                 </nav>

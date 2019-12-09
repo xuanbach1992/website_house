@@ -8,9 +8,9 @@ use Illuminate\Http\Request;
 
 class HouseController extends Controller
 {
-    public function listProduct(){
-        $products = House::all();
-        return view('page.product',compact('products'));
+    public function listHouses(){
+        $houses = House::all();
+        return view('page.product',compact('houses'));
     }
 
     public function create(){

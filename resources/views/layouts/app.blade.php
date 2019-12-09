@@ -54,21 +54,20 @@
     </div>
 
 
-    <!--header-->
-{{--header ở đây--}}
 <!--header-->
+{{--header ở đây--}}
     @include('header')
+<!--header-->
+
 <!--slice-->
 {{--@cannot('register')--}}
     @include('slice')
 {{--@endcan--}}
-
 <!--slice-->
 
 
 
-    <!--homepage content-->
-
+<!--homepage content-->
 {{--có 5 thẻ ở đây để hiển thị nội dung . --}}
     <main class="py-4">
         <div class="container">
@@ -79,7 +78,6 @@
             </div>
         </div>
     </main>
-
 <!--homepage content-->
 
 
