@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>Realtors &mdash; Website Template by Colorlib</title>
+    <title>House for rent</title>
     <meta charset="utf-8">
     <base href="{{asset('')}}">
     <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -15,7 +15,7 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
+    <script src="{{ asset('js/app.js') }}" ></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="{{asset('js/ajax.js')}}"></script>
 
@@ -87,7 +87,7 @@
 
 </div>
 
-<script src="{{asset('source/js/jquery-3.3.1.min.js')}}"></script>
+{{--<script src="{{asset('source/js/jquery-3.3.1.min.js')}}"></script>--}}
 <script src="{{asset('source/js/jquery-migrate-3.0.0.js')}}"></script>
 <script src="{{asset('source/js/popper.min.js')}}"></script>
 <script src="{{asset('source/js/bootstrap.min.js')}}"></script>
@@ -102,9 +102,7 @@
 <script src="{{asset('source/js/aos.js')}}"></script>
 
 <script src="{{asset('source/js/main.js')}}"></script>
-<script src="{{ asset('js/app.js') }}" defer></script>
-<script src="{{asset('https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js')}}"></script>
-<script src="{{asset('js/ajax.js')}}"></script>
+<script src="{{asset('js/app.js') }}"></script>
 
 </body>
 
