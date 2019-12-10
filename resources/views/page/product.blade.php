@@ -166,7 +166,7 @@
             @foreach($houses as $key => $value)
             <div class="col-md-4 mb-5">
                 <div class="media-38289">
-                    <a href="property-single.html" class="d-block"><img src="{{asset("/storage/$value->image")}}" alt="Image" class="img-fluid"></a>
+                    <a href="property-single.html" class="d-block"><img src="{{asset("/storage/$value->image")}}" alt="Image" class="img-fluid" width="200" height="300"></a>
                     <div class="text">
                         <div class="d-flex justify-content-between mb-3">
                             <div class="sq d-flex align-items-center"><span class="wrap-icon icon-fullscreen"></span> <span>{{$value->name}}</span></div>
