@@ -82,7 +82,7 @@
 
             <div class="owl-carousel nonloop-block-14">
                 <div class="media-38289">
-                    <a href="property-single.html" class="d-block"><img src="source/images/img_1.jpg" alt="Image" class="img-fluid"></a>
+                    <a href="#" class="d-block"><img src="source/images/img_1.jpg" alt="Image" class="img-fluid"></a>
                     <div class="text">
                         <div class="d-flex justify-content-between mb-3">
                             <div class="sq d-flex align-items-center"><span class="wrap-icon icon-fullscreen">
@@ -96,7 +96,7 @@
                 </div>
 
                 <div class="media-38289">
-                    <a href="property-single.html" class="d-block"><img src="source/images/img_2.jpg" alt="Image" class="img-fluid"></a>
+                    <a href="#" class="d-block"><img src="source/images/img_2.jpg" alt="Image" class="img-fluid"></a>
                     <div class="text">
                         <div class="d-flex justify-content-between mb-3">
                             <div class="sq d-flex align-items-center"><span class="wrap-icon icon-fullscreen"></span>
@@ -110,7 +110,7 @@
                 </div>
 
                 <div class="media-38289">
-                    <a href="property-single.html" class="d-block"><img src="source/images/img_3.jpg" alt="Image" class="img-fluid"></a>
+                    <a href="#" class="d-block"><img src="source/images/img_3.jpg" alt="Image" class="img-fluid"></a>
                     <div class="text">
                         <div class="d-flex justify-content-between mb-3">
                             <div class="sq d-flex align-items-center"><span class="wrap-icon icon-fullscreen">
@@ -125,7 +125,7 @@
 
 
                 <div class="media-38289">
-                    <a href="property-single.html" class="d-block"><img src="source/images/img_1.jpg" alt="Image" class="img-fluid"></a>
+                    <a href="#" class="d-block"><img src="source/images/img_1.jpg" alt="Image" class="img-fluid"></a>
                     <div class="text">
                         <div class="d-flex justify-content-between mb-3">
                             <div class="sq d-flex align-items-center"><span class="wrap-icon icon-fullscreen"></span>
@@ -139,7 +139,7 @@
                 </div>
 
                 <div class="media-38289">
-                    <a href="property-single.html" class="d-block"><img src="source/images/img_2.jpg" alt="Image" class="img-fluid"></a>
+                    <a href="#" class="d-block"><img src="source/images/img_2.jpg" alt="Image" class="img-fluid"></a>
                     <div class="text">
                         <div class="d-flex justify-content-between mb-3">
                             <div class="sq d-flex align-items-center"><span class="wrap-icon icon-fullscreen">
@@ -153,7 +153,7 @@
                 </div>
 
                 <div class="media-38289">
-                    <a href="property-single.html" class="d-block"><img src="source/images/img_3.jpg" alt="Image" class="img-fluid"></a>
+                    <a href="#" class="d-block"><img src="source/images/img_3.jpg" alt="Image" class="img-fluid"></a>
                     <div class="text">
                         <div class="d-flex justify-content-between mb-3">
                             <div class="sq d-flex align-items-center"><span class="wrap-icon icon-fullscreen"></span>

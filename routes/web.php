@@ -11,7 +11,8 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::prefix('/houses')->group(function (){
-    Route::get('/','HouseController@create')->name('house.showFormCreate')->middleware('auth');;
+    Route::get('/','HouseController@listHouses')->name('product');
+    Route::get('/create','HouseController@create')->name('house.showFormCreate')->middleware('auth');;
     Route::post('/create','HouseController@add')->name('house.add')->middleware('auth');;
   });
 
@@ -26,7 +27,7 @@ Route::prefix('/users')->group(function () {
 
 //code template
 //Route::get('/','HomeController@index')->name('index');
-Route::get('/product','HouseController@listHouses')->name('product');
+
 
 Route::get('/contact','HomeController@contactTest')->name('contact');
 Route::get('/blog','HomeController@blogTest')->name('blog');

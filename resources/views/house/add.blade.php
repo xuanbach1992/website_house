@@ -54,7 +54,7 @@
                         </div>
                         <div class="form-group">
                             <label><h6>Số lượng phòng ngủ : </h6></label>
-                            <input type="text" class="form-control
+                            <input type="number" class="form-control
                             @if($errors->has('bedrooms'))
                                     border-danger
                             @endif
@@ -67,7 +67,7 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label><h6>Số lượng phòng tắm : </h6></label>
-                            <input type="text" class="form-control
+                            <input type="number" class="form-control
                             @if($errors->has('bathroom'))
                                     border-danger
                             @endif
@@ -86,7 +86,7 @@
                         </div>
                         <div class="form-group">
                             <label><h6>Giá tiền theo đêm : </h6></label>
-                            <input type="text" class="form-control
+                            <input type="number" class="form-control
                             @if($errors->has('price'))
                                     border-danger
                             @endif

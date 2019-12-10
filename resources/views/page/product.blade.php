@@ -166,14 +166,14 @@
             @foreach($houses as $key => $value)
             <div class="col-md-4 mb-5">
                 <div class="media-38289">
-                    <a href="property-single.html" class="d-block"><img src="{{asset("/storage/$value->image")}}" alt="Image" class="img-fluid"></a>
+                    <a href="#" class="d-block"><img src="{{asset("/storage/$value->image")}}" alt="Image" class="img-fluid"></a>
                     <div class="text">
                         <div class="d-flex justify-content-between mb-3">
                             <div class="sq d-flex align-items-center"><span class="wrap-icon icon-fullscreen"></span> <span>{{$value->name}}</span></div>
                             <div class="bed d-flex align-items-center"><span class="wrap-icon icon-bed"></span> <span>{{$value->bedrooms}}</span></div>
                             <div class="bath d-flex align-items-center"><span class="wrap-icon icon-bath"></span> <span>{{$value->bathroom}}</span></div>
                         </div>
-                        <h3 class="mb-3"><a href="#">{{$value->price}} $</a></h3>
+                        <h3 class="mb-3"><a href="#">{{$value->price}} VND</a></h3>
                         <span class="d-block small address d-flex align-items-center"> <span class="icon-room mr-3 text-primary"></span> <span>{{$value->address}}</span></span>
                     </div>
                 </div>
