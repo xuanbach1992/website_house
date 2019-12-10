@@ -40,7 +40,7 @@ class HouseController extends Controller
 
         $house->save();
 
-        return redirect()->route('index');
+        return redirect()->route('product');
 
     }
 
