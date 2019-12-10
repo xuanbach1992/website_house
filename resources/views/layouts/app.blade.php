@@ -103,7 +103,16 @@
 
 <script src="{{asset('source/js/main.js')}}"></script>
 <script src="{{asset('js/app.js') }}"></script>
-
+<script>
+    function showPassword() {
+        let x = document.getElementById("password_show");
+        if (x.type === "password") {
+            x.type = "text";
+        } else {
+            x.type = "password";
+        }
+    }
+</script>
 </body>
 
 </html>
