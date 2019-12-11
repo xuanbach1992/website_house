@@ -97,7 +97,7 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        &nbsp;&nbsp;&nbsp;&nbsp;<button class="btn btn-primary">Create</button>&nbsp;&nbsp;
+                        <button class="btn btn-primary">Create</button>
                         <a class="btn btn-warning" href="{{route('product')}}">Back</a>
                     </div>
                 </div>
