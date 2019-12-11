@@ -35,6 +35,14 @@
     <link rel="stylesheet" href="{{asset('source/css/style.css')}}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
+
+    <link rel="stylesheet" href="{{asset('css/all.css')}}">
+{{--    <link rel="stylesheet" href="{{asset('css/bootstrap.min.css')}}">--}}
+    <script src="{{asset('js/bootstrap.bundle.min.js')}}" defer></script>
+    <script src="{{ asset('js/jquery.slim.min.js') }}" defer></script>
+
+
+
 </head>
 
 <body data-spy="scroll" data-target=".site-navbar-target" data-offset="300">
