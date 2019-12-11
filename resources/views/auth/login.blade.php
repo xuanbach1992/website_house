@@ -50,12 +50,12 @@
                             <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Sign in
                             </button>
                             <hr class="my-4">
-                            <button class="btn btn-lg btn-google btn-block text-uppercase" type="submit"><img
+                            <a class="btn btn-lg btn-google btn-block text-uppercase" ><img
                                     src="https://img.icons8.com/color/20/000000/google-logo.png"> Sign in with Google
-                            </button>
-                            <button class="btn btn-lg btn-facebook btn-block text-uppercase" type="submit"><img
+                            </a>
+                            <a class="btn btn-lg btn-facebook btn-block text-uppercase" href="redirect/facebook"><img
                                     src="https://img.icons8.com/color/20/000000/facebook-new.png"> Sign in with Facebook
-                            </button>
+                            </a>
                         </form>
                     </div>
                 </div>
