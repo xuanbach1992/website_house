@@ -27,7 +27,8 @@ Route::prefix('/users')->group(function () {
 
 //code template
 //Route::get('/','HomeController@index')->name('index');
-
+Route::get('/redirect/{social}', 'SocialAuthController@redirect');
+Route::get('/callback/{social}', 'SocialAuthController@callback');
 
 Route::get('/contact','HomeController@contactTest')->name('contact');
 Route::get('/blog','HomeController@blogTest')->name('blog');

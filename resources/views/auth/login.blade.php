@@ -40,6 +40,7 @@
                             </div>
                         </div>
 
+
 {{--                        <div class="form-group row">--}}
 {{--                            <div class="col-md-6 offset-md-4">--}}
 {{--                                <div class="form-check">--}}
@@ -63,6 +64,12 @@
                                         {{ __('Forgot Your Password?') }}
                                     </a>
                                 @endif
+                            </div>
+                        </div>
+                        <br>
+                        <div class="form-group row mb-0">
+                            <div class="col-md-8 offset-md-4">
+                                <a href="redirect/facebook" class="fa fa-facebook-square" style="font-size:37px"></a>
                             </div>
                         </div>
                     </form>
