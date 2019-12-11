@@ -4,11 +4,11 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
 //route khoong qua controller
-Route::get('/', function () {
-    return view('page.home');
-})->name('index');
+//Route::get('/', function () {
+//    return view('page.home');
+//})->name('index');
 
-//    Route::get('/', 'HomeController@index')->name('index');
+    Route::get('/', 'HomeController@index')->name('index');
 Auth::routes();
 
 Route::prefix('/houses')->group(function (){
