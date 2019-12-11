@@ -15,7 +15,7 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer ></script>
+    <script src="{{ asset('js/app.js') }}" defer></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="{{asset('js/ajax.js')}}"></script>
 
@@ -26,7 +26,7 @@
     <link rel="stylesheet" href="{{asset('source/css/owl.carousel.min.css')}}">
     <link rel="stylesheet" href="{{asset('source/css/owl.theme.default.min.css')}}">
     <link rel="stylesheet" href="{{asset('source/fonts/flaticon/font/flaticon.css')}}">
-    <link rel="stylesheet" href="{{asset('source/css/aos.css')}}">
+    {{--    <link rel="stylesheet" href="{{asset('source/css/aos.css')}}">--}}
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
           integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
@@ -37,7 +37,6 @@
 </head>
 
 <body data-spy="scroll" data-target=".site-navbar-target" data-offset="300">
-
 
 
 <div class="site-wrap" id="home-section">
@@ -64,7 +63,6 @@
 @include('slice')
 {{--@endcan--}}
 <!--slice-->
-
 
 
     <!--homepage content-->
@@ -105,11 +103,13 @@
 <script src="{{asset('js/app.js') }}"></script>
 <script>
     function showPassword() {
-        let x = document.getElementById("password_show");
-        if (x.type === "password") {
-            x.type = "text";
-        } else {
-            x.type = "password";
+        for (i = 0; i <= 1; i++) {
+            let x = document.getElementsByClassName("password_show")[i];
+            if (x.type === "password") {
+                x.type = "text";
+            } else {
+                x.type = "password";
+            }
         }
     }
 </script>
