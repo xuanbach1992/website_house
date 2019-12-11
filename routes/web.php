@@ -8,6 +8,7 @@ Route::get('/', function () {
     return view('page.home');
 })->name('index');
 
+//    Route::get('/', 'HomeController@index')->name('index');
 Auth::routes();
 
 Route::prefix('/houses')->group(function (){

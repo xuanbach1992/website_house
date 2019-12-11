@@ -27,6 +27,7 @@ class HomeController extends Controller
      */
 
     public function index(){
+//        toastr()->error('welcom admin');
         return view('page.home');
     }
 
