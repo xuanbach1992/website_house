@@ -27,7 +27,7 @@ class HomeController extends Controller
      */
 
     public function index(){
-        toastr()->error('welcome admin');
+        toastr()->success('welcome admin',"message",['timeOut' => 5000]);
         return view('welcome');
 //        return view('page.home');
     }
