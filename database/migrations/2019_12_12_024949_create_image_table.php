@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateUserHousesTable extends Migration
+class CreateImageTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,13 @@ class CreateUserHousesTable extends Migration
      */
     public function up()
     {
-        Schema::create('user_houses', function (Blueprint $table) {
+        Schema::create('image', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->string('path')->nullable();
 
-            $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-
-            $table->unsignedBigInteger('house_id');
+            $table->unsignedBigInteger('house_id')->nullable();
             $table->foreign('house_id')->references('id')->on('houses')->onDelete('cascade');
+
 
             $table->timestamps();
         });
@@ -33,6 +32,6 @@ class CreateUserHousesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('user_houses');
+        Schema::dropIfExists('image');
     }
 }
