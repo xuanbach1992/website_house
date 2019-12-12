@@ -166,6 +166,17 @@
 
                 <div class="row">
 
+<<<<<<< HEAD
+            @foreach($houses as $key => $value)
+            <div class="col-md-4 mb-5">
+                <div class="media-38289" >
+                    <a href="{{route('house.detail',$value->id)}}" class="d-block"><img src="{{asset("/storage/$value->image")}}" alt="Image" class="img-fluid"></a>
+                    <div class="text">
+                        <div class="d-flex justify-content-between mb-3">
+                            <div class="sq d-flex align-items-center"><span class="wrap-icon icon-fullscreen"></span> <a href="{{route('house.detail',$value->id)}}" style="color: white">{{$value->name}}</a></div>
+                            <div class="bed d-flex align-items-center"><span class="wrap-icon icon-bed"></span> <span>{{$value->bedrooms}}</span></div>
+                            <div class="bath d-flex align-items-center"><span class="wrap-icon icon-bath"></span> <span>{{$value->bathroom}}</span></div>
+=======
                     @foreach($houses as $key => $value)
                         <div class="col-md-4 mb-5">
                             <div class="media-38289">
@@ -188,6 +199,7 @@
                                             class="icon-room mr-3 text-primary"></span> <span>{{$value->address}}</span></span>
                                 </div>
                             </div>
+>>>>>>> dev
                         </div>
                     @endforeach
 
