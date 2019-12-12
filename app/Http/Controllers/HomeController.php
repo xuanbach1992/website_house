@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Rules\MatchOldPassword;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 
@@ -26,23 +27,26 @@ class HomeController extends Controller
      * @return \Illuminate\Contracts\Support\Renderable
      */
 
-    public function index(){
+    public function index()
+    {
         return view('welcome');
 //        return view('page.home');
     }
 
-    public function showChangePass(){
+    public function showChangePass()
+    {
         return view('user.change_pass');
     }
-    public function showFormEdit($id)
+
+    public function showFormEdit()
     {
-        $user = User::findOrFail($id);
+        $user = Auth::user();
         return view('user.edit', compact('user'));
     }
 
-    public function updateSuccess(Request $request, $id)
+    public function updateSuccess(Request $request)
     {
-        $user = User::findOrFail($id);
+        $user = Auth::user();
         $user->name = $request->name;
         $user->phone = $request->phone;
         $user->address = $request->address;
@@ -59,19 +63,22 @@ class HomeController extends Controller
         ]);
 
         User::find(auth()->user()->id)->update(['password' => Hash::make($request->new_password)]);
-        $request->session()->flash('success','Doi pass thanh cong');
+        $request->session()->flash('success', 'Doi pass thanh cong');
         return redirect()->route('index');
     }
 
-    public function contactTest(){
+    public function contactTest()
+    {
         return view('page.contact');
     }
 
-    public function blogTest(){
+    public function blogTest()
+    {
         return view('page.blog');
     }
 
-    public function aboutTest(){
+    public function aboutTest()
+    {
         return view('page.about');
     }
 
