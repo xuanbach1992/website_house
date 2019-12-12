@@ -81,8 +81,4 @@ class HomeController extends Controller
     {
         return view('page.about');
     }
-
-    public function propertydetails(){
-        return view('page.property-details');
-    }
 }

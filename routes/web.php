@@ -15,7 +15,8 @@ Route::prefix('/houses')->group(function (){
 //    Route::get('/','HouseController@listHouses')->name('product');
     Route::get('/create','HouseController@create')->name('house.showFormCreate')->middleware('auth');;
     Route::post('/create','HouseController@add')->name('house.add')->middleware('auth');;
-  });
+    Route::get('/detail','HouseController@showHouseDetails')->name('house.detail');
+});
 
 Route::prefix('/users')->group(function () {
 //    Route::get('/', 'HomeController@index')->name('index');
@@ -34,4 +35,3 @@ Route::get('/callback/{social}', 'SocialAuthController@callback');
 Route::get('/contact','HomeController@contactTest')->name('contact');
 Route::get('/blog','HomeController@blogTest')->name('blog');
 Route::get('/about','HomeController@aboutTest')->name('about');
-Route::get('/property','HomeController@propertydetails')->name('property');

@@ -56,4 +56,8 @@ class HouseController extends Controller
 
     }
 
+    public function showHouseDetails(){
+        return view('page.house-details');
+    }
+
 }
