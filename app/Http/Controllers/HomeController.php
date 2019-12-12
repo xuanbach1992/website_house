@@ -59,7 +59,7 @@ class HomeController extends Controller
     {
         $request->validate([
             'current_password' => ['required', new MatchOldPassword],
-            'new_password' => ['required'],
+            'new_password' => ['required','string', 'min:6'],
             'new_confirm_password' => ['same:new_password'],
         ]);
 

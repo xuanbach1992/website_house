@@ -9,7 +9,6 @@
                     <div class="card-body">
                         <form method="POST" action="{{ route('change.password') }}">
                             @csrf
-
                             @foreach ($errors->all() as $error)
                                 <p class="text-danger">{{ $error }}</p>
                             @endforeach
