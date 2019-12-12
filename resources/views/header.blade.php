@@ -11,57 +11,57 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-
                 <div class="modal-body">
+                    <h5 class="card-title text-center">Sign In</h5>
                     <form method="POST" action="{{ route('login') }}">
                         @csrf
-
-                        <div class="form-group row">
-                            <label for="email"
-                                   class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror"
-                                       name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
-
-                                @error('email')
-                                <span class="invalid-feedback" role="alert">
+                        <div class="form-label-group">
+                            <input type="email" style="width: 97%" id="inputEmail" placeholder="Email"
+                                   class="form-control @error('email') is-invalid @enderror" name="email"
+                                   value="{{ old('email') }}" required autocomplete="email" autofocus>
+                            @error('email')
+                            <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
-                                @enderror
-                            </div>
+                            @enderror
                         </div>
 
-                        <div class="form-group row">
-                            <label for="password"
-                                   class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
+                        <div class="form-label-group input-group" id="show_hide_password">
+                            <input type="password" placeholder="Password"
+                                   class="form-control password_show @error('password') is-invalid @enderror"
+                                   name="password" required autocomplete="current-password">
+                            <span class="input-group-addon">
+                                    <a href=""><i class="fa fa-eye-slash" aria-hidden="true"></i></a>
+                                </span>
 
-                            <div class="col-md-6">
-                                <input id="password_show" type="password"  class="form-control password_show @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
-                                <input type="checkbox" onclick="showPassword()">Show Password
-
-                                @error('password')
-                                <span class="invalid-feedback" role="alert">
+                            @error('password')
+                            <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
-                                @enderror
-                            </div>
+                            @enderror
+
                         </div>
 
-                        <div class="form-group row mb-0">
-                            <div class="col-md-8 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Login') }}
-                                </button>
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                        <div class="form-group my-4">
+                            <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Sign in
+                            </button>
+                            <button type="button" class="btn btn-lg btn-block text-uppercase btn-secondary"
+                                    data-dismiss="modal">Cancel
+                            </button>
 
-                                @if (Route::has('password.request'))
-                                    <a class="btn btn-link" href="{{ route('password.request') }}">
-                                        {{ __('Forgot Your Password?') }}
-                                    </a>
-                                @endif
-                            </div>
+                            @if (Route::has('password.request'))
+                                <a class="btn btn-link" href="{{ route('password.request') }}">
+                                    {{ __('Forgot Your Password?') }}
+                                </a>
+                            @endif
                         </div>
+                        <hr class="my-4">
+                        <a class="btn btn-lg btn-google btn-block text-uppercase"><img
+                                src="https://img.icons8.com/color/20/000000/google-logo.png"> Sign in with Google
+                        </a>
+                        <a class="btn btn-lg btn-facebook btn-block text-uppercase" href="redirect/facebook"><img
+                                src="https://img.icons8.com/color/20/000000/facebook-new.png"> Sign in with Facebook
+                        </a>
                     </form>
                 </div>
             </div>
@@ -95,11 +95,10 @@
                 <nav class="site-navigation text-right ml-auto d-none d-lg-block" role="navigation">
                     <ul class="site-menu main-menu js-clone-nav ml-auto ">
                         <li class="active"><a href="/" class="nav-link">Trang chủ</a></li>
-                        <li><a href="{{route('product')}}" class="nav-link" >Sản phẩm</a></li>
+                        <li><a href="{{route('index')}}" class="nav-link">Sản phẩm</a></li>
                         <li><a href="{{route('about')}}" class="nav-link">Giới thiệu</a></li>
                         <li><a href="{{route('blog')}}" class="nav-link">Blog</a></li>
-                        <li><a href="#"  id="product" class="nav-link">Liên Hệ</a></li>
-
+                        <li><a href="#" id="product" class="nav-link">Liên Hệ</a></li>
 
 
                         <li class="nav-item">

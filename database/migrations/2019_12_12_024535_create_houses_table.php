@@ -18,14 +18,22 @@ class CreateHousesTable extends Migration
             $table->string('name')->nullable();
             $table->string('address')->nullable();
 
-            $table->string('house_type')->nullable();
-            $table->string('room_type')->nullable();
+            $table->string('phone')->nullable();
             $table->integer('bedrooms')->nullable();
-
             $table->integer('bathroom')->nullable();
+
             $table->longText('description')->nullable();
             $table->integer('price')->nullable();
             $table->string('image')->nullable();
+
+            $table->unsignedBigInteger('house_category_id')->nullable();
+            $table->foreign('house_category_id')->references('id')->on('house_category')->onDelete('cascade');
+
+            $table->unsignedBigInteger('room_category_id')->nullable();
+            $table->foreign('room_category_id')->references('id')->on('room_category')->onDelete('cascade');
+
+            $table->unsignedBigInteger('cities_id')->nullable();
+            $table->foreign('cities_id')->references('id')->on('cities')->onDelete('cascade');
 
             $table->timestamps();
         });

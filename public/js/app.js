@@ -49594,8 +49594,13 @@ throw new Error("Module build failed (from ./node_modules/css-loader/index.js):\
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
+<<<<<<< HEAD
 __webpack_require__(/*! C:\tets\website_house\resources\js\app.js */"./resources/js/app.js");
 module.exports = __webpack_require__(/*! C:\tets\website_house\resources\sass\app.scss */"./resources/sass/app.scss");
+=======
+__webpack_require__(/*! D:\xampp\htdocs\website_house\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! D:\xampp\htdocs\website_house\resources\sass\app.scss */"./resources/sass/app.scss");
+>>>>>>> 3f2904c3b32edfb5fc5a0a0924abd3ead0a3b140
 
 
 /***/ })

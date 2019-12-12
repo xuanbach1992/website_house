@@ -5,20 +5,20 @@ use Illuminate\Support\Facades\Auth;
 
 //route khoong qua controller
 //Route::get('/', function () {
-//    return view('page.home');
+//    return view('page.product');
 //})->name('index');
+Route::get('/','HouseController@listHouses')->name('index');
 
-    Route::get('/', 'HomeController@index')->name('index');
 Auth::routes();
 
 Route::prefix('/houses')->group(function (){
-    Route::get('/','HouseController@listHouses')->name('product');
+//    Route::get('/','HouseController@listHouses')->name('product');
     Route::get('/create','HouseController@create')->name('house.showFormCreate')->middleware('auth');;
     Route::post('/create','HouseController@add')->name('house.add')->middleware('auth');;
   });
 
 Route::prefix('/users')->group(function () {
-//    Route::get('/', 'HomeController@index')->name('home');
+//    Route::get('/', 'HomeController@index')->name('index');
     Route::get('change-password', 'HomeController@showChangePass')->name('showChangePassword');
     Route::post('change-password', 'HomeController@changePassword')->name('change.password');
     Route::post('/{id}/edit', 'HomeController@showFormEdit')->name('user.edit');
