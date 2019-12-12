@@ -161,98 +161,96 @@
 
 
     <div class="site-section bg-black">
-        <div id="house_list">
-            <div class="container">
-
-                <div class="row">
-                    @foreach($houses as $key => $value)
-                        <div class="col-md-4 mb-5">
-                            <div class="media-38289">
-                                <a href="{{route('house.detail',$value->id)}}" class="d-block"><img
-                                            src="{{asset("/storage/$value->image")}}" alt="Image" class="img-fluid"></a>
-                                <div class="text">
-                                    <div class="d-flex justify-content-between mb-3">
-                                        <div class="sq d-flex align-items-center"><span
-                                                    class="wrap-icon icon-fullscreen"></span> <a
-                                                    href="{{route('house.detail',$value->id)}}"
-                                                    style="color: white">{{$value->name}}</a></div>
-                                        <div class="bed d-flex align-items-center"><span
-                                                    class="wrap-icon icon-bed"></span> <span>{{$value->bedrooms}}</span>
-                                        </div>
-                                        <div class="bath d-flex align-items-center"><span
-                                                    class="wrap-icon icon-bath"></span>
-                                            <span>{{$value->bathroom}}</span>
-                                        </div>
+        <div class="container">
+            <div class="row">
+                @foreach($houses as $key => $value)
+                    <div class="col-md-4 mb-5">
+                        <div class="media-38289">
+                            <a href="{{route('house.detail',$value->id)}}" class="d-block"><img
+                                    src="{{asset("/storage/$value->image")}}" alt="Image" class="img-fluid"></a>
+                            <div class="text">
+                                <div class="d-flex justify-content-between mb-3">
+                                    <div class="sq d-flex align-items-center"><span
+                                            class="wrap-icon icon-fullscreen"></span> <a
+                                            href="{{route('house.detail',$value->id)}}"
+                                            style="color: white">{{$value->name}}</a></div>
+                                    <div class="bed d-flex align-items-center"><span
+                                            class="wrap-icon icon-bed"></span> <span>{{$value->bedrooms}}</span>
+                                    </div>
+                                    <div class="bath d-flex align-items-center"><span
+                                            class="wrap-icon icon-bath"></span> <span>{{$value->bathroom}}</span>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    @endforeach
-                    <div class="col-12 mt-5 text-center pagination-39291">
-                        <span class="active">1</span>
-                        <a href="#">2</a>
-                        <a href="#">3</a>
-                        <a href="#">4</a>
+                    </div>
+                @endforeach
+                <div class="col-12 mt-5 text-center pagination-39291">
+                    <span class="active">1</span>
+                    <a href="#">2</a>
+                    <a href="#">3</a>
+                    <a href="#">4</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="site-section bg-primary">
+        <div class="container block-13">
+            <div class="nonloop-block-13 owl-carousel">
+                <div class="testimonial-38920 d-flex align-items-start">
+                    <div class="pic mr-4"><img src="source/images/person_1.jpg" alt=""></div>
+                    <div>
+                        <span class="meta">Business Man</span>
+                        <h3 class="mb-4">Josh Long</h3>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nemo sapiente unde
+                            pariatur id, hic
+                            quos nihil nulla veritatis!</p>
+                        <div class="mt-4">
+                            <span class="icon-star text-white"></span>
+                            <span class="icon-star text-white"></span>
+                            <span class="icon-star text-white"></span>
+                            <span class="icon-star text-white"></span>
+                        </div>
                     </div>
                 </div>
 
-                <div class="site-section bg-primary">
-                    <div class="container block-13">
-                        <div class="nonloop-block-13 owl-carousel">
-                            <div class="testimonial-38920 d-flex align-items-start">
-                                <div class="pic mr-4"><img src="source/images/person_1.jpg" alt=""></div>
-                                <div>
-                                    <span class="meta">Business Man</span>
-                                    <h3 class="mb-4">Josh Long</h3>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nemo sapiente unde
-                                        pariatur id, hic
-                                        quos nihil nulla veritatis!</p>
-                                    <div class="mt-4">
-                                        <span class="icon-star text-white"></span>
-                                        <span class="icon-star text-white"></span>
-                                        <span class="icon-star text-white"></span>
-                                        <span class="icon-star text-white"></span>
-                                    </div>
-                                </div>
-                            </div>
+                <div class="testimonial-38920 d-flex align-items-start">
+                    <div class="pic mr-4"><img src="source/images/person_1.jpg" alt=""></div>
+                    <div>
+                        <span class="meta">Business Woman</span>
+                        <h3 class="mb-4">Jean Doe</h3>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nemo sapiente unde
+                            pariatur id, hic
+                            quos nihil nulla veritatis!</p>
+                        <div class="mt-4">
+                            <span class="icon-star text-white"></span>
+                            <span class="icon-star text-white"></span>
+                            <span class="icon-star text-white"></span>
+                            <span class="icon-star text-white"></span>
+                        </div>
+                    </div>
+                </div>
 
-                            <div class="testimonial-38920 d-flex align-items-start">
-                                <div class="pic mr-4"><img src="source/images/person_1.jpg" alt=""></div>
-                                <div>
-                                    <span class="meta">Business Woman</span>
-                                    <h3 class="mb-4">Jean Doe</h3>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nemo sapiente unde
-                                        pariatur id, hic
-                                        quos nihil nulla veritatis!</p>
-                                    <div class="mt-4">
-                                        <span class="icon-star text-white"></span>
-                                        <span class="icon-star text-white"></span>
-                                        <span class="icon-star text-white"></span>
-                                        <span class="icon-star text-white"></span>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="testimonial-38920 d-flex align-items-start">
-                                <div class="pic mr-4"><img src="source/images/person_1.jpg" alt=""></div>
-                                <div>
-                                    <span class="meta">Business Woman</span>
-                                    <h3 class="mb-4">Jean Doe</h3>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nemo sapiente unde
-                                        pariatur id, hic
-                                        quos nihil nulla veritatis!</p>
-                                    <div class="mt-4">
-                                        <span class="icon-star text-white"></span>
-                                        <span class="icon-star text-white"></span>
-                                        <span class="icon-star text-white"></span>
-                                        <span class="icon-star text-white"></span>
-                                    </div>
-                                </div>
-                            </div>
+                <div class="testimonial-38920 d-flex align-items-start">
+                    <div class="pic mr-4"><img src="source/images/person_1.jpg" alt=""></div>
+                    <div>
+                        <span class="meta">Business Woman</span>
+                        <h3 class="mb-4">Jean Doe</h3>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nemo sapiente unde
+                            pariatur id, hic
+                            quos nihil nulla veritatis!</p>
+                        <div class="mt-4">
+                            <span class="icon-star text-white"></span>
+                            <span class="icon-star text-white"></span>
+                            <span class="icon-star text-white"></span>
+                            <span class="icon-star text-white"></span>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
 @endsection

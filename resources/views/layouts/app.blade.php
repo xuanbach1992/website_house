@@ -37,16 +37,16 @@
 
 
     <link rel="stylesheet" href="{{asset('css/all.css')}}">
-{{--    <link rel="stylesheet" href="{{asset('css/bootstrap.min.css')}}">--}}
+    {{--    <link rel="stylesheet" href="{{asset('css/bootstrap.min.css')}}">--}}
     <script src="{{asset('js/bootstrap.bundle.min.js')}}" defer></script>
-{{--    <script src="{{ asset('js/jquery.slim.min.js') }}" defer></script>--}}
-<script>
-    $.ajaxSetup({
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        }
-    });
-</script>
+    {{--    <script src="{{ asset('js/jquery.slim.min.js') }}" defer></script>--}}
+    <script>
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+    </script>
 
 </head>
 

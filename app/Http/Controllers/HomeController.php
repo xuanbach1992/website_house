@@ -51,6 +51,7 @@ class HomeController extends Controller
         $user->phone = $request->phone;
         $user->address = $request->address;
         $user->save();
+        toastr()->success('Cap nhat thanh cong');
         return redirect('/');
     }
 
@@ -63,7 +64,7 @@ class HomeController extends Controller
         ]);
 
         User::find(auth()->user()->id)->update(['password' => Hash::make($request->new_password)]);
-        $request->session()->flash('success', 'Doi pass thanh cong');
+        toastr()->success('Doi pass thanh cong');
         return redirect()->route('index');
     }
 
