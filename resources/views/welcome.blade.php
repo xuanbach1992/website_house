@@ -17,7 +17,7 @@
     @endif
 </div>--}}
 <div class="container">
-   @include('page.home')
+   @include('page.product')
 </div>
     @endsection
 
