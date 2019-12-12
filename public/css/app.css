@@ -11357,7 +11357,7 @@ a.text-dark:focus {
 }
 
 .toast-title {
-  font-weight: bold !important;
+  font-weight: bold;
 }
 
 .toast-message {
