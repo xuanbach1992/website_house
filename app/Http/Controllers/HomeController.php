@@ -74,4 +74,8 @@ class HomeController extends Controller
     public function aboutTest(){
         return view('page.about');
     }
+
+    public function propertydetails(){
+        return view('page.property-details');
+    }
 }
