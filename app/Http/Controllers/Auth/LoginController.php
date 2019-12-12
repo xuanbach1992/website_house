@@ -25,8 +25,15 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/';
-
+//    protected $redirectTo = '/';
+    protected function redirectTo()
+    {
+//        if (auth()->user()->role_id == 1) {
+//            return '/admin';
+//        }
+        toastr()->success('welcome admin',"message",['timeOut' => 5000]);
+        return '/';
+    }
     /**
      * Create a new controller instance.
      *
@@ -35,6 +42,6 @@ class LoginController extends Controller
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
-        toastr()->success('welcome admin',"message",['timeOut' => 5000]);
+
     }
 }
