@@ -21,7 +21,7 @@
                         </div>
                         <div class="form-group">
                             <label><h6>Số điện thoại : </h6></label>
-                            <input type="text" class="form-control" name="phone" placeholder="Nhập số điện thoại">
+                            <input type="number" class="form-control" name="phone" placeholder="Nhập số điện thoại">
                         </div>
 
                         <div class="form-group">

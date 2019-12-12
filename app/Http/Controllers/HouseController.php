@@ -56,8 +56,9 @@ class HouseController extends Controller
 
     }
 
-    public function showHouseDetails(){
-        return view('page.house-details');
+    public function showHouseDetails($id){
+        $house = House::findOrFail($id);
+        return view('page.house-details',compact('house'));
     }
 
 }
