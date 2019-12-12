@@ -43,7 +43,7 @@
                         </div>
 
                         <div class="form-group my-4">
-                            <button class="btn btn-lg btn-primary btn-block text-uppercase" type="button">Sign in
+                            <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Sign in
                             </button>
                             <button type="button" class="btn btn-lg btn-block text-uppercase btn-secondary"
                                     data-dismiss="modal">Cancel
