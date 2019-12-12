@@ -89,7 +89,7 @@
                         </div>
                         <div class="form-group">
                             <label><h6>Mô tả : </h6></label>
-                            <textarea class="form-control" name="description" rows="7"></textarea>
+                            <textarea class="form-control" name="description" rows="14"></textarea>
                         </div>
                         <div class="form-group">
                             <label><h6>Giá tiền theo đêm : </h6></label>
