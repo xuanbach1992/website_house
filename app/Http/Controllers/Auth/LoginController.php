@@ -35,5 +35,6 @@ class LoginController extends Controller
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
+        toastr()->success('welcome admin',"message",['timeOut' => 5000]);
     }
 }

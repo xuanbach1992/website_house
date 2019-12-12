@@ -27,7 +27,8 @@ class HomeController extends Controller
      */
 
     public function index(){
-        return view('page.home');
+        return view('welcome');
+//        return view('page.home');
     }
 
     public function showChangePass(){
