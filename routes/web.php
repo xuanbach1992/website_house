@@ -35,3 +35,4 @@ Route::get('/callback/{social}', 'SocialAuthController@callback');
 Route::get('/contact','HomeController@contactTest')->name('contact');
 Route::get('/blog','HomeController@blogTest')->name('blog');
 Route::get('/about','HomeController@aboutTest')->name('about');
+Route::get('/property','HomeController@propertydetails')->name('property');

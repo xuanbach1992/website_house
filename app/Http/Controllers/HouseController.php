@@ -19,10 +19,10 @@ class HouseController extends Controller
 
     public function create()
     {
-        $listHouseCategory  = HouseCategory::all();
-        $listRoomCategory   = RoomCategory::all();
-        $listCities         = Cities::all();
-        return view('house.add',compact('listHouseCategory','listRoomCategory','listCities'));
+        $listHouseCategory = HouseCategory::all();
+        $listRoomCategory = RoomCategory::all();
+        $listCities = Cities::all();
+        return view('house.add', compact('listHouseCategory', 'listRoomCategory', 'listCities'));
     }
 
     public function add(HouseValidationRequest $request)
@@ -53,15 +53,15 @@ class HouseController extends Controller
         $house->save();
         toastr()->success('Create success', 'message');
         return redirect()->route('index');
-
     }
 
-    public function showHouseDetails($id){
-        $house              = House::findOrFail($id);
-        $listHouseCategory  = HouseCategory::all();
-        $listRoomCategory   = RoomCategory::all();
-        $listCities         = Cities::all();
-        return view('page.house-details',compact('house','listCities','listRoomCategory','listHouseCategory'));
+    public function showHouseDetails($id)
+    {
+        $house = House::findOrFail($id);
+        $listHouseCategory = HouseCategory::all();
+        $listRoomCategory = RoomCategory::all();
+        $listCities = Cities::all();
+        return view('page.house-details', compact('house', 'listCities', 'listRoomCategory', 'listHouseCategory'));
     }
 
 }
