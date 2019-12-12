@@ -2,7 +2,6 @@
 
 @section('content')
 
-
     <div class="row">
         <div class="col-md-12">
             <div id="demo" class="carousel "> <!--cho slide vào class để ảnh tự động chạy-->
@@ -31,45 +30,78 @@
         <div class="col-md-12 mt-3">
             <div class="col-md-8">
                 <div>
-                    <h3 style="color: #ff6c5e ">Tên Nhà</h3>
+                    <h3 style="color: #ff6c5e "><b>{{$house->name}}</b></h3>
                 </div>
                 <hr>
                 <div class="col-md-12 row">
                     <div class="mt-3 col-md-4">
-                        <p style="font-size: 20px">Giá</p>
-                        <p style="font-size:14px">1000$</p>
+                        <p><b>Giá :</b></p>
+                        <p>{{$house->price}}</p>
                     </div>
                     <div class="mt-3 col-md-4">
-                        <p style="font-size: 20px">Địa chỉ</p>
-                        <p style="font-size:14px">Thái Bình</p>
+                        <p><b>Địa chỉ :</b></p>
+                        <p>{{$house->address}} -
+                            @foreach($listCities as $city)
+                                @if($house->cities_id == $city->id)
+                                    {{$city->name}}
+                                @endif
+                            @endforeach
+                        </p>
                     </div>
                     <div class="mt-3 col-md-4">
-                        <p style="font-size: 20px">Số Điện Thoại</p>
-                        <p style="font-size:14px">0981202560</p>
+                        <p><b>Số Điện Thoại :</b></p>
+                        <p>{{$house->phone}}</p>
                     </div>
                 </div>
                 <hr>
                 <div class="col-md-12">
-                    <p style="font-size: 25px">Thông tin chi tiết</p>
+                    <p style="font-size: 25px"><b>Thông tin chi tiết</b></p>
                 </div>
-                <div class="col-md-12">
-                    <p style="font-size: 14px">Lorem ipsum dolor sit Amet, consectetur adipiscing elit. Chúng tôi tố cáo
-                        thời gian của khắc nghiệt của cuộc sống, rất dễ dàng để mang theo thông điệp deleniti cùng một
-                        lúc
-                        mất người đàn ông khôn ngoan sẽ mở ra, tôi có! Mà họ bỏ rắc rối của chung tại một thời điểm khác
-                        và
-                        trong thời gian khắc nghiệt, ông tránh xa những người mà họ noi theo.
+                <div class="col-md-12 row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>
+                                <h6>Kiểu nhà :
+                                    @foreach($listHouseCategory as $houseType)
+                                        @if($house->cities_id == $houseType->id)
+                                            {{$houseType->name}}
+                                        @endif
+                                    @endforeach
+                                </h6>
+                            </label>
+                        </div>
+                        <div class="form-group">
+                            <label>
+                                <label>
+                                    <h6>Kiểu phòng :
+                                        @foreach($listRoomCategory as $roomType)
+                                            @if($house->cities_id == $roomType->id)
+                                                {{$roomType->name}}
+                                            @endif
+                                        @endforeach
+                                    </h6>
+                                </label>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label><h6>Số lượng phòng ngủ : {{$house->bedrooms}}</h6></label>
+                        </div>
+                        <div class="form-group">
+                            <label><h6>Số lượng phòng tắm : {{$house->bathroom}}</h6></label>
+                        </div>
+                    </div>
 
-                        Trừ khi lỗi của những thú vui mà anh cũng phải có, tuy nhiên, deleniti, nhưng anh muốn nỗi buồn
-                        của
-                        tôi: vì ông sẽ tìm kiếm sự sụp đổ của sự vật, ai là nhục! Thời gian một kiến ​​trúc sư không
-                        được
-                        lựa chọn với sự tâng bốc của cô tại mất một lần trong nỗi đau của cuộc sống, đau, ca ngợi họ:
-                        Bởi
-                        đâu là người đàn ông này.</p>
+                    <div class="col-md-12">
+                        <h6>Mô tả : </h6>
+                        <p style="font-size: 15px">{{$house->description}}</p>
+                    </div>
+
                 </div>
                 <hr>
             </div>
         </div>
     </div>
+
 @endsection
