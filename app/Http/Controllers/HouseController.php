@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Cities;
 use App\House;
 use App\HouseCategory;
 use App\Http\Requests\HouseValidationRequest;
@@ -18,9 +19,10 @@ class HouseController extends Controller
 
     public function create()
     {
-        $listHouseCategory = HouseCategory::all();
-        $listRoomCategory = RoomCategory::all();
-        return view('house.add',compact('listHouseCategory','listRoomCategory'));
+        $listHouseCategory  = HouseCategory::all();
+        $listRoomCategory   = RoomCategory::all();
+        $listCities         = Cities::all();
+        return view('house.add',compact('listHouseCategory','listRoomCategory','listCities'));
     }
 
     public function add(HouseValidationRequest $request)

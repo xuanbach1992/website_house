@@ -23,4 +23,9 @@ class House extends Model
         return $this->hasMany('App\RoomCategory');
     }
 
+    public function cities()
+    {
+        return $this->belongsTo('App\Cities');
+    }
+
 }
