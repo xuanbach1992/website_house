@@ -1,5 +1,5 @@
 <div class="ftco-blocks-cover-1">
-    <div class="site-section-cover overlay" data-stellar-background-ratio="0.5" style="background-image: url('{{asset('source/images/hero_1.jpg')}}')">
+    <div class="site-section-cover overlay" data-stellar-background-ratio="0.5" style="background-image: url('{{asset('source/images/hero_1.jpg')}}');height: 300px">
         <div class="container">
             <div class="row align-items-center justify-content-center text-center">
                 <!--thông tin-->

@@ -26,8 +26,6 @@ class HouseValidationRequest extends FormRequest
         return [
             'name' => 'required',
             'address' => 'required',
-            'house_type' => 'required',
-            'room_type' => 'required',
             'bedrooms' => 'required|integer',
             'bathroom' => 'required|integer',
             'price' => 'required|integer'
@@ -39,8 +37,6 @@ class HouseValidationRequest extends FormRequest
         return [
             'name.required' => 'Tên không được bỏ trống',
             'address.required' => 'Địa chỉ không được bỏ trống',
-            'house_type.required' => 'Kiểu nhà không được bỏ trống',
-            'room_type.required' => 'Kiểu phòng không được bỏ trống',
             'bedrooms.required' => 'Số phòng ngủ không được bỏ trống',
             'bedrooms.integer' => 'Phải nhập dữ liệu số',
             'bathroom.required' => 'Số phòng tắm không được bỏ trống',

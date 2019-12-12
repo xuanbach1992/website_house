@@ -2,46 +2,66 @@
 
 namespace App\Http\Controllers;
 
+use App\Cities;
 use App\House;
+use App\HouseCategory;
 use App\Http\Requests\HouseValidationRequest;
+use App\RoomCategory;
 use Illuminate\Http\Request;
 
 class HouseController extends Controller
 {
-    public function listHouses(){
+    public function listHouses()
+    {
         $houses = House::all();
-        return view('page.product',compact('houses'));
+        return view('page.product', compact('houses'));
     }
 
-    public function create(){
-        return view('house.add');
+    public function create()
+    {
+        $listHouseCategory = HouseCategory::all();
+        $listRoomCategory = RoomCategory::all();
+        $listCities = Cities::all();
+        return view('house.add', compact('listHouseCategory', 'listRoomCategory', 'listCities'));
     }
 
-    public function add(HouseValidationRequest $request){
+    public function add(HouseValidationRequest $request)
+    {
         $house = new House();
         $house->name = $request->name;
         $house->address = $request->address;
 
-        $house->house_type = $request->house_type;
-        $house->room_type = $request->room_type;
-        $house->bedrooms = $request->bedrooms;
+        $house->phone = $request->phone;
+        $house->house_category_id = $request->house_category_id;
+        $house->room_category_id = $request->room_category_id;
 
+        $house->cities_id = $request->cities_id;
+        $house->bedrooms = $request->bedrooms;
         $house->bathroom = $request->bathroom;
+
         $house->description = $request->description;
         $house->price = $request->price;
 
-        if (!$request->hasFile('image')){
+        if (!$request->hasFile('image')) {
             $house->image = $request->image;
-        }else{
+        } else {
             $image = $request->file('image');
-            $path = $image->store('image','public');
+            $path = $image->store('image', 'public');
             $house->image = $path;
         }
 
         $house->save();
+        toastr()->success('Create success', 'message');
+        return redirect()->route('index');
+    }
 
-        return redirect()->route('product');
-
+    public function showHouseDetails($id)
+    {
+        $house = House::findOrFail($id);
+        $listHouseCategory = HouseCategory::all();
+        $listRoomCategory = RoomCategory::all();
+        $listCities = Cities::all();
+        return view('page.house-details', compact('house', 'listCities', 'listRoomCategory', 'listHouseCategory'));
     }
 
 }
