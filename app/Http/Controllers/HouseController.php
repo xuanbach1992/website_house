@@ -43,7 +43,7 @@ class HouseController extends Controller
 
         $house->save();
         toastr()->success('Create success', 'message');
-        return redirect()->route('product');
+        return redirect()->route('index');
 
     }
 
