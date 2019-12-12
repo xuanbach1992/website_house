@@ -128,7 +128,7 @@
                                     </a>
 
                                     <a class="dropdown-item"
-                                       href="{{ route('user.edit',\Illuminate\Support\Facades\Auth::user()->id)}}"
+                                       href="{{ route('user.edit')}}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('edit_user').submit();">
                                         {{ __('Edit Profile') }}
@@ -147,8 +147,8 @@
                                     </form>
 
                                     <form id="edit_user"
-                                          action="{{ route('user.edit',\Illuminate\Support\Facades\Auth::user()->id)}}"
-                                          method="POST"
+                                          action="{{ route('user.edit')}}"
+                                          method="GET"
                                           style="display: none;">
                                         @csrf
                                     </form>

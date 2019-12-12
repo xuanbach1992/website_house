@@ -19,10 +19,10 @@ Route::prefix('/houses')->group(function (){
 
 Route::prefix('/users')->group(function () {
 //    Route::get('/', 'HomeController@index')->name('index');
-    Route::get('change-password', 'HomeController@showChangePass')->name('showChangePassword');
-    Route::post('change-password', 'HomeController@changePassword')->name('change.password');
-    Route::post('/{id}/edit', 'HomeController@showFormEdit')->name('user.edit');
-    Route::post('/{id}/update','HomeController@updateSuccess')->name('user.update');
+    Route::get('/change-password', 'HomeController@showChangePass')->name('showChangePassword');
+    Route::post('/change-password', 'HomeController@changePassword')->name('change.password');
+    Route::get('/change-profile', 'HomeController@showFormEdit')->name('user.edit');
+    Route::post('/change-profile','HomeController@updateSuccess')->name('user.update');
 
 });
 
