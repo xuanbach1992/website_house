@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\House;
+use App\HouseCategory;
 use App\Http\Requests\HouseValidationRequest;
+use App\RoomCategory;
 use Illuminate\Http\Request;
 
 class HouseController extends Controller
@@ -16,7 +18,9 @@ class HouseController extends Controller
 
     public function create()
     {
-        return view('house.add');
+        $listHouseCategory = HouseCategory::all();
+        $listRoomCategory = RoomCategory::all();
+        return view('house.add',compact('listHouseCategory','listRoomCategory'));
     }
 
     public function add(HouseValidationRequest $request)
@@ -25,11 +29,14 @@ class HouseController extends Controller
         $house->name = $request->name;
         $house->address = $request->address;
 
-        $house->house_type = $request->house_type;
-        $house->room_type = $request->room_type;
-        $house->bedrooms = $request->bedrooms;
+        $house->phone = $request->phone;
+        $house->house_category_id = $request->house_category_id;
+        $house->room_category_id = $request->room_category_id;
 
+        $house->cities_id = $request->cities_id;
+        $house->bedrooms = $request->bedrooms;
         $house->bathroom = $request->bathroom;
+
         $house->description = $request->description;
         $house->price = $request->price;
 
@@ -43,7 +50,7 @@ class HouseController extends Controller
 
         $house->save();
         toastr()->success('Create success', 'message');
-        return redirect()->route('product');
+        return redirect()->route('index');
 
     }
 

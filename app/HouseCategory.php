@@ -9,6 +9,11 @@ class HouseCategory extends Model
     protected $table = 'house_category';
 
     protected $fillable = [
-        'id','name',
+        'id', 'name',
     ];
+
+    public function house()
+    {
+        return $this->belongsTo('App\House');
+    }
 }

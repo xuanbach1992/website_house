@@ -9,6 +9,11 @@ class RoomCategory extends Model
     protected $table = 'room_category';
 
     protected $fillable = [
-        'id','name',
+        'id', 'name',
     ];
+
+    public function house()
+    {
+        return $this->belongsTo('App\House');
+    }
 }

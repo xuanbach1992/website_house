@@ -20,26 +20,26 @@
                             @endif
                         </div>
                         <div class="form-group">
-                            <label><h6>Loại nhà : </h6></label>
-                            <input type="text" class="form-control
-                            @if($errors->has('house_type'))
-                                    border-danger
-                            @endif
-                            " name="house_type" placeholder="Nhập loại nhà">
-                            @if($errors->has('house_type'))
-                                <p style="color: red;">{{$errors->first('house_type')}}</p>
-                            @endif
+                            <label><h6>Số điện thoại : </h6></label>
+                            <input type="text" class="form-control" name="phone" placeholder="Nhập số điện thoại">
                         </div>
+
                         <div class="form-group">
-                            <label><h6>Loại phòng : </h6></label>
-                            <input type="text" class="form-control
-                            @if($errors->has('room_type'))
-                                    border-danger
-                            @endif
-                            " name="room_type" placeholder="Nhập loại phòng">
-                            @if($errors->has('room_type'))
-                                <p style="color: red;">{{$errors->first('room_type')}}</p>
-                            @endif
+                            <label><h6>Loại nhà :</h6></label>
+                            <select name="house_category_id" class="custom-select mr-sm-2">
+                                @foreach($listHouseCategory as $houseType)
+                                    <option value="{{$houseType->id}}">{{$houseType->name}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label><h6>Loại Phòng :</h6></label>
+                            <select name="room_category_id" class="custom-select mr-sm-2">
+                                @foreach($listRoomCategory as $roomType)
+                                    <option value="{{$roomType->id}}">{{$roomType->name}}</option>
+                                @endforeach
+                            </select>
                         </div>
                         <div class="form-group">
                             <label><h6>Địa chỉ : </h6></label>
