@@ -8,16 +8,19 @@ use Illuminate\Http\Request;
 
 class HouseController extends Controller
 {
-    public function listHouses(){
+    public function listHouses()
+    {
         $houses = House::all();
-        return view('page.product',compact('houses'));
+        return view('page.product', compact('houses'));
     }
 
-    public function create(){
+    public function create()
+    {
         return view('house.add');
     }
 
-    public function add(HouseValidationRequest $request){
+    public function add(HouseValidationRequest $request)
+    {
         $house = new House();
         $house->name = $request->name;
         $house->address = $request->address;
@@ -30,16 +33,16 @@ class HouseController extends Controller
         $house->description = $request->description;
         $house->price = $request->price;
 
-        if (!$request->hasFile('image')){
+        if (!$request->hasFile('image')) {
             $house->image = $request->image;
-        }else{
+        } else {
             $image = $request->file('image');
-            $path = $image->store('image','public');
+            $path = $image->store('image', 'public');
             $house->image = $path;
         }
 
         $house->save();
-
+        toastr()->success('Create success', 'message');
         return redirect()->route('product');
 
     }
