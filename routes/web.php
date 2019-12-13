@@ -15,6 +15,7 @@ Route::prefix('/houses')->group(function (){
 //    Route::get('/','HouseController@listHouses')->name('product');
     Route::get('/create','HouseController@create')->name('house.showFormCreate')->middleware('auth');;
     Route::post('/create','HouseController@add')->name('house.add')->middleware('auth');;
+    Route::post('/upload','HouseController@storeImage')->name('house.upload')->middleware('auth');;
     Route::get('/detail/{id}','HouseController@showHouseDetails')->name('house.detail');
 });
 

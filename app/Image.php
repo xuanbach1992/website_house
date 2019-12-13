@@ -9,6 +9,11 @@ class Image extends Model
     protected $table = 'image';
 
     protected $fillable = [
-        'id','path','house_id',
+        'id', 'path', 'house_id',
     ];
+
+    public function house()
+    {
+        return $this->belongsTo('App\House');
+    }
 }
