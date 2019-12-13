@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'failed' => 'sai user name or password.',
+    'failed' => 'sai tài khoản hoặc mật khẩu.',
     'throttle' => 'Too many login attempts. Please try again in :seconds seconds.',
 
 ];

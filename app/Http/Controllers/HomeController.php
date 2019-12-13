@@ -51,6 +51,7 @@ class HomeController extends Controller
         $user->phone = $request->phone;
         $user->address = $request->address;
         $user->save();
+        toastr()->success('Cap nhat thanh cong');
         return redirect('/');
     }
 
@@ -58,12 +59,12 @@ class HomeController extends Controller
     {
         $request->validate([
             'current_password' => ['required', new MatchOldPassword],
-            'new_password' => ['required'],
+            'new_password' => ['required','string', 'min:6'],
             'new_confirm_password' => ['same:new_password'],
         ]);
 
         User::find(auth()->user()->id)->update(['password' => Hash::make($request->new_password)]);
-        $request->session()->flash('success', 'Doi pass thanh cong');
+        toastr()->success('Doi pass thanh cong');
         return redirect()->route('index');
     }
 

@@ -14,19 +14,23 @@ class MatchOldPassword implements Rule
      */
     public function __construct()
     {
-        //
     }
 
     /**
      * Determine if the validation rule passes.
      *
-     * @param  string  $attribute
-     * @param  mixed  $value
+     * @param string $attribute
+     * @param mixed $value
      * @return bool
      */
     public function passes($attribute, $value)
     {
-        return Hash::check($value, auth()->user()->password);
+        if (Hash::check($value, auth()->user()->password)) {
+            return Hash::check($value, auth()->user()->password);
+        } else {
+            toastr()->error("Error", 'messasge', ["timeOut" => "15000"]);
+            return Hash::check($value, auth()->user()->password);
+        }
     }
 
     /**
