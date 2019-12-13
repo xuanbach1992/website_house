@@ -16,17 +16,12 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
 
-    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
-
-
-
     <link rel="stylesheet" href="{{asset('source/css/bootstrap.min.css')}}">
     <link rel="stylesheet" href="{{asset('source/css/bootstrap-datepicker.css')}}">
     <link rel="stylesheet" href="{{asset('source/css/jquery.fancybox.min.css')}}">
-    <link rel="stylesheet" href="{{asset('source/css/owl.carousel.min.css')}}">
+{{--    <link rel="stylesheet" href="{{asset('source/css/owl.carousel.min.css')}}">--}}
     <link rel="stylesheet" href="{{asset('source/css/owl.theme.default.min.css')}}">
     <link rel="stylesheet" href="{{asset('source/fonts/flaticon/font/flaticon.css')}}">
-    {{--    <link rel="stylesheet" href="{{asset('source/css/aos.css')}}">--}}
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
           integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
@@ -34,13 +29,14 @@
     <!-- MAIN CSS -->
     <link rel="stylesheet" href="{{asset('source/css/style.css')}}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.5.0/min/dropzone.min.css">
-
-
     <link rel="stylesheet" href="{{asset('css/all.css')}}">
-    {{--    <link rel="stylesheet" href="{{asset('css/bootstrap.min.css')}}">--}}
+
+{{--    end css--}}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
     <script src="{{asset('js/bootstrap.bundle.min.js')}}" defer></script>
-    {{--    <script src="{{ asset('js/jquery.slim.min.js') }}" defer></script>--}}
     <script>
         $.ajaxSetup({
             headers: {
@@ -81,7 +77,6 @@
 
 
     <!--homepage content-->
-    {{--có 5 thẻ ở đây để hiển thị nội dung . --}}
     <main class="py-4">
         <div class="container">
             <div class="row">
@@ -100,11 +95,9 @@
 
 </div>
 
-{{--<script src="{{asset('source/js/jquery-3.3.1.min.js')}}"></script>--}}
 <script src="{{asset('source/js/jquery-migrate-3.0.0.js')}}"></script>
 <script src="{{asset('source/js/popper.min.js')}}"></script>
-<script src="{{asset('source/js/bootstrap.min.js')}}"></script>
-<script src="{{asset('source/js/owl.carousel.min.js')}}"></script>
+{{--<script src="{{asset('source/js/owl.carousel.min.js')}}"></script>--}}
 <script src="{{asset('source/js/jquery.sticky.js')}}"></script>
 <script src="{{asset('source/js/jquery.waypoints.min.js')}}"></script>
 <script src="{{asset('source/js/jquery.animateNumber.min.js')}}"></script>
