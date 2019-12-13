@@ -26,11 +26,11 @@ class MatchOldPassword implements Rule
     public function passes($attribute, $value)
     {
         if (Hash::check($value, auth()->user()->password)) {
-            return Hash::check($value, auth()->user()->password);
         } else {
             toastr()->error("Error", 'messasge', ["timeOut" => "15000"]);
-            return Hash::check($value, auth()->user()->password);
         }
+        return Hash::check($value, auth()->user()->password);
+
     }
 
     /**
