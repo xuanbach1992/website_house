@@ -19,7 +19,6 @@
     <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 
 
-
     <link rel="stylesheet" href="{{asset('source/css/bootstrap.min.css')}}">
     <link rel="stylesheet" href="{{asset('source/css/bootstrap-datepicker.css')}}">
     <link rel="stylesheet" href="{{asset('source/css/jquery.fancybox.min.css')}}">
@@ -48,27 +47,30 @@
             }
         });
     </script>
-
 </head>
 <body>
 
 <div>
-        @include('header')
+    @include('header')
 </div>
 <div class="container">
     <h2 style="color: white">Đăng nhiều ảnh để dễ bán hơn</h2><br/>
-    <form  method="post" action="{{route('house.upload')}}" enctype="multipart/form-data"
+    <form method="post" action="{{route('house.upload')}}" enctype="multipart/form-data"
           class="dropzone mt-5" id="dropzone" name="file">
         @csrf
-
     </form>
-    <div><a class="btn-secondary btn" href="{{route('index')}}" type="submit">Upload</a></div>
+    <div><a class="btn-secondary btn" id="uploadfiles" href="{{route('index')}}" type="submit">Upload</a></div>
 
 </div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.5.0/dropzone.js"></script>
 <script type="text/javascript">
-    Dropzone.options.dropzone =
-        {
+    Dropzone.autoDiscover = false;
+
+    let myDropzone = new Dropzone(".dropzone", {
+            autoProcessQueue: false,
             maxFilesize: 10,
+            parallelUploads: 10,
             renameFile: function (file) {
                 var dt = new Date();
                 var time = dt.getTime();
@@ -83,9 +85,11 @@
             error: function (file, response) {
                 return false;
             }
-        };
+        },
+        $('#uploadfiles').click(function(){
+            myDropzone.processQueue();
+        }))
 </script>
-
 <script src="{{asset('source/js/jquery-migrate-3.0.0.js')}}"></script>
 <script src="{{asset('source/js/popper.min.js')}}"></script>
 <script src="{{asset('source/js/bootstrap.min.js')}}"></script>
@@ -99,8 +103,8 @@
 <script src="{{asset('source/js/bootstrap-datepicker.min.js')}}"></script>
 <script src="{{asset('source/js/aos.js')}}"></script>
 <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
-<script>tinymce.init({selector:'textarea'});</script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.5.0/dropzone.js"></script>
+<script>tinymce.init({selector: 'textarea'});</script>
+
 <script src="{{asset('source/js/main.js')}}"></script>
 <script src="{{asset('js/app.js') }}"></script>
 <script src="{{asset('js/main.js')}}"></script>
