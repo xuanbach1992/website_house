@@ -28,4 +28,9 @@ class House extends Model
         return $this->belongsTo('App\Cities');
     }
 
+    public function images()
+    {
+        return $this->hasMany('App\Image');
+    }
+
 }

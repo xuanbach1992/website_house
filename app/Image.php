@@ -11,4 +11,7 @@ class Image extends Model
     protected $fillable = [
         'id','path','house_id',
     ];
+    public function house(){
+        return $this->belongsTo('App\House');
+    }
 }
