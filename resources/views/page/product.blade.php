@@ -164,10 +164,12 @@
         <div class="container">
             <div class="row">
                 @foreach($houses as $key => $value)
+{{--                    {{dd($value->images[0]->path)}}--}}
                     <div class="col-md-4 mb-5">
                         <div class="media-38289">
-                            <a href="{{route('house.detail',$value->id)}}" class="d-block"><img
-                                    src="{{asset("/storage/$value->image")}}" alt="Image" class="img-fluid"></a>
+                            <a href="{{route('house.detail',$value->id)}}" class="d-block">
+                                <img
+                                    src="{{asset('storage/'.$value->images[0]->path)}}" alt="Image" class="img-fluid"></a>
                             <div class="text">
                                 <div class="d-flex justify-content-between mb-3">
                                     <div class="sq d-flex align-items-center"><span

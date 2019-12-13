@@ -6,18 +6,28 @@ use App\Cities;
 use App\House;
 use App\HouseCategory;
 use App\Http\Requests\HouseValidationRequest;
+use App\Image;
 use App\RoomCategory;
+use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class HouseController extends Controller
 {
-    public function listHouses()
+    public function __construct()
+    {
+        //
+    }
+
+    public
+    function listHouses()
     {
         $houses = House::all();
         return view('page.product', compact('houses'));
     }
 
-    public function create()
+    public
+    function create()
     {
         $listHouseCategory = HouseCategory::all();
         $listRoomCategory = RoomCategory::all();
@@ -25,7 +35,8 @@ class HouseController extends Controller
         return view('house.add', compact('listHouseCategory', 'listRoomCategory', 'listCities'));
     }
 
-    public function add(HouseValidationRequest $request)
+    public
+    function add(HouseValidationRequest $request)
     {
         $house = new House();
         $house->name = $request->name;
@@ -42,17 +53,34 @@ class HouseController extends Controller
         $house->description = $request->description;
         $house->price = $request->price;
 
-        if (!$request->hasFile('image')) {
-            $house->image = $request->image;
-        } else {
-            $image = $request->file('image');
-            $path = $image->store('image', 'public');
-            $house->image = $path;
-        }
+//        if (!$request->hasFile('image')) {
+//            $house->image = $request->image;
+//        } else {
+//            $image = $request->file('image');
+//            $path = $image->store('image', 'public');
+//            $house->image = $path;
+//        }
 
         $house->save();
         toastr()->success('Create success', 'message');
-        return redirect()->route('index');
+        return view('house.upload');
+    }
+
+    public
+    function storeImage(Request $request)
+    {
+//        if ($request->ajax()) {/
+            $house_id = DB::table('houses')->max('id');
+            if ($request->hasFile('file')) {
+                $image = $request->file('file');
+                $path = $image->store('rooms', 'public');
+                $imageUpload = new Image();
+                $imageUpload->path = $path;
+                $imageUpload->house_id = $house_id;
+                $imageUpload->save();
+                return redirect()->route('index');
+            }
+//        }
     }
 
     public function showHouseDetails($id)
@@ -63,5 +91,6 @@ class HouseController extends Controller
         $listCities = Cities::all();
         return view('page.house-details', compact('house', 'listCities', 'listRoomCategory', 'listHouseCategory'));
     }
+
 
 }

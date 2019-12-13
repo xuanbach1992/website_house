@@ -50,57 +50,42 @@
     </script>
 
 </head>
+<body>
 
-<body data-spy="scroll" data-target=".site-navbar-target" data-offset="300">
+<div>
+        @include('header')
+</div>
+<div class="container">
+    <h2 style="color: white">Đăng nhiều ảnh để dễ bán hơn</h2><br/>
+    <form  method="post" action="{{route('house.upload')}}" enctype="multipart/form-data"
+          class="dropzone mt-5" id="dropzone" name="file">
+        @csrf
 
-
-<div class="site-wrap" id="home-section">
-
-    <div class="site-mobile-menu site-navbar-target">
-        <div class="site-mobile-menu-header">
-            <div class="site-mobile-menu-close mt-3">
-                <span class="icon-close2 js-menu-toggle"></span>
-
-
-            </div>
-        </div>
-        <div class="site-mobile-menu-body"></div>
-    </div>
-
-
-    <!--header-->
-{{--header ở đây--}}
-@include('header')
-<!--header-->
-
-    <!--slice-->
-{{--@cannot('register')--}}
-@include('slice')
-{{--@endcan--}}
-<!--slice-->
-
-
-    <!--homepage content-->
-    {{--có 5 thẻ ở đây để hiển thị nội dung . --}}
-    <main class="py-4">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    @yield('content')
-                </div>
-            </div>
-        </div>
-    </main>
-    <!--homepage content-->
-
-
-    <!--footer-->
-@include('footer')
-<!--footer-->
+    </form>
+    <div><a class="btn-secondary btn" href="{{route('index')}}" type="submit">Upload</a></div>
 
 </div>
+<script type="text/javascript">
+    Dropzone.options.dropzone =
+        {
+            maxFilesize: 10,
+            renameFile: function (file) {
+                var dt = new Date();
+                var time = dt.getTime();
+                return time + file.name;
+            },
+            acceptedFiles: ".jpeg,.jpg,.png,.gif",
+            addRemoveLinks: true,
+            timeout: 60000,
+            success: function (file, response) {
+                console.log(response);
+            },
+            error: function (file, response) {
+                return false;
+            }
+        };
+</script>
 
-{{--<script src="{{asset('source/js/jquery-3.3.1.min.js')}}"></script>--}}
 <script src="{{asset('source/js/jquery-migrate-3.0.0.js')}}"></script>
 <script src="{{asset('source/js/popper.min.js')}}"></script>
 <script src="{{asset('source/js/bootstrap.min.js')}}"></script>
