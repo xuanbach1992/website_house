@@ -124,32 +124,24 @@ class HouseController extends Controller
         if ($request->has('keyBathroom') && !empty($request->get('keyBathroom'))) {
             $query = $query->where('bathroom', $request->get('keyBathroom'));
         }
-        if ($request->has('keyAddress') && !empty($request->get('keyBedrooms'))) {
-            $query = $query->where('address', $request->get('keyAddress'));
-        }
-
-        if ($request->has('cities_id') && $request->get('cities_id') != '-1'){
-            $query = $query->where('cities_id', $request->get('cities_id'));
-        }
         if ($request->has('price_from') && !empty($request->get('price_from'))){
             $query = $query->where('price','>=',$request->get('price_from'));
         }
         if ($request->has('price_to') && !empty($request->get('price_to'))){
             $query = $query->where('price','<=',$request->get('price_to'));
         }
+        if ($request->has('cities_id') && $request->get('cities_id') != '-1'){
+            $query = $query->where('cities_id', $request->get('cities_id'));
+        }
 
 //        dd($query->toSql());
 
         $houses = $query->get();
         $listCities = $this->city->all();
-        $listDistrict = $this->district->all();
 
         return view('page.product', compact(
             'houses',
-            'listHouseCategory',
-            'listRoomCategory',
-            'listCities',
-            'listDistrict'
+            'listCities'
         ));
 
     }

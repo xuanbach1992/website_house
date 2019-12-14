@@ -24,11 +24,16 @@
                             <input type="text" name="keyBedrooms" class="form-control" placeholder="Phòng ngủ">
                         </div>
                         <div class="col-md-4 form-group">
-                            <input type="text" name="keyAddress" class="form-control" placeholder="Địa chỉ">
+                            <select name="cities_id" id="" class="form-control w-100">
+                                <option value="-1">Thành Phố</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                            </select>
                         </div>
                         <div class="col-md-4 form-group">
-                            <select name="cities_id" id="" class="form-control w-100">
-                                <option value="-1">All</option>
+                            <select name="" id="" class="form-control w-100">
+                                <option value="-1">Quận huyện</option>
                                 <option value="1">1</option>
                                 <option value="2">2</option>
                                 <option value="3">3</option>
@@ -53,10 +58,10 @@
                         <div class="col-md-4 form-group">
                             <div class="row">
                                 <div class="col-md-6 form-group">
-                                    <input type="date" name="price_from" class="form-control">
+                                    <input type="date" name="" class="form-control">
                                 </div>
                                 <div class="col-md-6 form-group">
-                                    <input type="date" name="price_to" class="form-control">
+                                    <input type="date" name="" class="form-control">
                                 </div>
                             </div>
                         </div>
