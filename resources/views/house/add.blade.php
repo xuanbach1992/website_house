@@ -42,7 +42,7 @@
                         </div>
                         <div class="form-group">
                             <label><h6>Thành phố :</h6></label>
-                            <select name="" class="custom-select mr-sm-2" onchange="onChange(this.value);">
+                            <select name="cities_id" class="custom-select mr-sm-2" onchange="onChange(this.value);">
                                 <option>---ALL---</option>
                                 @foreach($listCities as $city)
                                     <option value="{{$city->id}}">{{$city->name}}</option>

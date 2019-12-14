@@ -67,6 +67,7 @@ class HouseController extends Controller
     public function add(HouseValidationRequest $request)
     {
         $house = new House();
+
         $house->name = $request->name;
         $house->address = $request->address;
 
@@ -75,10 +76,11 @@ class HouseController extends Controller
         $house->room_category_id = $request->room_category_id;
 
         $house->cities_id = $request->cities_id;
+        $house->district_id = $request->district_id;
+
         $house->bedrooms = $request->bedrooms;
         $house->bathroom = $request->bathroom;
 
-        $house->district_id = $request->district_id;
         $house->description = $request->description;
         $house->price = $request->price;
 
@@ -132,16 +134,16 @@ class HouseController extends Controller
             $query = $query->where('price','<=',$request->get('price_to'));
         }
         if ($request->has('cities') && $request->get('cities') != '-1'){
-            $query = $query->where('id', $request->get('cities'));
+            $query = $query->where('cities_id', $request->get('cities'));
         }
         if ($request->has('district') && $request->get('district') != '-1'){
-            $query = $query->where('id', $request->get('district'));
+            $query = $query->where('district_id', $request->get('district'));
         }
 
 //        dd($query->toSql());
 
         $houses = $query->get();
-        $listCities = $this->city->all();
+        $listCities = $this->city->get();
 
         return view('page.product', compact(
             'houses',
