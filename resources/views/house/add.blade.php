@@ -42,10 +42,17 @@
                         </div>
                         <div class="form-group">
                             <label><h6>Thành phố :</h6></label>
-                            <select name="cities_id" class="custom-select mr-sm-2">
+                            <select name="cities_id" class="custom-select mr-sm-2" onchange="onChange(this.value);">
+                                <option>---ALL---</option>
                                 @foreach($listCities as $city)
                                     <option value="{{$city->id}}">{{$city->name}}</option>
                                 @endforeach
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label><h6>Quận huyện :</h6></label>
+                            <select name="district_id" class="custom-select mr-sm-2" id="district_id">
+
                             </select>
                         </div>
                         <div class="form-group">

@@ -2,8 +2,7 @@
 
 @section('content')
 
-    <form action="{{route('house.search')}}" method="get" >
-        @csrf
+    <form action="{!! route('search') !!}" method="get">
         <div class="realestate-filter">
             <div class="container">
                 <div class="realestate-filter-wrap nav">
@@ -28,12 +27,11 @@
                             <input type="text" name="keyAddress" class="form-control" placeholder="Địa chỉ">
                         </div>
                         <div class="col-md-4 form-group">
-                            <select name="" id="" class="form-control w-100">
-                                <option value="">Thành phố</option>
-                                <option value="">0</option>
-                                <option value="">1</option>
-                                <option value="">2</option>
-                                <option value="">3</option>
+                            <select name="cities_id" id="" class="form-control w-100">
+                                <option value="-1">All</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
                             </select>
                         </div>
                     </div>
@@ -45,46 +43,20 @@
                         <div class="col-md-4 form-group">
                             <div class="row">
                                 <div class="col-md-6 form-group">
-                                    <select name="" id="" class="form-control w-100">
-                                        <option value="">Giá từ:</option>
-                                        <option value="">$100</option>
-                                        <option value="">$200</option>
-                                        <option value="">$300</option>
-                                        <option value="">$400</option>
-                                    </select>
+                                    <input type="number" name="price_from" class="form-control" placeholder="Giá từ">
                                 </div>
-                                <div class="col-md-6">
-                                    <select name="" id="" class="form-control w-100">
-                                        <option value="">Đến Giá:</option>
-                                        <option value="">$25,000</option>
-                                        <option value="">$50,000</option>
-                                        <option value="">$75,000</option>
-                                        <option value="">$100,000</option>
-                                        <option value="">$100,000,000</option>
-                                    </select>
+                                <div class="col-md-6 form-group">
+                                    <input type="number" name="price_to" class="form-control" placeholder="Đến giá">
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-4 form-group">
                             <div class="row">
                                 <div class="col-md-6 form-group">
-                                    <select name="" id="" class="form-control w-100">
-                                        <option value="">Từ ngày:</option>
-                                        <option value="">$100</option>
-                                        <option value="">$200</option>
-                                        <option value="">$300</option>
-                                        <option value="">$400</option>
-                                    </select>
+                                    <input type="date" name="price_from" class="form-control">
                                 </div>
-                                <div class="col-md-6">
-                                    <select name="" id="" class="form-control w-100">
-                                        <option value="">Đến Ngày:</option>
-                                        <option value="">$25,000</option>
-                                        <option value="">$50,000</option>
-                                        <option value="">$75,000</option>
-                                        <option value="">$100,000</option>
-                                        <option value="">$100,000,000</option>
-                                    </select>
+                                <div class="col-md-6 form-group">
+                                    <input type="date" name="price_to" class="form-control">
                                 </div>
                             </div>
                         </div>
@@ -199,19 +171,23 @@
                     <div class="col-md-4 mb-5">
                         <div class="media-38289">
                             <a href="{{route('house.detail',$value->id)}}" class="d-block"><img
-                                    src="{{asset("/storage/$value->image")}}" alt="Image" class="img-fluid"></a>
+                                        src="{{asset("/storage/$value->image")}}" alt="Image" class="img-fluid"></a>
                             <div class="text">
                                 <div class="d-flex justify-content-between mb-3">
                                     <div class="sq d-flex align-items-center"><span
-                                            class="wrap-icon icon-fullscreen"></span> <a
-                                            href="{{route('house.detail',$value->id)}}"
-                                            style="color: white">{{$value->name}}</a></div>
+                                                class="wrap-icon icon-fullscreen"></span> <a
+                                                href="{{route('house.detail',$value->id)}}"
+                                                style="color: white">{{$value->name}}</a></div>
                                     <div class="bed d-flex align-items-center"><span
-                                            class="wrap-icon icon-bed"></span> <span>{{$value->bedrooms}}</span>
+                                                class="wrap-icon icon-bed"></span> <span>{{$value->bedrooms}}</span>
                                     </div>
                                     <div class="bath d-flex align-items-center"><span
-                                            class="wrap-icon icon-bath"></span> <span>{{$value->bathroom}}</span>
+                                                class="wrap-icon icon-bath"></span> <span>{{$value->bathroom}}</span>
                                     </div>
+                                </div>
+                                <div>
+                                    <button class="btn btn-primary btn-sm">Booking</button>
+                                    <button class="btn btn-warning btn-sm">Cancel</button>
                                 </div>
                             </div>
                         </div>

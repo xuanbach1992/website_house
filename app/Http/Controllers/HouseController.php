@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Cities;
+use App\District;
 use App\House;
 use App\HouseCategory;
 use App\Http\Requests\HouseValidationRequest;
@@ -11,23 +12,57 @@ use Illuminate\Http\Request;
 
 class HouseController extends Controller
 {
+    protected $house;
+    protected $houseCategory;
+    protected $roomCategory;
+    protected $city;
+    protected $district;
+
+    public function __construct(House $house,
+                                HouseCategory $houseCategory,
+                                RoomCategory $roomCategory,
+                                Cities $city,
+                                District $district)
+    {
+        $this->house = $house;
+        $this->houseCategory = $houseCategory;
+        $this->roomCategory = $roomCategory;
+        $this->city = $city;
+        $this->district = $district;
+    }
+
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * auth : hiep
+     */
     public function listHouses()
     {
-        $houses = House::all();
-        $listHouseCategory = HouseCategory::all();
-        $listRoomCategory = RoomCategory::all();
-        $listCities = Cities::all();
-        return view('page.product', compact('houses','listHouseCategory','listRoomCategory','listCities'));
+        $houses = $this->house->all();
+        $listCities = $this->city->all();
+
+        return view('page.product', [
+            'houses' => $houses,
+        ]);
     }
 
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * auth : hiep
+     */
     public function create()
     {
-        $listHouseCategory = HouseCategory::all();
-        $listRoomCategory = RoomCategory::all();
-        $listCities = Cities::all();
-        return view('house.add', compact('listHouseCategory', 'listRoomCategory', 'listCities'));
+        $listHouseCategory = $this->houseCategory->all();
+        $listRoomCategory = $this->roomCategory->all();
+        $listCities = $this->city->all();
+        $listDistrict = $this->district->all();
+
+        return view('house.add', compact('listHouseCategory', 'listRoomCategory', 'listCities', 'listDistrict'));
     }
 
+    /**
+     * @param HouseValidationRequest $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function add(HouseValidationRequest $request)
     {
         $house = new House();
@@ -42,6 +77,7 @@ class HouseController extends Controller
         $house->bedrooms = $request->bedrooms;
         $house->bathroom = $request->bathroom;
 
+        $house->district_id = $request->district_id;
         $house->description = $request->description;
         $house->price = $request->price;
 
@@ -58,17 +94,64 @@ class HouseController extends Controller
         return redirect()->route('index');
     }
 
+    /**
+     * @param $id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function showHouseDetails($id)
     {
         $house = House::findOrFail($id);
         $listHouseCategory = HouseCategory::all();
         $listRoomCategory = RoomCategory::all();
         $listCities = Cities::all();
-        return view('page.house-details', compact('house', 'listCities', 'listRoomCategory', 'listHouseCategory'));
+        $listDistrict = District::all();
+        return view('page.house-details', compact('house', 'listCities', 'listRoomCategory', 'listHouseCategory', 'listDistrict'));
     }
 
-    public function getSearch(Request $request){
-        $bedrooms = House::where('bedrooms','like','%'.$request->keyBedrooms.'%');
+    /**
+     * @param Request $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function search(Request $request)
+    {
+        $filter = $request->all();
+
+        $query = $this->house;
+
+        if ($request->has('keyBedrooms') && !empty($request->get('keyBedrooms'))) {
+            $query = $query->where('bedrooms', $request->get('keyBedrooms'));
+        }
+        if ($request->has('keyBathroom') && !empty($request->get('keyBathroom'))) {
+            $query = $query->where('bathroom', $request->get('keyBathroom'));
+        }
+        if ($request->has('keyAddress') && !empty($request->get('keyBedrooms'))) {
+            $query = $query->where('address', $request->get('keyAddress'));
+        }
+
+        if ($request->has('cities_id') && $request->get('cities_id') != '-1'){
+            $query = $query->where('cities_id', $request->get('cities_id'));
+        }
+        if ($request->has('price_from') && !empty($request->get('price_from'))){
+            $query = $query->where('price','>=',$request->get('price_from'));
+        }
+        if ($request->has('price_to') && !empty($request->get('price_to'))){
+            $query = $query->where('price','<=',$request->get('price_to'));
+        }
+
+//        dd($query->toSql());
+
+        $houses = $query->get();
+        $listCities = $this->city->all();
+        $listDistrict = $this->district->all();
+
+        return view('page.product', compact(
+            'houses',
+            'listHouseCategory',
+            'listRoomCategory',
+            'listCities',
+            'listDistrict'
+        ));
+
     }
 
 }
