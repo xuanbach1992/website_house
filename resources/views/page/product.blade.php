@@ -2,7 +2,8 @@
 
 @section('content')
 
-    <form action="">
+    <form action="{{route('house.search')}}" method="get" >
+        @csrf
         <div class="realestate-filter">
             <div class="container">
                 <div class="realestate-filter-wrap nav">
@@ -21,16 +22,10 @@
                     <!--dòng 1-->
                     <div class="row">
                         <div class="col-md-4 form-group">
-                            <select name="" id="" class="form-control w-100">
-                                <option value="">Any Bedrooms - phòng ngủ</option>
-                                <option value="">0</option>
-                                <option value="">1</option>
-                                <option value="">2</option>
-                                <option value="">3+</option>
-                            </select>
+                            <input type="text" name="keyBedrooms" class="form-control" placeholder="Phòng ngủ">
                         </div>
                         <div class="col-md-4 form-group">
-                            <input type="text" class="form-control" placeholder="Địa chỉ">
+                            <input type="text" name="keyAddress" class="form-control" placeholder="Địa chỉ">
                         </div>
                         <div class="col-md-4 form-group">
                             <select name="" id="" class="form-control w-100">
@@ -45,13 +40,7 @@
                     <!--dòng 2-->
                     <div class="row">
                         <div class="col-md-4 form-group">
-                            <select name="" id="" class="form-control w-100">
-                                <option value="">Any Bathrooms - phòng tắm</option>
-                                <option value="">0</option>
-                                <option value="">1</option>
-                                <option value="">2</option>
-                                <option value="">3+</option>
-                            </select>
+                            <input type="text" name="keyBathroom" class="form-control" placeholder="Phòng tắm">
                         </div>
                         <div class="col-md-4 form-group">
                             <div class="row">
@@ -202,7 +191,6 @@
             </div>
         </div>
     </form>
-
 
     <div class="site-section bg-black">
         <div class="container">

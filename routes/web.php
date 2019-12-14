@@ -32,6 +32,10 @@ Route::prefix('/users')->group(function () {
 Route::get('/redirect/{social}', 'SocialAuthController@redirect');
 Route::get('/callback/{social}', 'SocialAuthController@callback');
 
+//search
+Route::get('/search','HouseController@getSearch')->name('house.search');
+
+
 Route::get('/contact','HomeController@contactTest')->name('contact');
 Route::get('/blog','HomeController@blogTest')->name('blog');
 Route::get('/about','HomeController@aboutTest')->name('about');

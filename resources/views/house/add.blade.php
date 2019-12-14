@@ -41,6 +41,14 @@
                             </select>
                         </div>
                         <div class="form-group">
+                            <label><h6>Thành phố :</h6></label>
+                            <select name="cities_id" class="custom-select mr-sm-2">
+                                @foreach($listCities as $city)
+                                    <option value="{{$city->id}}">{{$city->name}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="form-group">
                             <label><h6>Địa chỉ : </h6></label>
                             <input type="text" class="form-control
                             @if($errors->has('address'))
@@ -50,14 +58,6 @@
                             @if($errors->has('address'))
                                 <p style="color: red;">{{$errors->first('address')}}</p>
                             @endif
-                        </div>
-                        <div class="form-group">
-                            <label><h6>Thành phố :</h6></label>
-                            <select name="cities_id" class="custom-select mr-sm-2">
-                                @foreach($listCities as $city)
-                                    <option value="{{$city->id}}">{{$city->name}}</option>
-                                @endforeach
-                            </select>
                         </div>
                         <div class="form-group">
                             <label><h6>Số lượng phòng ngủ : </h6></label>

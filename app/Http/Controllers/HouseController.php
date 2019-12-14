@@ -14,7 +14,10 @@ class HouseController extends Controller
     public function listHouses()
     {
         $houses = House::all();
-        return view('page.product', compact('houses'));
+        $listHouseCategory = HouseCategory::all();
+        $listRoomCategory = RoomCategory::all();
+        $listCities = Cities::all();
+        return view('page.product', compact('houses','listHouseCategory','listRoomCategory','listCities'));
     }
 
     public function create()
@@ -62,6 +65,10 @@ class HouseController extends Controller
         $listRoomCategory = RoomCategory::all();
         $listCities = Cities::all();
         return view('page.house-details', compact('house', 'listCities', 'listRoomCategory', 'listHouseCategory'));
+    }
+
+    public function getSearch(Request $request){
+        $bedrooms = House::where('bedrooms','like','%'.$request->keyBedrooms.'%');
     }
 
 }
