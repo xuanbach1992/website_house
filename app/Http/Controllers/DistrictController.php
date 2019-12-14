@@ -14,14 +14,15 @@ class DistrictController extends Controller
         $this->district = $district;
     }
 
-    public function getDataByCitiesId(Request $request){
+    public function getDataByCitiesId(Request $request)
+    {
         $id = $request->get('id');
-        $data = $this->district->where('cities_id',$id)->get();
+        $data = $this->district->where('cities_id', $id)->get();
 
-        if ($data->isEmpty()){
+        if ($data->isEmpty()) {
             return response()->json([
                 'erros' => true,
-                'message' => 'khong tim thay data tuong ung.',
+                'message' => 'Không tìm thấy dữ liệu tương ứng',
                 'data' => []
             ]);
         }

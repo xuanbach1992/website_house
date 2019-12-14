@@ -52,7 +52,7 @@
                         <div class="form-group">
                             <label><h6>Quận huyện :</h6></label>
                             <select name="district_id" class="custom-select mr-sm-2" id="district_id">
-
+                                <option>---ALL---</option>
                             </select>
                         </div>
                         <div class="form-group">

@@ -143,7 +143,5 @@ class HouseController extends Controller
             'houses',
             'listCities'
         ));
-
     }
-
 }
