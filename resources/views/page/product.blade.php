@@ -24,7 +24,7 @@
                             <input type="text" name="keyBedrooms" class="form-control" placeholder="Phòng ngủ">
                         </div>
                         <div class="col-md-4 form-group">
-                            <select name="" id="" class="form-control w-100" onchange="onChange(this.value);">
+                            <select name="cities" class="form-control w-100" onchange="onChange(this.value);">
                                 <option value="-1">Thành Phố</option>
                                 @foreach($listCities as $city)
                                     <option value="{{$city->id}}">{{$city->name}}</option>
@@ -32,7 +32,7 @@
                             </select>
                         </div>
                         <div class="col-md-4 form-group">
-                            <select name="" id="district_id" class="form-control w-100">
+                            <select name="district" id="district_id" class="form-control w-100">
                                 <option value="-1">Quận huyện</option>
                             </select>
                         </div>

@@ -131,8 +131,11 @@ class HouseController extends Controller
         if ($request->has('price_to') && !empty($request->get('price_to'))){
             $query = $query->where('price','<=',$request->get('price_to'));
         }
-        if ($request->has('cities_id') && $request->get('cities_id') != '-1'){
-            $query = $query->where('cities_id', $request->get('cities_id'));
+        if ($request->has('cities') && $request->get('cities') != '-1'){
+            $query = $query->where('id', $request->get('cities'));
+        }
+        if ($request->has('district') && $request->get('district') != '-1'){
+            $query = $query->where('id', $request->get('district'));
         }
 
 //        dd($query->toSql());
