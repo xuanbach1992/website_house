@@ -10,7 +10,8 @@ class House extends Model
 
     protected $fillable = [
         'id', 'name', 'address', 'phone', 'bedrooms', 'bathroom', 'description',
-        'price', 'image', 'house_category_id', 'room_category_id', 'cities_id'
+        'price', 'image', 'house_category_id', 'room_category_id', 'cities_id',
+        'district_id', 'status',
     ];
 
     public function houseCategory()
@@ -26,6 +27,11 @@ class House extends Model
     public function cities()
     {
         return $this->belongsTo('App\Cities');
+    }
+
+    public function district()
+    {
+        return $this->belongsTo('App\District');
     }
 
 }

@@ -9,11 +9,16 @@ class Cities extends Model
     protected $table = 'cities';
 
     protected $fillable = [
-        'id', 'name',
+        'id', 'name',''
     ];
 
     public function house()
     {
         return $this->hasMany('App\House');
+    }
+
+    public function district()
+    {
+        return $this->hasMany('App\District');
     }
 }

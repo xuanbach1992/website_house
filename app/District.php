@@ -11,4 +11,14 @@ class District extends Model
     protected $fillable = [
         'id', 'name', 'cities_id',
     ];
+
+    public function cities()
+    {
+        return $this->belongsTo('App\Cities');
+    }
+
+    public function house()
+    {
+        return $this->hasMany('App\House');
+    }
 }
