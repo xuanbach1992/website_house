@@ -105,5 +105,6 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="tinymce" level="application" />
+    <orderEntry type="library" name="dropzone" level="application" />
   </component>
 </module>

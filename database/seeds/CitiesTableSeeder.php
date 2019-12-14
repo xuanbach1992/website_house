@@ -13,7 +13,7 @@ class CitiesTableSeeder extends Seeder
     public function run()
     {
         $city = new Cities();
-        $city->name = 'TP Cần Thơ';
+        $city->name = 'TP Hà Nội';
         $city->save();
 
         $city = new Cities();
@@ -25,7 +25,7 @@ class CitiesTableSeeder extends Seeder
         $city->save();
 
         $city = new Cities();
-        $city->name = 'TP Hà Nội';
+        $city->name = 'TP Cần Thơ';
         $city->save();
 
         $city = new Cities();

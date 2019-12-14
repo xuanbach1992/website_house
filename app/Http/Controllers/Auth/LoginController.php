@@ -31,7 +31,7 @@ class LoginController extends Controller
 //        if (auth()->user()->role_id == 1) {
 //            return '/admin';
 //        }
-        toastr()->success('welcome admin',"message",['timeOut' => 5000]);
+        toastr()->success('welcome',"message",['timeOut' => 5000]);
         return '/';
     }
     /**

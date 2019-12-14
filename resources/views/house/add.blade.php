@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="card bg-light mb-3">
-        <div class="card-header" ><h4><b style="color: #71bc42">Create Home</b></h4></div>
+        <div class="card-header"><h4><b style="color: #71bc42">Create Home</b></h4></div>
         <div class="card-body">
             <form method="post" action="{{route('house.add')}}" enctype="multipart/form-data">
                 @csrf
@@ -12,9 +12,9 @@
                             <label><h6>Tên chủ nhà : </h6></label>
                             <input type="text" class="form-control
                             @if($errors->has('name'))
-                                    border-danger
+                                border-danger
                             @endif
-                            " name="name" placeholder="Nhập tên chủ nhà">
+                                " name="name" placeholder="Nhập tên chủ nhà">
                             @if($errors->has('name'))
                                 <p style="color: red;">{{$errors->first('name')}}</p>
                             @endif
@@ -59,40 +59,44 @@
                             <label><h6>Địa chỉ : </h6></label>
                             <input type="text" class="form-control
                             @if($errors->has('address'))
-                                    border-danger
+                                border-danger
                             @endif
-                            " name="address" placeholder="Nhập địa chỉ">
+                                " name="address" placeholder="Nhập địa chỉ">
                             @if($errors->has('address'))
                                 <p style="color: red;">{{$errors->first('address')}}</p>
                             @endif
                         </div>
                         <div class="form-group">
-                            <label><h6>Số lượng phòng ngủ : </h6></label>
-                            <input type="number" class="form-control
-                            @if($errors->has('bedrooms'))
-                                    border-danger
-                            @endif
-                            " name="bedrooms" placeholder="Nhập số phòng ngủ">
-                            @if($errors->has('bedrooms'))
-                                <p style="color: red;">{{$errors->first('bedrooms')}}</p>
-                            @endif
+                            <label><h6>Thành phố :</h6></label>
+                            <select name="cities_id" class="custom-select mr-sm-2">
+                                @foreach($listCities as $city)
+                                    <option value="{{$city->id}}">{{$city->name}}</option>
+                                @endforeach
+                            </select>
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label><h6>Số lượng phòng tắm : </h6></label>
+                            <label><h6>Số lượng phòng ngủ : </h6></label>
                             <input type="number" class="form-control
-                            @if($errors->has('bathroom'))
-                                    border-danger
+                            @if($errors->has('bedrooms'))
+                                border-danger
                             @endif
-                            " name="bathroom" placeholder="Nhập số phòng tắm">
-                            @if($errors->has('bathroom'))
-                                <p style="color: red;">{{$errors->first('bathroom')}}</p>
+                                " name="bedrooms" placeholder="Nhập số phòng ngủ">
+                            @if($errors->has('bedrooms'))
+                                <p style="color: red;">{{$errors->first('bedrooms')}}</p>
                             @endif
                         </div>
                         <div class="form-group">
-                            <label><h6>Ảnh phòng : </h6></label>
-                            <input type="file" name="image" class="custom-file">
+                            <label><h6>Số lượng phòng tắm : </h6></label>
+                            <input type="number" class="form-control
+                            @if($errors->has('bathroom'))
+                                border-danger
+                            @endif
+                                " name="bathroom" placeholder="Nhập số phòng tắm">
+                            @if($errors->has('bathroom'))
+                                <p style="color: red;">{{$errors->first('bathroom')}}</p>
+                            @endif
                         </div>
                         <div class="form-group">
                             <label><h6>Mô tả : </h6></label>
@@ -102,19 +106,21 @@
                             <label><h6>Giá tiền theo đêm : </h6></label>
                             <input type="number" class="form-control
                             @if($errors->has('price'))
-                                    border-danger
+                                border-danger
                             @endif
-                            " name="price" placeholder="Nhập giá phòng">
+                                " name="price" placeholder="Nhập giá phòng">
                             @if($errors->has('price'))
                                 <p style="color: red;">{{$errors->first('price')}}</p>
                             @endif
                         </div>
+
                     </div>
+                </div>
                     <div class="form-group">
                         <button class="btn btn-primary">Create</button>
                         <a class="btn btn-warning" href="{{route('index')}}">Back</a>
                     </div>
-                </div>
+
             </form>
         </div>
     </div>
