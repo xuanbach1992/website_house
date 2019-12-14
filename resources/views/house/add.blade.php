@@ -66,14 +66,6 @@
                                 <p style="color: red;">{{$errors->first('address')}}</p>
                             @endif
                         </div>
-                        <div class="form-group">
-                            <label><h6>Thành phố :</h6></label>
-                            <select name="cities_id" class="custom-select mr-sm-2">
-                                @foreach($listCities as $city)
-                                    <option value="{{$city->id}}">{{$city->name}}</option>
-                                @endforeach
-                            </select>
-                        </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
