@@ -9,10 +9,11 @@ function showPassword() {
     }
 }
 
+//lấy dữ liệu quận theo id của thành phố
 function onChange(id) {
     $.ajax({
         method: "GET",
-        url: '/test',
+        url: '/getDataByCitiesId',
         data: {
             id: id,
         }

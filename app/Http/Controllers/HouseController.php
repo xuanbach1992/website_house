@@ -42,6 +42,7 @@ class HouseController extends Controller
 
         return view('page.product', [
             'houses' => $houses,
+            'listCities' => $listCities
         ]);
     }
 

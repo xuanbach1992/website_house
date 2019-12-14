@@ -34,7 +34,7 @@ Route::get('/callback/{social}', 'SocialAuthController@callback');
 
 //search
 Route::get('/searchHouse','HouseController@search')->name('search');
-Route::get('/test','DistrictController@getDataByCitiesId')->name('test');
+Route::get('/getDataByCitiesId','DistrictController@getDataByCitiesId')->name('getDataByCitiesId');
 
 Route::get('/contact','HomeController@contactTest')->name('contact');
 Route::get('/blog','HomeController@blogTest')->name('blog');
