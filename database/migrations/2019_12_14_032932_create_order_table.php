@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateUserHousesTable extends Migration
+class CreateOrderTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,14 @@ class CreateUserHousesTable extends Migration
      */
     public function up()
     {
-        Schema::create('user_houses', function (Blueprint $table) {
+        Schema::create('order', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->timestamp('check_in')->nullable();
+            $table->timestamp('check_out')->nullable();
+
+            $table->tinyInteger('status')->nullable();
+            $table->timestamp('pay_money')->nullable();
+            $table->string('code_booking')->nullable();
 
             $table->unsignedBigInteger('user_id')->nullable();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
@@ -33,6 +39,6 @@ class CreateUserHousesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('user_houses');
+        Schema::dropIfExists('order');
     }
 }

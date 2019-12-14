@@ -13,7 +13,7 @@
                             <input type="text" class="form-control
                             @if($errors->has('name'))
                                 border-danger
-@endif
+                            @endif
                                 " name="name" placeholder="Nhập tên chủ nhà">
                             @if($errors->has('name'))
                                 <p style="color: red;">{{$errors->first('name')}}</p>
@@ -41,23 +41,30 @@
                             </select>
                         </div>
                         <div class="form-group">
-                            <label><h6>Địa chỉ : </h6></label>
-                            <input type="text" class="form-control
-                            @if($errors->has('address'))
-                                border-danger
-@endif
-                                " name="address" placeholder="Nhập địa chỉ">
-                            @if($errors->has('address'))
-                                <p style="color: red;">{{$errors->first('address')}}</p>
-                            @endif
-                        </div>
-                        <div class="form-group">
                             <label><h6>Thành phố :</h6></label>
-                            <select name="cities_id" class="custom-select mr-sm-2">
+                            <select name="cities_id" class="custom-select mr-sm-2" onchange="onChange(this.value);">
+                                <option>---ALL---</option>
                                 @foreach($listCities as $city)
                                     <option value="{{$city->id}}">{{$city->name}}</option>
                                 @endforeach
                             </select>
+                        </div>
+                        <div class="form-group">
+                            <label><h6>Quận huyện :</h6></label>
+                            <select name="district_id" class="custom-select mr-sm-2" id="district_id">
+                                <option>---ALL---</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label><h6>Địa chỉ : </h6></label>
+                            <input type="text" class="form-control
+                            @if($errors->has('address'))
+                                border-danger
+                            @endif
+                                " name="address" placeholder="Nhập địa chỉ">
+                            @if($errors->has('address'))
+                                <p style="color: red;">{{$errors->first('address')}}</p>
+                            @endif
                         </div>
                     </div>
                     <div class="col-md-6">
@@ -66,7 +73,7 @@
                             <input type="number" class="form-control
                             @if($errors->has('bedrooms'))
                                 border-danger
-@endif
+                            @endif
                                 " name="bedrooms" placeholder="Nhập số phòng ngủ">
                             @if($errors->has('bedrooms'))
                                 <p style="color: red;">{{$errors->first('bedrooms')}}</p>
@@ -77,7 +84,7 @@
                             <input type="number" class="form-control
                             @if($errors->has('bathroom'))
                                 border-danger
-@endif
+                            @endif
                                 " name="bathroom" placeholder="Nhập số phòng tắm">
                             @if($errors->has('bathroom'))
                                 <p style="color: red;">{{$errors->first('bathroom')}}</p>
@@ -92,7 +99,7 @@
                             <input type="number" class="form-control
                             @if($errors->has('price'))
                                 border-danger
-@endif
+                            @endif
                                 " name="price" placeholder="Nhập giá phòng">
                             @if($errors->has('price'))
                                 <p style="color: red;">{{$errors->first('price')}}</p>
