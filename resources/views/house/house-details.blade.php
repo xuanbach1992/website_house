@@ -112,7 +112,7 @@
                                         <h3><b>Thông Tin Chủ Nhà</b></h3>
                                         <hr>
 
-                                        <p><b>Name :</b> Nguyễn Văn Tuấn</p>
+                                        <p><b>Name :</b>Nguyễn Văn Tuấn</p>
                                         <p><b>Phone :</b> 0981202560</p>
                                         <p><b>Email :</b> tuankata20@gmail.com</p>
                                         <p><b>Address :</b> Thái Thủy-Thái Thụy Thái Bình</p>

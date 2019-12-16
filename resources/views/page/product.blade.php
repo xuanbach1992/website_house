@@ -21,10 +21,10 @@
                     <!--dòng 1-->
                     <div class="row">
                         <div class="col-md-4 form-group">
-                            <input type="text" name="keyBedrooms" class="form-control" placeholder="Phòng ngủ">
+                            <input type="text" name="keyBedrooms" class="form-control" placeholder="Phòng ngủ" >
                         </div>
                         <div class="col-md-4 form-group">
-                            <select name="cities" class="form-control w-100" onchange="onChange(this.value);">
+                            <select name="cities" onchange="onChange(this.value);" class="form-control w-100">
                                 <option value="-1">Thành Phố</option>
                                 @foreach($listCities as $city)
                                     <option value="{{$city->id}}">{{$city->name}}</option>

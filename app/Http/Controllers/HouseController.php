@@ -134,7 +134,6 @@ class HouseController extends Controller
     public function search(Request $request)
     {
         $filter = $request->all();
-
         $query = $this->house;
 
         if ($request->has('keyBedrooms') && !empty($request->get('keyBedrooms'))) {
@@ -162,6 +161,7 @@ class HouseController extends Controller
         $listCities = $this->city->get();
 
         return view('page.product', compact(
+            'filter',
             'houses',
             'listCities'
         ));
