@@ -70,16 +70,16 @@ class HouseController extends Controller
 
         $house->name = $request->name;
         $house->address = $request->address;
-
         $house->phone = $request->phone;
+
         $house->house_category_id = $request->house_category_id;
         $house->room_category_id = $request->room_category_id;
-
         $house->cities_id = $request->cities_id;
-        $house->district_id = $request->district_id;
 
+        $house->district_id = $request->district_id;
         $house->bedrooms = $request->bedrooms;
         $house->bathroom = $request->bathroom;
+
 
         $house->description = $request->description;
         $house->price = $request->price;
@@ -119,11 +119,12 @@ class HouseController extends Controller
     public function showHouseDetails($id)
     {
         $house = House::findOrFail($id);
-        $listHouseCategory = HouseCategory::all();
-        $listRoomCategory = RoomCategory::all();
-        $listCities = Cities::all();
-        $listDistrict = District::all();
-        return view('page.house-details', compact('house', 'listCities', 'listRoomCategory', 'listHouseCategory', 'listDistrict'));
+        $listHouseCategory = $this->houseCategory->all();
+        $listRoomCategory = $this->roomCategory->all();
+        $listCities = $this->city->all();
+        $listDistrict = $this->district->all();
+
+        return view('house.house-details', compact('house', 'listCities', 'listRoomCategory', 'listHouseCategory', 'listDistrict'));
     }
 
     /**

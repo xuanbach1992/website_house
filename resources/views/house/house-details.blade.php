@@ -40,7 +40,7 @@
                     </div>
                     <div class="mt-3 col-md-4">
                         <p><b>Địa chỉ :</b></p>
-                        <p>{{$house->address}} -
+                        <p >{{$house->address}} -
                             @foreach($listCities as $city)
                                 @if($house->cities_id == $city->id)
                                     {{$city->name}}

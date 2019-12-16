@@ -26,7 +26,7 @@ class HouseValidationRequest extends FormRequest
         return [
             'name' => 'required',
             'address' => 'required',
-            'cities_id' => 'required',+
+            'cities_id' => 'required',
             'district_id' => 'required',
             'bedrooms' => 'required|alpha_num|between:1,2',
             'bathroom' => 'required|alpha_num|between:1,2',
