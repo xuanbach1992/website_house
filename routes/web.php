@@ -15,8 +15,12 @@ Route::prefix('/houses')->group(function (){
 //    Route::get('/','HouseController@listHouses')->name('product');
     Route::get('/create','HouseController@create')->name('house.showFormCreate')->middleware('auth');;
     Route::post('/create','HouseController@add')->name('house.add')->middleware('auth');;
+
     Route::post('/upload','HouseController@storeImage')->name('house.upload')->middleware('auth');;
     Route::get('/detail/{id}','HouseController@showHouseDetails')->name('house.detail');
+
+    Route::get('/searchHouse','HouseController@search')->name('search');
+
 });
 
 Route::prefix('/users')->group(function () {
@@ -28,15 +32,15 @@ Route::prefix('/users')->group(function () {
 
 });
 
-//code template
-//Route::get('/','HomeController@index')->name('index');
+//đăng nhập bằng facebook
 Route::get('/redirect/{social}', 'SocialAuthController@redirect');
 Route::get('/callback/{social}', 'SocialAuthController@callback');
 
 //search
-Route::get('/searchHouse','HouseController@search')->name('search');
 Route::get('/getDataByCitiesId','DistrictController@getDataByCitiesId')->name('getDataByCitiesId');
 
+//code template
+//Route::get('/','HomeController@index')->name('index');
 Route::get('/contact','HomeController@contactTest')->name('contact');
 Route::get('/blog','HomeController@blogTest')->name('blog');
 Route::get('/about','HomeController@aboutTest')->name('about');
