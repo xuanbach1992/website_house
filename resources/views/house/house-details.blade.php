@@ -30,7 +30,12 @@
         <div class="col-md-12 row mt-3">
             <div class="col-md-8">
                 <div>
-                    <h3 style="color: #ff6c5e "><b>{{$house->name}}</b></h3>
+                    <h3><b style="color: #ff6c5e ">{{$house->name}}</b> -
+                        <label class="switch">
+                            <input type="checkbox">
+                            <span class="slider round"></span>
+                        </label>
+                    </h3>
                 </div>
                 <hr>
                 <div class="col-md-12 row">
@@ -40,7 +45,7 @@
                     </div>
                     <div class="mt-3 col-md-4">
                         <p><b>Địa chỉ :</b></p>
-                        <p >{{$house->address}} -
+                        <p>{{$house->address}} -
                             @foreach($listCities as $city)
                                 @if($house->cities_id == $city->id)
                                     {{$city->name}}
@@ -102,22 +107,21 @@
                 <hr>
             </div>
             <div class="col-md-4">
-{{--                <div class="card" style="width: 23rem;">--}}
-{{--                    <div class="card-body">--}}
-                        <div class="container">
-                        <div class="row">
-                            <div class="col-sm-12 col-md-12 col-lg-12 mx-auto">
-                                <div class="card card-signin my-5">
-                                    <div class="card-body">
-                                        <h3><b>Thông Tin Chủ Nhà</b></h3>
-                                        <hr>
+                {{--                <div class="card" style="width: 23rem;">--}}
+                {{--                    <div class="card-body">--}}
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-12 col-md-12 col-lg-12 mx-auto">
+                            <div class="card card-signin my-5">
+                                <div class="card-body">
+                                    <h3><b>Thông Tin Chủ Nhà</b></h3>
+                                    <hr>
 
-                                        <p><b>Name :</b>Nguyễn Văn Tuấn</p>
-                                        <p><b>Phone :</b> 0981202560</p>
-                                        <p><b>Email :</b> tuankata20@gmail.com</p>
-                                        <p><b>Address :</b> Thái Thủy-Thái Thụy Thái Bình</p>
+                                    <p><b>Name :</b>Nguyễn Văn Tuấn</p>
+                                    <p><b>Phone :</b> 0981202560</p>
+                                    <p><b>Email :</b> tuankata20@gmail.com</p>
+                                    <p><b>Address :</b> Thái Thủy-Thái Thụy Thái Bình</p>
 
-                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -125,7 +129,8 @@
                 </div>
             </div>
         </div>
-{{--    </div>--}}
-{{--    </div>--}}
+    </div>
+    {{--    </div>--}}
+    {{--    </div>--}}
 
 @endsection
