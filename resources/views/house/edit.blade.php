@@ -26,10 +26,12 @@
 
                         <div class="form-group">
                             <h6>Trạng thái : </h6>
-                            <label class="switch">
-                                <input type="checkbox">
+
+                                <label class="switch">
+                                <input type="checkbox" name="status">
                                 <span class="slider round"></span>
                             </label>
+
                         </div>
                         <div class="form-group">
                             <label><h6>Loại nhà :</h6></label>

@@ -184,7 +184,8 @@
                                     <div class="sq d-flex align-items-center"><span
                                                 class="wrap-icon icon-fullscreen"></span> <a
                                                 href="{{route('house.detail',$value->id)}}"
-                                                style="color: white">{{$value->name}}</a></div>
+                                                style="color: white">{{$value->name}}</a>
+                                    </div>
                                     <div class="bed d-flex align-items-center"><span
                                                 class="wrap-icon icon-bed"></span> <span>{{$value->bedrooms}}</span>
                                     </div>

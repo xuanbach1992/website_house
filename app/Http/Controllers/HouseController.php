@@ -143,10 +143,15 @@ class HouseController extends Controller
         $house->bedrooms = $request->bedrooms;
         $house->bathroom = $request->bathroom;
 
-
         $house->description = $request->description;
         $house->price = $request->price;
-        $house->status = $request->status;
+
+//        dd($request->status);
+        if (isset($request->status)){
+            $house->status = true;
+        }else{
+            $house->status = false;
+        }
 
         $house->save();
 
@@ -162,8 +167,8 @@ class HouseController extends Controller
     {
         $houses = $this->house->findOrFail($id);
 
-        if (file_exists(storage_path("/app/public/$houses->image"))) {
-            File::delete(storage_path("/app/public/$houses->image"));
+        if (file_exists(storage_path("/app/public/$houses->id"))) {
+            File::delete(storage_path("/app/public/$houses->id"));
         }
 
         $houses->delete();
