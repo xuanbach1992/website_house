@@ -169,27 +169,24 @@
     <div class="site-section bg-black">
         <div class="container">
             <div class="row">
-                @foreach($houses as $key => $value)
-                    <div class="col-md-4 mb-5">
+                @foreach($houses as $key => $house)
+{{--                    {{dd($value->images[0])}}--}}
+                    <div class="col-md-4 mb-5">$house
                         <div class="media-38289">
-{{--<<<<<<< HEAD--}}
-                            {{--<a href="{{route('house.detail',$value->id)}}" class="d-block"><img--}}
-                                        {{--src="{{asset("/storage/$value->image")}}" alt="Image" class="img-fluid"></a>--}}
-{{--=======--}}
-                            <a href="{{route('house.detail',$value->id)}}" class="d-block">
+                            <a href="{{route('house.detail',$house->id)}}" class="d-block">
                                 <img
-                                    src="{{asset('storage/'.$value->images[0]->path)}}" alt="Image" class="img-fluid"></a>
+                                    src="{{asset('storage/'.$house->images[0]->path)}}" alt="Image" class="img-fluid"></a>
                             <div class="text">
                                 <div class="d-flex justify-content-between mb-3">
                                     <div class="sq d-flex align-items-center"><span
                                                 class="wrap-icon icon-fullscreen"></span> <a
-                                                href="{{route('house.detail',$value->id)}}"
-                                                style="color: white">{{$value->name}}</a></div>
+                                                href="{{route('house.detail',$house->id)}}"
+                                                style="color: white">{{$house->name}}</a></div>
                                     <div class="bed d-flex align-items-center"><span
-                                                class="wrap-icon icon-bed"></span> <span>{{$value->bedrooms}}</span>
+                                                class="wrap-icon icon-bed"></span> <span>{{$house->bedrooms}}</span>
                                     </div>
                                     <div class="bath d-flex align-items-center"><span
-                                                class="wrap-icon icon-bath"></span> <span>{{$value->bathroom}}</span>
+                                                class="wrap-icon icon-bath"></span> <span>{{$house->bathroom}}</span>
                                     </div>
                                 </div>
                                 <div>
