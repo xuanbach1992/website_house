@@ -13,12 +13,16 @@ Auth::routes();
 
 Route::prefix('/houses')->group(function (){
 //    Route::get('/','HouseController@listHouses')->name('product');
-    Route::get('/create','HouseController@create')->name('house.showFormCreate')->middleware('auth');;
-    Route::post('/create','HouseController@add')->name('house.add')->middleware('auth');;
-    Route::post('/upload','HouseController@storeImage')->name('house.upload')->middleware('auth');;
+    Route::get('/create','HouseController@create')->name('house.showFormCreate')->middleware('auth');
+    Route::post('/create','HouseController@add')->name('house.add')->middleware('auth');
+    Route::post('/upload','HouseController@storeImage')->name('house.upload')->middleware('auth');
+
     Route::get('/detail/{id}','HouseController@showHouseDetails')->name('house.detail');
     Route::get('/searchHouse','HouseController@search')->name('search');
 
+    Route::get('/delete/{id}','HouseController@delete')->name('house.delete');
+    Route::get('/edit/{id}','HouseController@showEdit')->name('house.showEdit');
+    Route::post('/update/{id}','HouseController@update')->name('house.update');
 });
 
 Route::prefix('/users')->group(function () {

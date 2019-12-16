@@ -192,10 +192,10 @@
                                                 class="wrap-icon icon-bath"></span> <span>{{$value->bathroom}}</span>
                                     </div>
                                 </div>
-                                <div>
-                                    <button class="btn btn-primary btn-sm">Booking</button>
-                                    <button class="btn btn-warning btn-sm">Cancel</button>
-                                </div>
+                                {{--<div>--}}
+                                    {{--<button class="btn btn-primary btn-sm">Booking</button>--}}
+                                    {{--<button class="btn btn-warning btn-sm">Cancel</button>--}}
+                                {{--</div>--}}
                             </div>
                         </div>
                     </div>

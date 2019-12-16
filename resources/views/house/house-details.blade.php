@@ -29,13 +29,20 @@
         </div>
         <div class="col-md-12 row mt-3">
             <div class="col-md-8">
-                <div>
-                    <h3><b style="color: #ff6c5e ">{{$house->name}}</b> -
-                        <label class="switch">
-                            <input type="checkbox">
-                            <span class="slider round"></span>
-                        </label>
-                    </h3>
+                <div class="row">
+                    <div class="col-md-9">
+                        <h3>
+                            <b style="color: #ff6c5e ">{{$house->name}}</b> -
+                            <label class="switch">
+                                <input type="checkbox">
+                                <span class="slider round"></span>
+                            </label>
+                        </h3>
+                    </div>
+                    <div  class="col-md-3">
+                        <a href="{{route('house.showEdit',$house->id)}}" class="btn btn-primary">Sửa</a> &nbsp;
+                        <a href="{{route('house.delete',$house->id)}}" class="btn btn-danger">Xóa</a>
+                    </div>
                 </div>
                 <hr>
                 <div class="col-md-12 row">

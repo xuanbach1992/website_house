@@ -26,7 +26,7 @@ class CreateHousesTable extends Migration
             $table->integer('price')->nullable();
             $table->string('image')->nullable();
 
-            $table->tinyInteger('status')->default(1);
+            $table->tinyInteger('status')->default(1)->nullable();
 
             $table->unsignedBigInteger('house_category_id')->nullable();
             $table->foreign('house_category_id')->references('id')->on('house_category')->onDelete('cascade');
