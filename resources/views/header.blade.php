@@ -97,7 +97,6 @@
                         <li class="active"><a href="/" class="nav-link">Trang chủ</a></li>
                         <li><a href="#house_list" class="nav-link">Sản phẩm</a></li>
                         <li><a href="{{route('about')}}" class="nav-link">Giới thiệu</a></li>
-                        <li><a href="{{route('blog')}}" class="nav-link">Blog</a></li>
                         <li><a href="#" id="product" class="nav-link">Liên Hệ</a></li>
 
 
@@ -113,6 +112,7 @@
                             </li>
                         @endif
                         @else
+                            <li><a href="{{route('user.rent')}}" class="nav-link">Bài đăng</a></li>
                             <li><a href="{{route('house.showFormCreate')}}" class="nav-link">Create Home</a></li>
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"

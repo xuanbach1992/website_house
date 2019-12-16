@@ -39,4 +39,18 @@ class House extends Model
     {
         return $this->hasMany('App\Image');
     }
+
+    public function user()
+    {
+        return $this->belongsTo('App\User');
+    }
+
+    public function orders()
+    {
+        return $this->hasMany('App\Order');
+    }
+//    public function users()
+//    {
+//        return $this->belongsToMany(User::class,'orders','house_id','user_id');
+//    }
 }

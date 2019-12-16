@@ -11,6 +11,7 @@ use App\Image;
 use App\RoomCategory;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class HouseController extends Controller
@@ -34,11 +35,21 @@ class HouseController extends Controller
         $this->district = $district;
     }
 
+    public function findByUser()
+    {
+        $listCities = $this->city->all();
+        $houses = House::where('user_id', Auth::user()->id)->get();
+        return view('page.product', [
+            'houses' => $houses,
+            'listCities' => $listCities
+        ]);
+    }
+
     public function listHouses()
     {
         $houses = $this->house->all();
         $listCities = $this->city->all();
-
+//        dd($houses);
         return view('page.product', [
             'houses' => $houses,
             'listCities' => $listCities
@@ -83,6 +94,7 @@ class HouseController extends Controller
 
         $house->description = $request->description;
         $house->price = $request->price;
+        $house->user_id = Auth::user()->id;
 
 //        if (!$request->hasFile('image')) {
 //            $house->image = $request->image;
@@ -91,7 +103,7 @@ class HouseController extends Controller
 //            $path = $image->store('image', 'public');
 //            $house->image = $path;
 //        }
-
+//        $user=Auth::user();
         $house->save();
         toastr()->success('Create success', 'message');
         return view('house.upload');
@@ -108,6 +120,7 @@ class HouseController extends Controller
             $imageUpload->path = $path;
             $imageUpload->house_id = $house_id;
             $imageUpload->save();
+            toastr()->success('Upload success', 'message');
             return redirect()->route('index');
         }
     }
@@ -165,4 +178,5 @@ class HouseController extends Controller
             'listCities'
         ));
     }
+
 }

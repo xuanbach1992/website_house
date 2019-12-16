@@ -11,11 +11,22 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
-        $city = new \App\User();
-        $city->id = 1;
-        $city->name = "admin";
-        $city->email = "admin@gmail.com";
-        $city->password = \Illuminate\Support\Facades\Hash::make('123456');
-        $city->save();
+        $user = new \App\User();
+        $user->id = 1;
+        $user->name = "admin";
+        $user->email = "admin@gmail.com";
+        $user->phone = "0963729166";
+        $user->address = '15 tt 04 moncity my dinh 2 nam tu liem ha noi';
+        $user->password = \Illuminate\Support\Facades\Hash::make('123456');
+        $user->save();
+
+        $user = new \App\User();
+        $user->id = 2;
+        $user->name = "bach";
+        $user->email = "bach@gmail.com";
+        $user->phone = "01687256692";
+        $user->address = 'demo address';
+        $user->password = \Illuminate\Support\Facades\Hash::make('123456');
+        $user->save();
     }
 }
