@@ -26,44 +26,44 @@
 
                         <div class="form-group">
                             <h6>Trạng thái : </h6>
-
-                                <label class="switch">
-                                <input type="checkbox" name="status">
-                                <span class="slider round"></span>
+                                <div class="form-group">
+                                    <input type="checkbox" id="status" class="filled-in" name="status" value="1">
+                                    <label for="status"></label>
+                                </div>
                             </label>
 
                         </div>
-                        <div class="form-group">
-                            <label><h6>Loại nhà :</h6></label>
-                            <select name="house_category_id" class="custom-select mr-sm-2">
-                                @foreach($listHouseCategory as $houseType)
-                                    <option value="{{$houseType->id}}">{{$houseType->name}}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label><h6>Loại Phòng :</h6></label>
-                            <select name="room_category_id" class="custom-select mr-sm-2">
-                                @foreach($listRoomCategory as $roomType)
-                                    <option value="{{$roomType->id}}">{{$roomType->name}}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label><h6>Thành phố :</h6></label>
-                            <select name="cities_id" class="custom-select mr-sm-2" onchange="onChange(this.value);">
-                                <option>---ALL---</option>
-                                @foreach($listCities as $city)
-                                    <option value="{{$city->id}}">{{$city->name}}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label><h6>Quận huyện :</h6></label>
-                            <select name="district_id" class="custom-select mr-sm-2" id="district_id">
-                                <option>---ALL---</option>
-                            </select>
-                        </div>
+                        {{--<div class="form-group">--}}
+                            {{--<label><h6>Loại nhà :</h6></label>--}}
+                            {{--<select name="house_category_id" class="custom-select mr-sm-2">--}}
+                                {{--@foreach($listHouseCategory as $houseType)--}}
+                                    {{--<option value="{{$houseType->id}}">{{$houseType->name}}</option>--}}
+                                {{--@endforeach--}}
+                            {{--</select>--}}
+                        {{--</div>--}}
+                        {{--<div class="form-group">--}}
+                            {{--<label><h6>Loại Phòng :</h6></label>--}}
+                            {{--<select name="room_category_id" class="custom-select mr-sm-2">--}}
+                                {{--@foreach($listRoomCategory as $roomType)--}}
+                                    {{--<option value="{{$roomType->id}}">{{$roomType->name}}</option>--}}
+                                {{--@endforeach--}}
+                            {{--</select>--}}
+                        {{--</div>--}}
+                        {{--<div class="form-group">--}}
+                            {{--<label><h6>Thành phố :</h6></label>--}}
+                            {{--<select name="cities_id" class="custom-select mr-sm-2" onchange="onChange(this.value);">--}}
+                                {{--<option>---ALL---</option>--}}
+                                {{--@foreach($listCities as $city)--}}
+                                    {{--<option value="{{$city->id}}">{{$city->name}}</option>--}}
+                                {{--@endforeach--}}
+                            {{--</select>--}}
+                        {{--</div>--}}
+                        {{--<div class="form-group">--}}
+                            {{--<label><h6>Quận huyện :</h6></label>--}}
+                            {{--<select name="district_id" class="custom-select mr-sm-2" id="district_id">--}}
+                                {{--<option>---ALL---</option>--}}
+                            {{--</select>--}}
+                        {{--</div>--}}
                         <div class="form-group">
                             <label><h6>Địa chỉ : </h6></label>
                             <input type="text" class="form-control
@@ -99,10 +99,10 @@
                                 <p style="color: red;">{{$errors->first('bathroom')}}</p>
                             @endif
                         </div>
-                        <div class="form-group">
-                            <label><h6>Mô tả : </h6></label>
-                            <textarea class="form-control" name="description" rows="14"></textarea>
-                        </div>
+                        {{--<div class="form-group">--}}
+                            {{--<label><h6>Mô tả : </h6></label>--}}
+                            {{--<textarea class="form-control" name="description" rows="14"></textarea>--}}
+                        {{--</div>--}}
                         <div class="form-group">
                             <label><h6>Giá tiền theo đêm : </h6></label>
                             <input type="number" class="form-control
@@ -118,7 +118,7 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <button class="btn btn-success">Update</button>
+                    <button type="submit" class="btn btn-success">Update</button>
                     <a class="btn btn-warning" href="{{route('house.detail',$houses->id)}}">Back</a>
                 </div>
 

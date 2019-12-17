@@ -33,10 +33,11 @@
                     <div class="col-md-9">
                         <h3>
                             <b style="color: #ff6c5e ">{{$house->name}}</b> -
-                            <label class="switch">
-                                <input type="checkbox">
-                                <span class="slider round"></span>
-                            </label>
+                            @if($house->status == 1)
+                                    <span style="color: #000000;">Đã cho thuê</span>
+                            @else
+                                    <span style="color: #bd362f">Chưa cho thuê</span>
+                            @endif
                         </h3>
                     </div>
                     <div  class="col-md-3">

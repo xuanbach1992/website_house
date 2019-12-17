@@ -146,13 +146,8 @@ class HouseController extends Controller
         $house->description = $request->description;
         $house->price = $request->price;
 
-//        dd($request->status);
-        if (isset($request->status)){
-            $house->status = true;
-        }else{
-            $house->status = false;
-        }
 
+//        dd($request->status);
         $house->save();
 
         return redirect()->route('house.detail');
@@ -230,5 +225,19 @@ class HouseController extends Controller
             'houses',
             'listCities'
         ));
+    }
+
+    public function updateStatus(Request $request, $id)
+    {
+        $house = $this->house->findOrFail($id);
+
+        if (isset($request->status)) {
+            $house->status = true;
+        } else {
+            $house->status = false;
+        }
+        $house->save();
+
+        return redirect()->route('house.detail',$id);
     }
 }

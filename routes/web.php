@@ -22,7 +22,9 @@ Route::prefix('/houses')->group(function (){
 
     Route::get('/delete/{id}','HouseController@delete')->name('house.delete');
     Route::get('/edit/{id}','HouseController@showEdit')->name('house.showEdit');
-    Route::post('/update/{id}','HouseController@update')->name('house.update');
+    Route::post('/edit/{id}','HouseController@updateStatus')->name('house.update');
+//    Route::post('/status/{id}','HouseController@updateStatus')->name('house.status');
+
 });
 
 Route::prefix('/users')->group(function () {
