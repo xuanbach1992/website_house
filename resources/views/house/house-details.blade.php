@@ -40,10 +40,15 @@
                             @endif
                         </h3>
                     </div>
-                    <div  class="col-md-3">
-                        <a href="{{route('house.showEdit',$house->id)}}" class="btn btn-primary">Sửa</a> &nbsp;
-                        <a href="{{route('house.delete',$house->id)}}" class="btn btn-danger">Xóa</a>
-                    </div>
+                    @guest()
+                        <div  class="col-md-3">
+                        </div>
+                        @else
+                        <div  class="col-md-3">
+                            <a href="{{route('house.showEdit',$house->id)}}" class="btn btn-primary">Sửa</a> &nbsp;
+                            <a href="{{route('house.delete',$house->id)}}" class="btn btn-danger">Xóa</a>
+                        </div>
+                    @endguest
                 </div>
                 <hr>
                 <div class="col-md-12 row">
