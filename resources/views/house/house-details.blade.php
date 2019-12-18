@@ -8,13 +8,19 @@
                 <!-- The slideshow -->
                 <div class="carousel-inner">
                     <div class="carousel-item active">
-                        <img src="source/images/hero_1.jpg" alt="Los Angeles">
+                        <img
+                            src="{{asset('storage/'.$house->images[0]->path)}}" alt="Image"
+                            class="img-fluid">
                     </div>
                     <div class="carousel-item">
-                        <img src="source/images/img_2.jpg" alt="Chicago">
+                        <img
+                            src="{{asset('storage/'.$house->images[1]->path)}}" alt="Image"
+                            class="img-fluid">
                     </div>
                     <div class="carousel-item">
-                        <img src="source/images/hero_3.jpg" alt="New York">
+                        <img
+                            src="{{asset('storage/'.$house->images[2]->path)}}" alt="Image"
+                            class="img-fluid">
                     </div>
                 </div>
 
