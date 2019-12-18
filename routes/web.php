@@ -20,9 +20,9 @@ Route::prefix('/houses')->group(function (){
 
     Route::get('/detail/{id}','HouseController@showHouseDetails')->name('house.detail');
     Route::get('/searchHouse','HouseController@search')->name('search');
-    Route::get('/delete/{id}','HouseController@delete')->name('house.delete');
-    Route::get('/edit/{id}','HouseController@showEdit')->name('house.showEdit');
-    Route::post('/edit/{id}','HouseController@updateStatus')->name('house.update');
+    Route::get('/delete/{id}','HouseController@delete')->name('house.delete')->middleware('auth');
+    Route::get('/edit/{id}','HouseController@showEdit')->name('house.showEdit')->middleware('auth');
+    Route::post('/edit/{id}','HouseController@updateStatus')->name('house.update')->middleware('auth');
 //    Route::post('/status/{id}','HouseController@updateStatus')->name('house.status');
 
 });
