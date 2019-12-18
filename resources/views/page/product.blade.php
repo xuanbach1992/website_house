@@ -192,7 +192,6 @@
                                 </div>
                             </div>
                             {{--<div>--}}
-                            {{--<button class="btn btn-primary btn-sm">Booking</button>--}}
                             {{--<button class="btn btn-warning btn-sm">Cancel</button>--}}
                             {{--</div>--}}
                         </div>

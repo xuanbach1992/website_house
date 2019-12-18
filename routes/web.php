@@ -17,6 +17,7 @@ Route::prefix('/houses')->group(function (){
     Route::post('/create','HouseController@add')->name('house.add')->middleware('auth');
     Route::post('/upload','HouseController@storeImage')->name('house.upload')->middleware('auth');
     Route::get('/rent','HouseController@findByUser')->name('user.rent')->middleware('auth');
+    Route::get('/book/{id}','HouseController@book')->name('house.book')->middleware('auth');
 
     Route::get('/detail/{id}','HouseController@showHouseDetails')->name('house.detail');
     Route::get('/searchHouse','HouseController@search')->name('search');

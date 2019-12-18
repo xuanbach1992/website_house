@@ -96,8 +96,8 @@
                     <ul class="site-menu main-menu js-clone-nav ml-auto ">
                         <li class="active"><a href="/" class="nav-link">Trang chủ</a></li>
                         <li><a href="#house_list" class="nav-link">Sản phẩm</a></li>
-                        <li><a href="{{route('about')}}" class="nav-link">Giới thiệu</a></li>
-                        <li><a href="#" id="product" class="nav-link">Liên Hệ</a></li>
+                        {{--                        <li><a href="{{route('about')}}" class="nav-link">Giới thiệu</a></li>--}}
+                        {{--                        <li><a href="#" id="product" class="nav-link">Liên Hệ</a></li>--}}
 
 
                         <li class="nav-item">
@@ -114,6 +114,23 @@
                         @else
                             <li><a href="{{route('user.rent')}}" class="nav-link">Bài đăng</a></li>
                             <li><a href="{{route('house.showFormCreate')}}" class="nav-link">Create Home</a></li>
+                            {{--                            {{dd(\App\Notification::all())}}--}}
+
+                            <li class="nav-item dropdown">
+                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
+                                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                    Message<span class="caret"></span>
+                                </a>
+
+                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                    @foreach(\App\Notification::all() as $notify)
+                                        @if(json_decode($notify->data)->receive==\Illuminate\Support\Facades\Auth::user()->email)
+                                            {{ json_decode($notify->data)->Message}}
+                                        @endif
+                                    @endforeach
+                                </div>
+                            </li>
+
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
