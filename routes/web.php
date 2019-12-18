@@ -16,9 +16,14 @@ Route::prefix('/houses')->group(function (){
     Route::get('/create','HouseController@create')->name('house.showFormCreate')->middleware('auth');
     Route::post('/create','HouseController@add')->name('house.add')->middleware('auth');
     Route::post('/upload','HouseController@storeImage')->name('house.upload')->middleware('auth');
-    Route::get('/detail/{id}','HouseController@showHouseDetails')->name('house.detail');
     Route::get('/rent','HouseController@findByUser')->name('user.rent')->middleware('auth');
 
+    Route::get('/detail/{id}','HouseController@showHouseDetails')->name('house.detail');
+    Route::get('/searchHouse','HouseController@search')->name('search');
+    Route::get('/delete/{id}','HouseController@delete')->name('house.delete');
+    Route::get('/edit/{id}','HouseController@showEdit')->name('house.showEdit');
+    Route::post('/edit/{id}','HouseController@updateStatus')->name('house.update');
+//    Route::post('/status/{id}','HouseController@updateStatus')->name('house.status');
 
 });
 
@@ -31,15 +36,15 @@ Route::prefix('/users')->group(function () {
 
 });
 
-//code template
-//Route::get('/','HomeController@index')->name('index');
+//đăng nhập bằng facebook
 Route::get('/redirect/{social}', 'SocialAuthController@redirect');
 Route::get('/callback/{social}', 'SocialAuthController@callback');
 
 //search
-Route::get('/searchHouse','HouseController@search')->name('search');
 Route::get('/getDataByCitiesId','DistrictController@getDataByCitiesId')->name('getDataByCitiesId');
 
+//code template
+//Route::get('/','HomeController@index')->name('index');
 Route::get('/contact','HomeController@contactTest')->name('contact');
 Route::get('/blog','HomeController@blogTest')->name('blog');
 Route::get('/about','HomeController@aboutTest')->name('about');

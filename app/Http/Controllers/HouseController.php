@@ -13,6 +13,8 @@ use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\File;
+
 
 class HouseController extends Controller
 {
@@ -65,11 +67,9 @@ class HouseController extends Controller
         $listHouseCategory = $this->houseCategory->all();
         $listRoomCategory = $this->roomCategory->all();
         $listCities = $this->city->all();
-        $listDistrict = $this->district->all();
 
-        return view('house.add', compact('listHouseCategory', 'listRoomCategory', 'listCities', 'listDistrict'));
+        return view('house.add', compact('listHouseCategory', 'listRoomCategory', 'listCities'));
     }
-
 
     /**
      * @param HouseValidationRequest $request
@@ -81,16 +81,16 @@ class HouseController extends Controller
 
         $house->name = $request->name;
         $house->address = $request->address;
-
         $house->phone = $request->phone;
+
         $house->house_category_id = $request->house_category_id;
         $house->room_category_id = $request->room_category_id;
-
         $house->cities_id = $request->cities_id;
-        $house->district_id = $request->district_id;
 
+        $house->district_id = $request->district_id;
         $house->bedrooms = $request->bedrooms;
         $house->bathroom = $request->bathroom;
+
 
         $house->description = $request->description;
         $house->price = $request->price;
@@ -125,6 +125,66 @@ class HouseController extends Controller
         }
     }
 
+    public function showEdit($id)
+    {
+        $houses = $this->house->findOrFail($id);
+        $listHouseCategory = $this->houseCategory->all();
+        $listRoomCategory = $this->roomCategory->all();
+        $listCities = $this->city->all();
+
+        return view('house.edit', compact(
+                'houses',
+                'listHouseCategory',
+                'listRoomCategory',
+                'listCities'
+            )
+        );
+    }
+
+    public function update(HouseValidationRequest $request, $id)
+    {
+        $house = $this->house->findOrFail($id);
+        $house->name = $request->name;
+        $house->address = $request->address;
+        $house->phone = $request->phone;
+
+        $house->house_category_id = $request->house_category_id;
+        $house->room_category_id = $request->room_category_id;
+        $house->cities_id = $request->cities_id;
+
+        $house->district_id = $request->district_id;
+        $house->bedrooms = $request->bedrooms;
+        $house->bathroom = $request->bathroom;
+
+        $house->description = $request->description;
+        $house->price = $request->price;
+
+
+//        dd($request->status);
+        $house->save();
+
+        return redirect()->route('house.detail');
+    }
+
+    /**
+     * @param $id
+     * @return \Illuminate\Http\RedirectResponse
+     * @người viết: hiệp
+     */
+    public function delete($id)
+    {
+        $houses = $this->house->findOrFail($id);
+
+        if (file_exists(storage_path("/app/public/$houses->id"))) {
+            File::delete(storage_path("/app/public/$houses->id"));
+        }
+
+        $houses->delete();
+
+        return redirect()->route('index');
+
+    }
+
     /**
      * @param $id
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
@@ -132,11 +192,12 @@ class HouseController extends Controller
     public function showHouseDetails($id)
     {
         $house = House::findOrFail($id);
-        $listHouseCategory = HouseCategory::all();
-        $listRoomCategory = RoomCategory::all();
-        $listCities = Cities::all();
-        $listDistrict = District::all();
-        return view('page.house-details', compact('house', 'listCities', 'listRoomCategory', 'listHouseCategory', 'listDistrict'));
+        $listHouseCategory = $this->houseCategory->all();
+        $listRoomCategory = $this->roomCategory->all();
+        $listCities = $this->city->all();
+        $listDistrict = $this->district->all();
+
+        return view('house.house-details', compact('house', 'listCities', 'listRoomCategory', 'listHouseCategory', 'listDistrict'));
     }
 
     /**
@@ -146,7 +207,6 @@ class HouseController extends Controller
     public function search(Request $request)
     {
         $filter = $request->all();
-
         $query = $this->house;
 
         if ($request->has('keyBedrooms') && !empty($request->get('keyBedrooms'))) {
@@ -174,9 +234,23 @@ class HouseController extends Controller
         $listCities = $this->city->get();
 
         return view('page.product', compact(
+            'filter',
             'houses',
             'listCities'
         ));
     }
 
+    public function updateStatus(Request $request, $id)
+    {
+        $house = $this->house->findOrFail($id);
+
+        if (isset($request->status)) {
+            $house->status = true;
+        } else {
+            $house->status = false;
+        }
+        $house->save();
+
+        return redirect()->route('house.detail',$id);
+    }
 }

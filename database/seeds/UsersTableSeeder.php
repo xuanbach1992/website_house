@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use App\User;
 
 class UsersTableSeeder extends Seeder
 {
@@ -28,5 +29,6 @@ class UsersTableSeeder extends Seeder
         $user->address = 'demo address';
         $user->password = \Illuminate\Support\Facades\Hash::make('123456');
         $user->save();
+
     }
 }

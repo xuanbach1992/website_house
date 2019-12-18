@@ -9,12 +9,12 @@
                 <div class="row col-md-12">
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label><h6>Tên chủ nhà : </h6></label>
+                            <label><h6>Title  : </h6></label>
                             <input type="text" class="form-control
                             @if($errors->has('name'))
                                 border-danger
                             @endif
-                                " name="name" placeholder="Nhập tên chủ nhà">
+                                " name="name" placeholder="Nhập title">
                             @if($errors->has('name'))
                                 <p style="color: red;">{{$errors->first('name')}}</p>
                             @endif
