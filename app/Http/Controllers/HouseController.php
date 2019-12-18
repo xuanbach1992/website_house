@@ -8,6 +8,7 @@ use App\House;
 use App\HouseCategory;
 use App\Http\Requests\HouseValidationRequest;
 use App\Image;
+use App\Notifications\RepliedToThread;
 use App\RoomCategory;
 use App\User;
 use Illuminate\Http\Request;
@@ -252,5 +253,11 @@ class HouseController extends Controller
         $house->save();
 
         return redirect()->route('house.detail',$id);
+    }
+
+    function book($user_id){
+        $email=User::find($user_id)->email;
+        \auth()->user()->notify(new RepliedToThread($email));
+        return redirect('/');
     }
 }

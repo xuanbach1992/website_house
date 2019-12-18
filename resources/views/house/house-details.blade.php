@@ -110,6 +110,9 @@
                         <h6>Mô tả : </h6>
                         <p style="font-size: 15px">{{$house->description}}</p>
                     </div>
+                    <a class="btn btn-primary btn-sm"
+                       href="{{route('house.book',$house->user_id)}}"
+                    >Booking</a>
 
                 </div>
                 <hr>
