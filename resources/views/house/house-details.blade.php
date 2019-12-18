@@ -129,7 +129,6 @@
                                 <div class="card-body">
                                     <h3><b>Thông Tin Chủ Nhà</b></h3>
                                     <hr>
-
                                     <p><b>Name :</b> {{$house->user->name}}</p>
                                     <p><b>Phone :</b> {{$house->user->phone}}</p>
                                     <p><b>Email :</b> {{$house->user->email}}</p>
