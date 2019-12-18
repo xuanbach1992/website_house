@@ -103,7 +103,7 @@
 {{--<script src="{{asset('source/js/jquery.easing.1.3.js')}}"></script>--}}
 {{--<script src="{{asset('source/js/bootstrap-datepicker.min.js')}}"></script>--}}
 {{--<script src="{{asset('source/js/aos.js')}}"></script>--}}
-{{--<script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>--}}
+<script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
 <script>tinymce.init({selector:'textarea'});</script>
 {{--<script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.5.0/dropzone.js"></script>--}}
 <script src="{{asset('source/js/main.js')}}"></script>

@@ -248,7 +248,6 @@ class HouseController extends Controller
         }
 
 //        dd($query->toSql());
-//dd($filter["keyBathroom"]);
         $houses = $query->get();
         $listCities = $this->city->get();
 
