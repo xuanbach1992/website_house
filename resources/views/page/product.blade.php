@@ -21,10 +21,10 @@
                     <!--dòng 1-->
                     <div class="row">
                         <div class="col-md-4 form-group">
-                            <input type="text" name="keyBedrooms" class="form-control" placeholder="Phòng ngủ">
+                            <input type="text" name="keyBedrooms" class="form-control" placeholder="Phòng ngủ" >
                         </div>
                         <div class="col-md-4 form-group">
-                            <select name="cities" class="form-control w-100" onchange="onChange(this.value);">
+                            <select name="cities" onchange="onChange(this.value);" class="form-control w-100">
                                 <option value="-1">Thành Phố</option>
                                 @foreach($listCities as $city)
                                     <option value="{{$city->id}}">{{$city->name}}</option>
@@ -182,6 +182,7 @@
                                                 class="wrap-icon icon-fullscreen"></span> <a
                                                 href="{{route('house.detail',$house->id)}}"
                                                 style="color: white">{{$house->name}}</a></div>
+                                    </div>
                                     <div class="bed d-flex align-items-center"><span
                                                 class="wrap-icon icon-bed"></span> <span>{{$house->bedrooms}}</span>
                                     </div>
@@ -189,10 +190,10 @@
                                                 class="wrap-icon icon-bath"></span> <span>{{$house->bathroom}}</span>
                                     </div>
                                 </div>
-                                <div>
-                                    <button class="btn btn-primary btn-sm">Booking</button>
-                                    <button class="btn btn-warning btn-sm">Cancel</button>
-                                </div>
+                                {{--<div>--}}
+                                    {{--<button class="btn btn-primary btn-sm">Booking</button>--}}
+                                    {{--<button class="btn btn-warning btn-sm">Cancel</button>--}}
+                                {{--</div>--}}
                             </div>
                         </div>
                     </div>
@@ -205,8 +206,6 @@
                 </div>
             </div>
         </div>
-    </div>
-
 
     <div class="site-section bg-primary">
         <div class="container block-13">

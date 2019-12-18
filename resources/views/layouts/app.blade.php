@@ -33,9 +33,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.5.0/min/dropzone.min.css">
     <link rel="stylesheet" href="{{asset('css/all.css')}}">
 
-{{--    end css--}}
+{{--end css--}}
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-
     <script src="{{asset('js/bootstrap.bundle.min.js')}}" defer></script>
     <script>
         $.ajaxSetup({
@@ -94,7 +93,6 @@
 <!--footer-->
 
 </div>
-
 <script src="{{asset('source/js/jquery-migrate-3.0.0.js')}}"></script>
 <script src="{{asset('source/js/popper.min.js')}}"></script>
 {{--<script src="{{asset('source/js/owl.carousel.min.js')}}"></script>--}}

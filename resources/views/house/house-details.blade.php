@@ -29,8 +29,21 @@
         </div>
         <div class="col-md-12 row mt-3">
             <div class="col-md-8">
-                <div>
-                    <h3 style="color: #ff6c5e "><b>{{$house->name}}</b></h3>
+                <div class="row">
+                    <div class="col-md-9">
+                        <h3>
+                            <b style="color: #ff6c5e ">{{$house->name}}</b> -
+                            @if($house->status == 1)
+                                    <span style="color: #000000;">Đã cho thuê</span>
+                            @else
+                                    <span style="color: #bd362f">Chưa cho thuê</span>
+                            @endif
+                        </h3>
+                    </div>
+                    <div  class="col-md-3">
+                        <a href="{{route('house.showEdit',$house->id)}}" class="btn btn-primary">Sửa</a> &nbsp;
+                        <a href="{{route('house.delete',$house->id)}}" class="btn btn-danger">Xóa</a>
+                    </div>
                 </div>
                 <hr>
                 <div class="col-md-12 row">
@@ -102,22 +115,20 @@
                 <hr>
             </div>
             <div class="col-md-4">
-{{--                <div class="card" style="width: 23rem;">--}}
-{{--                    <div class="card-body">--}}
-                        <div class="container">
-                        <div class="row">
-                            <div class="col-sm-12 col-md-12 col-lg-12 mx-auto">
-                                <div class="card card-signin my-5">
-                                    <div class="card-body">
-                                        <h3><b>Thông Tin Chủ Nhà</b></h3>
-                                        <hr>
+                {{--                <div class="card" style="width: 23rem;">--}}
+                {{--                    <div class="card-body">--}}
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-12 col-md-12 col-lg-12 mx-auto">
+                            <div class="card card-signin my-5">
+                                <div class="card-body">
+                                    <h3><b>Thông Tin Chủ Nhà</b></h3>
+                                    <hr>
 
                                         <p><b>Name :</b> {{$house->user->name}}</p>
                                         <p><b>Phone :</b> {{$house->user->phone}}</p>
                                         <p><b>Email :</b> {{$house->user->email}}</p>
                                         <p><b>Address :</b> {{$house->user->address}}</p>
-
-                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -125,7 +136,8 @@
                 </div>
             </div>
         </div>
-{{--    </div>--}}
-{{--    </div>--}}
+    </div>
+    {{--    </div>--}}
+    {{--    </div>--}}
 
 @endsection

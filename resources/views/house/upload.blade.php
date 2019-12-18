@@ -59,7 +59,9 @@
           class="dropzone mt-5" id="dropzone" name="file">
         @csrf
     </form>
-    <div><a class="btn-secondary btn" id="uploadfiles" href="{{route('index')}}" type="submit">Upload</a></div>
+    <div>
+        <a class="btn btn-secondary" id="uploadfiles" href="{{route('index')}}" type="submit">Upload</a>
+    </div>
 
 </div>
 

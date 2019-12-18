@@ -26,7 +26,7 @@ class CreateHousesTable extends Migration
             $table->integer('price')->nullable();
             $table->string('image')->nullable();
 
-            $table->tinyInteger('status')->default(1);
+            $table->boolean('status')->default(0)->nullable();
 
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
