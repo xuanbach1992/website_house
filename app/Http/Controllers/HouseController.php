@@ -141,6 +141,7 @@ class HouseController extends Controller
         );
     }
 
+    //chưa sủ dụng được
     public function update(HouseValidationRequest $request, $id)
     {
         $house = $this->house->findOrFail($id);
@@ -197,7 +198,12 @@ class HouseController extends Controller
         $listCities = $this->city->all();
         $listDistrict = $this->district->all();
 
-        return view('house.house-details', compact('house', 'listCities', 'listRoomCategory', 'listHouseCategory', 'listDistrict'));
+        return view('house.house-details', compact(
+            'house',
+            'listCities',
+            'listRoomCategory',
+            'listHouseCategory',
+            'listDistrict'));
     }
 
     /**

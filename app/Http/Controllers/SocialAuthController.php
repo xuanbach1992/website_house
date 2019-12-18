@@ -11,6 +11,7 @@ class SocialAuthController extends Controller
     {
         return Socialite::driver($provider)->redirect();
     }
+
     public function callback($provider)
     {
         $getInfo = Socialite::driver($provider)->stateless()->user();
@@ -18,6 +19,7 @@ class SocialAuthController extends Controller
         Auth::login($user);
         return redirect()->to('/');
     }
+
     public function findOfCreate($getInfo) {
         $user = User::where('email',$getInfo->email)->first();
         if (!$user)
