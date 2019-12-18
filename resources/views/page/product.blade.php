@@ -7,7 +7,7 @@
             <div class="container">
                 <div class="realestate-filter-wrap nav">
                     <a href="#for-rent" class="active" data-toggle="tab" id="rent-tab" aria-controls="rent"
-                       aria-selected="true">Tim kiem</a>
+                       aria-selected="true">Tìm kiếm</a>
                     {{--                    <a href="#for-sale" class="" data-toggle="tab" id="sale-tab" aria-controls="sale"--}}
                     {{--                       aria-selected="false">Đã cho thuê</a>--}}
                 </div>
@@ -21,7 +21,7 @@
                     <!--dòng 1-->
                     <div class="row">
                         <div class="col-md-4 form-group">
-                            <input type="text" name="keyBedrooms" class="form-control" placeholder="Phòng ngủ">
+                            <input type="text" name="keyBedrooms" value="{{ (isset($filter)) ? $filter["keyBedrooms"] : null }}" class="form-control" placeholder="Phòng ngủ">
                         </div>
                         <div class="col-md-4 form-group">
                             <select name="cities" onchange="onChange(this.value);" class="form-control w-100">
@@ -40,15 +40,15 @@
                     <!--dòng 2-->
                     <div class="row">
                         <div class="col-md-4 form-group">
-                            <input type="text" name="keyBathroom" class="form-control" placeholder="Phòng tắm">
+                            <input type="text" name="keyBathroom" value="{{ (isset($filter)) ? $filter["keyBathroom"] : null }}" class="form-control" placeholder="Phòng tắm">
                         </div>
                         <div class="col-md-4 form-group">
                             <div class="row">
                                 <div class="col-md-6 form-group">
-                                    <input type="number" name="price_from" class="form-control" placeholder="Giá từ">
+                                    <input type="number" name="price_from" value="{{ (isset($filter)) ? $filter["price_from"] : null }}" class="form-control" placeholder="Giá từ">
                                 </div>
                                 <div class="col-md-6 form-group">
-                                    <input type="number" name="price_to" class="form-control" placeholder="Đến giá">
+                                    <input type="number" name="price_to" value="{{ (isset($filter)) ? $filter["price_to"] : null }}" class="form-control" placeholder="Đến giá">
                                 </div>
                             </div>
                         </div>
