@@ -4,7 +4,7 @@
     <div class="card bg-light mb-3">
         <div class="card-header"><h4><b style="color: #71bc42">Update Home</b></h4></div>
         <div class="card-body">
-            <form method="post" action="{{route('house.update',$houses->id)}}" enctype="multipart/form-data">
+            <form method="post" action="{{route('house.update',$house->id)}}" enctype="multipart/form-data">
                 @csrf
                 <div class="row col-md-12">
                     <div class="col-md-6">
@@ -14,14 +14,14 @@
                             @if($errors->has('name'))
                                     border-danger
                             @endif
-                                    " name="name" value="{{$houses->name}}" placeholder="Nhập title">
+                                    " name="name" value="{{$house->name}}" placeholder="Nhập title">
                             @if($errors->has('name'))
                                 <p style="color: red;">{{$errors->first('name')}}</p>
                             @endif
                         </div>
                         <div class="form-group">
                             <label><h6>Số điện thoại : </h6></label>
-                            <input type="number" class="form-control" name="phone" value="{{$houses->phone}}" placeholder="Nhập số điện thoại">
+                            <input type="number" class="form-control" name="phone" value="{{$house->phone}}" placeholder="Nhập số điện thoại">
                         </div>
 
                         <div class="form-group">
@@ -30,7 +30,6 @@
                                     <input type="checkbox" id="status" class="filled-in" name="status" value="1">
                                     <label for="status"></label>
                                 </div>
-                            </label>
 
                         </div>
                         {{--<div class="form-group">--}}
@@ -70,7 +69,7 @@
                             @if($errors->has('address'))
                                     border-danger
                             @endif
-                                    " name="address" value="{{$houses->address}}" placeholder="Nhập địa chỉ">
+                                    " name="address" value="{{$house->address}}" placeholder="Nhập địa chỉ">
                             @if($errors->has('address'))
                                 <p style="color: red;">{{$errors->first('address')}}</p>
                             @endif
@@ -83,7 +82,7 @@
                             @if($errors->has('bedrooms'))
                                     border-danger
                             @endif
-                                    " name="bedrooms" value="{{$houses->bedrooms}}" placeholder="Nhập số phòng ngủ">
+                                    " name="bedrooms" value="{{$house->bedrooms}}" placeholder="Nhập số phòng ngủ">
                             @if($errors->has('bedrooms'))
                                 <p style="color: red;">{{$errors->first('bedrooms')}}</p>
                             @endif
@@ -94,7 +93,7 @@
                             @if($errors->has('bathroom'))
                                     border-danger
                             @endif
-                                    " name="bathroom" value="{{$houses->bathroom}}" placeholder="Nhập số phòng tắm">
+                                    " name="bathroom" value="{{$house->bathroom}}" placeholder="Nhập số phòng tắm">
                             @if($errors->has('bathroom'))
                                 <p style="color: red;">{{$errors->first('bathroom')}}</p>
                             @endif
@@ -109,7 +108,7 @@
                             @if($errors->has('price'))
                                     border-danger
                             @endif
-                                    " name="price" value="{{$houses->price}}" placeholder="Nhập giá phòng">
+                                    " name="price" value="{{$house->price}}" placeholder="Nhập giá phòng">
                             @if($errors->has('price'))
                                 <p style="color: red;">{{$errors->first('price')}}</p>
                             @endif
@@ -119,7 +118,7 @@
                 </div>
                 <div class="form-group">
                     <button type="submit" class="btn btn-success">Update</button>
-                    <a class="btn btn-warning" href="{{route('house.detail',$houses->id)}}">Back</a>
+                    <a class="btn btn-warning" href="{{route('house.detail',$house->id)}}">Back</a>
                 </div>
 
             </form>

@@ -34,21 +34,18 @@
                         <h3>
                             <b style="color: #ff6c5e ">{{$house->name}}</b> -
                             @if($house->status == 1)
-                                    <span style="color: #000000;">Đã cho thuê</span>
+                                <span style="color: #000000;">Đã cho thuê</span>
                             @else
-                                    <span style="color: #bd362f">Chưa cho thuê</span>
+                                <span style="color: #bd362f">Chưa cho thuê</span>
                             @endif
                         </h3>
                     </div>
-                    @guest()
-                        <div  class="col-md-3">
-                        </div>
-                        @else
-                        <div  class="col-md-3">
+                    @can('userAuthorization')
+                        <div class="col-md-3">
                             <a href="{{route('house.showEdit',$house->id)}}" class="btn btn-primary">Sửa</a> &nbsp;
                             <a href="{{route('house.delete',$house->id)}}" class="btn btn-danger">Xóa</a>
                         </div>
-                    @endguest
+                    @endcan
                 </div>
                 <hr>
                 <div class="col-md-12 row">
@@ -133,10 +130,10 @@
                                     <h3><b>Thông Tin Chủ Nhà</b></h3>
                                     <hr>
 
-                                        <p><b>Name :</b> {{$house->user->name}}</p>
-                                        <p><b>Phone :</b> {{$house->user->phone}}</p>
-                                        <p><b>Email :</b> {{$house->user->email}}</p>
-                                        <p><b>Address :</b> {{$house->user->address}}</p>
+                                    <p><b>Name :</b> {{$house->user->name}}</p>
+                                    <p><b>Phone :</b> {{$house->user->phone}}</p>
+                                    <p><b>Email :</b> {{$house->user->email}}</p>
+                                    <p><b>Address :</b> {{$house->user->address}}</p>
                                 </div>
                             </div>
                         </div>

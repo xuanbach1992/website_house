@@ -128,43 +128,51 @@ class HouseController extends Controller
 
     public function showEdit($id)
     {
-        $houses = $this->house->findOrFail($id);
-        $listHouseCategory = $this->houseCategory->all();
-        $listRoomCategory = $this->roomCategory->all();
-        $listCities = $this->city->all();
+        $house = $this->house->findOrFail($id);
+        if ($house->user_id === Auth::user()->id) {
+            $listHouseCategory = $this->houseCategory->all();
+            $listRoomCategory = $this->roomCategory->all();
+            $listCities = $this->city->all();
 
-        return view('house.edit', compact(
-                'houses',
-                'listHouseCategory',
-                'listRoomCategory',
-                'listCities'
-            )
-        );
+            return view('house.edit', compact(
+                    'house',
+                    'listHouseCategory',
+                    'listRoomCategory',
+                    'listCities'
+                )
+            );
+        } else {
+            abort(403, "ban khong co quyen");
+        }
     }
 
     public function update(HouseValidationRequest $request, $id)
     {
         $house = $this->house->findOrFail($id);
-        $house->name = $request->name;
-        $house->address = $request->address;
-        $house->phone = $request->phone;
+        if ($house->user_id === Auth::user()->id) {
+            $house->name = $request->name;
+            $house->address = $request->address;
+            $house->phone = $request->phone;
 
-        $house->house_category_id = $request->house_category_id;
-        $house->room_category_id = $request->room_category_id;
-        $house->cities_id = $request->cities_id;
+            $house->house_category_id = $request->house_category_id;
+            $house->room_category_id = $request->room_category_id;
+            $house->cities_id = $request->cities_id;
 
-        $house->district_id = $request->district_id;
-        $house->bedrooms = $request->bedrooms;
-        $house->bathroom = $request->bathroom;
+            $house->district_id = $request->district_id;
+            $house->bedrooms = $request->bedrooms;
+            $house->bathroom = $request->bathroom;
 
-        $house->description = $request->description;
-        $house->price = $request->price;
+            $house->description = $request->description;
+            $house->price = $request->price;
 
 
 //        dd($request->status);
-        $house->save();
+            $house->save();
 
-        return redirect()->route('house.detail');
+            return redirect()->route('house.detail');
+        } else {
+            abort(403, "ban khong co quyen");
+        }
     }
 
     /**
@@ -174,15 +182,18 @@ class HouseController extends Controller
      */
     public function delete($id)
     {
-        $houses = $this->house->findOrFail($id);
+        $house = $this->house->findOrFail($id);
+        if ($house->user_id === Auth::user()->id) {
+            if (file_exists(storage_path("/app/public/$house->id"))) {
+                File::delete(storage_path("/app/public/$house->id"));
+            }
 
-        if (file_exists(storage_path("/app/public/$houses->id"))) {
-            File::delete(storage_path("/app/public/$houses->id"));
+            $house->delete();
+
+            return redirect()->route('index');
+        } else {
+            abort(403, "ban khong co quyen");
         }
-
-        $houses->delete();
-
-        return redirect()->route('index');
 
     }
 
@@ -193,12 +204,14 @@ class HouseController extends Controller
     public function showHouseDetails($id)
     {
         $house = House::findOrFail($id);
+
         $listHouseCategory = $this->houseCategory->all();
         $listRoomCategory = $this->roomCategory->all();
         $listCities = $this->city->all();
         $listDistrict = $this->district->all();
 
         return view('house.house-details', compact('house', 'listCities', 'listRoomCategory', 'listHouseCategory', 'listDistrict'));
+
     }
 
     /**
@@ -252,11 +265,12 @@ class HouseController extends Controller
         }
         $house->save();
 
-        return redirect()->route('house.detail',$id);
+        return redirect()->route('house.detail', $id);
     }
 
-    function book($user_id){
-        $email=User::find($user_id)->email;
+    function book($user_id)
+    {
+        $email = User::find($user_id)->email;
         \auth()->user()->notify(new RepliedToThread($email));
         return redirect('/');
     }
