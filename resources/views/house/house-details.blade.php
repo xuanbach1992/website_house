@@ -12,16 +12,18 @@
                             src="{{asset('storage/'.$house->images[0]->path)}}" alt="Image"
                             class="img-fluid">
                     </div>
+                    @foreach($house->images as $image)
                     <div class="carousel-item">
                         <img
-                            src="{{asset('storage/'.$house->images[1]->path)}}" alt="Image"
+                            src="{{asset('storage/'.$image->path)}}" alt="Image"
                             class="img-fluid">
                     </div>
-                    <div class="carousel-item">
-                        <img
-                            src="{{asset('storage/'.$house->images[2]->path)}}" alt="Image"
-                            class="img-fluid">
-                    </div>
+                    @endforeach
+{{--                    <div class="carousel-item">--}}
+{{--                        <img--}}
+{{--                            src="{{asset('storage/'.$house->images[2]->path)}}" alt="Image"--}}
+{{--                            class="img-fluid">--}}
+{{--                    </div>--}}
                 </div>
 
                 <!-- Left and right controls -->
