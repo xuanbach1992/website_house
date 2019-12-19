@@ -121,7 +121,7 @@
                         <p style="font-size: 15px">{{$house->description}}</p>
                     </div>
                     <a class="btn btn-primary btn-sm"
-                       href="{{route('house.book',$house->user_id)}}"
+                       href="{{route('house.book',$house->id)}}"
                     >Booking</a>
 
                 </div>
