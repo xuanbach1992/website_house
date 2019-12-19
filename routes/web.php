@@ -21,14 +21,8 @@ Route::prefix('/houses')->group(function (){
     Route::get('/rent','HouseController@findByUser')->name('user.rent')->middleware('auth');
 
     Route::get('/book/{id}','HouseController@book')->name('house.book')->middleware('auth');
-
     Route::get('/detail/{id}','HouseController@showHouseDetails')->name('house.detail');
     Route::get('/searchHouse','HouseController@search')->name('search');
-    Route::get('/delete/{id}','HouseController@delete')->name('house.delete')->middleware('auth');
-    Route::get('/edit/{id}','HouseController@showEdit')->name('house.showEdit')->middleware('auth');
-    Route::post('/edit/{id}','HouseController@updateStatus')->name('house.update')->middleware('auth');
-//    Route::post('/status/{id}','HouseController@updateStatus')->name('house.status');
-
 });
 
 Route::prefix('/users')->group(function () {
@@ -39,6 +33,18 @@ Route::prefix('/users')->group(function () {
     Route::post('/change-profile','HomeController@updateSuccess')->name('user.update');
 
 });
+
+//code admin template
+Route::prefix('/admin')->group(function (){
+    Route::get('/','HouseController@showMaster')->name('admin.index');
+    Route::get('/list-house','HouseController@findByUser')->name('admin.house');
+    Route::get('/notify','HouseController@showNotify')->name('admin.notify.show');
+
+    Route::get('/edit/{id}','HouseController@showEdit')->name('house.showEdit')->middleware('auth');
+    Route::post('/edit/{id}','HouseController@updateStatus')->name('house.update')->middleware('auth');
+    Route::get('/delete/{id}','HouseController@delete')->name('house.delete')->middleware('auth');
+});
+
 
 //đăng nhập bằng facebook
 Route::get('/redirect/{social}', 'SocialAuthController@redirect');
@@ -55,7 +61,5 @@ Route::get('/about','HomeController@aboutTest')->name('about');
 Route::get('/property','HomeController@propertydetails')->name('property');
 
 
-//code admin template
-Route::get('/master','HouseController@showMaster')->name('admin.master');
-Route::get('/notify','HouseController@showNotify')->name('admin.notify.show');
-Route::get('/houseManagement','HouseController@findByUser')->name('admin.house');
+
+

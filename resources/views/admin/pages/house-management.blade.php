@@ -14,7 +14,7 @@
                     <th scope="col">Trạng thái</th>
                     <th scope="col">Kiểu nhà</th>
                     <th scope="col">Giá</th>
-                    <th scope="col">Chức năng</th>
+                    <th scope="col" style="text-align: center">Chức năng</th>
                 </tr>
                 </thead>
                 @foreach($houses as $key => $value)
@@ -29,7 +29,13 @@
                                 @endif
                             @endforeach
                         </td>
-                        <td>{{$value->status}}</td>
+                        <td>
+                            @if($value->status == 1)
+                                <span style="color: #000000;">Đã cho thuê</span>
+                            @else
+                                <span style="color: #bd362f">Chưa cho thuê</span>
+                            @endif
+                        </td>
                         <td>
                             @foreach($listHouseCategory as $houseCategory)
                                 @if($value->house_category_id == $houseCategory->id)
@@ -38,9 +44,9 @@
                             @endforeach
                         </td>
                         <td>{{$value->price}}</td>
-                        <td>
-                            <a href="" class="btn btn-primary">Sửa</a>&nbsp;&nbsp;
-                            <a href="" class="btn btn-primary">Xóa</a>
+                        <td style="text-align: center">
+                            <a href="{{route('house.showEdit',$value->id)}}" class="btn btn-primary">Sửa</a>&nbsp;&nbsp;
+                            <a href="{{route('house.delete',$value->id)}}" class="btn btn-danger">Xóa</a>
                         </td>
                     </tr>
                     </tbody>
