@@ -40,11 +40,14 @@ class HouseController extends Controller
 
     public function findByUser()
     {
-        $listCities = $this->city->all();
         $houses = House::where('user_id', Auth::user()->id)->get();
-        return view('page.product', [
+        $listCities = $this->city->all();
+        $listHouseCategory = $this->houseCategory->all();
+
+        return view('admin.pages.house-management', [
             'houses' => $houses,
-            'listCities' => $listCities
+            'listCities' => $listCities,
+            'listHouseCategory' => $listHouseCategory
         ]);
     }
 
@@ -52,7 +55,7 @@ class HouseController extends Controller
     {
         $houses = $this->house->all();
         $listCities = $this->city->all();
-//        dd($houses);
+
         return view('page.product', [
             'houses' => $houses,
             'listCities' => $listCities
@@ -272,10 +275,15 @@ class HouseController extends Controller
         return redirect()->route('house.detail', $id);
     }
 
-    function book($user_id)
+    public function book($user_id)
     {
         $email = User::find($user_id)->email;
         \auth()->user()->notify(new RepliedToThread($email));
         return redirect('/');
     }
+
+    public function showMaster(){
+        return view('admin.layout.master');
+    }
+
 }
