@@ -69,7 +69,8 @@
                     <a href="#" class="dropdown-item">
                         <!-- Message Start -->
                         <div class="media">
-                            <img src="sourceAdmin/dist/img/user1-128x128.jpg" alt="User Avatar" class="img-size-50 mr-3 img-circle">
+                            <img src="sourceAdmin/dist/img/user1-128x128.jpg" alt="User Avatar"
+                                 class="img-size-50 mr-3 img-circle">
                             <div class="media-body">
                                 <h3 class="dropdown-item-title">
                                     Brad Diesel
@@ -85,7 +86,8 @@
                     <a href="#" class="dropdown-item">
                         <!-- Message Start -->
                         <div class="media">
-                            <img src="sourceAdmin/dist/img/user8-128x128.jpg" alt="User Avatar" class="img-size-50 img-circle mr-3">
+                            <img src="sourceAdmin/dist/img/user8-128x128.jpg" alt="User Avatar"
+                                 class="img-size-50 img-circle mr-3">
                             <div class="media-body">
                                 <h3 class="dropdown-item-title">
                                     John Pierce
@@ -101,7 +103,8 @@
                     <a href="#" class="dropdown-item">
                         <!-- Message Start -->
                         <div class="media">
-                            <img src="sourceAdmin/dist/img/user3-128x128.jpg" alt="User Avatar" class="img-size-50 img-circle mr-3">
+                            <img src="sourceAdmin/dist/img/user3-128x128.jpg" alt="User Avatar"
+                                 class="img-size-50 img-circle mr-3">
                             <div class="media-body">
                                 <h3 class="dropdown-item-title">
                                     Nora Silvester
@@ -157,7 +160,8 @@
     <aside class="main-sidebar sidebar-dark-primary elevation-4">
         <!-- Brand Logo  để lại-->
         <a href="{{route('admin.master')}}" class="brand-link">
-            <img src="sourceAdmin/dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
+            <img src="sourceAdmin/dist/img/AdminLTELogo.png" alt="AdminLTE Logo"
+                 class="brand-image img-circle elevation-3"
                  style="opacity: .8">
             <span class="brand-text font-weight-light">Trang Quản Lý</span>
         </a>
@@ -170,51 +174,52 @@
                     <img src="sourceAdmin/dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
                 </div>
                 <div class="info">
-                    <a href="#" class="d-block">Alexander Pierce</a>
+                    <a href="#" class="d-block">Trần Mạnh Hiệp</a>
                 </div>
             </div>
 
             <!-- Sidebar Menu -->
             <nav class="mt-2">
-                <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
+                    data-accordion="false">
                     <!-- Add icons to the links using the .nav-icon class
                          with font-awesome or any other icon font library -->
                     <li class="nav-item has-treeview menu-open">
                         <a href="#" class="nav-link active">
                             <i class="nav-icon fas fa-tachometer-alt"></i>
                             <p>
-                                Dashboard
+                                Manage
                                 <i class="right fas fa-angle-left"></i>
                             </p>
                         </a>
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
                                 <a href="{{route('admin.house')}}" class="nav-link active">
-                                    <i class="far fa-circle nav-icon"></i>
-                                    <p>Nhà của tôi</p>
+                                    <i class="far fa fa-home nav-icon"></i>
+                                    <p>Nhà Của Tôi</p>
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a href="#" class="nav-link">
-                                    <i class="far fa-circle nav-icon"></i>
-                                    <p>Dashboard v2</p>
+                                    <i class="far fa fa-bullhorn nav-icon"></i>
+                                    <p>Thông Báo</p>
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a href="#" class="nav-link">
-                                    <i class="far fa-circle nav-icon"></i>
-                                    <p>Dashboard v3</p>
+                                    <i class="far fa fa-area-chart nav-icon"></i>
+                                    <p>Thống Kê</p>
                                 </a>
                             </li>
                         </ul>
                     </li>
 
 
-                    <li class="nav-header">Mẫu file</li>
+                    <li class="nav-header">Web người dùng</li>
                     <li class="nav-item">
-                        <a href="https://adminlte.io/docs/3.0" class="nav-link">
-                            <i class="nav-icon fas fa-file"></i>
-                            <p>Documentation</p>
+                        <a href="{{route('index')}}" class="nav-link">
+                            <i class="nav-icon fas fa-link"></i>
+                            <p>Beautiful House</p>
                         </a>
                     </li>
                 </ul>
@@ -227,24 +232,28 @@
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
         <!-- Content Header (Page header) hiệp -->
-        <div class="content-header">
-            <div class="container-fluid">
-                <div class="row mb-2">
-                    <div class="col-sm-6">
-                        <h1 class="m-0 text-dark">Dashboard</h1>
-                    </div><!-- /.col -->
-                    <div class="col-sm-6">
-                        <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item active">Dashboard v1</li>
-                        </ol>
-                    </div><!-- /.col -->
-                </div><!-- /.row -->
-            </div><!-- /.container-fluid -->
-        </div>
+        {{--<div class="content-header">--}}
+            {{--<div class="container-fluid">--}}
+                {{--<div class="row mb-2">--}}
+                    {{--<div class="col-sm-6">--}}
+                        {{--<h1 class="m-0 text-dark">Trang quản lý</h1>--}}
+                    {{--</div><!-- /.col -->--}}
+                    {{--<div class="col-sm-6">--}}
+                        {{--<ol class="breadcrumb float-sm-right">--}}
+                            {{--<li class="breadcrumb-item"><a href="#">Trang chủ</a></li>--}}
+                            {{--<li class="breadcrumb-item active">Dashboard v1</li>--}}
+                        {{--</ol>--}}
+                    {{--</div><!-- /.col -->--}}
+                {{--</div><!-- /.row -->--}}
+            {{--</div><!-- /.container-fluid -->--}}
+        {{--</div>--}}
         <!-- /.content-header -->
 
-        @yield('contentAdmin')
+        <div class="container">
+            <div class="row col-md-12">
+                    @yield('contentAdmin')
+            </div>
+        </div>
 
         <!-- Main content -->
         <section class="content">
@@ -259,7 +268,7 @@
     <footer class="main-footer">
         <strong>Người tạo : <a href="#">Trần Mạnh Hiệp</a>.</strong>
         <div class="float-right d-none d-sm-inline-block">
-            <b>Version</b> 3.0.2-pre
+            <b>Version</b> 1.0 - TMH
         </div>
     </footer>
 

@@ -16,7 +16,10 @@ Route::prefix('/houses')->group(function (){
     Route::get('/create','HouseController@create')->name('house.showFormCreate')->middleware('auth');
     Route::post('/create','HouseController@add')->name('house.add')->middleware('auth');
     Route::post('/upload','HouseController@storeImage')->name('house.upload')->middleware('auth');
+
+    //đang k sử dụng route này vì đang dùng hàm này cho form admin
     Route::get('/rent','HouseController@findByUser')->name('user.rent')->middleware('auth');
+
     Route::get('/book/{id}','HouseController@book')->name('house.book')->middleware('auth');
 
     Route::get('/detail/{id}','HouseController@showHouseDetails')->name('house.detail');
@@ -54,4 +57,4 @@ Route::get('/property','HomeController@propertydetails')->name('property');
 
 //code admin template
 Route::get('/master','HouseController@showMaster')->name('admin.master');
-Route::get('/houseManagement','HouseController@showHomeManagement')->name('admin.house');
+Route::get('/houseManagement','HouseController@findByUser')->name('admin.house');
