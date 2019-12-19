@@ -57,4 +57,5 @@ Route::get('/property','HomeController@propertydetails')->name('property');
 
 //code admin template
 Route::get('/master','HouseController@showMaster')->name('admin.master');
+Route::get('/notify','HouseController@showNotify')->name('admin.notify.show');
 Route::get('/houseManagement','HouseController@findByUser')->name('admin.house');
