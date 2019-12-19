@@ -142,26 +142,26 @@
                     ({{$countNotice}}) Notifications</span>
                     @foreach(\App\Notification::all() as $notify)
                         @if(json_decode($notify->data)->receive==\Illuminate\Support\Facades\Auth::user()->email)
-                    <div class="dropdown-divider"></div>
-                    <a href="{{route('admin.notify.show')}}" class="dropdown-item">
-                        {{json_decode($notify->data)->sender}}
-{{--                        <span class="float-right text-muted text-sm">3 mins</span>--}}
-                    </a>
+                            <div class="dropdown-divider"></div>
+                            <a href="{{route('admin.notify.show')}}" class="dropdown-item">
+                                {{json_decode($notify->data)->sender}}
+                                {{--                        <span class="float-right text-muted text-sm">3 mins</span>--}}
+                            </a>
 
                         @endif
                     @endforeach
-{{--                    <div class="dropdown-divider"></div>--}}
-{{--                    <a href="#" class="dropdown-item">--}}
-{{--                        <i class="fas fa-users mr-2"></i> 8 friend requests--}}
-{{--                        <span class="float-right text-muted text-sm">12 hours</span>--}}
-{{--                    </a>--}}
-{{--                    <div class="dropdown-divider"></div>--}}
-{{--                    <a href="#" class="dropdown-item">--}}
-{{--                        <i class="fas fa-file mr-2"></i> 3 new reports--}}
-{{--                        <span class="float-right text-muted text-sm">2 days</span>--}}
-{{--                    </a>--}}
-{{--                    <div class="dropdown-divider"></div>--}}
-{{--                    <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>--}}
+                    {{--                    <div class="dropdown-divider"></div>--}}
+                    {{--                    <a href="#" class="dropdown-item">--}}
+                    {{--                        <i class="fas fa-users mr-2"></i> 8 friend requests--}}
+                    {{--                        <span class="float-right text-muted text-sm">12 hours</span>--}}
+                    {{--                    </a>--}}
+                    {{--                    <div class="dropdown-divider"></div>--}}
+                    {{--                    <a href="#" class="dropdown-item">--}}
+                    {{--                        <i class="fas fa-file mr-2"></i> 3 new reports--}}
+                    {{--                        <span class="float-right text-muted text-sm">2 days</span>--}}
+                    {{--                    </a>--}}
+                    {{--                    <div class="dropdown-divider"></div>--}}
+                    {{--                    <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>--}}
                 </div>
             </li>
             <li class="nav-item">
