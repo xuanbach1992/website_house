@@ -94,16 +94,18 @@
                             class="icon-menu h3 text-white"></span></a></span>
                 <nav class="site-navigation text-right ml-auto d-none d-lg-block" role="navigation">
                     <ul class="site-menu main-menu js-clone-nav ml-auto ">
-                        <li class="active"><a href="/" class="nav-link">Trang chủ</a></li>
-                        <li><a href="#house_list" class="nav-link">Sản phẩm</a></li>
+                        <li><a href="/" class="nav-link">Trang chủ</a></li>
+{{--                        <li><a href="#house_list" class="nav-link">Sản phẩm</a></li>--}}
                         {{--                        <li><a href="{{route('about')}}" class="nav-link">Giới thiệu</a></li>--}}
                         {{--                        <li><a href="#" id="product" class="nav-link">Liên Hệ</a></li>--}}
 
 
                         <li class="nav-item">
                             @guest
-                                <a class="nav-link" href="{{ route('login') }}" data-toggle="modal"
-                                   data-target="#exampleModalLong_2" data-backdrop="static" data-keyboard="false">
+                                <a class="nav-link" href="{{ route('login') }}"
+                                   data-toggle="modal"
+                                   data-target="#exampleModalLong_2" data-backdrop="static" data-keyboard="false"
+                                >
                                     {{ __('Login') }}</a>
                         </li>
                         @if (Route::has('register'))
@@ -112,8 +114,8 @@
                             </li>
                         @endif
                         @else
-                            <li><a href="{{route('user.rent')}}" class="nav-link">Bài đăng</a></li>
-                            <li><a href="{{route('house.showFormCreate')}}" class="nav-link">Create Home</a></li>
+                            <li><a href="{{route('user.rent')}}" class="nav-link">Danh sách</a></li>
+                            <li><a href="{{route('house.showFormCreate')}}" class="nav-link">Đăng nhà cho thuê</a></li>
                             {{--                            {{dd(\App\Notification::all())}}--}}
 
                             <li class="nav-item dropdown">
@@ -125,7 +127,7 @@
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                                     @foreach(\App\Notification::all() as $notify)
                                         @if(json_decode($notify->data)->receive==\Illuminate\Support\Facades\Auth::user()->email)
-                                            {{ json_decode($notify->data)->Message}}
+                                            {{ json_decode($notify->data)->Message}}</br>
                                         @endif
                                     @endforeach
                                 </div>
