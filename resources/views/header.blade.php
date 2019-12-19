@@ -117,15 +117,26 @@
                             {{--                            {{dd(\App\Notification::all())}}--}}
 
                             <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
+                                <a id="navbarDropdown" class="nav-link dropdown-toggle fa fa-bell"
+                                   style="font-size:24px" href="#" role="button"
                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    Message<span class="caret"></span>
+                                    <span class="caret badge">
+<?php $countNotice = 0 ?>
+                                            @foreach (\App\Notification::all() as $notice)
+                                                @if(json_decode($notice->data)->receive == auth()->user()->email)
+                                                    <?php $countNotice++ ?>
+                                                @endif
+                                            @endforeach
+                                        ({{$countNotice}})
+                                    </span>
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                                     @foreach(\App\Notification::all() as $notify)
                                         @if(json_decode($notify->data)->receive==\Illuminate\Support\Facades\Auth::user()->email)
-                                            {{ json_decode($notify->data)->Message}}
+                                           <strong>Bạn nhận được một yêu cầu thuê nhà từ  {{ json_decode($notify->data)->sender}} voi ngoi nha
+                                               {{ json_decode($notify->data)->house_title}}
+                                           </strong><br>
                                         @endif
                                     @endforeach
                                 </div>

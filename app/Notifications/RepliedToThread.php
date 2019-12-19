@@ -18,10 +18,15 @@ class RepliedToThread extends Notification
      * @return void
      */
     private $email;
+    private $house;
+//    private $user;
 
-    public function __construct($email)
+    public function __construct($email, $house)
     {
         $this->email = $email;
+        $this->house = $house;
+
+//        $this->user = $user;/
     }
 
     /**
@@ -53,9 +58,10 @@ class RepliedToThread extends Notification
     public function toDatabase($notifiable)
     {
         return [
-            'Message' => 'ban nhan duoc yeu cau thue nha',
+//            'Message' => 'Bạn nhận được một yêu cầu thuê nhà từ :sender của ngôi nhà :house_title',
             'sender' => $notifiable->email,
-            'receive' =>$this->email,
+            'receive' => $this->email,
+            'house_title' => $this->house,
         ];
     }
 
