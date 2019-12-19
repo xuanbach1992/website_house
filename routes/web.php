@@ -35,14 +35,13 @@ Route::prefix('/users')->group(function () {
 });
 
 //code admin template
-Route::prefix('/admin')->group(function (){
-    Route::get('/','HouseController@showMaster')->name('admin.index');
+Route::group(['prefix' => 'admin',  'middleware' => 'auth'], function(){
+//    Route::get('/','HouseController@showMaster')->name('admin.index');
     Route::get('/list-house','HouseController@findByUser')->name('admin.house');
     Route::get('/notify','HouseController@showNotify')->name('admin.notify.show');
-
-    Route::get('/edit/{id}','HouseController@showEdit')->name('house.showEdit')->middleware('auth');
-    Route::post('/edit/{id}','HouseController@updateStatus')->name('house.update')->middleware('auth');
-    Route::get('/delete/{id}','HouseController@delete')->name('house.delete')->middleware('auth');
+    Route::get('/edit/{id}','HouseController@showEdit')->name('house.showEdit');
+    Route::post('/edit/{id}','HouseController@updateStatus')->name('house.update');
+    Route::get('/delete/{id}','HouseController@delete')->name('house.delete');
 });
 
 
