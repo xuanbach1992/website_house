@@ -272,10 +272,18 @@ class HouseController extends Controller
         return redirect()->route('house.detail', $id);
     }
 
-    function book($user_id)
+    public function book($user_id)
     {
         $email = User::find($user_id)->email;
         \auth()->user()->notify(new RepliedToThread($email));
         return redirect('/');
+    }
+
+    public function showMaster(){
+        return view('admin.layout.master');
+    }
+
+    public function showHomeManagement(){
+        return view('admin.pages.house-management');
     }
 }
