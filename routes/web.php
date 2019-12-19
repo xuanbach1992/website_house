@@ -38,6 +38,7 @@ Route::prefix('/users')->group(function () {
 Route::prefix('/admin')->group(function (){
     Route::get('/','HouseController@showMaster')->name('admin.index');
     Route::get('/list-house','HouseController@findByUser')->name('admin.house');
+    Route::get('/notify','HouseController@showNotify')->name('admin.notify.show');
 
     Route::get('/edit/{id}','HouseController@showEdit')->name('house.showEdit')->middleware('auth');
     Route::post('/edit/{id}','HouseController@updateStatus')->name('house.update')->middleware('auth');
@@ -58,3 +59,7 @@ Route::get('/contact','HomeController@contactTest')->name('contact');
 Route::get('/blog','HomeController@blogTest')->name('blog');
 Route::get('/about','HomeController@aboutTest')->name('about');
 Route::get('/property','HomeController@propertydetails')->name('property');
+
+
+
+

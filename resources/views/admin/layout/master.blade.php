@@ -65,27 +65,44 @@
             <li class="nav-item dropdown">
                 <a class="nav-link" data-toggle="dropdown" href="#">
                     <i class="far fa-bell"></i>
-                    <span class="badge badge-warning navbar-badge">15</span>
+                    <span class="badge badge-warning navbar-badge"><?php $countNotice = 0 ?>
+                        @foreach (\App\Notification::all() as $notice)
+                            @if(json_decode($notice->data)->receive == auth()->user()->email)
+                                <?php $countNotice++ ?>
+                            @endif
+                        @endforeach
+                    ({{$countNotice}})</span>
                 </a>
                 <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-                    <span class="dropdown-item dropdown-header">15 Notifications</span>
-                    <div class="dropdown-divider"></div>
-                    <a href="#" class="dropdown-item">
-                        <i class="fas fa-envelope mr-2"></i> 4 new messages
-                        <span class="float-right text-muted text-sm">3 mins</span>
-                    </a>
-                    <div class="dropdown-divider"></div>
-                    <a href="#" class="dropdown-item">
-                        <i class="fas fa-users mr-2"></i> 8 friend requests
-                        <span class="float-right text-muted text-sm">12 hours</span>
-                    </a>
-                    <div class="dropdown-divider"></div>
-                    <a href="#" class="dropdown-item">
-                        <i class="fas fa-file mr-2"></i> 3 new reports
-                        <span class="float-right text-muted text-sm">2 days</span>
-                    </a>
-                    <div class="dropdown-divider"></div>
-                    <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
+                    <span class="dropdown-item dropdown-header"><?php $countNotice = 0 ?>
+                        @foreach (\App\Notification::all() as $notice)
+                            @if(json_decode($notice->data)->receive == auth()->user()->email)
+                                <?php $countNotice++ ?>
+                            @endif
+                        @endforeach
+                    ({{$countNotice}}) Notifications</span>
+                    @foreach(\App\Notification::all() as $notify)
+                        @if(json_decode($notify->data)->receive==\Illuminate\Support\Facades\Auth::user()->email)
+                            <div class="dropdown-divider"></div>
+                            <a href="{{route('admin.notify.show')}}" class="dropdown-item">
+                                {{json_decode($notify->data)->sender}}
+                                {{--                        <span class="float-right text-muted text-sm">3 mins</span>--}}
+                            </a>
+
+                        @endif
+                    @endforeach
+                    {{--                    <div class="dropdown-divider"></div>--}}
+                    {{--                    <a href="#" class="dropdown-item">--}}
+                    {{--                        <i class="fas fa-users mr-2"></i> 8 friend requests--}}
+                    {{--                        <span class="float-right text-muted text-sm">12 hours</span>--}}
+                    {{--                    </a>--}}
+                    {{--                    <div class="dropdown-divider"></div>--}}
+                    {{--                    <a href="#" class="dropdown-item">--}}
+                    {{--                        <i class="fas fa-file mr-2"></i> 3 new reports--}}
+                    {{--                        <span class="float-right text-muted text-sm">2 days</span>--}}
+                    {{--                    </a>--}}
+                    {{--                    <div class="dropdown-divider"></div>--}}
+                    {{--                    <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>--}}
                 </div>
             </li>
         </ul>
@@ -110,7 +127,7 @@
                     <img src="sourceAdmin/dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
                 </div>
                 <div class="info">
-                    <a href="#" class="d-block">Trần Mạnh Hiệp</a>
+                    <a href="#" class="d-block">{{\Illuminate\Support\Facades\Auth::user()->name}}</a>
                 </div>
             </div>
 
@@ -136,9 +153,15 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="#" class="nav-link">
+                                <a href="{{route('admin.notify.show')}}" class="nav-link">
                                     <i class="far fa fa-bullhorn nav-icon"></i>
-                                    <p>Thông Báo</p>
+                                    <p>Thông Báo</p><?php $countNotice = 0 ?>
+                                    @foreach (\App\Notification::all() as $notice)
+                                        @if(json_decode($notice->data)->receive == auth()->user()->email)
+                                            <?php $countNotice++ ?>
+                                        @endif
+                                    @endforeach
+                                ({{$countNotice}})
                                 </a>
                             </li>
                             <li class="nav-item">
@@ -168,26 +191,26 @@
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
         <!-- Content Header (Page header) hiệp -->
-        {{--<div class="content-header">--}}
-            {{--<div class="container-fluid">--}}
-                {{--<div class="row mb-2">--}}
-                    {{--<div class="col-sm-6">--}}
-                        {{--<h1 class="m-0 text-dark">Trang quản lý</h1>--}}
-                    {{--</div><!-- /.col -->--}}
-                    {{--<div class="col-sm-6">--}}
-                        {{--<ol class="breadcrumb float-sm-right">--}}
-                            {{--<li class="breadcrumb-item"><a href="#">Trang chủ</a></li>--}}
-                            {{--<li class="breadcrumb-item active">Dashboard v1</li>--}}
-                        {{--</ol>--}}
-                    {{--</div><!-- /.col -->--}}
-                {{--</div><!-- /.row -->--}}
-            {{--</div><!-- /.container-fluid -->--}}
-        {{--</div>--}}
-        <!-- /.content-header -->
+    {{--<div class="content-header">--}}
+    {{--<div class="container-fluid">--}}
+    {{--<div class="row mb-2">--}}
+    {{--<div class="col-sm-6">--}}
+    {{--<h1 class="m-0 text-dark">Trang quản lý</h1>--}}
+    {{--</div><!-- /.col -->--}}
+    {{--<div class="col-sm-6">--}}
+    {{--<ol class="breadcrumb float-sm-right">--}}
+    {{--<li class="breadcrumb-item"><a href="#">Trang chủ</a></li>--}}
+    {{--<li class="breadcrumb-item active">Dashboard v1</li>--}}
+    {{--</ol>--}}
+    {{--</div><!-- /.col -->--}}
+    {{--</div><!-- /.row -->--}}
+    {{--</div><!-- /.container-fluid -->--}}
+    {{--</div>--}}
+    <!-- /.content-header -->
 
         <div class="container">
             <div class="row col-md-12">
-                    @yield('contentAdmin')
+                @yield('contentAdmin')
             </div>
         </div>
 

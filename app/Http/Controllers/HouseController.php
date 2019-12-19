@@ -276,8 +276,8 @@ class HouseController extends Controller
     }
 
 
-   public function book($house_id)
-   {
+    public function book($house_id)
+    {
         $user_id = House::find($house_id)->user_id;
         $house_title = House::find($house_id)->name;
         $email = User::find($user_id)->email;
@@ -285,8 +285,13 @@ class HouseController extends Controller
         return redirect('/');
     }
 
-    public function showMaster(){
+    public function showMaster()
+    {
         return view('admin.layout.master');
     }
 
+    public function showNotify()
+    {
+        return view('admin.pages.notify');
+    }
 }
