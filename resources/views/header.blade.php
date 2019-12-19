@@ -112,7 +112,7 @@
                             </li>
                         @endif
                         @else
-                            <li><a href="{{route('admin.master')}}" class="nav-link">Admin</a></li>
+                            <li><a href="{{route('admin.index')}}" class="nav-link">Admin</a></li>
                             <li><a href="{{route('house.showFormCreate')}}" class="nav-link">Create Home</a></li>
                             {{--                            {{dd(\App\Notification::all())}}--}}
 

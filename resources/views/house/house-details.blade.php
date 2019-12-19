@@ -48,12 +48,6 @@
                             @endif
                         </h3>
                     </div>
-                    @can('userAuthorization')
-                        <div class="col-md-3">
-                            <a href="{{route('house.showEdit',$house->id)}}" class="btn btn-primary">Sửa</a> &nbsp;
-                            <a href="{{route('house.delete',$house->id)}}" class="btn btn-danger">Xóa</a>
-                        </div>
-                    @endcan
                 </div>
                 <hr>
                 <div class="col-md-12 row">

@@ -4,26 +4,28 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Admin | Dashboard</title>
+    <base href="{{asset('')}}">
+
     <!-- Tell the browser to be responsive to screen width -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="sourceAdmin/plugins/fontawesome-free/css/all.min.css">
+    <link rel="stylesheet" href="{{asset('sourceAdmin/plugins/fontawesome-free/css/all.min.css')}}">
     <!-- Ionicons -->
     <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
     <!-- Tempusdominus Bbootstrap 4 -->
-    <link rel="stylesheet" href="sourceAdmin/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
+    <link rel="stylesheet" href="{{asset('sourceAdmin/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css')}}">
     <!-- iCheck -->
-    <link rel="stylesheet" href="sourceAdmin/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+    <link rel="stylesheet" href="{{asset('sourceAdmin/plugins/icheck-bootstrap/icheck-bootstrap.min.css')}}">
     <!-- JQVMap -->
-    <link rel="stylesheet" href="sourceAdmin/plugins/jqvmap/jqvmap.min.css">
+    <link rel="stylesheet" href="{{asset('sourceAdmin/plugins/jqvmap/jqvmap.min.css')}}">
     <!-- Theme style -->
-    <link rel="stylesheet" href="sourceAdmin/dist/css/adminlte.min.css">
+    <link rel="stylesheet" href="{{asset('sourceAdmin/dist/css/adminlte.min.css')}}">
     <!-- overlayScrollbars -->
-    <link rel="stylesheet" href="sourceAdmin/plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
+    <link rel="stylesheet" href="{{asset('sourceAdmin/plugins/overlayScrollbars/css/OverlayScrollbars.min.css')}}">
     <!-- Daterange picker -->
-    <link rel="stylesheet" href="sourceAdmin/plugins/daterangepicker/daterangepicker.css">
+    <link rel="stylesheet" href="{{asset('sourceAdmin/plugins/daterangepicker/daterangepicker.css')}}">
     <!-- summernote -->
-    <link rel="stylesheet" href="sourceAdmin/plugins/summernote/summernote-bs4.css">
+    <link rel="stylesheet" href="{{asset('sourceAdmin/plugins/summernote/summernote-bs4.css')}}">
     <!-- Google Font: Source Sans Pro -->
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 </head>
@@ -59,67 +61,6 @@
 
         <!-- Right navbar links -->
         <ul class="navbar-nav ml-auto">
-            <!-- Messages Dropdown Menu -->
-            <li class="nav-item dropdown">
-                <a class="nav-link" data-toggle="dropdown" href="#">
-                    <i class="far fa-comments"></i>
-                    <span class="badge badge-danger navbar-badge">3</span>
-                </a>
-                <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-                    <a href="#" class="dropdown-item">
-                        <!-- Message Start -->
-                        <div class="media">
-                            <img src="sourceAdmin/dist/img/user1-128x128.jpg" alt="User Avatar"
-                                 class="img-size-50 mr-3 img-circle">
-                            <div class="media-body">
-                                <h3 class="dropdown-item-title">
-                                    Brad Diesel
-                                    <span class="float-right text-sm text-danger"><i class="fas fa-star"></i></span>
-                                </h3>
-                                <p class="text-sm">Call me whenever you can...</p>
-                                <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
-                            </div>
-                        </div>
-                        <!-- Message End -->
-                    </a>
-                    <div class="dropdown-divider"></div>
-                    <a href="#" class="dropdown-item">
-                        <!-- Message Start -->
-                        <div class="media">
-                            <img src="sourceAdmin/dist/img/user8-128x128.jpg" alt="User Avatar"
-                                 class="img-size-50 img-circle mr-3">
-                            <div class="media-body">
-                                <h3 class="dropdown-item-title">
-                                    John Pierce
-                                    <span class="float-right text-sm text-muted"><i class="fas fa-star"></i></span>
-                                </h3>
-                                <p class="text-sm">I got your message bro</p>
-                                <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
-                            </div>
-                        </div>
-                        <!-- Message End -->
-                    </a>
-                    <div class="dropdown-divider"></div>
-                    <a href="#" class="dropdown-item">
-                        <!-- Message Start -->
-                        <div class="media">
-                            <img src="sourceAdmin/dist/img/user3-128x128.jpg" alt="User Avatar"
-                                 class="img-size-50 img-circle mr-3">
-                            <div class="media-body">
-                                <h3 class="dropdown-item-title">
-                                    Nora Silvester
-                                    <span class="float-right text-sm text-warning"><i class="fas fa-star"></i></span>
-                                </h3>
-                                <p class="text-sm">The subject goes here</p>
-                                <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
-                            </div>
-                        </div>
-                        <!-- Message End -->
-                    </a>
-                    <div class="dropdown-divider"></div>
-                    <a href="#" class="dropdown-item dropdown-footer">See All Messages</a>
-                </div>
-            </li>
             <!-- Notifications Dropdown Menu -->
             <li class="nav-item dropdown">
                 <a class="nav-link" data-toggle="dropdown" href="#">
@@ -147,11 +88,6 @@
                     <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
                 </div>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#">
-                    <i class="fas fa-th-large"></i>
-                </a>
-            </li>
         </ul>
     </nav>
     <!-- /.navbar -->
@@ -159,7 +95,7 @@
     <!-- Main Sidebar Container hiệp -->
     <aside class="main-sidebar sidebar-dark-primary elevation-4">
         <!-- Brand Logo  để lại-->
-        <a href="{{route('admin.master')}}" class="brand-link">
+        <a href="{{route('admin.index')}}" class="brand-link">
             <img src="sourceAdmin/dist/img/AdminLTELogo.png" alt="AdminLTE Logo"
                  class="brand-image img-circle elevation-3"
                  style="opacity: .8">
@@ -267,9 +203,6 @@
     <!-- /.content-wrapper -->
     <footer class="main-footer">
         <strong>Người tạo : <a href="#">Trần Mạnh Hiệp</a>.</strong>
-        <div class="float-right d-none d-sm-inline-block">
-            <b>Version</b> 1.0 - TMH
-        </div>
     </footer>
 
     <!-- Control Sidebar -->
@@ -289,30 +222,30 @@
     $.widget.bridge('uibutton', $.ui.button)
 </script>
 <!-- Bootstrap 4 -->
-<script src="sourceAdmin/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="{{asset('')}}sourceAdmin/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <!-- ChartJS -->
-<script src="sourceAdmin/plugins/chart.js/Chart.min.js"></script>
+<script src="{{asset('')}}sourceAdmin/plugins/chart.js/Chart.min.js"></script>
 <!-- Sparkline -->
-<script src="sourceAdmin/plugins/sparklines/sparkline.js"></script>
+<script src="{{asset('sourceAdmin/plugins/sparklines/sparkline.js')}}"></script>
 <!-- JQVMap -->
-<script src="sourceAdmin/plugins/jqvmap/jquery.vmap.min.js"></script>
-<script src="sourceAdmin/plugins/jqvmap/maps/jquery.vmap.usa.js"></script>
+<script src="{{asset('sourceAdmin/plugins/jqvmap/jquery.vmap.min.js')}}"></script>
+<script src="{{asset('sourceAdmin/plugins/jqvmap/maps/jquery.vmap.usa.js')}}"></script>
 <!-- jQuery Knob Chart -->
-<script src="sourceAdmin/plugins/jquery-knob/jquery.knob.min.js"></script>
+<script src="{{asset('sourceAdmin/plugins/jquery-knob/jquery.knob.min.j')}}s"></script>
 <!-- daterangepicker -->
-<script src="sourceAdmin/plugins/moment/moment.min.js"></script>
-<script src="sourceAdmin/plugins/daterangepicker/daterangepicker.js"></script>
+<script src="{{asset('sourceAdmin/plugins/moment/moment.min.js')}}"></script>
+<script src="{{asset('sourceAdmin/plugins/daterangepicker/daterangepicker.js')}}"></script>
 <!-- Tempusdominus Bootstrap 4 -->
-<script src="sourceAdmin/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
+<script src="{{asset('sourceAdmin/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js')}}"></script>
 <!-- Summernote -->
-<script src="sourceAdmin/plugins/summernote/summernote-bs4.min.js"></script>
+<script src="{{asset('sourceAdmin/plugins/summernote/summernote-bs4.min.js')}}"></script>
 <!-- overlayScrollbars -->
-<script src="sourceAdmin/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
+<script src="{{asset('sourceAdmin/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js')}}"></script>
 <!-- AdminLTE App -->
-<script src="sourceAdmin/dist/js/adminlte.js"></script>
+<script src="{{asset('sourceAdmin/dist/js/adminlte.js')}}"></script>
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-<script src="sourceAdmin/dist/js/pages/dashboard.js"></script>
+<script src="{{asset('sourceAdmin/dist/js/pages/dashboard.js')}}"></script>
 <!-- AdminLTE for demo purposes -->
-<script src="sourceAdmin/dist/js/demo.js"></script>
+<script src="{{asset('sourceAdmin/dist/js/demo.js')}}"></script>
 </body>
 </html>

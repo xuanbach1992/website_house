@@ -137,7 +137,7 @@ class HouseController extends Controller
             $listRoomCategory = $this->roomCategory->all();
             $listCities = $this->city->all();
 
-            return view('house.edit', compact(
+            return view('admin.pages.edit', compact(
                     'house',
                     'listHouseCategory',
                     'listRoomCategory',
@@ -194,7 +194,7 @@ class HouseController extends Controller
 
             $house->delete();
 
-            return redirect()->route('index');
+            return redirect()->route('admin.house');
         } else {
             abort(403, "ban khong co quyen");
         }
@@ -272,7 +272,7 @@ class HouseController extends Controller
         }
         $house->save();
 
-        return redirect()->route('house.detail', $id);
+        return redirect()->route('admin.house', $id);
     }
 
     public function book($user_id)
