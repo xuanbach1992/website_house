@@ -6,7 +6,6 @@
         <div class="card-body">
             <form method="post" action="{{route('house.update',$house->id)}}" enctype="multipart/form-data">
             @csrf
-            <!--code cũ-->
                 <div class="col-md-12">
                     <div class="form-group">
                         <label><h6>Title : </h6></label>
@@ -118,7 +117,6 @@
                     {{--<textarea class="form-control" name="description" rows="14"></textarea>--}}
                     {{--</div>--}}
                 </div>
-                <!---->
 
                 <div class="form-group">
                     <button type="submit" class="btn btn-success">Update</button>
