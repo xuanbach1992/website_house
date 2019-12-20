@@ -56,12 +56,17 @@
                             @endif
                         </div>
                         <hr class="my-4">
-                        <a class="btn btn-lg btn-google btn-block text-uppercase"><img
-                                src="https://img.icons8.com/color/20/000000/google-logo.png"> Sign in with Google
-                        </a>
-                        <a class="btn btn-lg btn-facebook btn-block text-uppercase" href="redirect/facebook"><img
-                                src="https://img.icons8.com/color/20/000000/facebook-new.png"> Sign in with Facebook
-                        </a>
+                        <div class="row">
+                            <div class="col-md-4"></div>
+                            <div class="col-md-5">
+                                <a class=""><img src="https://img.icons8.com/color/48/000000/google-logo.png">
+                                </a>
+                                <a class="" href="redirect/facebook"><img src="https://img.icons8.com/color/48/000000/facebook-new.png">
+                                </a>
+                            </div>
+                        </div>
+
+
                     </form>
                 </div>
             </div>
@@ -94,17 +99,18 @@
                             class="icon-menu h3 text-white"></span></a></span>
                 <nav class="site-navigation text-right ml-auto d-none d-lg-block" role="navigation">
                     <ul class="site-menu main-menu js-clone-nav ml-auto ">
-                        <li class="active"><a href="/" class="nav-link">Trang chủ</a></li>
-                        <li><a href="#house_list" class="nav-link">Sản phẩm</a></li>
-                        <li><a href="{{route('about')}}" class="nav-link">Giới thiệu</a></li>
-                        <li><a href="{{route('blog')}}" class="nav-link">Blog</a></li>
-                        <li><a href="#" id="product" class="nav-link">Liên Hệ</a></li>
+                        <li><a href="/" class="nav-link">Trang chủ</a></li>
+{{--                        <li><a href="#house_list" class="nav-link">Sản phẩm</a></li>--}}
+                        {{--                        <li><a href="{{route('about')}}" class="nav-link">Giới thiệu</a></li>--}}
+                        {{--                        <li><a href="#" id="product" class="nav-link">Liên Hệ</a></li>--}}
 
 
                         <li class="nav-item">
                             @guest
-                                <a class="nav-link" href="{{ route('login') }}" data-toggle="modal"
-                                   data-target="#exampleModalLong_2" data-backdrop="static" data-keyboard="false">
+                                <a class="nav-link" href="{{ route('login') }}"
+                                   data-toggle="modal"
+                                   data-target="#exampleModalLong_2" data-backdrop="static" data-keyboard="false"
+                                >
                                     {{ __('Login') }}</a>
                         </li>
                         @if (Route::has('register'))
@@ -113,7 +119,38 @@
                             </li>
                         @endif
                         @else
+
+{{--                            <li><a href="{{route('admin.index')}}" class="nav-link">Admin</a></li>--}}
                             <li><a href="{{route('house.showFormCreate')}}" class="nav-link">Create Home</a></li>
+
+                            {{--                            {{dd(\App\Notification::all())}}--}}
+
+                            <li class="nav-item dropdown">
+                                <a id="navbarDropdown" class="nav-link fa fa-bell"
+                                   style="font-size:24px" href="#" role="button"
+                                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                    <span class="caret badge">
+<?php $countNotice = 0 ?>
+                                            @foreach (\App\Notification::all() as $notice)
+                                                @if(json_decode($notice->data)->receive == auth()->user()->email)
+                                                    <?php $countNotice++ ?>
+                                                @endif
+                                            @endforeach
+                                        ({{$countNotice}})
+                                    </span>
+                                </a>
+
+                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                    @foreach(\App\Notification::all() as $notify)
+                                        @if(json_decode($notify->data)->receive==\Illuminate\Support\Facades\Auth::user()->email)
+                                           <a href="{{route('admin.notify.show')}}"> {{json_decode($notify->data)->sender}}
+                                           </a><br>
+
+                                        @endif
+                                    @endforeach
+                                </div>
+                            </li>
+
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
@@ -121,24 +158,29 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
-                                    </a>
 
                                     <a class="dropdown-item"
-                                       href="{{ route('user.edit')}}"
-                                       onclick="event.preventDefault();
+                                       href="{{route('admin.house')}}">
+
+                                        {{ __('Trang cá nhân') }}
+                                    </a>
+                                    <a class="dropdown-item"
+                                           href="{{ route('user.edit')}}"
+                                           onclick="event.preventDefault();
                                                      document.getElementById('edit_user').submit();">
-                                        {{ __('Edit Profile') }}
+                                        {{ __('Thay đổi thông tin') }}
                                     </a>
 
                                     <a class="dropdown-item"
                                        href="{{ route('showChangePassword',\Illuminate\Support\Facades\Auth::user()->id)}}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('change_pass').submit();">
-                                        {{ __('Change password') }}
+                                        {{ __('Đổi mật khẩu') }}
+                                    </a>
+                                    <a class="dropdown-item" href="{{ route('logout') }}"
+                                       onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                        {{ __('Đăng xuất') }}
                                     </a>
 
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST"

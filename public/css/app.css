@@ -6,7 +6,52 @@
  * Copyright 2011-2019 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  */
+.list_start i:hover{
+ cursor: pointer;
+}
+.list_text{
+    display: inline-block;
+    margin-left:10px;
+    position: relative;
+    background: #52b858;
+    color:#fff;
+    padding: 2px 8px;
+    box-sizing: border-box;
+    font-size: 12px;
+    border-radius: 2px;
+    display: none;
+}
 
+.btn_avatar {
+    position: relative;
+    overflow: hidden;
+}
+.file_up {
+    position: absolute;
+    font-size: 50px;
+    opacity: 0;
+    right: 0;
+    top: 0;
+}
+
+.list_start .rating_active{
+    color: #ff9705;
+}
+.list_text:after{
+    right: 100%;
+    top:50%;
+    border: solid transparent;
+    content:"";
+    height: 0;
+    width: 0;
+    position: absolute;
+    pointer-events: none;
+    border-color: rgba(82,184,88,0);
+    border-right-color: #52b858;
+    border-width: 6px;
+    margin-top: -6px;
+
+}
 :root {
   --blue: #3490dc;
   --indigo: #6574cd;

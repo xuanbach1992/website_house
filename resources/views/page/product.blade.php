@@ -2,186 +2,111 @@
 
 @section('content')
 
-    <form action="">
+    <form action="{!! route('search') !!}" method="get">
         <div class="realestate-filter">
             <div class="container">
                 <div class="realestate-filter-wrap nav">
                     <a href="#for-rent" class="active" data-toggle="tab" id="rent-tab" aria-controls="rent"
-                       aria-selected="true">For Rent</a>
-                    <a href="#for-sale" class="" data-toggle="tab" id="sale-tab" aria-controls="sale"
-                       aria-selected="false">For Sale</a>
+                       aria-selected="true">Tìm kiếm</a>
+                    {{--                    <a href="#for-sale" class="" data-toggle="tab" id="sale-tab" aria-controls="sale"--}}
+                    {{--                       aria-selected="false">Đã cho thuê</a>--}}
                 </div>
             </div>
         </div>
 
         <div class="realestate-tabpane pb-5 " id="demo">
             <div class="container tab-content">
+                <!--for-rent-->
                 <div class="tab-pane active" id="for-rent" role="tabpanel" aria-labelledby="rent-tab">
-
+                    <!--dòng 1-->
                     <div class="row">
                         <div class="col-md-4 form-group">
-                            <select name="" id="" class="form-control w-100">
-                                <option value="">All Types</option>
-                                <option value="">Townhouses</option>
-                                <option value="">Duplexes</option>
-                                <option value="">Quadplexes</option>
-                                <option value="">Condominiums</option>
+                            <input type="text" name="keyBedrooms" value="{{ (isset($filter)) ? $filter["keyBedrooms"] : null }}" class="form-control" placeholder="Phòng ngủ">
+                        </div>
+                        <div class="col-md-4 form-group">
+                            <select name="cities" onchange="onChange(this.value);" class="form-control w-100">
+                                <option value="-1">Thành Phố</option>
+{{--                                @if(!isset($filter))--}}
+                                    @foreach($listCities as $city)
+                                        <option value="{{$city->id}}">{{$city->name}}</option>
+                                    @endforeach
+{{--                                @else--}}
+{{--                                    <option>{{$filter["keyBedrooms"]}}</option>--}}
+{{--                                @endif--}}
                             </select>
                         </div>
                         <div class="col-md-4 form-group">
-                            <input type="text" class="form-control" placeholder="Title">
-                        </div>
-                        <div class="col-md-4 form-group">
-                            <input type="text" class="form-control" placeholder="Address">
+                            <select name="district" id="district_id" class="form-control w-100">
+                                <option value="-1">Quận huyện</option>
+                            </select>
                         </div>
                     </div>
-
+                    <!--dòng 2-->
                     <div class="row">
                         <div class="col-md-4 form-group">
-                            <select name="" id="" class="form-control w-100">
-                                <option value="">Any Bedrooms</option>
-                                <option value="">0</option>
-                                <option value="">1</option>
-                                <option value="">2</option>
-                                <option value="">3+</option>
-                            </select>
-                        </div>
-                        <div class="col-md-4 form-group">
-                            <select name="" id="" class="form-control w-100">
-                                <option value="">Any Bathrooms</option>
-                                <option value="">0</option>
-                                <option value="">1</option>
-                                <option value="">2</option>
-                                <option value="">3+</option>
-                            </select>
+                            <input type="text" name="keyBathroom" value="{{ (isset($filter)) ? $filter["keyBathroom"] : null }}" class="form-control" placeholder="Phòng tắm">
                         </div>
                         <div class="col-md-4 form-group">
                             <div class="row">
                                 <div class="col-md-6 form-group">
-                                    <select name="" id="" class="form-control w-100">
-                                        <option value="">Min Price</option>
-                                        <option value="">$100</option>
-                                        <option value="">$200</option>
-                                        <option value="">$300</option>
-                                        <option value="">$400</option>
-                                    </select>
+                                    <input type="number" name="price_from" value="{{ (isset($filter)) ? $filter["price_from"] : null }}" class="form-control" placeholder="Giá từ">
                                 </div>
-                                <div class="col-md-6">
-                                    <select name="" id="" class="form-control w-100">
-                                        <option value="">Max Price</option>
-                                        <option value="">$25,000</option>
-                                        <option value="">$50,000</option>
-                                        <option value="">$75,000</option>
-                                        <option value="">$100,000</option>
-                                        <option value="">$100,000,000</option>
-                                    </select>
+                                <div class="col-md-6 form-group">
+                                    <input type="number" name="price_to" value="{{ (isset($filter)) ? $filter["price_to"] : null }}" class="form-control" placeholder="Đến giá">
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-4">
-                            <input type="submit" class="btn btn-black py-3 btn-block" value="Submit">
-                        </div>
-                    </div>
-
-                </div>
-                <div class="tab-pane" id="for-sale" role="tabpanel" aria-labelledby="sale-tab">
-                    <div class="row">
-                        <div class="col-md-4 form-group">
-                            <select name="" id="" class="form-control w-100">
-                                <option value="">All Types</option>
-                                <option value="">Townhouses</option>
-                                <option value="">Duplexes</option>
-                                <option value="">Quadplexes</option>
-                                <option value="">Condominiums</option>
-                            </select>
-                        </div>
-                        <div class="col-md-4 form-group">
-                            <input type="text" class="form-control" placeholder="Title">
-                        </div>
-                        <div class="col-md-4 form-group">
-                            <input type="text" class="form-control" placeholder="Address">
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-md-4 form-group">
-                            <select name="" id="" class="form-control w-100">
-                                <option value="">Any Bedrooms</option>
-                                <option value="">0</option>
-                                <option value="">1</option>
-                                <option value="">2</option>
-                                <option value="">3+</option>
-                            </select>
-                        </div>
-                        <div class="col-md-4 form-group">
-                            <select name="" id="" class="form-control w-100">
-                                <option value="">Any Bathrooms</option>
-                                <option value="">0</option>
-                                <option value="">1</option>
-                                <option value="">2</option>
-                                <option value="">3+</option>
-                            </select>
                         </div>
                         <div class="col-md-4 form-group">
                             <div class="row">
                                 <div class="col-md-6 form-group">
-                                    <select name="" id="" class="form-control w-100">
-                                        <option value="">Min Price</option>
-                                        <option value="">$100</option>
-                                        <option value="">$200</option>
-                                        <option value="">$300</option>
-                                        <option value="">$400</option>
-                                    </select>
+                                    <input type="date" name="" class="form-control">
                                 </div>
-                                <div class="col-md-6">
-                                    <select name="" id="" class="form-control w-100">
-                                        <option value="">Max Price</option>
-                                        <option value="">$25,000</option>
-                                        <option value="">$50,000</option>
-                                        <option value="">$75,000</option>
-                                        <option value="">$100,000</option>
-                                        <option value="">$100,000,000</option>
-                                    </select>
+                                <div class="col-md-6 form-group">
+                                    <input type="date" name="" class="form-control">
                                 </div>
                             </div>
                         </div>
                     </div>
+                    <!--nút submit-->
                     <div class="row">
                         <div class="col-md-4">
-                            <input type="submit" class="btn btn-black py-3 btn-block" value="Submit">
+                            <button type="submit" class="btn btn-black py-3 btn-block">Search...</button>
                         </div>
                     </div>
-
                 </div>
+
             </div>
         </div>
     </form>
 
-
     <div class="site-section bg-black">
         <div class="container">
             <div class="row">
-                @foreach($houses as $key => $value)
+                @foreach($houses as $key => $house)
+                    {{--                    {{dd($value->images[0])}}--}}
                     <div class="col-md-4 mb-5">
                         <div class="media-38289">
-                            <a href="{{route('house.detail',$value->id)}}" class="d-block"><img
-                                    src="{{asset("/storage/$value->image")}}" alt="Image" class="img-fluid"></a>
+                            <a href="{{route('house.detail',$house->id)}}" class="d-block">
+                                <img
+                                    src="{{asset('storage/'.$house->images[0]->path)}}" alt="Image"
+                                    class="img-fluid"></a>
                             <div class="text">
                                 <div class="d-flex justify-content-between mb-3">
                                     <div class="sq d-flex align-items-center"><span
                                             class="wrap-icon icon-fullscreen"></span> <a
-                                            href="{{route('house.detail',$value->id)}}"
-                                            style="color: white">{{$value->name}}</a></div>
-                                    <div class="bed d-flex align-items-center"><span
-                                            class="wrap-icon icon-bed"></span> <span>{{$value->bedrooms}}</span>
-                                    </div>
-                                    <div class="bath d-flex align-items-center"><span
-                                            class="wrap-icon icon-bath"></span> <span>{{$value->bathroom}}</span>
-                                    </div>
+                                            href="{{route('house.detail',$house->id)}}"
+                                            style="color: white">{{$house->name}}</a></div>
+                                </div>
+                                <div class="bed d-flex align-items-center"><span
+                                        class="wrap-icon icon-bed"></span> <span>{{$house->bedrooms}}</span>
+                                </div>
+                                <div class="bath d-flex align-items-center"><span
+                                        class="wrap-icon icon-bath"></span> <span>{{$house->bathroom}}</span>
                                 </div>
                             </div>
+                            {{--<div>--}}
+                            {{--<button class="btn btn-warning btn-sm">Cancel</button>--}}
+                            {{--</div>--}}
                         </div>
                     </div>
                 @endforeach
@@ -193,59 +118,58 @@
                 </div>
             </div>
         </div>
-    </div>
 
-
-    <div class="site-section bg-primary">
-        <div class="container block-13">
-            <div class="nonloop-block-13 owl-carousel">
-                <div class="testimonial-38920 d-flex align-items-start">
-                    <div class="pic mr-4"><img src="source/images/person_1.jpg" alt=""></div>
-                    <div>
-                        <span class="meta">Business Man</span>
-                        <h3 class="mb-4">Josh Long</h3>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nemo sapiente unde
-                            pariatur id, hic
-                            quos nihil nulla veritatis!</p>
-                        <div class="mt-4">
-                            <span class="icon-star text-white"></span>
-                            <span class="icon-star text-white"></span>
-                            <span class="icon-star text-white"></span>
-                            <span class="icon-star text-white"></span>
+        <div class="site-section bg-primary">
+            <div class="container block-13">
+                <div class="nonloop-block-13 owl-carousel">
+                    <div class="testimonial-38920 d-flex align-items-start">
+                        <div class="pic mr-4"><img src="source/images/person_1.jpg" alt=""></div>
+                        <div>
+                            <span class="meta">Business Man</span>
+                            <h3 class="mb-4">Josh Long</h3>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nemo sapiente unde
+                                pariatur id, hic
+                                quos nihil nulla veritatis!</p>
+                            <div class="mt-4">
+                                <span class="icon-star text-white"></span>
+                                <span class="icon-star text-white"></span>
+                                <span class="icon-star text-white"></span>
+                                <span class="icon-star text-white"></span>
+                            </div>
                         </div>
                     </div>
-                </div>
 
-                <div class="testimonial-38920 d-flex align-items-start">
-                    <div class="pic mr-4"><img src="source/images/person_1.jpg" alt=""></div>
-                    <div>
-                        <span class="meta">Business Woman</span>
-                        <h3 class="mb-4">Jean Doe</h3>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nemo sapiente unde
-                            pariatur id, hic
-                            quos nihil nulla veritatis!</p>
-                        <div class="mt-4">
-                            <span class="icon-star text-white"></span>
-                            <span class="icon-star text-white"></span>
-                            <span class="icon-star text-white"></span>
-                            <span class="icon-star text-white"></span>
+                    <div class="testimonial-38920 d-flex align-items-start">
+                        <div class="pic mr-4"><img src="source/images/person_1.jpg" alt=""></div>
+                        <div>
+                            <span class="meta">Business Woman</span>
+                            <h3 class="mb-4">Jean Doe</h3>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nemo sapiente unde
+                                pariatur id, hic
+                                quos nihil nulla veritatis!</p>
+                            <div class="mt-4">
+                                <span class="icon-star text-white"></span>
+                                <span class="icon-star text-white"></span>
+                                <span class="icon-star text-white"></span>
+                                <span class="icon-star text-white"></span>
+                            </div>
                         </div>
                     </div>
-                </div>
 
-                <div class="testimonial-38920 d-flex align-items-start">
-                    <div class="pic mr-4"><img src="source/images/person_1.jpg" alt=""></div>
-                    <div>
-                        <span class="meta">Business Woman</span>
-                        <h3 class="mb-4">Jean Doe</h3>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nemo sapiente unde
-                            pariatur id, hic
-                            quos nihil nulla veritatis!</p>
-                        <div class="mt-4">
-                            <span class="icon-star text-white"></span>
-                            <span class="icon-star text-white"></span>
-                            <span class="icon-star text-white"></span>
-                            <span class="icon-star text-white"></span>
+                    <div class="testimonial-38920 d-flex align-items-start">
+                        <div class="pic mr-4"><img src="source/images/person_1.jpg" alt=""></div>
+                        <div>
+                            <span class="meta">Business Woman</span>
+                            <h3 class="mb-4">Jean Doe</h3>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nemo sapiente unde
+                                pariatur id, hic
+                                quos nihil nulla veritatis!</p>
+                            <div class="mt-4">
+                                <span class="icon-star text-white"></span>
+                                <span class="icon-star text-white"></span>
+                                <span class="icon-star text-white"></span>
+                                <span class="icon-star text-white"></span>
+                            </div>
                         </div>
                     </div>
                 </div>

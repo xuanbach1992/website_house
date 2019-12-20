@@ -10,7 +10,8 @@ class House extends Model
 
     protected $fillable = [
         'id', 'name', 'address', 'phone', 'bedrooms', 'bathroom', 'description',
-        'price', 'image', 'house_category_id', 'room_category_id', 'cities_id'
+        'price', 'image', 'house_category_id', 'room_category_id', 'cities_id',
+        'district_id', 'status',
     ];
 
     public function houseCategory()
@@ -28,4 +29,27 @@ class House extends Model
         return $this->belongsTo('App\Cities');
     }
 
+    public function district()
+    {
+        return $this->belongsTo('App\District');
+    }
+
+    public function images()
+    {
+        return $this->hasMany('App\Image');
+    }
+
+    public function user()
+    {
+        return $this->belongsTo('App\User');
+    }
+
+    public function orders()
+    {
+        return $this->hasMany('App\Order');
+    }
+//    public function users()
+//    {
+//        return $this->belongsToMany(User::class,'orders','house_id','user_id');
+//    }
 }

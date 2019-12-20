@@ -13,9 +13,16 @@ Auth::routes();
 
 Route::prefix('/houses')->group(function (){
 //    Route::get('/','HouseController@listHouses')->name('product');
-    Route::get('/create','HouseController@create')->name('house.showFormCreate')->middleware('auth');;
-    Route::post('/create','HouseController@add')->name('house.add')->middleware('auth');;
+    Route::get('/create','HouseController@create')->name('house.showFormCreate')->middleware('auth');
+    Route::post('/create','HouseController@add')->name('house.add')->middleware('auth');
+    Route::post('/upload','HouseController@storeImage')->name('house.upload')->middleware('auth');
+
+    //đang k sử dụng route này vì đang dùng hàm này cho form admin
+    Route::get('/rent','HouseController@findByUser')->name('user.rent')->middleware('auth');
+
+    Route::get('/book/{id}','HouseController@book')->name('house.book')->middleware('auth');
     Route::get('/detail/{id}','HouseController@showHouseDetails')->name('house.detail');
+    Route::get('/searchHouse','HouseController@search')->name('search');
 });
 
 Route::prefix('/users')->group(function () {
@@ -27,12 +34,31 @@ Route::prefix('/users')->group(function () {
 
 });
 
-//code template
-//Route::get('/','HomeController@index')->name('index');
+//code admin template
+Route::group(['prefix' => 'admin',  'middleware' => 'auth'], function(){
+//    Route::get('/','HouseController@showMaster')->name('admin.index');
+    Route::get('/list-house','HouseController@findByUser')->name('admin.house');
+    Route::get('/notify','HouseController@showNotify')->name('admin.notify.show');
+    Route::get('/edit/{id}','HouseController@showEdit')->name('house.showEdit');
+    Route::post('/edit/{id}','HouseController@updateStatus')->name('house.update');
+    Route::get('/delete/{id}','HouseController@delete')->name('house.delete');
+});
+
+
+//đăng nhập bằng facebook
 Route::get('/redirect/{social}', 'SocialAuthController@redirect');
 Route::get('/callback/{social}', 'SocialAuthController@callback');
 
+//search
+Route::get('/getDataByCitiesId','DistrictController@getDataByCitiesId')->name('getDataByCitiesId');
+
+//code template
+//Route::get('/','HomeController@index')->name('index');
 Route::get('/contact','HomeController@contactTest')->name('contact');
 Route::get('/blog','HomeController@blogTest')->name('blog');
 Route::get('/about','HomeController@aboutTest')->name('about');
 Route::get('/property','HomeController@propertydetails')->name('property');
+
+
+
+
