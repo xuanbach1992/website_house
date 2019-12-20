@@ -6,12 +6,14 @@ use App\Cities;
 use App\District;
 use App\House;
 use App\HouseCategory;
+use App\Http\Requests\DateCheckinValidate;
 use App\Http\Requests\HouseValidationRequest;
 use App\Image;
 use App\Notifications\RepliedToThread;
 use App\RoomCategory;
 use App\StatusHouseInterface;
 use App\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -282,13 +284,21 @@ class HouseController extends Controller
     }
 
 
-    public function book($house_id)
+    public function bookHouse(DateCheckinValidate $request, $house_id)
+    {
+        dd(1);
+    }
+
+    public function book($house_id, Request $request)
     {
         $user_id = House::find($house_id)->user_id;
         $house_title = House::find($house_id)->name;
-        $email = User::find($user_id)->email;
-        toastr()->success('booking house success', 'message');
-        \auth()->user()->notify(new RepliedToThread($email, $house_title));
+        $email_host = User::find($user_id)->email;
+        $checkin = Carbon::createFromFormat('Y-m-d', $request->checkin);
+        $checkout = Carbon::createFromFormat('Y-m-d', $request->checkout);
+        $totalPrice = ($checkin->diffInDays($checkout)) * House::find($house_id)->price;
+        toastr()->warning('đặt phòng, đang chờ chủ nhà xác nhận', 'message');
+        \auth()->user()->notify(new RepliedToThread($house_id, $email_host, $house_title, $checkin, $checkout, $totalPrice));
         return redirect('/');
     }
 

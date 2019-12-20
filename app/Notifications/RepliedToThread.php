@@ -18,13 +18,22 @@ class RepliedToThread extends Notification
      * @return void
      */
     private $email;
-    private $house;
+    private $house_title;
+    private $house_id;
+    private $checkin;
+    private $checkout;
+    private $totalPrice;
+
 //    private $user;
 
-    public function __construct($email, $house)
+    public function __construct($house_id, $email_host, $house_title, $checkin, $checkout, $totalPrice)
     {
-        $this->email = $email;
-        $this->house = $house;
+        $this->house_id = $house_id;
+        $this->email = $email_host;
+        $this->house_title = $house_title;
+        $this->checkin = $checkin;
+        $this->checkout = $checkout;
+        $this->totalPrice = $totalPrice;
 
 //        $this->user = $user;/
     }
@@ -61,7 +70,10 @@ class RepliedToThread extends Notification
 //            'Message' => 'Bạn nhận được một yêu cầu thuê nhà từ :sender của ngôi nhà :house_title',
             'sender' => $notifiable->email,
             'receive' => $this->email,
-            'house_title' => $this->house,
+            'house_title' => $this->house_title,
+            'checkin' => $this->checkin,
+            'checkout' => $this->checkout,
+            'total_price' => $this->totalPrice,
         ];
     }
 
