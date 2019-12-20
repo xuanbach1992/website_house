@@ -41,12 +41,10 @@ class HouseController extends Controller
     public function findByUser()
     {
         $houses = House::where('user_id', Auth::user()->id)->get();
-        $listCities = $this->city->all();
         $listHouseCategory = $this->houseCategory->all();
 
         return view('admin.pages.house-management', [
             'houses' => $houses,
-            'listCities' => $listCities,
             'listHouseCategory' => $listHouseCategory
         ]);
     }
