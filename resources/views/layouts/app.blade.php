@@ -12,7 +12,7 @@
     <link href="https://fonts.googleapis.com/css?family=DM+Sans:300,400,700&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="{{asset('source/fonts/icomoon/style.css')}}">
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <title>{{ config('app.name', 'Laravel') }}</title>
 
 {{--    <link rel="stylesheet" href="{{asset('source/css/bootstrap.min.css')}}">--}}
@@ -110,6 +110,7 @@
 <script src="{{asset('js/app.js') }}"></script>
 <script src="{{asset('js/main.js')}}"></script>
 <script src="{{asset('js/ajax.js')}}"></script>
+@yield('script')
 {!! toastr()->render() !!}
 </body>
 

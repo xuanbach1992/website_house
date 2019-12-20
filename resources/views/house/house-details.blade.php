@@ -13,17 +13,17 @@
                             class="img-fluid">
                     </div>
                     @foreach($house->images as $image)
-                    <div class="carousel-item">
-                        <img
-                            src="{{asset('storage/'.$image->path)}}" alt="Image"
-                            class="img-fluid">
-                    </div>
+                        <div class="carousel-item">
+                            <img
+                                src="{{asset('storage/'.$image->path)}}" alt="Image"
+                                class="img-fluid">
+                        </div>
                     @endforeach
-{{--                    <div class="carousel-item">--}}
-{{--                        <img--}}
-{{--                            src="{{asset('storage/'.$house->images[2]->path)}}" alt="Image"--}}
-{{--                            class="img-fluid">--}}
-{{--                    </div>--}}
+                    {{--                    <div class="carousel-item">--}}
+                    {{--                        <img--}}
+                    {{--                            src="{{asset('storage/'.$house->images[2]->path)}}" alt="Image"--}}
+                    {{--                            class="img-fluid">--}}
+                    {{--                    </div>--}}
                 </div>
 
                 <!-- Left and right controls -->
@@ -126,6 +126,69 @@
 
                 </div>
                 <hr>
+                <div class="col-md-12">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-sm-12 col-md-12 col-lg-12 mx-auto">
+                                <div class="card card-signin my-5">
+                                    <div class="card-body">
+                                        <h3><b>Đánh Giá Sản Phẩm</b></h3>
+                                        <hr>
+                                        <div class="compolent_rating_content" style="display: flex;align-items:center">
+                                            <div class="rating_item" style="width: 20%;margin: 0 20px">
+                                                <span class="fa fa-star"
+                                                      style="font-size: 60px;color: #ff9705;margin: 0 auto; text-align: center;">4.4</span>
+                                            </div>
+
+
+                                            <div class="list_rating" style="width: 60%;padding: 20px">
+                                                @for($i = 1 ;$i<=5;$i++)
+                                                    <div class="item_rating" style="display: flex;align-items: center">
+                                                        <div style="width: 20%;">
+                                                            {{$i }} <span class="fa fa-star"></span>
+                                                        </div>
+                                                        <div style="width: 70%;margin: 0 20px;">
+                                                    <span
+                                                        style="width: 100%;height: 8px;display: block;border: 1px solid #dedede;border-radius: 5px;background-color:#dedede "><b
+                                                            style="width: 30%;background-color: #f25800;display: block;height: 100%;border-radius: 5px"></b></span>
+                                                        </div>
+                                                        <div style="width: 10%;">
+                                                            <a href="">10 </a>
+                                                        </div>
+                                                    </div>
+                                                @endfor
+                                            </div>
+
+                                        </div>
+                                        <hr>
+                                        <?php
+                                        $listRatingText = [
+                                            1 => 'Không thích',
+                                            2 => 'Tạm được',
+                                            3 => 'Bình thường',
+                                            4 => 'Rất tôt',
+                                            5 => 'Tuyệt vời quá'
+                                        ]
+                                        ?>
+                                        <div style="display: flex; margin-top: 15px;font-size: 15px" class="hide">
+                                            <p style="margin-bottom: 0">Đánh Giá Của Bạn:</p>
+                                            <span style="margin:0 15px" class="list_start">
+                                                @for($i = 1 ;$i<=5 ; $i++)
+                                                    <i class="fa fa-star" data-key="{{$i}}"></i>
+                                                @endfor
+                                            </span>
+                                            <span class="list_text"></span>
+                                        </div>
+                                        <div>
+                                            <input name="" class="form-control" id="" >
+                                            <button class="btn btn-primary" >Gửi đánh giá</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
             <div class="col-md-4">
                 {{--                <div class="card" style="width: 23rem;">--}}
@@ -153,3 +216,30 @@
     {{--    </div>--}}
 
 @endsection
+@section('script')
+    <script>
+        $(function () {
+            let listStart = $(".list_start .fa");
+            listRatingText = {
+                1: 'Không thích',
+                2: 'Tạm được',
+                3: 'Bình thường',
+                4: 'Rất tôt',
+                5: 'Tuyệt vời quá'
+            }
+            listStart.mouseover(function () {
+                let $this = $(this);
+                let number = $this.attr('data-key');
+                listStart.removeClass('rating_active');
+
+                $.each(listStart, function (key, value) {
+                    if (key +  1 <= number) {
+                        $(this).addClass('rating_active')
+                    }
+                })
+                $(".list_text").text('').text(listRatingText[number]).show();
+
+            });
+        });
+    </script>
+@stop
