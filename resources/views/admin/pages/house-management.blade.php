@@ -22,18 +22,14 @@
                     <tr>
                         <th scope="row">{{++$key}}</th>
                         <td>{{$value->name}}</td>
-                        <td>
-                            @foreach($listCities as $houseType)
-                                @if($value->cities_id == $houseType->id)
-                                    {{$houseType->name}}
-                                @endif
-                            @endforeach
-                        </td>
+                        <td>{{$value->cities->name}}</td>
                         <td>
                             @if($value->status == 1)
-                                <span style="color: #000000;">Đã cho thuê</span>
-                            @else
-                                <span style="color: #bd362f">Chưa cho thuê</span>
+                                <span style="color: #ff0013">Chưa cho thuê</span>
+                            @elseif($value->status == 2)
+                                <span style="color: #0bff00">Đã cho thuê</span>
+                            @elseif($value->status == 3)
+                                <span style="color: #0004ff">Chờ xác nhận</span>
                             @endif
                         </td>
                         <td>

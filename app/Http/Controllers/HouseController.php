@@ -10,6 +10,7 @@ use App\Http\Requests\HouseValidationRequest;
 use App\Image;
 use App\Notifications\RepliedToThread;
 use App\RoomCategory;
+use App\StatusHouseInterface;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -41,12 +42,10 @@ class HouseController extends Controller
     public function findByUser()
     {
         $houses = House::where('user_id', Auth::user()->id)->get();
-        $listCities = $this->city->all();
         $listHouseCategory = $this->houseCategory->all();
 
         return view('admin.pages.house-management', [
             'houses' => $houses,
-            'listCities' => $listCities,
             'listHouseCategory' => $listHouseCategory
         ]);
     }
@@ -85,7 +84,6 @@ class HouseController extends Controller
 
         $house->name = $request->name;
         $house->address = $request->address;
-        $house->phone = $request->phone;
 
         $house->house_category_id = $request->house_category_id;
         $house->room_category_id = $request->room_category_id;
@@ -156,7 +154,6 @@ class HouseController extends Controller
         if ($house->user_id === Auth::user()->id) {
             $house->name = $request->name;
             $house->address = $request->address;
-            $house->phone = $request->phone;
 
             $house->house_category_id = $request->house_category_id;
             $house->room_category_id = $request->room_category_id;
@@ -265,11 +262,18 @@ class HouseController extends Controller
     {
         $house = $this->house->findOrFail($id);
 
-        if (isset($request->status)) {
-            $house->status = true;
-        } else {
-            $house->status = false;
+        switch ($request->status) {
+            case 1 :
+                $house->status = StatusHouseInterface::CHUACHOTHUE;
+                break;
+            case 2 :
+                $house->status = StatusHouseInterface::DACHOTHUE;
+                break;
+            case 3 :
+                $house->status = StatusHouseInterface::CHOXACNHAN;
+                break;
         }
+
         $house->save();
 
         return redirect()->route('admin.house', $id);
