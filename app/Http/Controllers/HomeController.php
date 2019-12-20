@@ -50,6 +50,12 @@ class HomeController extends Controller
         $user->name = $request->name;
         $user->phone = $request->phone;
         $user->address = $request->address;
+        if($request->file('images')){
+            $file = $request->file('images');
+            $filename = $file->getClientOriginalName('images');
+            $file->move('storage/rooms',$filename);
+            $user->images = $filename;
+        }
         $user->save();
         toastr()->success('Cap nhat thanh cong');
         return redirect('/');
