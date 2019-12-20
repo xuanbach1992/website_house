@@ -10,6 +10,7 @@ use App\Http\Requests\HouseValidationRequest;
 use App\Image;
 use App\Notifications\RepliedToThread;
 use App\RoomCategory;
+use App\StatusHouseInterface;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -40,11 +41,12 @@ class HouseController extends Controller
 
     public function findByUser()
     {
-        $listCities = $this->city->all();
         $houses = House::where('user_id', Auth::user()->id)->get();
-        return view('page.product', [
+        $listHouseCategory = $this->houseCategory->all();
+
+        return view('admin.pages.house-management', [
             'houses' => $houses,
-            'listCities' => $listCities
+            'listHouseCategory' => $listHouseCategory
         ]);
     }
 
@@ -52,7 +54,7 @@ class HouseController extends Controller
     {
         $houses = $this->house->all();
         $listCities = $this->city->all();
-//        dd($houses);
+
         return view('page.product', [
             'houses' => $houses,
             'listCities' => $listCities
@@ -82,7 +84,6 @@ class HouseController extends Controller
 
         $house->name = $request->name;
         $house->address = $request->address;
-        $house->phone = $request->phone;
 
         $house->house_category_id = $request->house_category_id;
         $house->room_category_id = $request->room_category_id;
@@ -135,7 +136,7 @@ class HouseController extends Controller
             $listRoomCategory = $this->roomCategory->all();
             $listCities = $this->city->all();
 
-            return view('house.edit', compact(
+            return view('admin.pages.edit', compact(
                     'house',
                     'listHouseCategory',
                     'listRoomCategory',
@@ -154,7 +155,6 @@ class HouseController extends Controller
         if ($house->user_id === Auth::user()->id) {
             $house->name = $request->name;
             $house->address = $request->address;
-            $house->phone = $request->phone;
 
             $house->house_category_id = $request->house_category_id;
             $house->room_category_id = $request->room_category_id;
@@ -192,7 +192,8 @@ class HouseController extends Controller
 
             $house->delete();
             toastr()->success('delete success', 'message');
-            return redirect()->route('index');
+
+            return redirect()->route('admin.house');
         } else {
             abort(403, "ban khong co quyen");
         }
@@ -263,21 +264,41 @@ class HouseController extends Controller
     {
         $house = $this->house->findOrFail($id);
 
-        if (isset($request->status)) {
-            $house->status = true;
-        } else {
-            $house->status = false;
+        switch ($request->status) {
+            case 1 :
+                $house->status = StatusHouseInterface::CHUACHOTHUE;
+                break;
+            case 2 :
+                $house->status = StatusHouseInterface::DACHOTHUE;
+                break;
+            case 3 :
+                $house->status = StatusHouseInterface::CHOXACNHAN;
+                break;
         }
+
         $house->save();
 
-        return redirect()->route('house.detail', $id);
+        return redirect()->route('admin.house', $id);
     }
 
-    function book($user_id)
+
+    public function book($house_id)
     {
+        $user_id = House::find($house_id)->user_id;
+        $house_title = House::find($house_id)->name;
         $email = User::find($user_id)->email;
-        \auth()->user()->notify(new RepliedToThread($email));
         toastr()->success('booking house success', 'message');
+        \auth()->user()->notify(new RepliedToThread($email, $house_title));
         return redirect('/');
+    }
+
+    public function showMaster()
+    {
+        return view('admin.layout.master');
+    }
+
+    public function showNotify()
+    {
+        return view('admin.pages.notify');
     }
 }

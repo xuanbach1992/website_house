@@ -29,7 +29,6 @@ class House extends Model
         return $this->belongsTo('App\Cities');
     }
 
-
     public function district()
     {
         return $this->belongsTo('App\District');
