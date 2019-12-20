@@ -107,7 +107,8 @@ class HouseController extends Controller
 //        }
 //        $user=Auth::user();
         $house->save();
-        toastr()->success('Create success', 'message');
+        toastr()->success('Create new house success', 'message');
+        toastr()->warning('Upload image into house rent');
         return view('house.upload');
     }
 
@@ -122,7 +123,7 @@ class HouseController extends Controller
             $imageUpload->path = $path;
             $imageUpload->house_id = $house_id;
             $imageUpload->save();
-            toastr()->success('Upload success', 'message');
+            toastr()->success('Upload image house success');
             return redirect()->route('index');
         }
     }
@@ -169,7 +170,7 @@ class HouseController extends Controller
 
 //        dd($request->status);
             $house->save();
-
+            toastr()->success('update success', 'message');
             return redirect()->route('house.detail');
         } else {
             abort(403, "ban khong co quyen");
@@ -190,6 +191,7 @@ class HouseController extends Controller
             }
 
             $house->delete();
+            toastr()->success('delete success', 'message');
 
             return redirect()->route('admin.house');
         } else {
@@ -285,6 +287,7 @@ class HouseController extends Controller
         $user_id = House::find($house_id)->user_id;
         $house_title = House::find($house_id)->name;
         $email = User::find($user_id)->email;
+        toastr()->success('booking house success', 'message');
         \auth()->user()->notify(new RepliedToThread($email, $house_title));
         return redirect('/');
     }

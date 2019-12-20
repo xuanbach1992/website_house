@@ -56,12 +56,17 @@
                             @endif
                         </div>
                         <hr class="my-4">
-                        <a class="btn btn-lg btn-google btn-block text-uppercase"><img
-                                src="https://img.icons8.com/color/20/000000/google-logo.png"> Sign in with Google
-                        </a>
-                        <a class="btn btn-lg btn-facebook btn-block text-uppercase" href="redirect/facebook"><img
-                                src="https://img.icons8.com/color/20/000000/facebook-new.png"> Sign in with Facebook
-                        </a>
+                        <div class="row">
+                            <div class="col-md-4"></div>
+                            <div class="col-md-5">
+                                <a class=""><img src="https://img.icons8.com/color/48/000000/google-logo.png">
+                                </a>
+                                <a class="" href="redirect/facebook"><img src="https://img.icons8.com/color/48/000000/facebook-new.png">
+                                </a>
+                            </div>
+                        </div>
+
+
                     </form>
                 </div>
             </div>
@@ -94,16 +99,18 @@
                             class="icon-menu h3 text-white"></span></a></span>
                 <nav class="site-navigation text-right ml-auto d-none d-lg-block" role="navigation">
                     <ul class="site-menu main-menu js-clone-nav ml-auto ">
-                        <li class="active"><a href="/" class="nav-link">Trang chủ</a></li>
-                        <li><a href="#house_list" class="nav-link">Sản phẩm</a></li>
+                        <li><a href="/" class="nav-link">Trang chủ</a></li>
+{{--                        <li><a href="#house_list" class="nav-link">Sản phẩm</a></li>--}}
                         {{--                        <li><a href="{{route('about')}}" class="nav-link">Giới thiệu</a></li>--}}
                         {{--                        <li><a href="#" id="product" class="nav-link">Liên Hệ</a></li>--}}
 
 
                         <li class="nav-item">
                             @guest
-                                <a class="nav-link" href="{{ route('login') }}" data-toggle="modal"
-                                   data-target="#exampleModalLong_2" data-backdrop="static" data-keyboard="false">
+                                <a class="nav-link" href="{{ route('login') }}"
+                                   data-toggle="modal"
+                                   data-target="#exampleModalLong_2" data-backdrop="static" data-keyboard="false"
+                                >
                                     {{ __('Login') }}</a>
                         </li>
                         @if (Route::has('register'))
@@ -112,8 +119,10 @@
                             </li>
                         @endif
                         @else
+
 {{--                            <li><a href="{{route('admin.index')}}" class="nav-link">Admin</a></li>--}}
                             <li><a href="{{route('house.showFormCreate')}}" class="nav-link">Create Home</a></li>
+
                             {{--                            {{dd(\App\Notification::all())}}--}}
 
                             <li class="nav-item dropdown">
@@ -136,6 +145,7 @@
                                         @if(json_decode($notify->data)->receive==\Illuminate\Support\Facades\Auth::user()->email)
                                            <a href="{{route('admin.notify.show')}}"> {{json_decode($notify->data)->sender}}
                                            </a><br>
+
                                         @endif
                                     @endforeach
                                 </div>

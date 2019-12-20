@@ -26,13 +26,13 @@
                         <div class="col-md-4 form-group">
                             <select name="cities" onchange="onChange(this.value);" class="form-control w-100">
                                 <option value="-1">Thành Phố</option>
-                                @if(!isset($filter))
+{{--                                @if(!isset($filter))--}}
                                     @foreach($listCities as $city)
                                         <option value="{{$city->id}}">{{$city->name}}</option>
                                     @endforeach
-                                @else
-                                    <option>{{$filter["keyBedrooms"]}}</option>
-                                @endif
+{{--                                @else--}}
+{{--                                    <option>{{$filter["keyBedrooms"]}}</option>--}}
+{{--                                @endif--}}
                             </select>
                         </div>
                         <div class="col-md-4 form-group">

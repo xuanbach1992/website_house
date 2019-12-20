@@ -6,12 +6,12 @@
         <div class="row">
             <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
                 <div class="card card-signin my-5">
-                    <div class="card-body">
+                    <div class="modal-body">
                         <h5 class="card-title text-center">Sign In</h5>
-                        <form class="form-signin" method="POST" action="{{ route('login') }}">
+                        <form method="POST" action="{{ route('login') }}">
                             @csrf
                             <div class="form-label-group">
-                                <input type="email" style="width: 95.5%" id="inputEmail" placeholder="Email"
+                                <input type="email" style="width: 97%" id="inputEmail" placeholder="Email"
                                        class="form-control @error('email') is-invalid @enderror" name="email"
                                        value="{{ old('email') }}" required autocomplete="email" autofocus>
                                 @error('email')
@@ -21,11 +21,12 @@
                                 @enderror
                             </div>
 
-                            <div class="form-label-group input-group"  id="show_hide_password">
-                                <input type="password" placeholder="Password" class="form-control password_show @error('password') is-invalid @enderror"
+                            <div class="form-label-group input-group" id="show_hide_password">
+                                <input type="password" placeholder="Password"
+                                       class="form-control password_show @error('password') is-invalid @enderror"
                                        name="password" required autocomplete="current-password">
                                 <span class="input-group-addon">
-                                    <a href=""><i class="fa fa-eye-slash" aria-hidden="true"></i></a>
+                                    <a><i class="fa fa-eye-slash" aria-hidden="true"></i></a>
                                 </span>
 
                                 @error('password')
@@ -36,15 +37,21 @@
 
                             </div>
 
-                            <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Sign in
-                            </button>
-                            @if (Route::has('password.request'))
-                                <a class="btn btn-link" href="{{ route('password.request') }}">
-                                    {{ __('Forgot Your Password?') }}
-                                </a>
-                            @endif
+                            <div class="form-group my-4">
+                                <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Sign in
+                                </button>
+                                <button type="button" class="btn btn-lg btn-block text-uppercase btn-secondary"
+                                        data-dismiss="modal">Cancel
+                                </button>
+
+                                @if (Route::has('password.request'))
+                                    <a class="btn btn-link" href="{{ route('password.request') }}">
+                                        {{ __('Forgot Your Password?') }}
+                                    </a>
+                                @endif
+                            </div>
                             <hr class="my-4">
-                            <a class="btn btn-lg btn-google btn-block text-uppercase" ><img
+                            <a class="btn btn-lg btn-google btn-block text-uppercase"><img
                                     src="https://img.icons8.com/color/20/000000/google-logo.png"> Sign in with Google
                             </a>
                             <a class="btn btn-lg btn-facebook btn-block text-uppercase" href="redirect/facebook"><img
