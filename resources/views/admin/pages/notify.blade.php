@@ -8,16 +8,18 @@
             <table class="table">
                 @foreach(\App\Notification::all() as  $notify)
                     <tbody>
-                    <tr>
+                    @if(json_decode($notify->data)->receive==\Illuminate\Support\Facades\Auth::user()->email)
+
+                        <tr>
                         <th scope="row">
-                            @if(json_decode($notify->data)->receive==\Illuminate\Support\Facades\Auth::user()->email)
                                 Bạn nhận được một yêu cầu thuê nhà từ  {{ json_decode($notify->data)->sender}} với ngôi nhà
                                     {{ json_decode($notify->data)->house_title}}
-                            @endif</th>
+                            </th>
                         <td>
                             <a href="" class="btn btn-primary">Chấp nhận</a>&nbsp;&nbsp;
                             <a href="" class="btn btn-danger">Không đồng ý</a>
                         </td>
+                        @endif
                     </tr>
                     </tbody>
                 @endforeach
