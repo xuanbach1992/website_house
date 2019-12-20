@@ -40,7 +40,7 @@
                 <div class="row">
                     <div class="col-md-9">
                         <h3>
-                            <b style="color: #ff6c5e ">{{$house->name}}</b> - 
+                            <b style="color: #ff6c5e ">{{$house->name}}</b> -
                             @if(\App\StatusHouseInterface::CHUACHOTHUE == $house->status)
                                 <option>Chưa cho thuê</option>
                             @elseif(\App\StatusHouseInterface::DACHOTHUE == $house->status)
