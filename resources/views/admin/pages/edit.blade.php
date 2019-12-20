@@ -5,7 +5,7 @@
         <div class="card-header"><h5>Update Home</h5></div>
         <div class="card-body">
             <form method="post" action="{{route('house.update',$house->id)}}" enctype="multipart/form-data">
-            @csrf
+                @csrf
                 <div class="col-md-12">
                     <div class="form-group">
                         <label><h6>Title : </h6></label>
@@ -33,52 +33,60 @@
                         <div class="col-md-3 row">
                             <div class="form-group">
                                 <h6>Trạng thái : </h6>
-                                <div class="form-group">
-                                    <input type="checkbox" id="status" class="filled-in" name="status" value="1">
-                                    <label for="status"></label>
-                                </div>
+                                <select name="status" class="custom-select mr-sm-2">
+                                    @if(\App\StatusHouseInterface::CHUACHOTHUE == $house->status)
+                                        <option value="{{\App\StatusHouseInterface::CHUACHOTHUE}}">Chưa cho thuê</option>
+                                    @elseif(\App\StatusHouseInterface::DACHOTHUE == $house->status)
+                                        <option value="{{\App\StatusHouseInterface::DACHOTHUE}}">Đã cho thuê</option>
+                                    @else
+                                        <option value="{{\App\StatusHouseInterface::CHOXACNHAN}}">Chờ xác nhận</option>
+                                    @endif
+                                        <option value="{{\App\StatusHouseInterface::CHUACHOTHUE}}">Chưa cho thuê</option>
+                                        <option value="{{\App\StatusHouseInterface::DACHOTHUE}}">Đã cho thuê</option>
+                                        <option value="{{\App\StatusHouseInterface::CHOXACNHAN}}">Chờ xác nhận</option>
+                                </select>
                             </div>
                         </div>
                         <div class="col-md-3 row">
-                        <div class="form-group">
-                            <label><h6>Số lượng phòng ngủ : </h6></label>
-                            <input type="number" class="form-control
+                            <div class="form-group">
+                                <label><h6>Số lượng phòng ngủ : </h6></label>
+                                <input type="number" class="form-control
                             @if($errors->has('bedrooms'))
-                                    border-danger
-                            @endif
-                                    " name="bedrooms" value="{{$house->bedrooms}}" placeholder="Nhập số phòng ngủ">
-                            @if($errors->has('bedrooms'))
-                                <p style="color: red;">{{$errors->first('bedrooms')}}</p>
-                            @endif
+                                        border-danger
+@endif
+                                        " name="bedrooms" value="{{$house->bedrooms}}" placeholder="Nhập số phòng ngủ">
+                                @if($errors->has('bedrooms'))
+                                    <p style="color: red;">{{$errors->first('bedrooms')}}</p>
+                                @endif
+                            </div>
                         </div>
-                    </div>
                         <div class="col-md-3 row">
-                        <div class="form-group">
-                            <label><h6>Số lượng phòng tắm : </h6></label>
-                            <input type="number" class="form-control
+                            <div class="form-group">
+                                <label><h6>Số lượng phòng tắm : </h6></label>
+                                <input type="number" class="form-control
                             @if($errors->has('bathroom'))
-                                    border-danger
-                            @endif
-                                    " name="bathroom" value="{{$house->bathroom}}" placeholder="Nhập số phòng tắm">
-                            @if($errors->has('bathroom'))
-                                <p style="color: red;">{{$errors->first('bathroom')}}</p>
-                            @endif
-                        </div>
+                                        border-danger
+@endif
+                                        " name="bathroom" value="{{$house->bathroom}}" placeholder="Nhập số phòng tắm">
+                                @if($errors->has('bathroom'))
+                                    <p style="color: red;">{{$errors->first('bathroom')}}</p>
+                                @endif
+                            </div>
 
-                    </div>
-                        <div class="col-md-3 row">
-                        <div class="form-group">
-                            <label><h6>Giá tiền theo đêm : </h6></label>
-                            <input type="number" class="form-control
-                            @if($errors->has('price'))
-                                    border-danger
-                            @endif
-                                    " name="price" value="{{$house->price}}" placeholder="Nhập giá phòng">
-                            @if($errors->has('price'))
-                                <p style="color: red;">{{$errors->first('price')}}</p>
-                            @endif
                         </div>
-                    </div>
+                        <div class="col-md-3 row">
+                            <div class="form-group">
+                                <label><h6>Giá tiền theo đêm : </h6></label>
+                                <input type="number" class="form-control
+                            @if($errors->has('price'))
+                                        border-danger
+@endif
+                                        " name="price" value="{{$house->price}}" placeholder="Nhập giá phòng">
+                                @if($errors->has('price'))
+                                    <p style="color: red;">{{$errors->first('price')}}</p>
+                                @endif
+                            </div>
+                        </div>
                     </div>
 
                     {{--<div class="form-group">--}}

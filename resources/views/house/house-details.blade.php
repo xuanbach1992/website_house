@@ -40,11 +40,13 @@
                 <div class="row">
                     <div class="col-md-9">
                         <h3>
-                            <b style="color: #ff6c5e ">{{$house->name}}</b> -
-                            @if($house->status == 1)
-                                <span style="color: #000000;">Đã cho thuê</span>
+                            <b style="color: #ff6c5e ">{{$house->name}}</b> - 
+                            @if(\App\StatusHouseInterface::CHUACHOTHUE == $house->status)
+                                <option>Chưa cho thuê</option>
+                            @elseif(\App\StatusHouseInterface::DACHOTHUE == $house->status)
+                                <option>Đã cho thuê</option>
                             @else
-                                <span style="color: #bd362f">Chưa cho thuê</span>
+                                <option>Chờ xác nhận</option>
                             @endif
                         </h3>
                     </div>
