@@ -34,16 +34,24 @@
                             <div class="form-group">
                                 <h6>Trạng thái : </h6>
                                 <select name="status" class="custom-select mr-sm-2">
-                                    @if(\App\StatusHouseInterface::CHUACHOTHUE == $house->status)
-                                        <option value="{{\App\StatusHouseInterface::CHUACHOTHUE}}">Chưa cho thuê</option>
-                                    @elseif(\App\StatusHouseInterface::DACHOTHUE == $house->status)
-                                        <option value="{{\App\StatusHouseInterface::DACHOTHUE}}">Đã cho thuê</option>
-                                    @else
-                                        <option value="{{\App\StatusHouseInterface::CHOXACNHAN}}">Chờ xác nhận</option>
-                                    @endif
-                                        <option value="{{\App\StatusHouseInterface::CHUACHOTHUE}}">Chưa cho thuê</option>
-                                        <option value="{{\App\StatusHouseInterface::DACHOTHUE}}">Đã cho thuê</option>
-                                        <option value="{{\App\StatusHouseInterface::CHOXACNHAN}}">Chờ xác nhận</option>
+                                    <option value="{{\App\StatusHouseInterface::CHUACHOTHUE}}"
+                                            @if(\App\StatusHouseInterface::CHUACHOTHUE == $house->status)
+                                                selected
+                                            @endif
+                                    >Chưa cho thuê</option>
+                                    <option value="{{\App\StatusHouseInterface::DACHOTHUE}}"
+                                            @if(\App\StatusHouseInterface::DACHOTHUE == $house->status)
+                                                selected
+                                            @endif
+                                    >Đã cho thuê</option>
+                                    <option value="{{\App\StatusHouseInterface::CHOXACNHAN}}"
+                                            @if(\App\StatusHouseInterface::CHOXACNHAN == $house->status)
+                                                selected
+                                            @endif
+                                    >Chờ xác nhận</option>
+                                    {{--<option value="{{\App\StatusHouseInterface::CHUACHOTHUE}}">Chưa cho thuê</option>--}}
+                                    {{--<option value="{{\App\StatusHouseInterface::DACHOTHUE}}">Đã cho thuê</option>--}}
+                                    {{--<option value="{{\App\StatusHouseInterface::CHOXACNHAN}}">Chờ xác nhận</option>--}}
                                 </select>
                             </div>
                         </div>
