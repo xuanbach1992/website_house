@@ -32,8 +32,10 @@
                             <td> {{ json_decode($notify->data)->checkout}}</td>
                             <td> {{ json_decode($notify->data)->total_price}}</td>
                             <td>
-                                <a href="" class="btn btn-primary">Chấp nhận</a>&nbsp;&nbsp;
-                                <a href="" class="btn btn-danger">Không đồng ý</a>
+                                <a href="{{route('house.notifi.accept',$notify->uid)}}" class="btn btn-primary">Chấp
+                                    nhận</a>&nbsp;&nbsp;
+                                <a href="{{route('house.notifi.no.accept',$notify->uid)}}" class="btn btn-danger">Không
+                                    đồng ý</a>
                             </td>
                             @endif
                         </tr>

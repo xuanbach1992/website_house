@@ -68,6 +68,7 @@ class RepliedToThread extends Notification
     {
         return [
 //            'Message' => 'Bạn nhận được một yêu cầu thuê nhà từ :sender của ngôi nhà :house_title',
+            'house_id' => $this->house_id,
             'sender' => $notifiable->email,
             'receive' => $this->email,
             'house_title' => $this->house_title,

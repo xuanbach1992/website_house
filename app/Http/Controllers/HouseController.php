@@ -294,11 +294,12 @@ class HouseController extends Controller
         $user_id = House::find($house_id)->user_id;
         $house_title = House::find($house_id)->name;
         $email_host = User::find($user_id)->email;
-        $checkin = Carbon::createFromFormat('Y-m-d', $request->checkin);
-        $checkout = Carbon::createFromFormat('Y-m-d', $request->checkout);
+        $checkin = Carbon::create( $request->checkin);
+        $checkout = Carbon::create($request->checkout);
         $totalPrice = ($checkin->diffInDays($checkout)) * House::find($house_id)->price;
+
         toastr()->warning('đặt phòng, đang chờ chủ nhà xác nhận', 'message');
-        \auth()->user()->notify(new RepliedToThread($house_id, $email_host, $house_title, $checkin, $checkout, $totalPrice));
+        \auth()->user()->notify(new RepliedToThread($house_id, $email_host, $house_title, $request->checkin, $request->checkout, $totalPrice));
         return redirect('/');
     }
 

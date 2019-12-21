@@ -217,7 +217,7 @@
                                         @csrf
                                         <div class="ml-5"
                                              style="text-align: left; font-size: 40px; font-weight: bold; float: left">{{$house->price}}
-                                            $/đêm
+                                           đ /đêm
                                         </div>
                                         <div class="ml-5">
                                             <input type="date" name="checkin" style="border-radius: 10px">
