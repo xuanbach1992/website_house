@@ -2,13 +2,12 @@
 
 namespace App\Notifications;
 
-use Carbon\Carbon;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class RepliedToThread extends Notification
+class AcceptRentHouse extends Notification
 {
     use Queueable;
 
@@ -22,20 +21,16 @@ class RepliedToThread extends Notification
     private $house_id;
     private $checkin;
     private $checkout;
-    private $totalPrice;
 
-//    private $user;
 
-    public function __construct($house_id, $email_host, $house_title, $checkin, $checkout, $totalPrice)
+    public function __construct($house_id, $email_receive, $house_title, $checkin, $checkout)
     {
         $this->house_id = $house_id;
-        $this->email = $email_host;
+        $this->email = $email_receive;
         $this->house_title = $house_title;
         $this->checkin = $checkin;
         $this->checkout = $checkout;
-        $this->totalPrice = $totalPrice;
 
-//        $this->user = $user;/
     }
 
     /**
@@ -63,25 +58,28 @@ class RepliedToThread extends Notification
             ->line('Thank you for using our application!');
     }
 
+    /**
+     * Get the array representation of the notification.
+     *
+     * @param mixed $notifiable
+     * @return array
+     */
+    public function toArray($notifiable)
+    {
+        return [
+            //
+        ];
+    }
 
     public function toDatabase($notifiable)
     {
         return [
-//            'Message' => 'Bạn nhận được một yêu cầu thuê nhà từ :sender của ngôi nhà :house_title',
             'house_id' => $this->house_id,
             'sender' => $notifiable->email,
             'receive' => $this->email,
             'house_title' => $this->house_title,
             'checkin' => $this->checkin,
             'checkout' => $this->checkout,
-            'total_price' => $this->totalPrice,
-        ];
-    }
-
-    public function toArray($notifiable)
-    {
-        return [
-            //
         ];
     }
 }

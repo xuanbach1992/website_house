@@ -9,7 +9,7 @@ use App\HouseCategory;
 use App\Http\Requests\DateCheckinValidate;
 use App\Http\Requests\HouseValidationRequest;
 use App\Image;
-use App\Notifications\RepliedToThread;
+use App\Notifications\SendNotificationToHouseHost;
 use App\RoomCategory;
 use App\StatusHouseInterface;
 use App\User;
@@ -299,7 +299,7 @@ class HouseController extends Controller
         $totalPrice = ($checkin->diffInDays($checkout)) * House::find($house_id)->price;
 
         toastr()->warning('đặt phòng, đang chờ chủ nhà xác nhận', 'message');
-        \auth()->user()->notify(new RepliedToThread($house_id, $email_host, $house_title, $request->checkin, $request->checkout, $totalPrice));
+        \auth()->user()->notify(new SendNotificationToHouseHost($house_id, $email_host, $house_title, $request->checkin, $request->checkout, $totalPrice));
         return redirect('/');
     }
 
