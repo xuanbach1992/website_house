@@ -39,9 +39,12 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
 //    Route::get('/','HouseController@showMaster')->name('admin.index');
     Route::get('/list-house', 'HouseController@findByUser')->name('admin.house');
     Route::get('/notify', 'HouseController@showNotify')->name('admin.notify.show');
+    Route::get('/rented', 'HouseController@showRented')->name('admin.house.rented');
+
     Route::get('/edit/{id}', 'HouseController@showEdit')->name('house.showEdit');
     Route::post('/edit/{id}', 'HouseController@updateStatus')->name('house.update');
     Route::get('/delete/{id}', 'HouseController@delete')->name('house.delete');
+    Route::get('/un-rent-house/{id}', 'OrderController@unRentHouse')->name('order.house.delete');
 });
 
 

@@ -10,6 +10,7 @@ use App\Http\Requests\DateCheckinValidate;
 use App\Http\Requests\HouseValidationRequest;
 use App\Image;
 use App\Notifications\SendNotificationToHouseHost;
+use App\Order;
 use App\RoomCategory;
 use App\StatusHouseInterface;
 use App\User;
@@ -209,15 +210,16 @@ class HouseController extends Controller
     public function showHouseDetails($id)
     {
         $house = House::findOrFail($id);
-
+        $orders = Order::all();
         $listHouseCategory = $this->houseCategory->all();
         $listRoomCategory = $this->roomCategory->all();
         $listCities = $this->city->all();
         $listDistrict = $this->district->all();
 
-        return view('house.house-details', compact(
+        return view('house.details', compact(
             'house',
             'listCities',
+            'orders',
             'listRoomCategory',
             'listHouseCategory',
             'listDistrict'));
@@ -294,7 +296,7 @@ class HouseController extends Controller
         $user_id = House::find($house_id)->user_id;
         $house_title = House::find($house_id)->name;
         $email_host = User::find($user_id)->email;
-        $checkin = Carbon::create( $request->checkin);
+        $checkin = Carbon::create($request->checkin);
         $checkout = Carbon::create($request->checkout);
         $totalPrice = ($checkin->diffInDays($checkout)) * House::find($house_id)->price;
 
@@ -312,4 +314,25 @@ class HouseController extends Controller
     {
         return view('admin.pages.notify');
     }
+
+    public function showRented()
+    {
+        $user_id = Auth::user()->id;
+        $orders = Order::where('user_id', $user_id)->get();
+        foreach ($orders as $order) {
+            $timeNow = Carbon::now();
+            $nowTimestamp = strtotime($timeNow);
+            $timeCheckout = Carbon::create($order->check_out);
+            $checkoutTimestamp = strtotime($timeCheckout);
+//            $timeDifference = $timeNow->diffInDays($timeCheckout);
+            if ($checkoutTimestamp-$nowTimestamp <=86400) {
+                $order->status = 1;
+            } else {
+                $order->status = 0;
+            }
+            $order->save();
+        }
+        return view('admin.pages.rented', compact('orders'));
+    }
+
 }

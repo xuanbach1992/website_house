@@ -7,6 +7,7 @@ use App\Notifications\AcceptRentHouse;
 use App\Notifications\NoAcceptRent;
 use App\Order;
 use App\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -34,12 +35,12 @@ class OrderController extends Controller
                 $order->save();
                 \auth()->user()->notify(new AcceptRentHouse($dataNotification->house_id, $email_receive, $house_title, $dataNotification->checkin, $dataNotification->checkout));
 //              cho notification da doc bang cach xoa notification day
-                $notification->delete();
 
+                $notification->delete();
                 toastr()->info('gui thong bao den cho nguoi thue nha');
                 return redirect()->route('admin.house');
-            } else {
-                return abort(404, "not found");
+//            } else {
+//                return abort(404, "not found");
             }
         }
 
@@ -77,6 +78,22 @@ class OrderController extends Controller
                 return abort(404, "not found");
             }
         }
+    }
+
+    public function unRentHouse($id)
+    {
+        $order = Order::findOrFail($id);
+        $timeNow = Carbon::now();
+        $nowTimestamp = strtotime($timeNow);
+        $timeCheckin = Carbon::create($order->check_in);
+        $checkInTimestamp = strtotime($timeCheckin);
+        if ($checkInTimestamp - $nowTimestamp >= 86400) {
+            $order->delete();
+            //notification
+        } else {
+            //notification
+        }
+        return redirect()->route('admin.house.rented');
     }
 
 }
