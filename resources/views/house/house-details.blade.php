@@ -1,9 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-
-    <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-7">
             <div id="demo" class="carousel "> <!--cho slide vào class để ảnh tự động chạy-->
                 <!-- The slideshow -->
                 <div class="carousel-inner">
@@ -37,7 +35,45 @@
                 </a>
             </div>
         </div>
-        <div class="col-md-12 row mt-3">
+        <div class="col-md-5 informationHouseHost">
+            <div class="col-md-12 col-lg-12 mx-auto">
+                <div class="card card-signin my-5">
+                    <div class="card-body">
+                        <form action="{{route('house.book.notify',$house->id)}}" method="post">
+                            @csrf
+                            <div class="ml-5"
+                                 style="text-align: left; font-size: 40px; font-weight: bold; float: left">{{$house->price}}
+                                đ /đêm
+                            </div>
+                            <div class="ml-5">
+                                <input type="date" name="checkin" style="border-radius: 10px">
+                                @if($errors->has('checkin'))
+                                    <p class="text-danger">{{$errors->first('checkin')}}</p>
+                                @endif
+                                <input type="date" name="checkout" style="border-radius: 10px">
+                                @if($errors->has('checkout'))
+                                    <p class="text-danger">{{$errors->first('checkout')}}</p>
+                                @endif
+                            </div>
+                            {{--                                        <input type="text" value="{{$house->user->email}}" name="email" readonly="readonly" style="display: none">--}}
+                            {{--                                        <input type="text" value="{{$house->name}}" name="title" readonly="readonly" style="display: none">--}}
+                            {{--                                        <input type="text" value="{{$house->id}}" name="house_id" readonly="readonly" style="display: none">--}}
+                            <h3><b>Thông Tin Liên Hệ</b></h3>
+                            <hr>
+                            <p><b>Name :</b> {{$house->user->name}}</p>
+                            <p><b>Phone :</b> {{$house->user->phone}}</p>
+                            <p><b>Email :</b> {{$house->user->email}}</p>
+                            <div class="col-md-12 row">
+                                <button type="submit" class="btn btn-primary btn-sm">Đặt phòng
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-12 row mt-3 information">
             <div class="col-md-7">
                 <div class="col-md-9 row">
                     <h4><b style="color: #0037ff ">{{$house->name}}</b></h4>
@@ -101,8 +137,8 @@
                     <br>
                     <div>
                         <b class="fa fa-book"> THÔNG TIN PHÒNG ỐC :</b>
-                        <p>- Tổng diện tích : 800 m2</p>
-                        <p>- Không gian sống: 600 m2</p>
+                        <p>- Tổng diện tích : 150 m2</p>
+                        <p>- Không gian sống: 140 m2</p>
                         <p>- {{$house->bedrooms}} phòng ngủ (3 phòng ngủ chính và 1 phòng ngủ phụ)</p>
                         <p>- {{$house->bathroom}} phòng tắm</p>
                         <p>- 1 phòng cho người giúp việc/ hoặc tài xế có nhà tắm và WC riêng</p>
@@ -205,55 +241,7 @@
             </div>
 
             <!--Thông tin chủ nhà-->
-            <div class="col-md-5">
-                {{--                <div class="card" style="width: 23rem;">--}}
-                {{--                    <div class="card-body">--}}
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md-12 col-lg-12 mx-auto">
-                            <div class="card card-signin my-5">
-                                <div class="card-body">
-                                    <form action="{{route('house.book.notify',$house->id)}}" method="post">
-                                        @csrf
-                                        <div class="ml-5"
-                                             style="text-align: left; font-size: 40px; font-weight: bold; float: left">{{$house->price}}
-                                           đ /đêm
-                                        </div>
-                                        <div class="ml-5">
-                                            <input type="date" name="checkin" style="border-radius: 10px">
-                                            @if($errors->has('checkin'))
-                                                <p class="text-danger">{{$errors->first('checkin')}}</p>
-                                            @endif
-                                            <input type="date" name="checkout" style="border-radius: 10px">
-                                            @if($errors->has('checkout'))
-                                                <p class="text-danger">{{$errors->first('checkout')}}</p>
-                                            @endif
-                                        </div>
-                                        {{--                                        <input type="text" value="{{$house->user->email}}" name="email" readonly="readonly" style="display: none">--}}
-                                        {{--                                        <input type="text" value="{{$house->name}}" name="title" readonly="readonly" style="display: none">--}}
-                                        {{--                                        <input type="text" value="{{$house->id}}" name="house_id" readonly="readonly" style="display: none">--}}
-
-                                        <h3><b>Thông Tin Liên Hệ</b></h3>
-                                        <hr>
-                                        <p><b>Name :</b> {{$house->user->name}}</p>
-                                        <p><b>Phone :</b> {{$house->user->phone}}</p>
-                                        <p><b>Email :</b> {{$house->user->email}}</p>
-                                        <div class="col-md-12 row">
-                                            <button type="submit" class="btn btn-primary btn-sm">Đặt phòng
-                                            </button>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!--End-->
         </div>
-    </div>
-    {{--    </div>--}}
-    {{--    </div>--}}
 
 @endsection
 @section('script')
