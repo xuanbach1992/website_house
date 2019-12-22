@@ -46,7 +46,7 @@
                             đ /đêm
                         </div>
                         <div class="ml-5">
-                            <input type="date" name="checkin" style="border-radius: 10px">
+                            <input type="date" class="mr-1" name="checkin" style="border-radius: 10px">
                             @if($errors->has('checkin'))
                                 <p class="text-danger">{{$errors->first('checkin')}}</p>
                             @endif
@@ -57,14 +57,15 @@
                         </div>
                         <div>
                             @foreach($orders as $order)
-                                @if($order->house_id===$house->id)
-                                    <p class="text text-danger">** Ngôi nhà đã được thuê từ ngày {{$order->check_in}} đến ngày {{$order->check_out}}</p>
+                                @if($order->house_id===$house->id&&$order->status==0)
+                                    <p class="text text-danger">** Ngôi nhà đã được thuê từ ngày {{$order->check_in}}
+                                        đến ngày {{$order->check_out}}</p>
                                 @endif
                             @endforeach
-                                <div class="col-md-12 row">
-                                    <button type="submit" class="btn btn-primary btn-sm">Đặt phòng
-                                    </button>
-                                </div>
+                            <div class="col-md-12 row">
+                                <button type="submit" class="btn btn-primary btn-sm">Đặt phòng
+                                </button>
+                            </div>
                         </div>
                         {{--                                        <input type="text" value="{{$house->user->email}}" name="email" readonly="readonly" style="display: none">--}}
                         {{--                                        <input type="text" value="{{$house->name}}" name="title" readonly="readonly" style="display: none">--}}

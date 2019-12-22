@@ -210,7 +210,7 @@ class HouseController extends Controller
     public function showHouseDetails($id)
     {
         $house = House::findOrFail($id);
-        $orders = Order::all();
+        $orders = Order::where('house_id', $house->id)->get();
         $listHouseCategory = $this->houseCategory->all();
         $listRoomCategory = $this->roomCategory->all();
         $listCities = $this->city->all();
@@ -325,7 +325,7 @@ class HouseController extends Controller
             $timeCheckout = Carbon::create($order->check_out);
             $checkoutTimestamp = strtotime($timeCheckout);
 //            $timeDifference = $timeNow->diffInDays($timeCheckout);
-            if ($checkoutTimestamp-$nowTimestamp <=86400) {
+            if ($checkoutTimestamp - $nowTimestamp <= 86400) {
                 $order->status = 1;
             } else {
                 $order->status = 0;
