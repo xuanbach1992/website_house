@@ -34,7 +34,7 @@
                             <td>
                                 <a href="{{route('house.notifi.accept',$notify->uid)}}" class="btn btn-primary">Chấp
                                     nhận</a>&nbsp;&nbsp;
-                                <a href="{{route('house.notifi.no.accept',$notify->uid)}}" class="btn btn-danger">Không
+                                <a href="{{route('house.notifi.no.accept')}}" class="btn btn-danger">Không
                                     đồng ý</a>
                             </td>
                             @endif

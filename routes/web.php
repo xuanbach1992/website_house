@@ -19,7 +19,7 @@ Route::prefix('/houses')->group(function () {
     Route::post('/book/{id}', 'HouseController@book')->name('house.book.notify')->middleware('auth');
     Route::get('/rent', 'HouseController@findByUser')->name('user.rent')->middleware('auth');
     Route::get('/accept/{uid}', 'OrderController@acceptRentHouse')->name('house.notifi.accept')->middleware('auth');
-    Route::get('/not-accept/{uid}', 'HouseController@noAccepRentHouse')->name('house.notifi.no.accept')->middleware('auth');
+    Route::get('/not-accept', 'OrderController@noAcceptRentHouse')->name('house.notifi.no.accept')->middleware('auth');
     Route::get('/detail/{id}', 'HouseController@showHouseDetails')->name('house.detail');
     Route::get('/searchHouse', 'HouseController@search')->name('search');
 });

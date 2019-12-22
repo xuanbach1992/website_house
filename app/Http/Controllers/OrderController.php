@@ -27,7 +27,24 @@ class OrderController extends Controller
                 $order->house_id = $dataNotification->house_id;
                 $order->user_id = $notification->notifiable_id;
                 $order->save();
+//              cho notification da doc bang cach xoa notification day
+                $notification->delete();
+
+                toastr()->info('gui thong bao den cho nguoi thue nha');
+                return redirect()->route('admin.house');
+            } else {
+                return abort(404, "not found");
             }
+        }
+
+    }
+
+    public function noAcceptRentHouse()
+    {
+        $user = User::find(1);
+        dd($user->unreadNotifications);
+        foreach ($user->unreadNotifications as $notification) {
+            echo $notification->markAsRead;
         }
     }
 }
