@@ -73,7 +73,6 @@
             </div>
         </div>
 
-        <div class="col-md-12 row mt-3 information">
             <div class="col-md-7">
                 <div class="col-md-9 row">
                     <h4><b style="color: #0037ff ">{{$house->name}}</b></h4>
@@ -241,7 +240,6 @@
             </div>
 
             <!--Thông tin chủ nhà-->
-        </div>
 
 @endsection
 @section('script')
@@ -254,7 +252,7 @@
                 3: 'Bình thường',
                 4: 'Rất tôt',
                 5: 'Tuyệt vời quá'
-            }
+            };
             listStart.mouseover(function () {
                 let $this = $(this);
                 let number = $this.attr('data-key');
@@ -264,7 +262,7 @@
                     if (key + 1 <= number) {
                         $(this).addClass('rating_active')
                     }
-                })
+                });
                 $(".list_text").text('').text(listRatingText[number]).show();
 
             });
