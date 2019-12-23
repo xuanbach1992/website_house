@@ -89,7 +89,7 @@
         <div class="row align-items-center position-relative">
             <div class="col-3 ">
                 <div class="site-logo">
-                    <a href="{{route('index')}}">Realtors</a>
+                    <a href="{{route('index')}}">Friendly</a>
                 </div>
             </div>
 
@@ -122,7 +122,7 @@
                         @else
 
                             {{--                            <li><a href="{{route('admin.index')}}" class="nav-link">Admin</a></li>--}}
-                            <li><a href="{{route('house.showFormCreate')}}" class="nav-link">Create Home</a></li>
+                            <li><a href="{{route('house.showFormCreate')}}" class="nav-link">Cho Thuê Nhà</a></li>
 
                             {{--                            {{dd(\App\Notification::all())}}--}}
 
