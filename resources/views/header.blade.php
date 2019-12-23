@@ -76,7 +76,7 @@
 </div>
 
 
-<header class="site-navbar site-navbar-target" role="banner" style="background-color:#1f6fb2;position: fixed;">
+<header class="site-navbar site-navbar-target" role="banner" style="background-color:#00040b42;position: fixed;">
     <div class="container">
         @if(\Illuminate\Support\Facades\Session::has('success'))
             <div>
