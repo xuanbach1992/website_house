@@ -13,7 +13,7 @@ class DateCheckinValidate extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,8 +24,8 @@ class DateCheckinValidate extends FormRequest
     public function rules()
     {
         return [
-//            'checkin' => 'required|after:today',
-//            'checkout' => 'required|after:checkin'
+            'checkin' => 'required|after:today|before:checkout',
+            'checkout' => 'required|after:checkin'
         ];
     }
 }

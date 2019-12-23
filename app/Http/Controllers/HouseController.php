@@ -291,7 +291,7 @@ class HouseController extends Controller
         dd(1);
     }
 
-    public function book($house_id, Request $request)
+    public function book($house_id, DateCheckinValidate $request)
     {
         $user_id = House::find($house_id)->user_id;
         $house_title = House::find($house_id)->name;
