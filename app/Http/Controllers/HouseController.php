@@ -6,12 +6,15 @@ use App\Cities;
 use App\District;
 use App\House;
 use App\HouseCategory;
+use App\Http\Requests\DateCheckinValidate;
 use App\Http\Requests\HouseValidationRequest;
 use App\Image;
-use App\Notifications\RepliedToThread;
+use App\Notifications\SendNotificationToHouseHost;
+use App\Order;
 use App\RoomCategory;
 use App\StatusHouseInterface;
 use App\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -207,15 +210,16 @@ class HouseController extends Controller
     public function showHouseDetails($id)
     {
         $house = House::findOrFail($id);
-
+        $orders = Order::where('house_id', $house->id)->get();
         $listHouseCategory = $this->houseCategory->all();
         $listRoomCategory = $this->roomCategory->all();
         $listCities = $this->city->all();
         $listDistrict = $this->district->all();
 
-        return view('house.house-details', compact(
+        return view('house.details', compact(
             'house',
             'listCities',
+            'orders',
             'listRoomCategory',
             'listHouseCategory',
             'listDistrict'));
@@ -282,13 +286,22 @@ class HouseController extends Controller
     }
 
 
-    public function book($house_id)
+    public function bookHouse(DateCheckinValidate $request, $house_id)
+    {
+        dd(1);
+    }
+
+    public function book($house_id, DateCheckinValidate $request)
     {
         $user_id = House::find($house_id)->user_id;
         $house_title = House::find($house_id)->name;
-        $email = User::find($user_id)->email;
-        toastr()->success('booking house success', 'message');
-        \auth()->user()->notify(new RepliedToThread($email, $house_title));
+        $email_host = User::find($user_id)->email;
+        $checkin = Carbon::create($request->checkin);
+        $checkout = Carbon::create($request->checkout);
+        $totalPrice = ($checkin->diffInDays($checkout)) * House::find($house_id)->price;
+
+        toastr()->warning('đặt phòng, đang chờ chủ nhà xác nhận', 'message');
+        \auth()->user()->notify(new SendNotificationToHouseHost($house_id, $email_host, $house_title, $request->checkin, $request->checkout, $totalPrice));
         return redirect('/');
     }
 
@@ -301,4 +314,25 @@ class HouseController extends Controller
     {
         return view('admin.pages.notify');
     }
+
+    public function showRented()
+    {
+        $user_id = Auth::user()->id;
+        $orders = Order::where('user_id', $user_id)->get();
+        foreach ($orders as $order) {
+            $timeNow = Carbon::now();
+            $nowTimestamp = strtotime($timeNow);
+            $timeCheckout = Carbon::create($order->check_out);
+            $checkoutTimestamp = strtotime($timeCheckout);
+//            $timeDifference = $timeNow->diffInDays($timeCheckout);
+            if ($checkoutTimestamp - $nowTimestamp <= 86400) {
+                $order->status = 1;
+            } else {
+                $order->status = 0;
+            }
+            $order->save();
+        }
+        return view('admin.pages.rented', compact('orders'));
+    }
+
 }

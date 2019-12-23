@@ -19,7 +19,7 @@ class CreateOrderTable extends Migration
             $table->timestamp('check_out')->nullable();
 
             $table->tinyInteger('status')->nullable();
-            $table->timestamp('pay_money')->nullable();
+            $table->integer('pay_money')->nullable();
             $table->string('code_booking')->nullable();
 
             $table->unsignedBigInteger('user_id')->nullable();

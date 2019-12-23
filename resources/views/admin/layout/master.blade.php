@@ -149,7 +149,7 @@
                             <li class="nav-item">
                                 <a href="{{route('admin.house')}}" class="nav-link active">
                                     <i class="far fa fa-home nav-icon"></i>
-                                    <p>Nhà Của Tôi</p>
+                                    <p>Nhà Của Tôi</p>admin.house.rented
                                 </a>
                             </li>
                             <li class="nav-item">
@@ -165,9 +165,9 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="#" class="nav-link">
+                                <a href="{{route('admin.house.rented')}}" class="nav-link">
                                     <i class="far fa fa-area-chart nav-icon"></i>
-                                    <p>Thống Kê</p>
+                                    <p>Nhà thuê</p>
                                 </a>
                             </li>
                         </ul>

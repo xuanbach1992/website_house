@@ -43,3 +43,12 @@ $(document).ready(function () {
         // });
     })
 });
+$(document).scroll(function() {
+    var y = $(document).scrollTop(), //get page y value
+        header = $(".informationHouseHost"); // your div id
+    if(y >= 400)  {
+        header.css({position: "fixed", "top" : "10%", "left" : "55%"});
+    } else {
+        header.css("position", "static");
+    }
+});
