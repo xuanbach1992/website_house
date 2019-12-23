@@ -44,10 +44,10 @@ class OrderController extends Controller
                 $order->save();
                 \auth()->user()->notify(new AcceptRentHouse($dataNotification->house_id, $email_receive, $house_title, $dataNotification->checkin, $dataNotification->checkout));
 //              cho notification da doc bang cach xoa notification day
-                Mail::send('house.content', array('content' => 'Chủ nhà đồng ý cho thuê nhà'),
-                    function ($message) {
-                        $message->to('hiepken95@gmail.com', 'Visitor')->subject('Thông báo thuê nhà!');
-                    });
+//                Mail::send('house.content', array('content' => 'Chủ nhà đồng ý cho thuê nhà'),
+//                    function ($message) {
+//                        $message->to('hiepken95@gmail.com', 'Visitor')->subject('Thông báo thuê nhà!');
+//                    });
                 $notification->delete();
                 toastr()->info('gui thong bao den cho nguoi thue nha');
                 return redirect()->route('admin.house');

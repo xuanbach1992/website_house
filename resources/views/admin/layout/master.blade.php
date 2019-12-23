@@ -29,6 +29,12 @@
     <link rel="stylesheet" href="{{asset('sourceAdmin/plugins/summernote/summernote-bs4.css')}}">
     <!-- Google Font: Source Sans Pro -->
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+
+    <script src="{{asset('https://code.jquery.com/jquery-3.1.1.min.js')}}"></script>
+    <script src="{{asset('https://code.highcharts.com/highcharts.js')}}"></script>
+    <script src="{{asset('https://code.highcharts.com/modules/exporting.js')}}"></script>
+    <script src="{{asset('https://code.highcharts.com/modules/export-data.js')}}"></script>
+
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
@@ -251,6 +257,9 @@
 <script>
     $.widget.bridge('uibutton', $.ui.button)
 </script>
+
+
+
 <!-- Bootstrap 4 -->
 <script src="{{asset('')}}sourceAdmin/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <!-- ChartJS -->

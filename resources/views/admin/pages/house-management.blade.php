@@ -1,7 +1,7 @@
 @extends('admin.layout.master')
 
 @section('contentAdmin')
-
+    <div id="container" data-order="{{ $orderMonth }}"></div>
     <div class="card mt-4" style="width: 100%">
         <div class="card-header"><h5>Quản lý nhà</h5></div>
         <div class="card-body">
@@ -13,7 +13,7 @@
                     <th scope="col">Địa chỉ</th>
                     <th scope="col">Lịch đặt thuê</th>
                     <th scope="col">Kiểu nhà</th>
-                    <th scope="col">Giá/1 ngày </th>
+                    <th scope="col">Giá/1 ngày</th>
                     <th scope="col" style="text-align: center">Chức năng</th>
                 </tr>
                 </thead>
@@ -24,7 +24,7 @@
                         <td>{{$value->name}}</td>
                         <td>{{$value->cities->name}}</td>
                         <td>
-                           <a href="{{route('house.show.rent.detail',$value->id)}}">Chi tiết</a>
+                            <a href="{{route('house.show.rent.detail',$value->id)}}">Chi tiết</a>
                         </td>
                         <td>
                             @foreach($listHouseCategory as $houseCategory)
@@ -44,5 +44,77 @@
             </table>
         </div>
     </div>
+    <script>
+        $(document).ready(function () {
+            var order = $('#container').data('order');
+            var listOfValue = [];
+            var listOfMonth = [];
+            order.forEach(function (element) {
+                listOfMonth.push(element.getMonth);
+                listOfValue.push(+element.moneyInMonth);
+            });
+            console.log(listOfValue);
+            let chart = Highcharts.chart('container', {
 
+                title: {
+                    text: 'Money by month'
+                },
+
+                xAxis: {
+                    title: {
+                        text: 'Month'
+                    },
+                    categories: listOfMonth,
+                },
+                yAxis: {
+                    title: {
+                        text: 'Money'
+                    }
+                },
+
+                series: [{
+                    type: 'column',
+                    colorByPoint: true,
+                    data: listOfValue,
+                    showInLegend: false
+                }]
+            });
+
+            // $('#plain').click(function () {
+            //     chart.update({
+            //         chart: {
+            //             inverted: false,
+            //             polar: false
+            //         },
+            //         subtitle: {
+            //             text: 'Plain'
+            //         }
+            //     });
+            // });
+            //
+            // $('#inverted').click(function () {
+            //     chart.update({
+            //         chart: {
+            //             inverted: true,
+            //             polar: false
+            //         },
+            //         subtitle: {
+            //             text: 'Inverted'
+            //         }
+            //     });
+            // });
+            //
+            // $('#polar').click(function () {
+            //     chart.update({
+            //         chart: {
+            //             inverted: false,
+            //             polar: true
+            //         },
+            //         subtitle: {
+            //             text: 'Polar'
+            //         }
+            //     });
+            // });
+        });
+    </script>
 @endsection
