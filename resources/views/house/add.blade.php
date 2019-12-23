@@ -9,7 +9,7 @@
                 <div class="row col-md-12">
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label><h6>Title  : </h6></label>
+                            <label><h6>Title : </h6></label>
                             <input type="text" class="form-control
                             @if($errors->has('name'))
                                 border-danger
@@ -19,10 +19,10 @@
                                 <p style="color: red;">{{$errors->first('name')}}</p>
                             @endif
                         </div>
-                        <div class="form-group">
-                            <label><h6>Số điện thoại : </h6></label>
-                            <input type="number" class="form-control" name="phone" placeholder="Nhập số điện thoại">
-                        </div>
+                        {{--                        <div class="form-group">--}}
+                        {{--                            <label><h6>Số điện thoại : </h6></label>--}}
+                        {{--                            <input type="number" class="form-control" name="phone" placeholder="Nhập số điện thoại">--}}
+                        {{--                        </div>--}}
 
                         <div class="form-group">
                             <label><h6>Loại nhà :</h6></label>
@@ -66,6 +66,19 @@
                                 <p style="color: red;">{{$errors->first('address')}}</p>
                             @endif
                         </div>
+                        <div class="form-group">
+                            <label><h6>Giá tiền theo đêm : </h6></label>
+                            <input type="number" class="form-control
+                            @if($errors->has('price'))
+                                border-danger
+                            @endif
+                                " name="price" placeholder="VND">
+                            @if($errors->has('price'))
+                                <p style="color: red;">{{$errors->first('price')}}</p>
+                            @endif
+
+                        </div>
+
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
@@ -92,26 +105,16 @@
                         </div>
                         <div class="form-group">
                             <label><h6>Mô tả : </h6></label>
-                            <textarea class="form-control" name="description" rows="14"></textarea>
-                        </div>
-                        <div class="form-group">
-                            <label><h6>Giá tiền theo đêm : </h6></label>
-                            <input type="number" class="form-control
-                            @if($errors->has('price'))
-                                border-danger
-                            @endif
-                                " name="price" placeholder="Nhập giá phòng">
-                            @if($errors->has('price'))
-                                <p style="color: red;">{{$errors->first('price')}}</p>
-                            @endif
+                            <textarea class="form-control" style="height: 430px" name="description"
+                                      rows="14"></textarea>
                         </div>
 
                     </div>
                 </div>
-                    <div class="form-group">
-                        <button class="btn btn-primary">Create</button>
-                        <a class="btn btn-warning" href="{{route('index')}}">Back</a>
-                    </div>
+                <div class="form-group">
+                    <button class="btn btn-primary">Create</button>
+                    <a class="btn btn-warning" href="{{route('index')}}">Back</a>
+                </div>
 
             </form>
         </div>

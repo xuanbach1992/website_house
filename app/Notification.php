@@ -8,6 +8,6 @@ class Notification extends Model
 {
     protected $table = 'notifications';
     protected $fillable = [
-        'data'
+        'data','id'
     ];
 }

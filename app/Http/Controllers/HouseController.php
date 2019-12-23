@@ -6,12 +6,19 @@ use App\Cities;
 use App\District;
 use App\House;
 use App\HouseCategory;
+use App\Http\Requests\DateCheckinValidate;
 use App\Http\Requests\HouseValidationRequest;
 use App\Image;
-use App\Notifications\RepliedToThread;
+use App\Notifications\SendNotificationToHouseHost;
+use App\Order;
 use App\RoomCategory;
+<<<<<<< HEAD
 use App\Star;
+=======
+use App\StatusHouseInterface;
+>>>>>>> b056989af8ddcc79034852b43fe740a22109fc6c
 use App\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -46,11 +53,12 @@ class HouseController extends Controller
 
     public function findByUser()
     {
-        $listCities = $this->city->all();
         $houses = House::where('user_id', Auth::user()->id)->get();
-        return view('page.product', [
+        $listHouseCategory = $this->houseCategory->all();
+
+        return view('admin.pages.house-management', [
             'houses' => $houses,
-            'listCities' => $listCities
+            'listHouseCategory' => $listHouseCategory
         ]);
     }
 
@@ -58,7 +66,7 @@ class HouseController extends Controller
     {
         $houses = $this->house->all();
         $listCities = $this->city->all();
-//        dd($houses);
+
         return view('page.product', [
             'houses' => $houses,
             'listCities' => $listCities
@@ -88,7 +96,6 @@ class HouseController extends Controller
 
         $house->name = $request->name;
         $house->address = $request->address;
-        $house->phone = $request->phone;
 
         $house->house_category_id = $request->house_category_id;
         $house->room_category_id = $request->room_category_id;
@@ -141,7 +148,7 @@ class HouseController extends Controller
             $listRoomCategory = $this->roomCategory->all();
             $listCities = $this->city->all();
 
-            return view('house.edit', compact(
+            return view('admin.pages.edit', compact(
                     'house',
                     'listHouseCategory',
                     'listRoomCategory',
@@ -160,7 +167,6 @@ class HouseController extends Controller
         if ($house->user_id === Auth::user()->id) {
             $house->name = $request->name;
             $house->address = $request->address;
-            $house->phone = $request->phone;
 
             $house->house_category_id = $request->house_category_id;
             $house->room_category_id = $request->room_category_id;
@@ -198,7 +204,8 @@ class HouseController extends Controller
 
             $house->delete();
             toastr()->success('delete success', 'message');
-            return redirect()->route('index');
+
+            return redirect()->route('admin.house');
         } else {
             abort(403, "ban khong co quyen");
         }
@@ -212,8 +219,12 @@ class HouseController extends Controller
     public function showHouseDetails($id)
     {
         $house = House::findOrFail($id);
+<<<<<<< HEAD
         $starArray=[];
 
+=======
+        $orders = Order::where('house_id', $house->id)->get();
+>>>>>>> b056989af8ddcc79034852b43fe740a22109fc6c
         $listHouseCategory = $this->houseCategory->all();
         $listRoomCategory = $this->roomCategory->all();
         $listCities = $this->city->all();
@@ -234,9 +245,10 @@ class HouseController extends Controller
 
 
 
-        return view('house.house-details', compact(
+        return view('house.details', compact(
             'house',
             'listCities',
+            'orders',
             'listRoomCategory',
             'listHouseCategory',
             'listDistrict','listStar','starMedium'));
@@ -285,21 +297,71 @@ class HouseController extends Controller
     {
         $house = $this->house->findOrFail($id);
 
-        if (isset($request->status)) {
-            $house->status = true;
-        } else {
-            $house->status = false;
+        switch ($request->status) {
+            case 1 :
+                $house->status = StatusHouseInterface::CHUACHOTHUE;
+                break;
+            case 2 :
+                $house->status = StatusHouseInterface::DACHOTHUE;
+                break;
+            case 3 :
+                $house->status = StatusHouseInterface::CHOXACNHAN;
+                break;
         }
+
         $house->save();
 
-        return redirect()->route('house.detail', $id);
+        return redirect()->route('admin.house', $id);
     }
 
-    function book($user_id)
+
+    public function bookHouse(DateCheckinValidate $request, $house_id)
     {
-        $email = User::find($user_id)->email;
-        \auth()->user()->notify(new RepliedToThread($email));
-        toastr()->success('booking house success', 'message');
+        dd(1);
+    }
+
+    public function book($house_id, DateCheckinValidate $request)
+    {
+        $user_id = House::find($house_id)->user_id;
+        $house_title = House::find($house_id)->name;
+        $email_host = User::find($user_id)->email;
+        $checkin = Carbon::create($request->checkin);
+        $checkout = Carbon::create($request->checkout);
+        $totalPrice = ($checkin->diffInDays($checkout)) * House::find($house_id)->price;
+
+        toastr()->warning('đặt phòng, đang chờ chủ nhà xác nhận', 'message');
+        \auth()->user()->notify(new SendNotificationToHouseHost($house_id, $email_host, $house_title, $request->checkin, $request->checkout, $totalPrice));
         return redirect('/');
     }
+
+    public function showMaster()
+    {
+        return view('admin.layout.master');
+    }
+
+    public function showNotify()
+    {
+        return view('admin.pages.notify');
+    }
+
+    public function showRented()
+    {
+        $user_id = Auth::user()->id;
+        $orders = Order::where('user_id', $user_id)->get();
+        foreach ($orders as $order) {
+            $timeNow = Carbon::now();
+            $nowTimestamp = strtotime($timeNow);
+            $timeCheckout = Carbon::create($order->check_out);
+            $checkoutTimestamp = strtotime($timeCheckout);
+//            $timeDifference = $timeNow->diffInDays($timeCheckout);
+            if ($checkoutTimestamp - $nowTimestamp <= 86400) {
+                $order->status = 1;
+            } else {
+                $order->status = 0;
+            }
+            $order->save();
+        }
+        return view('admin.pages.rented', compact('orders'));
+    }
+
 }
