@@ -104,7 +104,7 @@ class OrderController extends Controller
 
         $email_host = User::findOrFail($order->user_id)->email;
 
-        $timeNow = Carbon::now();
+        $timeNow = Carbon::now('Asia/Ho_Chi_Minh');
         $nowTimestamp = strtotime($timeNow);
         $timeCheckin = Carbon::create($order->check_in);
         $checkInTimestamp = strtotime($timeCheckin);

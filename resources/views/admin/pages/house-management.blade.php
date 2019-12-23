@@ -46,9 +46,9 @@
     </div>
     <script>
         $(document).ready(function () {
-            var order = $('#container').data('order');
-            var listOfValue = [];
-            var listOfMonth = [];
+            let order = $('#container').data('order');
+            let listOfValue = [];
+            let listOfMonth = [];
             order.forEach(function (element) {
                 listOfMonth.push(element.getMonth);
                 listOfValue.push(+element.moneyInMonth);
@@ -68,7 +68,7 @@
                 },
                 yAxis: {
                     title: {
-                        text: 'Money'
+                        text: 'VND'
                     }
                 },
 

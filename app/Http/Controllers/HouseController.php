@@ -54,7 +54,7 @@ class HouseController extends Controller
         $houses = House::where('user_id', Auth::user()->id)->get();
         $listHouseCategory = $this->houseCategory->all();
 
-        $range = \Carbon\Carbon::now()->subMonth(12);
+        $range = \Carbon\Carbon::now('Asia/Ho_Chi_Minh')->subMonth(12);
         $orderMonth = DB::table('orders')
             ->select(DB::raw('month(check_in) as getMonth'), DB::raw('SUM(pay_money) as moneyInMonth'))
             ->where('check_in', '>=', $range)
@@ -363,7 +363,7 @@ class HouseController extends Controller
         $user_id = Auth::user()->id;
         $orders = Order::where('user_id', $user_id)->get();
         foreach ($orders as $order) {
-            $timeNow = Carbon::now();
+            $timeNow = Carbon::now('Asia/Ho_Chi_Minh');
             $nowTimestamp = strtotime($timeNow);
             $timeCheckout = Carbon::create($order->check_out);
             $checkoutTimestamp = strtotime($timeCheckout);
