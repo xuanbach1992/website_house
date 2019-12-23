@@ -103,7 +103,6 @@ class HouseController extends Controller
         $house->bedrooms = $request->bedrooms;
         $house->bathroom = $request->bathroom;
 
-
         $house->description = $request->description;
         $house->price = $request->price;
         $house->user_id = Auth::user()->id;
@@ -117,6 +116,15 @@ class HouseController extends Controller
 //        }
 //        $user=Auth::user();
         $house->save();
+
+        $house_id = DB::table('houses')->max('id');
+        $star = new Star();
+        $star->house_id = $house_id;
+        $star->user_id = Auth::user()->id;
+        $star->number = 5;
+        $star->content = 'nhà đẹp, dịch vụ tốt';
+        $star->save();
+
         toastr()->success('Create new house success', 'message');
         toastr()->warning('Upload image into house rent');
         return view('house.upload');
@@ -224,10 +232,10 @@ class HouseController extends Controller
         $listCities = $this->city->all();
         $listDistrict = $this->district->all();
         $listStar = $this->star->paginate(5);
-        $starMedium=0;
+        $starMedium = 0;
         $house_id = $house->id;
         $stars = Star::where('house_id', $house_id)->get();
-        if ($stars == null) {
+        if ($stars !== null) {
             $countStar = 0;
             $allStarInHouseDetail = 0;
             foreach ($stars as $star) {
