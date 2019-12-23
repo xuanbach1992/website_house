@@ -53,4 +53,9 @@ class House extends Model
 //    {
 //        return $this->belongsToMany(User::class,'orders','house_id','user_id');
 //    }
+    public function star()
+    {
+        return $this->belongsTo('App\Star');
+    }
+
 }

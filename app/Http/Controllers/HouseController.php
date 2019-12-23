@@ -10,6 +10,7 @@ use App\Http\Requests\HouseValidationRequest;
 use App\Image;
 use App\Notifications\RepliedToThread;
 use App\RoomCategory;
+use App\Star;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -24,18 +25,23 @@ class HouseController extends Controller
     protected $roomCategory;
     protected $city;
     protected $district;
+    protected $star;
+
 
     public function __construct(House $house,
                                 HouseCategory $houseCategory,
                                 RoomCategory $roomCategory,
                                 Cities $city,
-                                District $district)
+                                District $district,
+                                Star $star)
     {
         $this->house = $house;
         $this->houseCategory = $houseCategory;
         $this->roomCategory = $roomCategory;
         $this->city = $city;
         $this->district = $district;
+        $this->star=$star;
+
     }
 
     public function findByUser()
@@ -206,18 +212,34 @@ class HouseController extends Controller
     public function showHouseDetails($id)
     {
         $house = House::findOrFail($id);
+        $starArray=[];
 
         $listHouseCategory = $this->houseCategory->all();
         $listRoomCategory = $this->roomCategory->all();
         $listCities = $this->city->all();
         $listDistrict = $this->district->all();
+        $listStar = $this->star->paginate(5);
+
+        $house_id = $house->id;
+        $countStar = 0;
+        $allStarInHouseDetail = 0;
+        $stars = Star::where('house_id', $house_id)->get();
+        foreach ($stars as $star) {
+            $allStarInHouseDetail += $star->number;
+            $countStar++;
+        }
+        $starMedium=$allStarInHouseDetail/$countStar;
+
+
+
+
 
         return view('house.house-details', compact(
             'house',
             'listCities',
             'listRoomCategory',
             'listHouseCategory',
-            'listDistrict'));
+            'listDistrict','listStar','starMedium'));
     }
 
     /**

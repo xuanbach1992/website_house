@@ -50,3 +50,4 @@ Route::get('/contact','HomeController@contactTest')->name('contact');
 Route::get('/blog','HomeController@blogTest')->name('blog');
 Route::get('/about','HomeController@aboutTest')->name('about');
 Route::get('/property','HomeController@propertydetails')->name('property');
+route::post('/rating/{id}','RatingController@saveRating')->name('house.rating')->middleware('auth');

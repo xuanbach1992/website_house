@@ -137,9 +137,10 @@
                                         <div class="compolent_rating_content" style="display: flex;align-items:center">
                                             <div class="rating_item" style="width: 20%;margin: 0 20px">
                                                 <span class="fa fa-star"
-                                                      style="font-size: 60px;color: #ff9705;margin: 0 auto; text-align: center;">4.4</span>
+                                                      style="font-size: 60px;color: #ff9705;margin: 0 auto; text-align: center;">
+                                                    {{$starMedium}}
+                                                </span>
                                             </div>
-
 
                                             <div class="list_rating" style="width: 60%;padding: 20px">
                                                 @for($i = 1 ;$i<=5;$i++)
@@ -150,7 +151,7 @@
                                                         <div style="width: 70%;margin: 0 20px;">
                                                     <span
                                                         style="width: 100%;height: 8px;display: block;border: 1px solid #dedede;border-radius: 5px;background-color:#dedede "><b
-                                                            style="width: 30%;background-color: #f25800;display: block;height: 100%;border-radius: 5px"></b></span>
+                                                            style="width: 50%;background-color: #f25800;display: block;height: 100%;border-radius: 5px"></b></span>
                                                         </div>
                                                         <div style="width: 10%;">
                                                             <a href="">10 </a>
@@ -161,27 +162,71 @@
 
                                         </div>
                                         <hr>
-                                        <?php
-                                        $listRatingText = [
-                                            1 => 'Không thích',
-                                            2 => 'Tạm được',
-                                            3 => 'Bình thường',
-                                            4 => 'Rất tôt',
-                                            5 => 'Tuyệt vời quá'
-                                        ]
-                                        ?>
-                                        <div style="display: flex; margin-top: 15px;font-size: 15px" class="hide">
-                                            <p style="margin-bottom: 0">Đánh Giá Của Bạn:</p>
-                                            <span style="margin:0 15px" class="list_start">
-                                                @for($i = 1 ;$i<=5 ; $i++)
-                                                    <i class="fa fa-star" data-key="{{$i}}"></i>
-                                                @endfor
-                                            </span>
-                                            <span class="list_text"></span>
-                                        </div>
-                                        <div>
-                                            <input name="" class="form-control" id="" >
-                                            <button class="btn btn-primary" >Gửi đánh giá</button>
+
+                                        <form action="{{route('house.rating',$house->id)}}" method="post">
+                                            @csrf
+                                            <div style="display: flex; margin-top: 15px;font-size: 15px" class="hide">
+                                                <p style="margin-bottom: 0">Đánh Giá Của Bạn:</p>
+
+                                                <div style="margin:0;padding:0;" id="rating">
+                                                    <input type="radio" id="star5" name="rating" value="5"/>
+                                                    <label style="margin:0;padding:0;" class="full" for="star5"></label>
+                                                    <input type="radio" id="star4" name="rating" value="4"/>
+                                                    <label style="margin:0;padding:0;" class="full" for="star4"></label>
+                                                    <input type="radio" id="star3" name="rating" value="3"/>
+                                                    <label style="margin:0;padding:0;" class="full" for="star3"></label>
+                                                    <input type="radio" id="star2" name="rating" value="2"/>
+                                                    <label style="margin:0;padding:0;" class="full" for="star2"></label>
+                                                    <input type="radio" id="star1" name="rating" value="1"/>
+                                                    <label style="margin:0;padding:0;" class="full"
+                                                             for="star1"></label>
+
+
+                                                </div>
+                                                <span class="list_text"></span>
+
+                                            </div>
+                                            <div>
+                                                <input class="form-control" name="contents">
+                                                <button type="submit"
+                                                        class="btn btn-primary js_rating_house">Gửi đánh giá
+                                                </button>
+                                            </div>
+                                        </form>
+
+                                        <hr>
+                                        <div class="mt-5">
+                                            <h3><b>Tất Cả Đánh Giá </b></h3>
+                                            @foreach($listStar as $star)
+                                                @if($star->house_id==$house->id)
+                                                    <div class="row">
+                                                        <div class="col-md-1 mt-3">
+                                                            @if(!$star->user->images)
+                                                                <img src="source/images/avatar.jpeg"
+                                                                     style="border-radius: 300px;display: block; margin-left: auto; margin-right: auto"
+                                                                     class="img-circle" alt="" width="50" height="50">
+                                                            @else
+                                                                <img
+                                                                    src="{{ asset('storage/rooms/'. $star->user->images) }}"
+                                                                    style="border-radius: 300px;display: block; margin-left: auto; margin-right: auto"
+                                                                    class="img-circle" alt="" width="50" height="50">
+                                                            @endif
+                                                        </div>
+                                                        <div class="col-md-10 mt-3">
+                                                            {{$star->user->name}}
+                                                        </div>
+                                                    </div>
+                                                    @for($i=1;$i<=$star->number;$i++)
+                                                        <div class="fa fa-star"
+                                                             style="color: #ff9705"></div>
+                                                    @endfor
+                                                    <div><p>{{$star->content}}</p></div>
+                                                    <hr>
+                                                @endif
+                                            @endforeach
+                                            {{ $listStar->links() }}
+
+
                                         </div>
                                     </div>
                                 </div>
@@ -200,6 +245,15 @@
                                 <div class="card-body">
                                     <h3><b>Thông Tin Chủ Nhà</b></h3>
                                     <hr>
+                                    @if(!$house->user->images)
+                                        <img src="source/images/avatar.jpeg"
+                                             style="border-radius: 300px;display: block; margin-left: auto; margin-right: auto"
+                                             class="img-circle" alt="" width="150" height="150">
+                                    @else
+                                        <img src="{{ asset('storage/rooms/'. $house->user->images) }}"
+                                             style="border-radius: 300px;display: block; margin-left: auto; margin-right: auto"
+                                             class="img-circle" alt="" width="150" height="150">
+                                    @endif
                                     <p><b>Name :</b> {{$house->user->name}}</p>
                                     <p><b>Phone :</b> {{$house->user->phone}}</p>
                                     <p><b>Email :</b> {{$house->user->email}}</p>
@@ -216,30 +270,4 @@
     {{--    </div>--}}
 
 @endsection
-@section('script')
-    <script>
-        $(function () {
-            let listStart = $(".list_start .fa");
-            listRatingText = {
-                1: 'Không thích',
-                2: 'Tạm được',
-                3: 'Bình thường',
-                4: 'Rất tôt',
-                5: 'Tuyệt vời quá'
-            }
-            listStart.mouseover(function () {
-                let $this = $(this);
-                let number = $this.attr('data-key');
-                listStart.removeClass('rating_active');
 
-                $.each(listStart, function (key, value) {
-                    if (key +  1 <= number) {
-                        $(this).addClass('rating_active')
-                    }
-                })
-                $(".list_text").text('').text(listRatingText[number]).show();
-
-            });
-        });
-    </script>
-@stop
