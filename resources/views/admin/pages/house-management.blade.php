@@ -8,12 +8,12 @@
             <table class="table">
                 <thead class="thead-dark">
                 <tr>
-                    <th scope="col">#</th>
+                    <th scope="col">STT</th>
                     <th scope="col">Tên Nhà</th>
                     <th scope="col">Địa chỉ</th>
-                    <th scope="col">Trạng thái</th>
+                    <th scope="col">Lịch đặt thuê</th>
                     <th scope="col">Kiểu nhà</th>
-                    <th scope="col">Giá</th>
+                    <th scope="col">Giá/1 ngày </th>
                     <th scope="col" style="text-align: center">Chức năng</th>
                 </tr>
                 </thead>
@@ -24,13 +24,7 @@
                         <td>{{$value->name}}</td>
                         <td>{{$value->cities->name}}</td>
                         <td>
-                            @if($value->status == 1)
-                                <span style="color: #ff0013">Chưa cho thuê</span>
-                            @elseif($value->status == 2)
-                                <span style="color: #0bff00">Đã cho thuê</span>
-                            @elseif($value->status == 3)
-                                <span style="color: #0004ff">Chờ xác nhận</span>
-                            @endif
+                           <a href="{{route('house.show.rent.detail',$value->id)}}">Chi tiết</a>
                         </td>
                         <td>
                             @foreach($listHouseCategory as $houseCategory)
@@ -39,7 +33,7 @@
                                 @endif
                             @endforeach
                         </td>
-                        <td>{{$value->price}}</td>
+                        <td>{{$value->price}} đ</td>
                         <td style="text-align: center">
                             <a href="{{route('house.showEdit',$value->id)}}" class="btn btn-primary">Sửa</a>&nbsp;&nbsp;
                             <a href="{{route('house.delete',$value->id)}}" class="btn btn-danger">Xóa</a>
