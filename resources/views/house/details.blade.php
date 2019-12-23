@@ -41,16 +41,16 @@
                 <div class="card-body">
                     <form action="{{route('house.book.notify',$house->id)}}" method="post">
                         @csrf
-                        <div class="ml-5"
+                        <div class="ml-2"
                              style="text-align: left; font-size: 40px; font-weight: bold; float: left">{{$house->price}}
                             đ /đêm
                         </div>
-                        <div class="ml-5">
-                            <input type="date" class="mr-1" name="checkin" style="border-radius: 10px">
+                        <div class="ml-2">
+                            <input type="date" class="mr-2" name="checkin" style="border-radius: 10px">
                             @if($errors->has('checkin'))
                                 <p class="text-danger">{{$errors->first('checkin')}}</p>
                             @endif
-                            <input type="date" name="checkout" style="border-radius: 10px">
+                            <input type="date" class="ml-2" name="checkout" style="border-radius: 10px">
                             @if($errors->has('checkout'))
                                 <p class="text-danger">{{$errors->first('checkout')}}</p>
                             @endif
@@ -62,16 +62,16 @@
                                         đến ngày {{$order->check_out}}</p>
                                 @endif
                             @endforeach
-                            <div class="col-md-12 row offset-9">
+                            <div class="col-md-12 mt-2">
                                 <button type="submit" class="btn btn-primary btn-sm">Đặt phòng</button>
                             </div>
                         </div>
                         {{--                                        <input type="text" value="{{$house->user->email}}" name="email" readonly="readonly" style="display: none">--}}
                         {{--                                        <input type="text" value="{{$house->name}}" name="title" readonly="readonly" style="display: none">--}}
                         {{--                                        <input type="text" value="{{$house->id}}" name="house_id" readonly="readonly" style="display: none">--}}
-                        <h3><b>Thông Tin Liên Hệ</b></h3>
                         <hr>
-                        @if(!$house->user->images)
+                        <h3><b>Thông Tin Liên Hệ</b></h3>
+                    @if(!$house->user->images)
                             <img src="source/images/avatar.jpeg"
                                  style="border-radius: 300px;display: block; margin-left: auto; margin-right: auto"
                                  class="img-circle" alt="" width="150" height="150">
