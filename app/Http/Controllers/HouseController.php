@@ -12,11 +12,8 @@ use App\Image;
 use App\Notifications\SendNotificationToHouseHost;
 use App\Order;
 use App\RoomCategory;
-<<<<<<< HEAD
 use App\Star;
-=======
 use App\StatusHouseInterface;
->>>>>>> b056989af8ddcc79034852b43fe740a22109fc6c
 use App\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -219,12 +216,8 @@ class HouseController extends Controller
     public function showHouseDetails($id)
     {
         $house = House::findOrFail($id);
-<<<<<<< HEAD
-        $starArray=[];
 
-=======
         $orders = Order::where('house_id', $house->id)->get();
->>>>>>> b056989af8ddcc79034852b43fe740a22109fc6c
         $listHouseCategory = $this->houseCategory->all();
         $listRoomCategory = $this->roomCategory->all();
         $listCities = $this->city->all();
