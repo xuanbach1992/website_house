@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\House;
 use App\Notification;
 use App\Notifications\AcceptRentHouse;
 use App\Notifications\NoAcceptRent;
@@ -38,14 +39,14 @@ class OrderController extends Controller
 
                 $order->user_id = $notification->notifiable_id;
 
-                $order->status=StatusHouseInterface::THANHCONG;
+                $order->status = StatusHouseInterface::THANHCONG;
 
                 $order->save();
                 \auth()->user()->notify(new AcceptRentHouse($dataNotification->house_id, $email_receive, $house_title, $dataNotification->checkin, $dataNotification->checkout));
 //              cho notification da doc bang cach xoa notification day
-                Mail::send('house.content', array('content'=>'Chủ nhà đồng ý cho thuê nhà'),
-                    function($message){
-                        $message->to('hiepken95@gmail.com','Visitor')->subject('Thông báo thuê nhà!');
+                Mail::send('house.content', array('content' => 'Chủ nhà đồng ý cho thuê nhà'),
+                    function ($message) {
+                        $message->to('hiepken95@gmail.com', 'Visitor')->subject('Thông báo thuê nhà!');
                     });
                 $notification->delete();
                 toastr()->info('gui thong bao den cho nguoi thue nha');
@@ -72,9 +73,9 @@ class OrderController extends Controller
                 $checkout = $dataNotification->checkout;
                 $notification->delete();
                 Auth::user()->notify(new NoAcceptRent($house_id, $email_host, $house_title, $checkin, $checkout));
-                Mail::send('house.content', array('content'=>'Chủ nhà không đồng ý vì bạn quá xấu tính'),
-                    function($message){
-                        $message->to('hiepken95@gmail.com','Visitor')->subject('Thông báo thuê nhà!');
+                Mail::send('house.content', array('content' => 'Chủ nhà không đồng ý vì bạn quá xấu tính'),
+                    function ($message) {
+                        $message->to('hiepken95@gmail.com', 'Visitor')->subject('Thông báo thuê nhà!');
                     });
                 toastr()->info('gui thong bao den cho nguoi thue nha');
                 return redirect()->route('admin.house');
@@ -101,7 +102,7 @@ class OrderController extends Controller
     {
         $order = Order::findOrFail($id);
 
-        $email_host=User::findOrFail($order->user_id)->email;
+        $email_host = User::findOrFail($order->user_id)->email;
 
         $timeNow = Carbon::now();
         $nowTimestamp = strtotime($timeNow);
@@ -109,18 +110,23 @@ class OrderController extends Controller
         $checkInTimestamp = strtotime($timeCheckin);
         if ($checkInTimestamp - $nowTimestamp >= 86400) {
             $order->delete();
-            Mail::send('house.content', array('content'=>'Bạn đã hủy thuê nhà thành công . Hẹn bạn dịp khác'),
-                function($message){
-                    $message->to('hiepken95@gmail.com','Visitor')->subject('Thông tin!');
+            Mail::send('house.content', array('content' => 'Bạn đã hủy thuê nhà thành công . Hẹn bạn dịp khác'),
+                function ($message) {
+                    $message->to('hiepken95@gmail.com', 'Visitor')->subject('Thông tin!');
                 });
             //notification
         } else {
-            Mail::send('house.content', array('content'=>'Bạn không thể hủy vì trước thời hạn thuê nhà một ngày! Xin thông cảm'),
-                function($message){
-                    $message->to('hiepken95@gmail.com','Visitor')->subject('Thông tin!');
+            Mail::send('house.content', array('content' => 'Bạn không thể hủy vì trước thời hạn thuê nhà một ngày! Xin thông cảm'),
+                function ($message) {
+                    $message->to('hiepken95@gmail.com', 'Visitor')->subject('Thông tin!');
                 });
         }
         return redirect()->route('admin.house.rented');
     }
 
+    public function showRentDetailByHouse($house_id)
+    {   $house_name=House::find($house_id)->name;
+        $orders = Order::where('house_id', $house_id)->get();
+        return view('admin.pages.rent-detail', compact('orders','house_name'));
+    }
 }
