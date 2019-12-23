@@ -192,7 +192,7 @@
                                 <div class="compolent_rating_content" style="display: flex;align-items:center">
                                     <div class="rating_item" style="width: 20%;margin: 0 20px">
                                                 <span class="fa fa-star"
-                                                      style="font-size: 60px;color: #ff9705;margin: 0 auto; text-align: center;">4.4</span>
+                                                      style="font-size: 60px;color: #ff9705;margin: 0 auto; text-align: center;">{{$starMedium}}</span>
                                     </div>
 
 
