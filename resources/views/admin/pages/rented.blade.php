@@ -3,7 +3,7 @@
 @section('contentAdmin')
 
     <div class="card mt-4" style="width: 100%">
-        <div class="card-header"><h5>chua biet xai tu gi cho hop ly</h5></div>
+        <div class="card-header"><h5>Nhà đã thuê</h5></div>
         <div class="card-body">
             <table class="table">
                 <thead class="thead-dark">

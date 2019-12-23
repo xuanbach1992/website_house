@@ -174,7 +174,7 @@
                             <li class="nav-item">
                                 <a href="{{route('admin.house.rented')}}" class="nav-link">
                                     <i class="far fa fa-area-chart nav-icon"></i>
-                                    <p>Nhà thuê</p>
+                                    <p>Nhà đã thuê</p>
                                 </a>
                             </li>
                         </ul>
