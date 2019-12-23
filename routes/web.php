@@ -62,6 +62,11 @@ Route::get('/blog', 'HomeController@blogTest')->name('blog');
 Route::get('/about', 'HomeController@aboutTest')->name('about');
 Route::get('/property', 'HomeController@propertydetails')->name('property');
 
+//test email
+//Route::get('/email', function () {
+//    return view('house.email');
+//});
+//Route::post('/message/send', ['uses' => 'FrontController@addFeedback', 'as' => 'front.fb']);
 
-
-
+Route::get('/email','FrontController@showForm');
+Route::post('/email/send','FrontController@addFeedback')->name('house.email.send');

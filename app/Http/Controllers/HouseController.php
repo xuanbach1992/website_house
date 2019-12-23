@@ -19,6 +19,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Mail;
 
 
 class HouseController extends Controller
@@ -302,6 +303,10 @@ class HouseController extends Controller
 
         toastr()->warning('đặt phòng, đang chờ chủ nhà xác nhận', 'message');
         \auth()->user()->notify(new SendNotificationToHouseHost($house_id, $email_host, $house_title, $request->checkin, $request->checkout, $totalPrice));
+        Mail::send('house.content', array('content'=>'Yêu cầu xác nhận thuê nhà từ khách hàng'),
+            function($message){
+                $message->to('hiepken95@gmail.com','Visitor')->subject('Xác nhận thuê nhà!');
+            });
         return redirect('/');
     }
 

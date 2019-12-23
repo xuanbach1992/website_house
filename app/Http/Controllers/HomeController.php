@@ -74,6 +74,7 @@ class HomeController extends Controller
         return redirect()->route('index');
     }
 
+
     public function contactTest()
     {
         return view('page.contact');
