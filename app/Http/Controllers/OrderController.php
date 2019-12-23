@@ -27,14 +27,19 @@ class OrderController extends Controller
             if ($notification->uid == $notificationId) {
                 $dataNotification = json_decode($notification->data);
                 $order = new Order();
-                $email_receive = $dataNotification->sender;
+                $email_receive = $dataNotification->sender; //email nguoi nhan
                 $house_title = $dataNotification->house_title;
                 $order->check_in = $dataNotification->checkin;
                 $order->check_out = $dataNotification->checkout;
                 $order->pay_money = $dataNotification->total_price;
                 $order->house_id = $dataNotification->house_id;
+
+//                $email_host=User::find($order->user_id)->email;
+
                 $order->user_id = $notification->notifiable_id;
+
                 $order->status=StatusHouseInterface::THANHCONG;
+
                 $order->save();
                 \auth()->user()->notify(new AcceptRentHouse($dataNotification->house_id, $email_receive, $house_title, $dataNotification->checkin, $dataNotification->checkout));
 //              cho notification da doc bang cach xoa notification day
@@ -59,7 +64,9 @@ class OrderController extends Controller
             if ($notification->uid == $notificationId) {
                 $dataNotification = json_decode($notification->data);
                 $house_id = $dataNotification->house_id;
-                $email_host = $dataNotification->sender;
+
+                $email_host = $dataNotification->sender;//email nguoi nhan
+
                 $house_title = $dataNotification->house_title;
                 $checkin = $dataNotification->checkin;
                 $checkout = $dataNotification->checkout;
@@ -93,6 +100,9 @@ class OrderController extends Controller
     public function unRentHouse($id)
     {
         $order = Order::findOrFail($id);
+
+        $email_host=User::findOrFail($order->user_id)->email;
+
         $timeNow = Carbon::now();
         $nowTimestamp = strtotime($timeNow);
         $timeCheckin = Carbon::create($order->check_in);
