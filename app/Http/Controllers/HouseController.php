@@ -12,6 +12,7 @@ use App\Image;
 use App\Notifications\SendNotificationToHouseHost;
 use App\Order;
 use App\RoomCategory;
+use App\Star;
 use App\StatusHouseInterface;
 use App\User;
 use Carbon\Carbon;
@@ -29,18 +30,23 @@ class HouseController extends Controller
     protected $roomCategory;
     protected $city;
     protected $district;
+    protected $star;
+
 
     public function __construct(House $house,
                                 HouseCategory $houseCategory,
                                 RoomCategory $roomCategory,
                                 Cities $city,
-                                District $district)
+                                District $district,
+                                Star $star)
     {
         $this->house = $house;
         $this->houseCategory = $houseCategory;
         $this->roomCategory = $roomCategory;
         $this->city = $city;
         $this->district = $district;
+        $this->star=$star;
+
     }
 
     public function findByUser()
@@ -211,11 +217,27 @@ class HouseController extends Controller
     public function showHouseDetails($id)
     {
         $house = House::findOrFail($id);
+
         $orders = Order::where('house_id', $house->id)->get();
         $listHouseCategory = $this->houseCategory->all();
         $listRoomCategory = $this->roomCategory->all();
         $listCities = $this->city->all();
         $listDistrict = $this->district->all();
+        $listStar = $this->star->paginate(5);
+
+        $house_id = $house->id;
+        $countStar = 0;
+        $allStarInHouseDetail = 0;
+        $stars = Star::where('house_id', $house_id)->get();
+        foreach ($stars as $star) {
+            $allStarInHouseDetail += $star->number;
+            $countStar++;
+        }
+        $starMedium=$allStarInHouseDetail/$countStar;
+
+
+
+
 
         return view('house.details', compact(
             'house',
@@ -223,7 +245,7 @@ class HouseController extends Controller
             'orders',
             'listRoomCategory',
             'listHouseCategory',
-            'listDistrict'));
+            'listDistrict','listStar','starMedium'));
     }
 
     /**
@@ -330,12 +352,10 @@ class HouseController extends Controller
             $timeCheckout = Carbon::create($order->check_out);
             $checkoutTimestamp = strtotime($timeCheckout);
 //            $timeDifference = $timeNow->diffInDays($timeCheckout);
-            if ($checkoutTimestamp - $nowTimestamp <= 86400) {
-                $order->status = 1;
-            } else {
-                $order->status = 0;
+            if ($checkoutTimestamp - $nowTimestamp <= 0) {
+                $order->status = StatusHouseInterface::KETTHUC;
+                $order->save();
             }
-            $order->save();
         }
         return view('admin.pages.rented', compact('orders'));
     }

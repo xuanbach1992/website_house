@@ -28,4 +28,7 @@ class User extends Authenticatable
 //    public function houses(){
 //        return $this->belongsToMany(House::class,'orders','user_id','house_id');
 //    }
+public function star(){
+        return $this->hasMany('App\Star');
+}
 }

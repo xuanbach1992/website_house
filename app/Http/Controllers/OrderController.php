@@ -6,6 +6,7 @@ use App\Notification;
 use App\Notifications\AcceptRentHouse;
 use App\Notifications\NoAcceptRent;
 use App\Order;
+use App\StatusHouseInterface;
 use App\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -33,6 +34,7 @@ class OrderController extends Controller
                 $order->pay_money = $dataNotification->total_price;
                 $order->house_id = $dataNotification->house_id;
                 $order->user_id = $notification->notifiable_id;
+                $order->status=StatusHouseInterface::THANHCONG;
                 $order->save();
                 \auth()->user()->notify(new AcceptRentHouse($dataNotification->house_id, $email_receive, $house_title, $dataNotification->checkin, $dataNotification->checkout));
 //              cho notification da doc bang cach xoa notification day

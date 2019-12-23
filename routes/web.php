@@ -57,16 +57,8 @@ Route::get('/getDataByCitiesId', 'DistrictController@getDataByCitiesId')->name('
 
 //code template
 //Route::get('/','HomeController@index')->name('index');
-Route::get('/contact', 'HomeController@contactTest')->name('contact');
-Route::get('/blog', 'HomeController@blogTest')->name('blog');
-Route::get('/about', 'HomeController@aboutTest')->name('about');
-Route::get('/property', 'HomeController@propertydetails')->name('property');
-
-//test email
-//Route::get('/email', function () {
-//    return view('house.email');
-//});
-//Route::post('/message/send', ['uses' => 'FrontController@addFeedback', 'as' => 'front.fb']);
-
-Route::get('/email','FrontController@showForm');
-Route::post('/email/send','FrontController@addFeedback')->name('house.email.send');
+Route::get('/contact','HomeController@contactTest')->name('contact');
+Route::get('/blog','HomeController@blogTest')->name('blog');
+Route::get('/about','HomeController@aboutTest')->name('about');
+Route::get('/property','HomeController@propertydetails')->name('property');
+route::post('/rating/{id}','RatingController@saveRating')->name('house.rating')->middleware('auth');
