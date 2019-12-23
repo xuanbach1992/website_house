@@ -318,7 +318,9 @@ class HouseController extends Controller
     {
         $user_id = House::find($house_id)->user_id;
         $house_title = House::find($house_id)->name;
-        $email_host = User::find($user_id)->email;
+
+        $email_host = User::find($user_id)->email;//email chu nha
+
         $checkin = Carbon::create($request->checkin);
         $checkout = Carbon::create($request->checkout);
         $totalPrice = ($checkin->diffInDays($checkout)) * House::find($house_id)->price;
