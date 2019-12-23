@@ -57,6 +57,13 @@ Route::get('/getDataByCitiesId', 'DistrictController@getDataByCitiesId')->name('
 
 //code template
 //Route::get('/','HomeController@index')->name('index');
+<<<<<<< HEAD
+Route::get('/contact','HomeController@contactTest')->name('contact');
+Route::get('/blog','HomeController@blogTest')->name('blog');
+Route::get('/about','HomeController@aboutTest')->name('about');
+Route::get('/property','HomeController@propertydetails')->name('property');
+route::post('/rating/{id}','RatingController@saveRating')->name('house.rating')->middleware('auth');
+=======
 Route::get('/contact', 'HomeController@contactTest')->name('contact');
 Route::get('/blog', 'HomeController@blogTest')->name('blog');
 Route::get('/about', 'HomeController@aboutTest')->name('about');
@@ -65,3 +72,4 @@ Route::get('/property', 'HomeController@propertydetails')->name('property');
 
 
 
+>>>>>>> b056989af8ddcc79034852b43fe740a22109fc6c
