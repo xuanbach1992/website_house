@@ -325,12 +325,10 @@ class HouseController extends Controller
             $timeCheckout = Carbon::create($order->check_out);
             $checkoutTimestamp = strtotime($timeCheckout);
 //            $timeDifference = $timeNow->diffInDays($timeCheckout);
-            if ($checkoutTimestamp - $nowTimestamp <= 86400) {
-                $order->status = 1;
-            } else {
-                $order->status = 0;
+            if ($checkoutTimestamp - $nowTimestamp <= 0) {
+                $order->status = StatusHouseInterface::KETTHUC;
+                $order->save();
             }
-            $order->save();
         }
         return view('admin.pages.rented', compact('orders'));
     }
