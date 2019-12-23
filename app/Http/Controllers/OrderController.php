@@ -11,6 +11,7 @@ use App\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 
 class OrderController extends Controller
 {
@@ -37,7 +38,10 @@ class OrderController extends Controller
                 $order->save();
                 \auth()->user()->notify(new AcceptRentHouse($dataNotification->house_id, $email_receive, $house_title, $dataNotification->checkin, $dataNotification->checkout));
 //              cho notification da doc bang cach xoa notification day
-
+                Mail::send('house.content', array('content'=>'Chủ nhà đồng ý cho thuê nhà'),
+                    function($message){
+                        $message->to('hiepken95@gmail.com','Visitor')->subject('Thông báo thuê nhà!');
+                    });
                 $notification->delete();
                 toastr()->info('gui thong bao den cho nguoi thue nha');
                 return redirect()->route('admin.house');
@@ -61,6 +65,10 @@ class OrderController extends Controller
                 $checkout = $dataNotification->checkout;
                 $notification->delete();
                 Auth::user()->notify(new NoAcceptRent($house_id, $email_host, $house_title, $checkin, $checkout));
+                Mail::send('house.content', array('content'=>'Chủ nhà không đồng ý vì bạn quá xấu tính'),
+                    function($message){
+                        $message->to('hiepken95@gmail.com','Visitor')->subject('Thông báo thuê nhà!');
+                    });
                 toastr()->info('gui thong bao den cho nguoi thue nha');
                 return redirect()->route('admin.house');
             } else {
@@ -91,8 +99,16 @@ class OrderController extends Controller
         $checkInTimestamp = strtotime($timeCheckin);
         if ($checkInTimestamp - $nowTimestamp >= 86400) {
             $order->delete();
+            Mail::send('house.content', array('content'=>'Bạn đã hủy thuê nhà thành công . Hẹn bạn dịp khác'),
+                function($message){
+                    $message->to('hiepken95@gmail.com','Visitor')->subject('Thông tin!');
+                });
+            //notification
         } else {
-            toastr()->warning('dasdas');
+            Mail::send('house.content', array('content'=>'Bạn không thể hủy vì trước thời hạn thuê nhà một ngày! Xin thông cảm'),
+                function($message){
+                    $message->to('hiepken95@gmail.com','Visitor')->subject('Thông tin!');
+                });
         }
         return redirect()->route('admin.house.rented');
     }

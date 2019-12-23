@@ -62,9 +62,8 @@
                                         đến ngày {{$order->check_out}}</p>
                                 @endif
                             @endforeach
-                            <div class="col-md-12 row">
-                                <button type="submit" class="btn btn-primary btn-sm">Đặt phòng
-                                </button>
+                            <div class="col-md-12 row offset-9">
+                                <button type="submit" class="btn btn-primary btn-sm">Đặt phòng</button>
                             </div>
                         </div>
                         {{--                                        <input type="text" value="{{$house->user->email}}" name="email" readonly="readonly" style="display: none">--}}
@@ -84,7 +83,7 @@
     <div class="col-md-7">
         <div class="col-md-9 row">
             <h4><b style="color: #0037ff ">{{$house->name}}</b></h4>
-            <b class="offset-4">Trạng thái :</b>
+            <b class="offset-1">Trạng thái :</b>
             @if(\App\StatusHouseInterface::CHUACHOTHUE == $house->status)
                 <option>Chưa cho thuê</option>
             @elseif(\App\StatusHouseInterface::DACHOTHUE == $house->status)
