@@ -54,4 +54,8 @@ class House extends Model
         return $this->belongsTo('App\Star');
     }
 
+    public function comments()
+    {
+        return $this->hasMany(Comments::class)->whereNull('parent_id');
+    }
 }
