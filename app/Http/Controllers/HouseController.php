@@ -57,7 +57,7 @@ class HouseController extends Controller
         $range = \Carbon\Carbon::now('Asia/Ho_Chi_Minh')->subMonth(12);
         $orderMonth = DB::table('orders')
             ->select(DB::raw('month(check_in) as getMonth'), DB::raw('SUM(pay_money) as moneyInMonth'))
-            ->where('check_in', '>=', $range)
+            ->where([['check_in', '>=', $range],['user_id','=',Auth::user()->id]])
             ->groupBy('getMonth')
             ->orderBy('getMonth', 'ASC')
             ->get();
