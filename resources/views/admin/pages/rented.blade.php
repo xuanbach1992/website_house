@@ -26,7 +26,7 @@
                         <td>{{$order->house->address}}</td>
                         <td>{{$order->check_in}}</td>
                         <td>{{$order->check_out}}</td>
-                        <td>{{$order->pay_money}}</td>
+                        <td>{{number_format($order->pay_money)}} đ</td>
                         <td>
                             @if($order->status===\App\StatusHouseInterface::KETTHUC)
                                 Đã thuê xong

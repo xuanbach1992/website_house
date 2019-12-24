@@ -55,18 +55,17 @@ class HouseController extends Controller
         $user_id = Auth::user()->id;
         $houses = House::where('user_id', $user_id)->get();
         $listHouseCategory = $this->houseCategory->all();
-        $range = \Carbon\Carbon::now('Asia/Ho_Chi_Minh')->subDay(15);
+        $range = \Carbon\Carbon::now('Asia/Ho_Chi_Minh')->subDays(1);
         $orderMonth = Order::select(
-            DB::raw('day(check_out) as getMonth'),
-            DB::raw('SUM(pay_money) as moneyInMonth')
+            DB::raw('day(check_in) as getDays'),
+            DB::raw('SUM(pay_money) as moneyInDays')
         )
-            ->rightJoin('houses', 'house_id', '=', 'houses.id')
-            ->where([['check_out', '<=', $range], ['houses.user_id', '=', $user_id]])
-            ->orwhere('houses.user_id', '=', $user_id)
-            ->groupBy('getMonth')
-            ->orderBy('getMonth', 'ASC')
+            ->Join('houses', 'house_id', '=', 'houses.id')
+            ->where('houses.user_id', '=', $user_id)
+            ->where('check_out', '<=', $range)
+            ->groupBy('getDays')
+            ->orderBy('getDays')
             ->get();
-
         return view('admin.pages.house-management', [
             'houses' => $houses,
             'listHouseCategory' => $listHouseCategory,
@@ -394,10 +393,10 @@ class HouseController extends Controller
 
         toastr()->warning('đặt phòng, đang chờ chủ nhà xác nhận', 'message');
         \auth()->user()->notify(new SendNotificationToHouseHost($house_id, $email_host, $house_title, $request->checkin, $request->checkout, $totalPrice));
-        Mail::send('house.content', array('content' => 'Yêu cầu xác nhận thuê nhà từ khách hàng'),
-            function ($message) {
-                $message->to('hiepken95@gmail.com', 'Visitor')->subject('Xác nhận thuê nhà!');
-            });
+//        Mail::send('house.content', array('content' => 'Yêu cầu xác nhận thuê nhà từ khách hàng'),
+//            function ($message) {
+//                $message->to('hiepken95@gmail.com', 'Visitor')->subject('Xác nhận thuê nhà!');
+//            });
         return redirect('/');
     }
 

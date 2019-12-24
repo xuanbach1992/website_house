@@ -24,7 +24,7 @@
                             <td>{{\App\User::find($order->user_id)->email}}</td>
                             <td>{{$order->check_in}}</td>
                             <td>{{$order->check_out}}</td>
-                            <td>{{$order->pay_money}}</td>
+                            <td>{{number_format($order->pay_money)}}đ</td>
                             <td></td>
                         <tr>
                 @endif
