@@ -114,6 +114,7 @@ class OrderController extends Controller
         if ($checkInTimestamp - $nowTimestamp >= 86400) {
             $order->delete();
             toastr()->success('huy thue nha thanh cong');
+            //không gửi được email thì chạy php artisan config:cache rồi chạy lại serve
             Mail::send('house.content', array('content' => 'Bạn đã hủy thuê nhà thành công . Hẹn bạn dịp khác'),
                 function ($message) {
                     $message->to('hiepken95@gmail.com', 'Visitor')->subject('Thông tin!');

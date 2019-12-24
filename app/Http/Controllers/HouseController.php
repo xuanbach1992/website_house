@@ -294,8 +294,29 @@ class HouseController extends Controller
             $query = $query->where('district_id', $request->get('district'));
         }
 
+
+        $housesList = $query->get();
+        $housesOrder = Order::all();
+        $houses = [];
+        $inputCheckIn = $request->get('check_in');
+        $inputCheckOut = Carbon::parse($request->get('check_out'));
+
+        for ($j = 0; $j < count($housesList); $j++) {
+            array_push($houses, $housesList[$j]);
+        }
+
+        for ($i = 0; $i < count($housesOrder); $i++) {
+            for ($j = 0; $j < count($houses); $j++) {
+                if (!empty($inputCheckIn) && !empty($inputCheckOut)) {
+                    if (( Carbon::parse($inputCheckIn)->timestamp >= Carbon::parse($housesOrder[$i]->check_in)->timestamp
+                            || Carbon::parse($inputCheckOut) ->timestamp >= Carbon::parse($housesOrder[$i]->check_out)->timestamp)
+                        && $housesOrder[$i]['house_id'] == $houses[$j]['id']) {
+                        array_splice($houses, $j, 1);
+                    }
+                }
+            }
+        }
 //        dd($query->toSql());
-        $houses = $query->get();
         $listCities = $this->city->get();
 
         return view('page.product', compact(
