@@ -67,7 +67,6 @@ class OrderController extends Controller
 
                 $dataNotification = json_decode($notification->data);
                 $house_id = $dataNotification->house_id;
-
                 $email_host = $dataNotification->sender;//email nguoi nhan
 
                 $house_title = $dataNotification->house_title;
