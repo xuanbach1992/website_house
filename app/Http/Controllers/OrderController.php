@@ -52,7 +52,7 @@ class OrderController extends Controller
 //                    });
         $notification[0]->delete();
         toastr()->info('gui thong bao den cho nguoi thue nha');
-        return redirect()->route('admin.house');
+        return redirect()->route('admin.notify.show');
 //            }
 //        }
     }
@@ -80,7 +80,7 @@ class OrderController extends Controller
                         $message->to('hiepken95@gmail.com', 'Visitor')->subject('Thông báo thuê nhà!');
                     });
                 toastr()->info('gui thong bao den cho nguoi thue nha');
-                return redirect()->route('admin.house');
+                return redirect()->route('admin.notify.show');
             } else {
                 return abort(404, "not found");
             }
@@ -94,9 +94,7 @@ class OrderController extends Controller
         foreach ($notifications as $notification) {
             if ($notification->uid == $notificationId) {
                 $notification->delete();
-                return redirect()->route('admin.house');
-            } else {
-                return abort(404, "not found");
+                return redirect()->route('admin.notify.show');
             }
         }
     }

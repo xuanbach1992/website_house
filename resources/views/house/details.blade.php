@@ -35,9 +35,9 @@
             </a>
         </div>
     </div>
-    <div class="col-md-5 informationHouseHost">
-        <div class="col-md-12 col-lg-12 mx-auto">
-            <div class="card card-signin my-5">
+    <div class="col-md-5 mt-0 informationHouseHost" style="font-size: 15px">
+        <div class="col-md-12 col-lg-12">
+            <div class="card card-signin">
                 <div class="card-body">
                     <form action="{{route('house.book.notify',$house->id)}}" method="post">
                         @csrf
@@ -57,32 +57,34 @@
                         </div>
                         <div>
                             @foreach($orders as $order)
-                                @if($order->house_id===$house->id&&$order->status==0)
-                                    <p class="text text-danger">** Ngôi nhà đã được thuê từ ngày {{$order->check_in}}
+                                @if($order->house_id===$house->id&&$order->status==\App\StatusHouseInterface::THANHCONG)
+                                    <p class="text text-danger">** Được cho thuê {{$order->check_in}}
                                         đến ngày {{$order->check_out}}</p>
                                 @endif
+
                             @endforeach
                             <div class="col-md-12 mt-2">
-                                <button type="submit" class="btn btn-primary btn-sm">Đặt phòng</button>
+                                <button type="submit" style="font-size:25px" class="btn btn-primary btn-sm">Đặt phòng
+                                </button>
                             </div>
                         </div>
                         {{--                                        <input type="text" value="{{$house->user->email}}" name="email" readonly="readonly" style="display: none">--}}
                         {{--                                        <input type="text" value="{{$house->name}}" name="title" readonly="readonly" style="display: none">--}}
                         {{--                                        <input type="text" value="{{$house->id}}" name="house_id" readonly="readonly" style="display: none">--}}
                         <hr>
-                        <h3><b>Thông Tin Liên Hệ</b></h3>
-                    @if(!$house->user->images)
-                            <img src="source/images/avatar.jpeg"
-                                 style="border-radius: 300px;display: block; margin-left: auto; margin-right: auto"
-                                 class="img-circle" alt="" width="150" height="150">
-                        @else
-                            <img src="{{ asset('storage/rooms/'. $house->user->images) }}"
-                                 style="border-radius: 300px;display: block; margin-left: auto; margin-right: auto"
-                                 class="img-circle" alt="" width="150" height="150">
-                        @endif
-                        <p><b>Name :</b> {{$house->user->name}}</p>
-                        <p><b>Phone :</b> {{$house->user->phone}}</p>
-                        <p><b>Email :</b> {{$house->user->email}}</p>
+                        <div class="row">
+                            <div class="col-lg-6"><img
+                                    @if(!$house->user->images)
+                                    src="source/images/avatar.jpeg"
+                                    @else
+                                    src="{{ asset('storage/rooms/'. $house->user->images) }}"
+                                    @endif
+                                    style="border-radius: 300px;display: block; margin-left: 0"
+                                    class="img-circle" alt="" width="100" height="100"></div>
+                            <div class="col-lg-6"><p> {{$house->user->name}}</p>
+                                <p><b>ĐT :</b> {{$house->user->phone}}</p>
+                                <p><b>Email :</b> {{$house->user->email}}</p></div>
+                        </div>
                     </form>
                 </div>
             </div>
@@ -90,16 +92,16 @@
     </div>
 
     <div class="col-md-7">
-        <div class="col-md-9 row">
+        <div class="col-md-9 mt-5 row">
             <h4><b style="color: #0037ff ">{{$house->name}}</b></h4>
-            <b class="offset-1">Trạng thái :</b>
-            @if(\App\StatusHouseInterface::CHUACHOTHUE == $house->status)
-                <option>Chưa cho thuê</option>
-            @elseif(\App\StatusHouseInterface::DACHOTHUE == $house->status)
-                <option>Đã cho thuê</option>
-            @else
-                <option>Chờ xác nhận</option>
-            @endif
+            {{--            <b class="offset-1">Trạng thái :</b>--}}
+            {{--            @if(\App\StatusHouseInterface::CHUACHOTHUE == $house->status)--}}
+            {{--                <option>Chưa cho thuê</option>--}}
+            {{--            @elseif(\App\StatusHouseInterface::DACHOTHUE == $house->status)--}}
+            {{--                <option>Đã cho thuê</option>--}}
+            {{--            @else--}}
+            {{--                <option>Chờ xác nhận</option>--}}
+            {{--            @endif--}}
 
         </div>
         <hr>
