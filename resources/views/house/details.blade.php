@@ -58,7 +58,7 @@
                         <div>
                             @foreach($orders as $order)
                                 @if($order->house_id===$house->id&&$order->status==\App\StatusHouseInterface::THANHCONG)
-                                    <p class="text text-danger">** Được thuê {{$order->check_in}}
+                                    <p class="text text-danger">** Được cho thuê {{$order->check_in}}
                                         đến ngày {{$order->check_out}}</p>
                                 @endif
 

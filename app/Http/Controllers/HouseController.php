@@ -55,13 +55,14 @@ class HouseController extends Controller
         $user_id = Auth::user()->id;
         $houses = House::where('user_id', $user_id)->get();
         $listHouseCategory = $this->houseCategory->all();
-        $range = \Carbon\Carbon::now('Asia/Ho_Chi_Minh')->subWeek(4);
+        $range = \Carbon\Carbon::now('Asia/Ho_Chi_Minh')->subDay(15);
         $orderMonth = Order::select(
-            DB::raw('day(check_in) as getMonth'),
+            DB::raw('day(check_out) as getMonth'),
             DB::raw('SUM(pay_money) as moneyInMonth')
         )
-            ->Join('houses', 'house_id', '=', 'houses.id')
-            ->where([['check_in', '>=', $range], ['houses.user_id', '=', $user_id]])
+            ->rightJoin('houses', 'house_id', '=', 'houses.id')
+            ->where([['check_out', '<=', $range], ['houses.user_id', '=', $user_id]])
+            ->orwhere('houses.user_id', '=', $user_id)
             ->groupBy('getMonth')
             ->orderBy('getMonth', 'ASC')
             ->get();
@@ -308,8 +309,8 @@ class HouseController extends Controller
         for ($i = 0; $i < count($housesOrder); $i++) {
             for ($j = 0; $j < count($houses); $j++) {
                 if (!empty($inputCheckIn) && !empty($inputCheckOut)) {
-                    if (( Carbon::parse($inputCheckIn)->timestamp >= Carbon::parse($housesOrder[$i]->check_in)->timestamp
-                            || Carbon::parse($inputCheckOut) ->timestamp >= Carbon::parse($housesOrder[$i]->check_out)->timestamp)
+                    if ((Carbon::parse($inputCheckIn)->timestamp >= Carbon::parse($housesOrder[$i]->check_in)->timestamp
+                            || Carbon::parse($inputCheckOut)->timestamp >= Carbon::parse($housesOrder[$i]->check_out)->timestamp)
                         && $housesOrder[$i]['house_id'] == $houses[$j]['id']) {
                         array_splice($houses, $j, 1);
                     }
@@ -369,34 +370,37 @@ class HouseController extends Controller
 
         $checkInTimestampRequest = Carbon::parse($request->get('checkin'))->timestamp;
         $checkOutTimestampRequest = Carbon::parse($request->get('checkout'))->timestamp;
+
+
         foreach ($orders as $order) {
             if (!empty($request->get('checkin')) && !empty($request->get('checkout'))) {
                 if (
-                    ($checkInTimestampRequest > Carbon::parse($order->check_in)->timestamp
-                        && $checkInTimestampRequest < Carbon::parse($order->check_out)->timestamp) ||
-                    ($checkOutTimestampRequest > Carbon::parse($order->check_in)->timestamp
-                        && $checkOutTimestampRequest < Carbon::parse($order->check_out)->timestamp) ||
-                    ($checkInTimestampRequest < Carbon::parse($order->check_in)->timestamp
-                        && $checkOutTimestampRequest > Carbon::parse($order->check_out)->timestamp)
+                    ($checkInTimestampRequest >= Carbon::parse($order->check_in)->timestamp
+                        && $checkInTimestampRequest <= Carbon::parse($order->check_out)->timestamp) &&
+                    ($checkOutTimestampRequest >= Carbon::parse($order->check_in)->timestamp
+                        && $checkOutTimestampRequest <= Carbon::parse($order->check_out)->timestamp) ||
+                    ($checkInTimestampRequest <= Carbon::parse($order->check_in)->timestamp
+                        && $checkOutTimestampRequest >= Carbon::parse($order->check_out)->timestamp)
                 ) {
                     toastr()->warning('Đã có người thuê trong thời gian này');
                     return back();
                 }
-            } else {
-                $checkin = Carbon::create($request->checkin);
-                $checkout = Carbon::create($request->checkout);
-                $totalPrice = ($checkin->diffInDays($checkout)) * House::find($house_id)->price;
-
-                toastr()->warning('đặt phòng, đang chờ chủ nhà xác nhận', 'message');
-                \auth()->user()->notify(new SendNotificationToHouseHost($house_id, $email_host, $house_title, $request->checkin, $request->checkout, $totalPrice));
-                Mail::send('house.content', array('content' => 'Yêu cầu xác nhận thuê nhà từ khách hàng'),
-                    function ($message) {
-                        $message->to('hiepken95@gmail.com', 'Visitor')->subject('Xác nhận thuê nhà!');
-                    });
-                return redirect('/');
             }
         }
+
+        $checkin = Carbon::create($request->checkin);
+        $checkout = Carbon::create($request->checkout);
+        $totalPrice = ($checkin->diffInDays($checkout)) * House::find($house_id)->price;
+
+        toastr()->warning('đặt phòng, đang chờ chủ nhà xác nhận', 'message');
+        \auth()->user()->notify(new SendNotificationToHouseHost($house_id, $email_host, $house_title, $request->checkin, $request->checkout, $totalPrice));
+        Mail::send('house.content', array('content' => 'Yêu cầu xác nhận thuê nhà từ khách hàng'),
+            function ($message) {
+                $message->to('hiepken95@gmail.com', 'Visitor')->subject('Xác nhận thuê nhà!');
+            });
+        return redirect('/');
     }
+
 
     public function showRented()
     {
