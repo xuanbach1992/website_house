@@ -59,10 +59,10 @@
                         <div class="col-md-4 form-group">
                             <div class="row">
                                 <div class="col-md-6 form-group">
-                                    <input type="date" name="" class="form-control">
+                                    <input type="date" name="check_in" class="form-control">
                                 </div>
                                 <div class="col-md-6 form-group">
-                                    <input type="date" name="" class="form-control">
+                                    <input type="date" name="check_out" class="form-control">
                                 </div>
                             </div>
                         </div>

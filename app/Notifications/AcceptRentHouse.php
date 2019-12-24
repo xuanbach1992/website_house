@@ -2,13 +2,12 @@
 
 namespace App\Notifications;
 
-use Carbon\Carbon;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class RepliedToThread extends Notification
+class AcceptRentHouse extends Notification
 {
     use Queueable;
 
@@ -18,15 +17,20 @@ class RepliedToThread extends Notification
      * @return void
      */
     private $email;
-    private $house;
-//    private $user;
+    private $house_title;
+    private $house_id;
+    private $checkin;
+    private $checkout;
 
-    public function __construct($email, $house)
+
+    public function __construct($house_id, $email_receive, $house_title, $checkin, $checkout)
     {
-        $this->email = $email;
-        $this->house = $house;
+        $this->house_id = $house_id;
+        $this->email = $email_receive;
+        $this->house_title = $house_title;
+        $this->checkin = $checkin;
+        $this->checkout = $checkout;
 
-//        $this->user = $user;/
     }
 
     /**
@@ -54,21 +58,28 @@ class RepliedToThread extends Notification
             ->line('Thank you for using our application!');
     }
 
-
-    public function toDatabase($notifiable)
-    {
-        return [
-//            'Message' => 'Bạn nhận được một yêu cầu thuê nhà từ :sender của ngôi nhà :house_title',
-            'sender' => $notifiable->email,
-            'receive' => $this->email,
-            'house_title' => $this->house,
-        ];
-    }
-
+    /**
+     * Get the array representation of the notification.
+     *
+     * @param mixed $notifiable
+     * @return array
+     */
     public function toArray($notifiable)
     {
         return [
             //
+        ];
+    }
+
+    public function toDatabase($notifiable)
+    {
+        return [
+            'house_id' => $this->house_id,
+            'sender' => $notifiable->email,
+            'receive' => $this->email,
+            'house_title' => $this->house_title,
+            'checkin' => $this->checkin,
+            'checkout' => $this->checkout,
         ];
     }
 }

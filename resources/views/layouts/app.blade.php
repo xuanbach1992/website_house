@@ -7,6 +7,7 @@
     <base href="{{asset('')}}">
 
     <meta name="csrf-token" content="{{ csrf_token() }}">
+
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <link href="https://fonts.googleapis.com/css?family=DM+Sans:300,400,700&display=swap" rel="stylesheet">
@@ -52,8 +53,6 @@
         <div class="site-mobile-menu-header">
             <div class="site-mobile-menu-close mt-3">
                 <span class="icon-close2 js-menu-toggle"></span>
-
-
             </div>
         </div>
         <div class="site-mobile-menu-body"></div>

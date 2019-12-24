@@ -7,11 +7,13 @@ use Laravel\Socialite\Facades\Socialite;
 
 class SocialAuthController extends Controller
 {
+    //code đăng nhập facebook
     public function redirect($provider)
     {
         return Socialite::driver($provider)->redirect();
     }
 
+    //code đăng nhập facebook
     public function callback($provider)
     {
         $getInfo = Socialite::driver($provider)->stateless()->user();

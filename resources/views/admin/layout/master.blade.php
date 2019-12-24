@@ -13,7 +13,8 @@
     <!-- Ionicons -->
     <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
     <!-- Tempusdominus Bbootstrap 4 -->
-    <link rel="stylesheet" href="{{asset('sourceAdmin/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css')}}">
+    <link rel="stylesheet"
+          href="{{asset('sourceAdmin/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css')}}">
     <!-- iCheck -->
     <link rel="stylesheet" href="{{asset('sourceAdmin/plugins/icheck-bootstrap/icheck-bootstrap.min.css')}}">
     <!-- JQVMap -->
@@ -28,6 +29,12 @@
     <link rel="stylesheet" href="{{asset('sourceAdmin/plugins/summernote/summernote-bs4.css')}}">
     <!-- Google Font: Source Sans Pro -->
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+
+    <script src="{{asset('https://code.jquery.com/jquery-3.1.1.min.js')}}"></script>
+    <script src="{{asset('https://code.highcharts.com/highcharts.js')}}"></script>
+    <script src="{{asset('https://code.highcharts.com/modules/exporting.js')}}"></script>
+    <script src="{{asset('https://code.highcharts.com/modules/export-data.js')}}"></script>
+
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
@@ -91,18 +98,6 @@
 
                         @endif
                     @endforeach
-                    {{--                    <div class="dropdown-divider"></div>--}}
-                    {{--                    <a href="#" class="dropdown-item">--}}
-                    {{--                        <i class="fas fa-users mr-2"></i> 8 friend requests--}}
-                    {{--                        <span class="float-right text-muted text-sm">12 hours</span>--}}
-                    {{--                    </a>--}}
-                    {{--                    <div class="dropdown-divider"></div>--}}
-                    {{--                    <a href="#" class="dropdown-item">--}}
-                    {{--                        <i class="fas fa-file mr-2"></i> 3 new reports--}}
-                    {{--                        <span class="float-right text-muted text-sm">2 days</span>--}}
-                    {{--                    </a>--}}
-                    {{--                    <div class="dropdown-divider"></div>--}}
-                    {{--                    <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>--}}
                 </div>
             </li>
         </ul>
@@ -118,16 +113,22 @@
                  style="opacity: .8">
             <span class="brand-text font-weight-light">Trang Quản Lý</span>
         </a>
-
         <!-- Sidebar -->
         <div class="sidebar">
             <!-- Sidebar user panel (optional) -->
             <div class="user-panel mt-3 pb-3 mb-3 d-flex">
                 <div class="image">
-                    <img src="sourceAdmin/dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
+                    <img  style="width: 150px;height:150px" src="
+                    @if(auth()->user()->images!=null)
+                    {{asset('/storage/rooms/'.auth()->user()->images)}}
+                    @else
+                        sourceAdmin/dist/img/defaultAvatar.png
+                    @endif
+                        " class="img-circle elevation-2" alt="User Image">
                 </div>
                 <div class="info">
-                    <a href="{{route('user.edit')}}" class="d-block">{{\Illuminate\Support\Facades\Auth::user()->name}}</a>
+                    <a href="{{route('user.edit')}}"
+                       class="d-block">{{\Illuminate\Support\Facades\Auth::user()->name}}</a>
                 </div>
             </div>
 
@@ -165,9 +166,9 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="#" class="nav-link">
-                                    <i class="far fa fa-area-chart nav-icon"></i>
-                                    <p>Thống Kê</p>
+                                <a href="{{route('admin.house.rented')}}" class="nav-link">
+                                    <i class="far fa fa-home nav-icon"></i>
+                                    <p>Nhà đã thuê</p>
                                 </a>
                             </li>
                         </ul>
@@ -244,6 +245,9 @@
 <script>
     $.widget.bridge('uibutton', $.ui.button)
 </script>
+
+
+
 <!-- Bootstrap 4 -->
 <script src="{{asset('')}}sourceAdmin/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <!-- ChartJS -->

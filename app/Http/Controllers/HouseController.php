@@ -6,16 +6,21 @@ use App\Cities;
 use App\District;
 use App\House;
 use App\HouseCategory;
+use App\Http\Requests\DateCheckinValidate;
 use App\Http\Requests\HouseValidationRequest;
 use App\Image;
-use App\Notifications\RepliedToThread;
+use App\Notifications\SendNotificationToHouseHost;
+use App\Order;
 use App\RoomCategory;
+use App\Star;
 use App\StatusHouseInterface;
 use App\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Mail;
 
 
 class HouseController extends Controller
@@ -25,28 +30,47 @@ class HouseController extends Controller
     protected $roomCategory;
     protected $city;
     protected $district;
+    protected $star;
+
 
     public function __construct(House $house,
                                 HouseCategory $houseCategory,
                                 RoomCategory $roomCategory,
                                 Cities $city,
-                                District $district)
+                                District $district,
+                                Star $star)
     {
         $this->house = $house;
         $this->houseCategory = $houseCategory;
         $this->roomCategory = $roomCategory;
         $this->city = $city;
         $this->district = $district;
+        $this->star = $star;
+
     }
 
+    //code vẽ biểu đồ
     public function findByUser()
     {
-        $houses = House::where('user_id', Auth::user()->id)->get();
+        $user_id = Auth::user()->id;
+        $houses = House::where('user_id', $user_id)->get();
         $listHouseCategory = $this->houseCategory->all();
+        $range = \Carbon\Carbon::now('Asia/Ho_Chi_Minh')->subDay(15);
+        $orderMonth = Order::select(
+            DB::raw('day(check_out) as getMonth'),
+            DB::raw('SUM(pay_money) as moneyInMonth')
+        )
+            ->rightJoin('houses', 'house_id', '=', 'houses.id')
+            ->where([['check_out', '<=', $range], ['houses.user_id', '=', $user_id]])
+            ->orwhere('houses.user_id', '=', $user_id)
+            ->groupBy('getMonth')
+            ->orderBy('getMonth', 'ASC')
+            ->get();
 
         return view('admin.pages.house-management', [
             'houses' => $houses,
-            'listHouseCategory' => $listHouseCategory
+            'listHouseCategory' => $listHouseCategory,
+            'orderMonth' => $orderMonth,
         ]);
     }
 
@@ -93,7 +117,6 @@ class HouseController extends Controller
         $house->bedrooms = $request->bedrooms;
         $house->bathroom = $request->bathroom;
 
-
         $house->description = $request->description;
         $house->price = $request->price;
         $house->user_id = Auth::user()->id;
@@ -107,6 +130,15 @@ class HouseController extends Controller
 //        }
 //        $user=Auth::user();
         $house->save();
+
+        $house_id = DB::table('houses')->max('id');
+        $star = new Star();
+        $star->house_id = $house_id;
+        $star->user_id = Auth::user()->id;
+        $star->number = 5;
+        $star->content = 'nhà đẹp, dịch vụ tốt';
+        $star->save();
+
         toastr()->success('Create new house success', 'message');
         toastr()->warning('Upload image into house rent');
         return view('house.upload');
@@ -208,17 +240,31 @@ class HouseController extends Controller
     {
         $house = House::findOrFail($id);
 
+        $orders = Order::where('house_id', $house->id)->get();
         $listHouseCategory = $this->houseCategory->all();
         $listRoomCategory = $this->roomCategory->all();
         $listCities = $this->city->all();
         $listDistrict = $this->district->all();
-
-        return view('house.house-details', compact(
+        $listStar = $this->star->paginate(5);
+        $starMedium = 0;
+        $house_id = $house->id;
+        $stars = Star::where('house_id', $house_id)->get();
+        if ($stars !== null) {
+            $countStar = 0;
+            $allStarInHouseDetail = 0;
+            foreach ($stars as $star) {
+                $allStarInHouseDetail += $star->number;
+                $countStar++;
+            }
+            $starMedium = $allStarInHouseDetail / $countStar;
+        }
+        return view('house.details', compact(
             'house',
             'listCities',
+            'orders',
             'listRoomCategory',
             'listHouseCategory',
-            'listDistrict'));
+            'listDistrict', 'listStar', 'starMedium'));
     }
 
     /**
@@ -249,8 +295,29 @@ class HouseController extends Controller
             $query = $query->where('district_id', $request->get('district'));
         }
 
+
+        $housesList = $query->get();
+        $housesOrder = Order::all();
+        $houses = [];
+        $inputCheckIn = $request->get('check_in');
+        $inputCheckOut = $request->get('check_out');
+
+        for ($j = 0; $j < count($housesList); $j++) {
+            array_push($houses, $housesList[$j]);
+        }
+
+        for ($i = 0; $i < count($housesOrder); $i++) {
+            for ($j = 0; $j < count($houses); $j++) {
+                if (!empty($inputCheckIn) && !empty($inputCheckOut)) {
+                    if ((Carbon::parse($inputCheckIn)->timestamp >= Carbon::parse($housesOrder[$i]->check_in)->timestamp
+                            || Carbon::parse($inputCheckOut)->timestamp >= Carbon::parse($housesOrder[$i]->check_out)->timestamp)
+                        && $housesOrder[$i]['house_id'] == $houses[$j]['id']) {
+                        array_splice($houses, $j, 1);
+                    }
+                }
+            }
+        }
 //        dd($query->toSql());
-        $houses = $query->get();
         $listCities = $this->city->get();
 
         return view('page.product', compact(
@@ -260,6 +327,12 @@ class HouseController extends Controller
         ));
     }
 
+    /**
+     * @param Request $request
+     * @param $id
+     * @return \Illuminate\Http\RedirectResponse
+     *
+     */
     public function updateStatus(Request $request, $id)
     {
         $house = $this->house->findOrFail($id);
@@ -281,24 +354,72 @@ class HouseController extends Controller
         return redirect()->route('admin.house', $id);
     }
 
-
-    public function book($house_id)
-    {
-        $user_id = House::find($house_id)->user_id;
-        $house_title = House::find($house_id)->name;
-        $email = User::find($user_id)->email;
-        toastr()->success('booking house success', 'message');
-        \auth()->user()->notify(new RepliedToThread($email, $house_title));
-        return redirect('/');
-    }
-
-    public function showMaster()
-    {
-        return view('admin.layout.master');
-    }
-
     public function showNotify()
     {
         return view('admin.pages.notify');
     }
+
+    public function book($house_id, DateCheckinValidate $request)
+    {
+        $house = House::find($house_id);
+        $user_id = $house->user_id;
+        $house_title = $house->name;
+
+        $email_host = User::find($user_id)->email;//email chu nha
+        $orders = Order::where('house_id', $house_id)->get();
+
+        $checkInTimestampRequest = Carbon::parse($request->get('checkin'))->timestamp;
+        $checkOutTimestampRequest = Carbon::parse($request->get('checkout'))->timestamp;
+
+
+        foreach ($orders as $order) {
+            if (!empty($request->get('checkin')) && !empty($request->get('checkout'))) {
+                if (
+                    ($checkInTimestampRequest >= Carbon::parse($order->check_in)->timestamp
+                        && $checkInTimestampRequest <= Carbon::parse($order->check_out)->timestamp) &&
+                    ($checkOutTimestampRequest >= Carbon::parse($order->check_in)->timestamp
+                        && $checkOutTimestampRequest <= Carbon::parse($order->check_out)->timestamp) ||
+                    ($checkInTimestampRequest <= Carbon::parse($order->check_in)->timestamp
+                        && $checkOutTimestampRequest >= Carbon::parse($order->check_out)->timestamp)
+                ) {
+                    toastr()->warning('Đã có người thuê trong thời gian này');
+                    return back();
+                }
+            }
+        }
+
+        $checkin = Carbon::create($request->checkin);
+        $checkout = Carbon::create($request->checkout);
+        $totalPrice = ($checkin->diffInDays($checkout)) * House::find($house_id)->price;
+
+        toastr()->warning('đặt phòng, đang chờ chủ nhà xác nhận', 'message');
+        \auth()->user()->notify(new SendNotificationToHouseHost($house_id, $email_host, $house_title, $request->checkin, $request->checkout, $totalPrice));
+        Mail::send('house.content', array('content' => 'Yêu cầu xác nhận thuê nhà từ khách hàng'),
+            function ($message) {
+                $message->to('hiepken95@gmail.com', 'Visitor')->subject('Xác nhận thuê nhà!');
+            });
+        return redirect('/');
+    }
+
+
+    public function showRented()
+    {
+        $user_id = Auth::user()->id;
+        $orders = Order::where('user_id', $user_id)->get();
+
+        foreach ($orders as $order) {
+            $timeNow = Carbon::now('Asia/Ho_Chi_Minh');
+            $nowTimestamp = strtotime($timeNow);
+            $timeCheckout = Carbon::create($order->check_out);
+            $checkoutTimestamp = strtotime($timeCheckout);
+//            $timeDifference = $timeNow->diffInDays($timeCheckout);
+            if ($checkoutTimestamp - $nowTimestamp <= 0) {
+                $order->status = StatusHouseInterface::KETTHUC;
+                $order->save();
+            }
+        }
+
+        return view('admin.pages.rented', compact('orders'));
+    }
+
 }

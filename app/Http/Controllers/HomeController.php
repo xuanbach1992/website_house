@@ -74,6 +74,7 @@ class HomeController extends Controller
         return redirect()->route('index');
     }
 
+
     public function contactTest()
     {
         return view('page.contact');
@@ -89,7 +90,7 @@ class HomeController extends Controller
         return view('page.about');
     }
 
-    public function propertydetails(){
+    public function propertyDetails(){
         return view('page.property-details');
     }
 }
