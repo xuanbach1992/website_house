@@ -300,7 +300,7 @@ class HouseController extends Controller
         $housesOrder = Order::all();
         $houses = [];
         $inputCheckIn = $request->get('check_in');
-        $inputCheckOut = Carbon::parse($request->get('check_out'));
+        $inputCheckOut = $request->get('check_out');
 
         for ($j = 0; $j < count($housesList); $j++) {
             array_push($houses, $housesList[$j]);
