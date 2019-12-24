@@ -6,8 +6,8 @@
         <div class="realestate-filter">
             <div class="container">
                 <div class="realestate-filter-wrap nav">
-                    <a href="#for-rent" class="active" data-toggle="tab" id="rent-tab" aria-controls="rent"
-                       aria-selected="true">Tìm kiếm</a>
+{{--                    <a href="#for-rent" class="active" data-toggle="tab" id="rent-tab" aria-controls="rent"--}}
+{{--                       aria-selected="true">Tìm kiếm</a>--}}
                     {{--                    <a href="#for-sale" class="" data-toggle="tab" id="sale-tab" aria-controls="sale"--}}
                     {{--                       aria-selected="false">Đã cho thuê</a>--}}
                 </div>
@@ -20,12 +20,12 @@
                 <div class="tab-pane active" id="for-rent" role="tabpanel" aria-labelledby="rent-tab">
                     <!--dòng 1-->
                     <div class="row">
-                        <div class="col-md-4 form-group">
+                        <div class="col-md-4 mt-4 form-group">
                             <input type="text" name="keyBedrooms"
                                    value="{{ (isset($filter)) ? $filter["keyBedrooms"] : null }}" class="form-control"
                                    placeholder="Phòng ngủ">
                         </div>
-                        <div class="col-md-4 form-group">
+                        <div class="col-md-4 mt-4 form-group">
                             <select name="cities" onchange="onChange(this.value);" class="form-control w-100">
                                 <option value="-1">Thành Phố</option>
                                 {{--                                @if(!isset($filter))--}}
@@ -37,7 +37,7 @@
                                 {{--                                @endif--}}
                             </select>
                         </div>
-                        <div class="col-md-4 form-group">
+                        <div class="col-md-4 mt-4 form-group">
                             <select name="district" id="district_id" class="form-control w-100">
                                 <option value="-1">Quận huyện</option>
                             </select>
