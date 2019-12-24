@@ -284,12 +284,14 @@
                                                 <div class="fa fa-star"
                                                      style="color: #ff9705"></div>
                                             @endfor
-                                            <div><p>{{$star->content}}</p></div>
+                                            <div>
+                                                <p>{{$star->content}}</p>
+                                                {{--@include('house.commentsDisplay', ['comments' => $house->comments, 'house_id' => $house->id])--}}
+                                            </div>
                                             <hr>
                                         @endif
                                     @endforeach
                                     {{ $listStar->links() }}
-
 
                                 </div>
                             </div>

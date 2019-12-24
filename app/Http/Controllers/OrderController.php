@@ -77,6 +77,7 @@ class OrderController extends Controller
                 $house_title = $dataNotification->house_title;
                 $checkin = $dataNotification->checkin;
                 $checkout = $dataNotification->checkout;
+
                 $notification->delete();
                 Auth::user()->notify(new NoAcceptRent($house_id, $email_host, $house_title, $checkin, $checkout));
                 //gửi email
