@@ -48,13 +48,14 @@ class House extends Model
     {
         return $this->hasMany('App\Order');
     }
-//    public function users()
-//    {
-//        return $this->belongsToMany(User::class,'orders','house_id','user_id');
-//    }
+
     public function star()
     {
         return $this->belongsTo('App\Star');
     }
 
+    public function comments()
+    {
+        return $this->hasMany(Comments::class)->whereNull('parent_id');
+    }
 }
