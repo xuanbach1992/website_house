@@ -49,9 +49,6 @@
             <li class="nav-item d-none d-sm-inline-block">
                 <a href="#" class="nav-link">Home</a>
             </li>
-            <li class="nav-item d-none d-sm-inline-block">
-                <a href="#" class="nav-link">Contact</a>
-            </li>
         </ul>
 
         <!-- SEARCH FORM -->
@@ -111,7 +108,7 @@
             <img src="sourceAdmin/dist/img/AdminLTELogo.png" alt="AdminLTE Logo"
                  class="brand-image img-circle elevation-3"
                  style="opacity: .8">
-            <span class="brand-text font-weight-light">Trang Quản Lý</span>
+            <span class="brand-text">Trang cá nhân</span>
         </a>
         <!-- Sidebar -->
         <div class="sidebar">
@@ -175,7 +172,7 @@
                     </li>
 
 
-                    <li class="nav-header">Web người dùng</li>
+                    <li class="nav-header">Website</li>
                     <li class="nav-item">
                         <a href="{{route('index')}}" class="nav-link">
                             <i class="nav-icon fas fa-link"></i>
@@ -225,9 +222,9 @@
         <!-- /.content -->
     </div>
     <!-- /.content-wrapper -->
-    <footer class="main-footer">
-        <strong>Người tạo : <a href="#">Trần Mạnh Hiệp</a>.</strong>
-    </footer>
+{{--    <footer class="main-footer">--}}
+{{--        <strong>Người tạo : <a href="#">Trần Mạnh Hiệp</a>.</strong>--}}
+{{--    </footer>--}}
 
     <!-- Control Sidebar -->
     <aside class="control-sidebar control-sidebar-dark">

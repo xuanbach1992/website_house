@@ -33,7 +33,7 @@
                                 @endif
                             @endforeach
                         </td>
-                        <td>{{$value->price}} đ</td>
+                        <td>{{number_format($value->price)}} đ</td>
                         <td style="text-align: center">
                             <a href="{{route('house.showEdit',$value->id)}}" class="btn btn-primary">Sửa</a>&nbsp;&nbsp;
                             <a href="{{route('house.delete',$value->id)}}" class="btn btn-danger">Xóa</a>

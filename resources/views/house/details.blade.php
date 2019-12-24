@@ -42,7 +42,7 @@
                     <form action="{{route('house.book.notify',$house->id)}}" method="post">
                         @csrf
                         <div class="ml-2"
-                             style="text-align: left; font-size: 40px; font-weight: bold; float: left">{{$house->price}}
+                             style="text-align: left; font-size: 40px; font-weight: bold; float: left">{{number_format($house->price)}}
                             đ /đêm
                         </div>
                         <div class="ml-2">

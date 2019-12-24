@@ -21,18 +21,20 @@
                     <!--dòng 1-->
                     <div class="row">
                         <div class="col-md-4 form-group">
-                            <input type="text" name="keyBedrooms" value="{{ (isset($filter)) ? $filter["keyBedrooms"] : null }}" class="form-control" placeholder="Phòng ngủ">
+                            <input type="text" name="keyBedrooms"
+                                   value="{{ (isset($filter)) ? $filter["keyBedrooms"] : null }}" class="form-control"
+                                   placeholder="Phòng ngủ">
                         </div>
                         <div class="col-md-4 form-group">
                             <select name="cities" onchange="onChange(this.value);" class="form-control w-100">
                                 <option value="-1">Thành Phố</option>
-{{--                                @if(!isset($filter))--}}
-                                    @foreach($listCities as $city)
-                                        <option value="{{$city->id}}">{{$city->name}}</option>
-                                    @endforeach
-{{--                                @else--}}
-{{--                                    <option>{{$filter["keyBedrooms"]}}</option>--}}
-{{--                                @endif--}}
+                                {{--                                @if(!isset($filter))--}}
+                                @foreach($listCities as $city)
+                                    <option value="{{$city->id}}">{{$city->name}}</option>
+                                @endforeach
+                                {{--                                @else--}}
+                                {{--                                    <option>{{$filter["keyBedrooms"]}}</option>--}}
+                                {{--                                @endif--}}
                             </select>
                         </div>
                         <div class="col-md-4 form-group">
@@ -44,15 +46,21 @@
                     <!--dòng 2-->
                     <div class="row">
                         <div class="col-md-4 form-group">
-                            <input type="text" name="keyBathroom" value="{{ (isset($filter)) ? $filter["keyBathroom"] : null }}" class="form-control" placeholder="Phòng tắm">
+                            <input type="text" name="keyBathroom"
+                                   value="{{ (isset($filter)) ? $filter["keyBathroom"] : null }}" class="form-control"
+                                   placeholder="Phòng tắm">
                         </div>
                         <div class="col-md-4 form-group">
                             <div class="row">
                                 <div class="col-md-6 form-group">
-                                    <input type="number" name="price_from" value="{{ (isset($filter)) ? $filter["price_from"] : null }}" class="form-control" placeholder="Giá từ">
+                                    <input type="number" name="price_from"
+                                           value="{{ (isset($filter)) ? $filter["price_from"] : null }}"
+                                           class="form-control" placeholder="Giá từ">
                                 </div>
                                 <div class="col-md-6 form-group">
-                                    <input type="number" name="price_to" value="{{ (isset($filter)) ? $filter["price_to"] : null }}" class="form-control" placeholder="Đến giá">
+                                    <input type="number" name="price_to"
+                                           value="{{ (isset($filter)) ? $filter["price_to"] : null }}"
+                                           class="form-control" placeholder="Đến giá">
                                 </div>
                             </div>
                         </div>
@@ -89,7 +97,7 @@
                             <a href="{{route('house.detail',$house->id)}}" class="d-block">
                                 <img
                                     src="{{asset('storage/'.$house->images[0]->path)}}" alt="Image"
-                                    class="img-fluid"></a>
+                                    class="img-fluid" style="width: 400px;height: 250px"></a>
                             <div class="text">
                                 <div class="d-flex justify-content-between mb-3">
                                     <div class="sq d-flex align-items-center"><span
@@ -97,12 +105,15 @@
                                             href="{{route('house.detail',$house->id)}}"
                                             style="color: white">{{$house->name}}</a></div>
                                 </div>
+                                <div class="fa fa-money" ><span class="col-md-6 mt-1">{{$house->price}} đ</span>
+                                </div>
                                 <div class="bed d-flex align-items-center"><span
                                         class="wrap-icon icon-bed"></span> <span>{{$house->bedrooms}}</span>
                                 </div>
                                 <div class="bath d-flex align-items-center"><span
                                         class="wrap-icon icon-bath"></span> <span>{{$house->bathroom}}</span>
                                 </div>
+
                             </div>
                             {{--<div>--}}
                             {{--<button class="btn btn-warning btn-sm">Cancel</button>--}}
