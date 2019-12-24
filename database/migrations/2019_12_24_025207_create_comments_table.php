@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateStarsTable extends Migration
+class CreateCommentsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,18 +13,20 @@ class CreateStarsTable extends Migration
      */
     public function up()
     {
-        Schema::create('stars', function (Blueprint $table) {
+        Schema::create('comments', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->tinyInteger('number')->default(0);
-            $table->text('content')->nullable();
+            $table->text('body');
+            $table->unsignedBigInteger('parent_id')->unsigned()->nullable();
 
-            $table->unsignedBigInteger('house_id')->nullable();
-            $table->foreign('house_id')->references('id')->on('houses')->onDelete('cascade');
-
-            $table->unsignedBigInteger('user_id')->nullable();
+            $table->unsignedBigInteger('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
 
+            $table->unsignedBigInteger('house_id')->unsigned();
+            $table->foreign('house_id')->references('id')->on('houses')->onDelete('cascade');
+
             $table->timestamps();
+            $table->softDeletes();
+
         });
     }
 
@@ -35,6 +37,6 @@ class CreateStarsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('stars');
+        Schema::dropIfExists('comments');
     }
 }
