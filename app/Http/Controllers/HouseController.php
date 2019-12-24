@@ -55,9 +55,9 @@ class HouseController extends Controller
         $user_id = Auth::user()->id;
         $houses = House::where('user_id', $user_id)->get();
         $listHouseCategory = $this->houseCategory->all();
-        $range = \Carbon\Carbon::now('Asia/Ho_Chi_Minh')->subMonth(12);
+        $range = \Carbon\Carbon::now('Asia/Ho_Chi_Minh')->subWeek(4);
         $orderMonth = Order::select(
-            DB::raw('month(check_in) as getMonth'),
+            DB::raw('day(check_in) as getMonth'),
             DB::raw('SUM(pay_money) as moneyInMonth')
         )
             ->Join('houses', 'house_id', '=', 'houses.id')

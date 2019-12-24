@@ -58,12 +58,12 @@
             let chart = Highcharts.chart('container', {
 
                 title: {
-                    text: 'Money by month'
+                    text: 'Money in days'
                 },
 
                 xAxis: {
                     title: {
-                        text: 'Month'
+                        text: 'Days'
                     },
                     categories: listOfMonth,
                 },
@@ -72,9 +72,15 @@
                         text: 'VND'
                     }
                 },
+                plotOptions: {
+                    column: {
+                        borderRadius: 5
+                    }
+                },
 
                 series: [{
                     type: 'column',
+                    styledMode: true,
                     colorByPoint: true,
                     data: listOfValue,
                     showInLegend: false
