@@ -26,39 +26,33 @@ class OrderController extends Controller
         $notification = Notification::where('uid', $notificationId)->get();
         $dataNotification = json_decode($notification[0]->data);
         $house_id = $dataNotification->house_id;
-//        $oldOrders = Order::where('house_id', $house_id)->get();
-//        foreach ($oldOrders as $oldOrder) {
-//            dd(1);
-//            $oldOrderCheckIn = strtotime(Carbon::create($oldOrder->check_in));
-//            $oldOrderCheckOut = strtotime(Carbon::create($oldOrder->check_out));
-//            $newOrderCheckIn = strtotime(Carbon::create($dataNotification->checkin));
-//            $newOrderCheckOut = strtotime(Carbon::create($dataNotification->checkout));
-//            if ($oldOrderCheckIn - $newOrderCheckIn != 0 || $oldOrderCheckOut - $newOrderCheckOut != 0) {
-//                dd(123);
-                $order = new Order();
-                $email_receive = $dataNotification->sender; //email nguoi nhan
-                $house_title = $dataNotification->house_title;
-                $order->check_in = $dataNotification->checkin;
-                $order->check_out = $dataNotification->checkout;
-                $order->pay_money = $dataNotification->total_price;
-                $order->house_id = $house_id;
+
+        $order = new Order();
+        $email_receive = $dataNotification->sender; //email nguoi nhan
+        $house_title = $dataNotification->house_title;
+        $order->check_in = $dataNotification->checkin;
+        $order->check_out = $dataNotification->checkout;
+        $order->pay_money = $dataNotification->total_price;
+        $order->house_id = $house_id;
 
 //                $email_host=User::find($order->user_id)->email;
 
-                $order->user_id = $notification[0]->notifiable_id;
+        $order->user_id = $notification[0]->notifiable_id;
 
-                $order->status = StatusHouseInterface::THANHCONG;
+        $order->status = StatusHouseInterface::THANHCONG;
 
-                $order->save();
-                \auth()->user()->notify(new AcceptRentHouse($house_id, $email_receive, $house_title, $dataNotification->checkin, $dataNotification->checkout));
+        $order->save();
+        \auth()->user()->notify(new AcceptRentHouse($house_id, $email_receive, $house_title, $dataNotification->checkin, $dataNotification->checkout));
+        toastr()->success('đang gửi thông báo cho người thuê');
+
 //              cho notification da doc bang cach xoa notification day
 //                Mail::send('house.content', array('content' => 'Chủ nhà đồng ý cho thuê nhà'),
 //                    function ($message) {
 //                        $message->to('hiepken95@gmail.com', 'Visitor')->subject('Thông báo thuê nhà!');
 //                    });
-                $notification[0]->delete();
-                toastr()->info('gui thong bao den cho nguoi thue nha');
-                return redirect()->route('admin.house');
+        $notification[0]->delete();
+        toastr()->info('gui thong bao den cho nguoi thue nha');
+        return redirect()->route('admin.house');
 //            }
 //        }
     }
@@ -119,6 +113,7 @@ class OrderController extends Controller
         $checkInTimestamp = strtotime($timeCheckin);
         if ($checkInTimestamp - $nowTimestamp >= 86400) {
             $order->delete();
+            toastr()->success('huy thue nha thanh cong');
             //không gửi được email thì chạy php artisan config:cache rồi chạy lại serve
             Mail::send('house.content', array('content' => 'Bạn đã hủy thuê nhà thành công . Hẹn bạn dịp khác'),
                 function ($message) {
@@ -126,6 +121,7 @@ class OrderController extends Controller
                 });
             //notification
         } else {
+            toastr()->warning('không thể hủy trước thời hạn 1 ngày');
             Mail::send('house.content', array('content' => 'Bạn không thể hủy vì trước thời hạn thuê nhà một ngày! Xin thông cảm'),
                 function ($message) {
                     $message->to('hiepken95@gmail.com', 'Visitor')->subject('Thông tin!');
