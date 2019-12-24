@@ -49,6 +49,7 @@ class HouseController extends Controller
 
     }
 
+    //code vẽ biểu đồ
     public function findByUser()
     {
         $houses = House::where('user_id', Auth::user()->id)->get();
@@ -57,14 +58,14 @@ class HouseController extends Controller
         $range = \Carbon\Carbon::now('Asia/Ho_Chi_Minh')->subMonth(12);
         $orderMonth = DB::table('orders')
             ->select(DB::raw('month(check_in) as getMonth'), DB::raw('SUM(pay_money) as moneyInMonth'))
-            ->where([['check_in', '>=', $range],['user_id','=',Auth::user()->id]])
+            ->where([['check_in', '>=', $range], ['user_id', '=', Auth::user()->id]])
             ->groupBy('getMonth')
             ->orderBy('getMonth', 'ASC')
             ->get();
         return view('admin.pages.house-management', [
             'houses' => $houses,
             'listHouseCategory' => $listHouseCategory,
-            'orderMonth'=>$orderMonth,
+            'orderMonth' => $orderMonth,
         ]);
     }
 
@@ -300,6 +301,12 @@ class HouseController extends Controller
         ));
     }
 
+    /**
+     * @param Request $request
+     * @param $id
+     * @return \Illuminate\Http\RedirectResponse
+     *
+     */
     public function updateStatus(Request $request, $id)
     {
         $house = $this->house->findOrFail($id);
@@ -321,10 +328,9 @@ class HouseController extends Controller
         return redirect()->route('admin.house', $id);
     }
 
-
-    public function bookHouse(DateCheckinValidate $request, $house_id)
+    public function showNotify()
     {
-        dd(1);
+        return view('admin.pages.notify');
     }
 
     public function book($house_id, DateCheckinValidate $request)
@@ -347,21 +353,11 @@ class HouseController extends Controller
         return redirect('/');
     }
 
-    public function showMaster()
-    {
-
-        return view('admin.layout.master');
-    }
-
-    public function showNotify()
-    {
-        return view('admin.pages.notify');
-    }
-
     public function showRented()
     {
         $user_id = Auth::user()->id;
         $orders = Order::where('user_id', $user_id)->get();
+
         foreach ($orders as $order) {
             $timeNow = Carbon::now('Asia/Ho_Chi_Minh');
             $nowTimestamp = strtotime($timeNow);
@@ -373,6 +369,7 @@ class HouseController extends Controller
                 $order->save();
             }
         }
+
         return view('admin.pages.rented', compact('orders'));
     }
 

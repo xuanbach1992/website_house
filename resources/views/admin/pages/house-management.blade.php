@@ -44,6 +44,7 @@
             </table>
         </div>
     </div>
+    <!--code script vẽ biểu đồ-->
     <script>
         $(document).ready(function () {
             let order = $('#container').data('order');

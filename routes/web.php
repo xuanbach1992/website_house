@@ -36,7 +36,6 @@ Route::prefix('/users')->group(function () {
 
 //code admin template
 Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
-//    Route::get('/','HouseController@showMaster')->name('admin.index');
     Route::get('/list-house', 'HouseController@findByUser')->name('admin.house');
     Route::get('/notify', 'HouseController@showNotify')->name('admin.notify.show');
     Route::get('/rented', 'HouseController@showRented')->name('admin.house.rented');
@@ -56,10 +55,12 @@ Route::get('/callback/{social}', 'SocialAuthController@callback');
 //search
 Route::get('/getDataByCitiesId', 'DistrictController@getDataByCitiesId')->name('getDataByCitiesId');
 
+Route::get('/property','HomeController@propertyDetails')->name('property');
+route::post('/rating/{id}','RatingController@saveRating')->name('house.rating')->middleware('auth');
+
+
 //code template
 //Route::get('/','HomeController@index')->name('index');
 Route::get('/contact','HomeController@contactTest')->name('contact');
 Route::get('/blog','HomeController@blogTest')->name('blog');
 Route::get('/about','HomeController@aboutTest')->name('about');
-Route::get('/property','HomeController@propertydetails')->name('property');
-route::post('/rating/{id}','RatingController@saveRating')->name('house.rating')->middleware('auth');

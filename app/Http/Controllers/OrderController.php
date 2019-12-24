@@ -61,8 +61,10 @@ class OrderController extends Controller
     public function noAcceptRentHouse($notificationId)
     {
         $notifications = Notification::all();
+
         foreach ($notifications as $notification) {
             if ($notification->uid == $notificationId) {
+
                 $dataNotification = json_decode($notification->data);
                 $house_id = $dataNotification->house_id;
 
@@ -73,6 +75,7 @@ class OrderController extends Controller
                 $checkout = $dataNotification->checkout;
                 $notification->delete();
                 Auth::user()->notify(new NoAcceptRent($house_id, $email_host, $house_title, $checkin, $checkout));
+                //gửi email
                 Mail::send('house.content', array('content' => 'Chủ nhà không đồng ý vì bạn quá xấu tính'),
                     function ($message) {
                         $message->to('hiepken95@gmail.com', 'Visitor')->subject('Thông báo thuê nhà!');
@@ -88,6 +91,7 @@ class OrderController extends Controller
     public function isReadNotification($notificationId)
     {
         $notifications = Notification::all();
+
         foreach ($notifications as $notification) {
             if ($notification->uid == $notificationId) {
                 $notification->delete();

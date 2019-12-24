@@ -90,7 +90,7 @@ class HomeController extends Controller
         return view('page.about');
     }
 
-    public function propertydetails(){
+    public function propertyDetails(){
         return view('page.property-details');
     }
 }
