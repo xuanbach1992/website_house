@@ -54,9 +54,17 @@ class HouseController extends Controller
         $houses = House::where('user_id', Auth::user()->id)->get();
         $listHouseCategory = $this->houseCategory->all();
 
+        $range = \Carbon\Carbon::now('Asia/Ho_Chi_Minh')->subMonth(12);
+        $orderMonth = DB::table('orders')
+            ->select(DB::raw('month(check_in) as getMonth'), DB::raw('SUM(pay_money) as moneyInMonth'))
+            ->where([['check_in', '>=', $range],['user_id','=',Auth::user()->id]])
+            ->groupBy('getMonth')
+            ->orderBy('getMonth', 'ASC')
+            ->get();
         return view('admin.pages.house-management', [
             'houses' => $houses,
-            'listHouseCategory' => $listHouseCategory
+            'listHouseCategory' => $listHouseCategory,
+            'orderMonth'=>$orderMonth,
         ]);
     }
 
@@ -332,15 +340,16 @@ class HouseController extends Controller
 
         toastr()->warning('đặt phòng, đang chờ chủ nhà xác nhận', 'message');
         \auth()->user()->notify(new SendNotificationToHouseHost($house_id, $email_host, $house_title, $request->checkin, $request->checkout, $totalPrice));
-        Mail::send('house.content', array('content' => 'Yêu cầu xác nhận thuê nhà từ khách hàng'),
-            function ($message) {
-                $message->to('hiepken95@gmail.com', 'Visitor')->subject('Xác nhận thuê nhà!');
-            });
+//        Mail::send('house.content', array('content' => 'Yêu cầu xác nhận thuê nhà từ khách hàng'),
+//            function ($message) {
+//                $message->to('hiepken95@gmail.com', 'Visitor')->subject('Xác nhận thuê nhà!');
+//            });
         return redirect('/');
     }
 
     public function showMaster()
     {
+
         return view('admin.layout.master');
     }
 
@@ -354,7 +363,7 @@ class HouseController extends Controller
         $user_id = Auth::user()->id;
         $orders = Order::where('user_id', $user_id)->get();
         foreach ($orders as $order) {
-            $timeNow = Carbon::now();
+            $timeNow = Carbon::now('Asia/Ho_Chi_Minh');
             $nowTimestamp = strtotime($timeNow);
             $timeCheckout = Carbon::create($order->check_out);
             $checkoutTimestamp = strtotime($timeCheckout);
