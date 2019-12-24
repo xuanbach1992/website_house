@@ -49,10 +49,10 @@
         $(document).ready(function () {
             let order = $('#container').data('order');
             let listOfValue = [];
-            let listOfMonth = [];
+            let listOfDay = [];
             order.forEach(function (element) {
-                listOfMonth.push(element.getMonth);
-                listOfValue.push(+element.moneyInMonth);
+                listOfDay.push(element.getDays);
+                listOfValue.push(+element.moneyInDays);
             });
             console.log(listOfValue);
             let chart = Highcharts.chart('container', {
@@ -65,7 +65,7 @@
                     title: {
                         text: 'Days'
                     },
-                    categories: listOfMonth,
+                    categories: listOfDay,
                 },
                 yAxis: {
                     title: {
