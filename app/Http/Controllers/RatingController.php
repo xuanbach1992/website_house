@@ -11,6 +11,7 @@ use phpDocumentor\Reflection\DocBlock\Description;
 
 class RatingController extends Controller
 {
+    //code đánh giá nhà bằng sao
     public function saveRating(Request $request, $id)
     {
         $user = Auth::user();
