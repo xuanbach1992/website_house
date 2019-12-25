@@ -40,7 +40,7 @@ $notify->type==='App\Notifications\SendNotificationToHouseHost')
                             <td> {{ json_decode($notify->data)->house_title}}</td>
                             <td> {{ json_decode($notify->data)->checkin}}</td>
                             <td> {{ json_decode($notify->data)->checkout}}</td>
-                            <td> Tổng tiền : <br>{{ json_decode($notify->data)->total_price}}</td>
+                            <td> Tổng tiền : <br>{{ number_format(json_decode($notify->data)->total_price)}} đ</td>
                             <td>
                                 <a href="{{route('house.notifi.accept',$notify->uid)}}" class="btn btn-primary">Chấp
                                     nhận</a>&nbsp;&nbsp;
