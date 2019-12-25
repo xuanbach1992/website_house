@@ -139,7 +139,7 @@
                                                 <span class="fa fa-star"
                                                       style="font-size: 60px;color: #ff9705;margin: 0 auto; text-align: center;">
 
-                                                    {{floor($starMedium)}}
+                                                    {{round($starMedium,1)}}
                                                 </span>
                                             </div>
 
@@ -226,47 +226,112 @@
                                                 @endif
                                             @endforeach
                                             {{ $listStar->links() }}
+                                            <div>
+                                                <h5><span class="fa fa-bed"> Phòng ngủ :
+                                {{$house->bedrooms}}
+                        </span></h5>
+                                            </div>
+                                            <br>
+                                            <div>
+                                                <b class="fa fa-book"> THÔNG TIN PHÒNG ỐC :</b>
+                                                <p>- Tổng diện tích : 150 m2</p>
+                                                <p>- Không gian sống: 140 m2</p>
+                                                <p>- {{$house->bedrooms}} phòng ngủ (3 phòng ngủ chính và 1 phòng ngủ
+                                                    phụ)</p>
+                                                <p>- {{$house->bathroom}} phòng tắm</p>
+                                                <p>- 1 phòng cho người giúp việc/ hoặc tài xế có nhà tắm và WC riêng</p>
+                                                <p>- 1 nhà bếp lớn</p>
+                                                <p>- 1 phòng khách lớn</p>
+                                                <p>- Hồ bơi nước mặn riêng biệt</p>
+                                            </div>
+                                            <br>
+                                            <div>
+                                                <h5 class="fa fa-smile-o"><b> Mô tả : </b></h5>
+                                                <p style="font-size: 15px">{{$house->description}}</p>
+                                            </div>
+                                            <br>
+                                            <div>
+                                                <h5><b class="fa fa-legal"> Nội quy và chính sách về chỗ ở</b></h5>
+                                                <h6><b>Chính sách hủy phòng</b></h6>
+                                                <strong>Nghiêm ngặt:</strong>
+                                                Hoàn lại 50% giá trị đặt phòng khi khách hàng huỷ phòng trong vòng 48h
+                                                sau khi đặt phòng thành
+                                                công và trước 14 ngày so với thời gian check-in. Sau đó, hủy phòng trước
+                                                14 ngày so với thời
+                                                gian check-in, được hoàn lại 50% tổng số tiền đã trả (trừ phí dịch vụ).
+                                                Chi tiết
+                                            </div>
+                                            <br>
+                                            <div>
+                                                <h4><b class="fa fa-exclamation"> Lưu ý đặc biệt</b></h4>
+                                                <h5>PHỤ THU (nếu phát sinh đi thêm người):</h5>
+                                                <b>- 1,000,000 VNĐ/đêm/ người lớn</b>
+                                                <b>- 500,000 VNĐ/đêm/ trẻ em từ 2 tuổi -> 12 tuổi/ đêm</b>
+                                                <b>- Sạch sẽ gọn gàng, ngăn nắp</b>
+                                                <b>- Không mang vật nuôi</b>
+                                                <b>- Không hút thuốc trong phòng</b>
+                                            </div>
+                                        </div>
+                                        <hr>
+                                        <!--Code mới-->
+                                        <!--End-->
+                                        <hr>
+                                        <div class="col-md-12">
+                                            <div class="container">
+                                                <div class="row">
+                                                    <div class="col-sm-12 col-md-12 col-lg-12 mx-auto">
+                                                        <div class="card card-signin my-5">
+                                                            <div class="card-body">
+                                                                <h3><b>Đánh Giá Sản Phẩm</b></h3>
+                                                                <hr>
+                                                                <div class="compolent_rating_content"
+                                                                     style="display: flex;align-items:center">
+                                                                    <div class="rating_item"
+                                                                         style="width: 20%;margin: 0 20px">
+                                                <span class="fa fa-star"
+                                                      style="font-size: 60px;color: #ff9705;margin: 0 auto; text-align: center;">{{$starMedium}}</span>
+                                                                    </div>
 
-
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        {{--                <div class="card" style="width: 23rem;">--}}
+                                        {{--                    <div class="card-body">--}}
+                                        <div class="container">
+                                            <div class="row">
+                                                <div class="col-sm-12 col-md-12 col-lg-12 mx-auto">
+                                                    <div class="card card-signin my-5">
+                                                        <div class="card-body">
+                                                            <h3><b>Thông Tin Chủ Nhà</b></h3>
+                                                            <hr>
+                                                            @if(!$house->user->images)
+                                                                <img src="source/images/avatar.jpeg"
+                                                                     style="border-radius: 300px;display: block; margin-left: auto; margin-right: auto"
+                                                                     class="img-circle" alt="" width="150" height="150">
+                                                            @else
+                                                                <img
+                                                                    src="{{ asset('storage/rooms/'. $house->user->images) }}"
+                                                                    style="border-radius: 300px;display: block; margin-left: auto; margin-right: auto"
+                                                                    class="img-circle" alt="" width="150" height="150">
+                                                            @endif
+                                                            <p><b>Name :</b> {{$house->user->name}}</p>
+                                                            <p><b>Phone :</b> {{$house->user->phone}}</p>
+                                                            <p><b>Email :</b> {{$house->user->email}}</p>
+                                                            <p><b>Address :</b> {{$house->user->address}}</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                {{--                <div class="card" style="width: 23rem;">--}}
-                {{--                    <div class="card-body">--}}
-                <div class="container">
-                    <div class="row">
-                        <div class="col-sm-12 col-md-12 col-lg-12 mx-auto">
-                            <div class="card card-signin my-5">
-                                <div class="card-body">
-                                    <h3><b>Thông Tin Chủ Nhà</b></h3>
-                                    <hr>
-                                    @if(!$house->user->images)
-                                        <img src="source/images/avatar.jpeg"
-                                             style="border-radius: 300px;display: block; margin-left: auto; margin-right: auto"
-                                             class="img-circle" alt="" width="150" height="150">
-                                    @else
-                                        <img src="{{ asset('storage/rooms/'. $house->user->images) }}"
-                                             style="border-radius: 300px;display: block; margin-left: auto; margin-right: auto"
-                                             class="img-circle" alt="" width="150" height="150">
-                                    @endif
-                                    <p><b>Name :</b> {{$house->user->name}}</p>
-                                    <p><b>Phone :</b> {{$house->user->phone}}</p>
-                                    <p><b>Email :</b> {{$house->user->email}}</p>
-                                    <p><b>Address :</b> {{$house->user->address}}</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
     {{--    </div>--}}
     {{--    </div>--}}
 

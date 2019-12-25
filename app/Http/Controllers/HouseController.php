@@ -47,7 +47,7 @@ class HouseController extends Controller
         $this->roomCategory = $roomCategory;
         $this->city = $city;
         $this->district = $district;
-        $this->star=$star;
+        $this->star = $star;
 
     }
 
@@ -230,28 +230,25 @@ class HouseController extends Controller
         $listCities = $this->city->all();
         $listDistrict = $this->district->all();
         $listStar = $this->star->paginate(5);
-
+        $starMedium=0;
         $house_id = $house->id;
-        $countStar = 0;
-        $allStarInHouseDetail = 0;
         $stars = Star::where('house_id', $house_id)->get();
-        foreach ($stars as $star) {
-            $allStarInHouseDetail += $star->number;
-            $countStar++;
+        if ($stars == null) {
+            $countStar = 0;
+            $allStarInHouseDetail = 0;
+            foreach ($stars as $star) {
+                $allStarInHouseDetail += $star->number;
+                $countStar++;
+            }
+            $starMedium = $allStarInHouseDetail / $countStar;
         }
-        $starMedium=$allStarInHouseDetail/$countStar;
-
-
-
-
-
         return view('house.details', compact(
             'house',
             'listCities',
             'orders',
             'listRoomCategory',
             'listHouseCategory',
-            'listDistrict','listStar','starMedium'));
+            'listDistrict', 'listStar', 'starMedium'));
     }
 
     /**
@@ -331,6 +328,10 @@ class HouseController extends Controller
 
         toastr()->warning('đặt phòng, đang chờ chủ nhà xác nhận', 'message');
         \auth()->user()->notify(new SendNotificationToHouseHost($house_id, $email_host, $house_title, $request->checkin, $request->checkout, $totalPrice));
+        Mail::send('house.content', array('content' => 'Yêu cầu xác nhận thuê nhà từ khách hàng'),
+            function ($message) {
+                $message->to('hiepken95@gmail.com', 'Visitor')->subject('Xác nhận thuê nhà!');
+            });
         return redirect('/');
     }
 
