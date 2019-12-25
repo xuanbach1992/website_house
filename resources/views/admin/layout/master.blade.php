@@ -13,8 +13,7 @@
     <!-- Ionicons -->
     <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
     <!-- Tempusdominus Bbootstrap 4 -->
-    <link rel="stylesheet"
-          href="{{asset('sourceAdmin/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css')}}">
+    <link rel="stylesheet" href="{{asset('sourceAdmin/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css')}}">
     <!-- iCheck -->
     <link rel="stylesheet" href="{{asset('sourceAdmin/plugins/icheck-bootstrap/icheck-bootstrap.min.css')}}">
     <!-- JQVMap -->
@@ -110,22 +109,16 @@
                  style="opacity: .8">
             <span class="brand-text">Trang cá nhân</span>
         </a>
+
         <!-- Sidebar -->
         <div class="sidebar">
             <!-- Sidebar user panel (optional) -->
             <div class="user-panel mt-3 pb-3 mb-3 d-flex">
                 <div class="image">
-                    <img  style="width: 150px;height:150px" src="
-                    @if(auth()->user()->images!=null)
-                    {{asset('/storage/rooms/'.auth()->user()->images)}}
-                    @else
-                        sourceAdmin/dist/img/defaultAvatar.png
-                    @endif
-                        " class="img-circle elevation-2" alt="User Image">
+                    <img src="sourceAdmin/dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
                 </div>
                 <div class="info">
-                    <a href="{{route('user.edit')}}"
-                       class="d-block">{{\Illuminate\Support\Facades\Auth::user()->name}}</a>
+                    <a href="{{route('user.edit')}}" class="d-block">{{\Illuminate\Support\Facades\Auth::user()->name}}</a>
                 </div>
             </div>
 
@@ -147,7 +140,7 @@
                             <li class="nav-item">
                                 <a href="{{route('admin.house')}}" class="nav-link active">
                                     <i class="far fa fa-home nav-icon"></i>
-                                    <p>Nhà Của Tôi</p>
+                                    <p>Nhà Của Tôi</p>admin.house.rented
                                 </a>
                             </li>
                             <li class="nav-item">
