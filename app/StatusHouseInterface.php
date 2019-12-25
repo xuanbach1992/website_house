@@ -11,9 +11,11 @@ namespace App;
 
 interface StatusHouseInterface
 {
-    const CHUACHOTHUE = 1;
-    const DACHOTHUE = 2;
+    const DACHECKIN = 1;
+    const CHECKOUT = 2;
     const CHOXACNHAN = 3;
-    const THANHCONG = 4;
-    const KETTHUC = 5;
+    const DATTHANHCONG = 4;
+    const HOANTHANH = 5;
+    const DANGTHUE = 6;
+    const KHONGCHECKIN = 7;
 }

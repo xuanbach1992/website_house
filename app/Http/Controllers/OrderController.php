@@ -1,5 +1,7 @@
 <?php
+
 namespace App\Http\Controllers;
+
 use App\House;
 use App\Notification;
 use App\Notifications\AcceptRentHouse;
@@ -11,12 +13,14 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
+
 class OrderController extends Controller
 {
     public function __construct()
     {
         //
     }
+
     public function acceptRentHouse($notificationId)
     {
         $notification = Notification::where('uid', $notificationId)->get();
@@ -31,7 +35,7 @@ class OrderController extends Controller
         $order->house_id = $house_id;
 //                $email_host=User::find($order->user_id)->email;
         $order->user_id = $notification[0]->notifiable_id;
-        $order->status = StatusHouseInterface::THANHCONG;
+        $order->status = StatusHouseInterface::DATTHANHCONG;
         $order->save();
         \auth()->user()->notify(new AcceptRentHouse($house_id, $email_receive, $house_title, $dataNotification->checkin, $dataNotification->checkout));
         toastr()->success('đang gửi thông báo cho người thuê');
@@ -46,6 +50,7 @@ class OrderController extends Controller
 //            }
 //        }
     }
+
     public function noAcceptRentHouse($notificationId)
     {
         $notification = Notification::where('uid', $notificationId)->get();
@@ -69,12 +74,14 @@ class OrderController extends Controller
         return redirect()->route('admin.notify.show');
 
     }
+
     public function isReadNotification($notificationId)
     {
         $notification = Notification::where('uid', $notificationId)->get();
         $notification[0]->delete();
         return redirect()->route('admin.notify.show');
     }
+
     public function unRentHouse($id)
     {
         $order = Order::findOrFail($id);
@@ -91,6 +98,7 @@ class OrderController extends Controller
                 function ($message) {
                     $message->to('hiepken95@gmail.com', 'Visitor')->subject('Thông tin!');
                 });
+            return redirect()->route('admin.house.rented');
             //notification
         } else {
             toastr()->warning('không thể hủy trước thời hạn 1 ngày');
@@ -98,9 +106,10 @@ class OrderController extends Controller
                 function ($message) {
                     $message->to('hiepken95@gmail.com', 'Visitor')->subject('Thông tin!');
                 });
+            return back();
         }
-        return redirect()->route('admin.house.rented');
     }
+
     public function showRentDetailByHouse($house_id)
     {
         $house_name = House::find($house_id)->name;

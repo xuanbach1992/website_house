@@ -28,13 +28,17 @@
                         <td>{{\Carbon\Carbon::create($order->check_out)->format('d/m/Y')}}</td>
                         <td>{{number_format($order->pay_money)}} đ</td>
                         <td>
-                            @if($order->status===\App\StatusHouseInterface::KETTHUC)
-                                Đã thuê xong
-                            @elseif($order->status===\App\StatusHouseInterface::THANHCONG)
-                                Đang sẵn sàng
+                            @if($order->status===\App\StatusHouseInterface::HOANTHANH)
+                               Đã kết thúc
+                            @elseif($order->status===\App\StatusHouseInterface::DATTHANHCONG)
+                                Chưa đến ngày
                                 <a href="{{route('order.house.delete',$order->id)}}" class="btn btn-danger"
                                 onclick="return confirm('Không thể hủy nhà trước ngày thuê 1 ngày, bạn chắc chứ?')"
                                 >Hủy</a>
+                                @elseif($order->status===\App\StatusHouseInterface::DANGTHUE)
+                                Đang trong thời gian thuê
+                                <a href="{{route('user.checkin.house',$order->id)}}" onclick="return confirm('check in')"
+                                >Check In</a>
                             @endif
                         </td>
                     <tr>

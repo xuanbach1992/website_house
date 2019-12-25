@@ -19,6 +19,9 @@ Route::prefix('/houses')->group(function () {
     Route::get('/is-read/{uid}', 'OrderController@isReadNotification')->name('house.notifi.isread')->middleware('auth');
     Route::get('/detail/{id}', 'HouseController@showHouseDetails')->name('house.detail');
     Route::get('/searchHouse', 'HouseController@search')->name('search');
+    Route::get('/check-in/{id}', 'HouseController@userCheckinHouse')->name('user.checkin.house')->middleware('auth');
+    Route::get('/check-out/{id}', 'HouseController@userCheckoutHouse')->name('user.checkout.house')->middleware('auth');
+
 });
 Route::prefix('/users')->group(function () {
 //    Route::get('/', 'HomeController@index')->name('index');

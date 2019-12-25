@@ -34,13 +34,13 @@
                             <div class="form-group">
                                 <h6>Trạng thái : </h6>
                                 <select name="status" class="custom-select mr-sm-2">
-                                    <option value="{{\App\StatusHouseInterface::CHUACHOTHUE}}"
-                                            @if(\App\StatusHouseInterface::CHUACHOTHUE == $house->status)
+                                    <option value="{{\App\StatusHouseInterface::DACHECKIN}}"
+                                            @if(\App\StatusHouseInterface::DACHECKIN == $house->status)
                                                 selected
                                             @endif
                                     >Chưa cho thuê</option>
-                                    <option value="{{\App\StatusHouseInterface::DACHOTHUE}}"
-                                            @if(\App\StatusHouseInterface::DACHOTHUE == $house->status)
+                                    <option value="{{\App\StatusHouseInterface::CHECKOUT}}"
+                                            @if(\App\StatusHouseInterface::CHECKOUT == $house->status)
                                                 selected
                                             @endif
                                     >Đã cho thuê</option>
