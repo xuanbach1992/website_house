@@ -107,7 +107,7 @@
             <img src="sourceAdmin/dist/img/AdminLTELogo.png" alt="AdminLTE Logo"
                  class="brand-image img-circle elevation-3"
                  style="opacity: .8">
-            <span class="brand-text">Trang cá nhân</span>
+            <span class="brand-text">{{\Illuminate\Support\Facades\Auth::user()->name}}'s pages</span>
         </a>
 
         <!-- Sidebar -->
@@ -115,10 +115,15 @@
             <!-- Sidebar user panel (optional) -->
             <div class="user-panel mt-3 pb-3 mb-3 d-flex">
                 <div class="image">
-                    <img src="sourceAdmin/dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
-                </div>
-                <div class="info">
-                    <a href="{{route('user.edit')}}" class="d-block">{{\Illuminate\Support\Facades\Auth::user()->name}}</a>
+                    <a href="{{route('user.edit')}}">
+                    <img  style="width: 150px;height:150px" src="
+
+                        @if(!\Illuminate\Support\Facades\Auth::user()->images)
+                       source/images/avatar.jpeg
+                        @else
+                       {{ asset('storage/rooms/'. \Illuminate\Support\Facades\Auth::user()->images) }}
+                        @endif
+                        " class="img-circle elevation-2" alt="User Image"></a>
                 </div>
             </div>
 
@@ -140,7 +145,7 @@
                             <li class="nav-item">
                                 <a href="{{route('admin.house')}}" class="nav-link active">
                                     <i class="far fa fa-home nav-icon"></i>
-                                    <p>Nhà Của Tôi</p>admin.house.rented
+                                    <p>Nhà Của Tôi</p>
                                 </a>
                             </li>
                             <li class="nav-item">

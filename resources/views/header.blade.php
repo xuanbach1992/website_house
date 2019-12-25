@@ -128,8 +128,8 @@
 
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link fa fa-bell"
-                                   style="font-size:24px" href="#" role="button"
-                                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                   style="font-size:24px" href="{{route('admin.notify.show')}}" role="button"
+                                >
                                     <span class="caret badge">
 <?php $countNotice = 0 ?>
                                         @foreach (\App\Notification::all() as $notice)
@@ -141,29 +141,29 @@
                                     </span>
                                 </a>
 
-                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    @foreach(\App\Notification::all() as $notify)
-                                        @if(json_decode($notify->data)->receive==\Illuminate\Support\Facades\Auth::user()->email&&
-$notify->type==='App\Notifications\SendNotificationToHouseHost')
-                                        <a href="{{route('admin.notify.show')}}">
-                                            Yêu cầu thuê phòng từ
-                                            {{json_decode($notify->data)->sender}}
-                                        </a><br>
-                                        @elseif(json_decode($notify->data)->receive==\Illuminate\Support\Facades\Auth::user()->email&&
-$notify->type==='App\Notifications\NoAcceptRent')
-                                        <a href="{{route('admin.notify.show')}}">
-                                            Yêu cầu thuê không được đồng ý từ
-                                            {{json_decode($notify->data)->sender}}
-                                        </a><br>
-                                        @elseif(json_decode($notify->data)->receive==\Illuminate\Support\Facades\Auth::user()->email&&
-$notify->type==='App\Notifications\AcceptRentHouse')
-                                        <a href="{{route('admin.notify.show')}}">
-                                            Bạn được chủ nhà chấp nhận cho thuê
-                                            {{json_decode($notify->data)->sender}}
-                                        </a><br>
-                                        @endif
-                                    @endforeach
-                                </div>
+{{--                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">--}}
+{{--                                    @foreach(\App\Notification::all() as $notify)--}}
+{{--                                        @if(json_decode($notify->data)->receive==\Illuminate\Support\Facades\Auth::user()->email&&--}}
+{{--$notify->type==='App\Notifications\SendNotificationToHouseHost')--}}
+{{--                                        <a href="{{route('admin.notify.show')}}">--}}
+{{--                                            Yêu cầu thuê phòng từ--}}
+{{--                                            {{json_decode($notify->data)->sender}}--}}
+{{--                                        </a><br>--}}
+{{--                                        @elseif(json_decode($notify->data)->receive==\Illuminate\Support\Facades\Auth::user()->email&&--}}
+{{--$notify->type==='App\Notifications\NoAcceptRent')--}}
+{{--                                        <a href="{{route('admin.notify.show')}}">--}}
+{{--                                            Yêu cầu thuê không được đồng ý từ--}}
+{{--                                            {{json_decode($notify->data)->sender}}--}}
+{{--                                        </a><br>--}}
+{{--                                        @elseif(json_decode($notify->data)->receive==\Illuminate\Support\Facades\Auth::user()->email&&--}}
+{{--$notify->type==='App\Notifications\AcceptRentHouse')--}}
+{{--                                        <a href="{{route('admin.notify.show')}}">--}}
+{{--                                            Bạn được chủ nhà chấp nhận cho thuê--}}
+{{--                                            {{json_decode($notify->data)->sender}}--}}
+{{--                                        </a><br>--}}
+{{--                                        @endif--}}
+{{--                                    @endforeach--}}
+{{--                                </div>--}}
                             </li>
 
                             <li class="nav-item dropdown">
