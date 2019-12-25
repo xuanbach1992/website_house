@@ -1,16 +1,12 @@
 <?php
-
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
-
 //route khoong qua controller
 //Route::get('/', function () {
 //    return view('page.product');
 //})->name('index');
 Route::get('/', 'HouseController@listHouses')->name('index');
-
 Auth::routes();
-
 Route::prefix('/houses')->group(function () {
 //    Route::get('/','HouseController@listHouses')->name('product');
     Route::get('/create', 'HouseController@create')->name('house.showFormCreate')->middleware('auth');
@@ -24,52 +20,34 @@ Route::prefix('/houses')->group(function () {
     Route::get('/detail/{id}', 'HouseController@showHouseDetails')->name('house.detail');
     Route::get('/searchHouse', 'HouseController@search')->name('search');
 });
-
 Route::prefix('/users')->group(function () {
 //    Route::get('/', 'HomeController@index')->name('index');
     Route::get('/change-password', 'HomeController@showChangePass')->name('showChangePassword');
     Route::post('/change-password', 'HomeController@changePassword')->name('change.password');
     Route::get('/change-profile', 'HomeController@showFormEdit')->name('user.edit');
     Route::post('/change-profile', 'HomeController@updateSuccess')->name('user.update');
-
 });
-
 //code admin template
 Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
-//    Route::get('/','HouseController@showMaster')->name('admin.index');
     Route::get('/list-house', 'HouseController@findByUser')->name('admin.house');
     Route::get('/notify', 'HouseController@showNotify')->name('admin.notify.show');
     Route::get('/rented', 'HouseController@showRented')->name('admin.house.rented');
-
     Route::get('/edit/{id}', 'HouseController@showEdit')->name('house.showEdit');
     Route::post('/edit/{id}', 'HouseController@updateStatus')->name('house.update');
     Route::get('/delete/{id}', 'HouseController@delete')->name('house.delete');
     Route::get('/un-rent-house/{id}', 'OrderController@unRentHouse')->name('order.house.delete');
     Route::get('/rent-detail/{id}', 'OrderController@showRentDetailByHouse')->name('house.show.rent.detail');
 });
-
-
 //đăng nhập bằng facebook
 Route::get('/redirect/{social}', 'SocialAuthController@redirect');
 Route::get('/callback/{social}', 'SocialAuthController@callback');
-
 //search
 Route::get('/getDataByCitiesId', 'DistrictController@getDataByCitiesId')->name('getDataByCitiesId');
-
+Route::get('/property','HomeController@propertyDetails')->name('property');
+route::post('/rating/{id}','RatingController@saveRating')->name('house.rating')->middleware('auth');
+route::post('/comment/{id}','CommentController@replyStar')->name('house.comment')->middleware('auth');
 //code template
 //Route::get('/','HomeController@index')->name('index');
-
 Route::get('/contact','HomeController@contactTest')->name('contact');
 Route::get('/blog','HomeController@blogTest')->name('blog');
 Route::get('/about','HomeController@aboutTest')->name('about');
-Route::get('/property','HomeController@propertydetails')->name('property');
-route::post('/rating/{id}','RatingController@saveRating')->name('house.rating')->middleware('auth');
-
-Route::get('/contact', 'HomeController@contactTest')->name('contact');
-Route::get('/blog', 'HomeController@blogTest')->name('blog');
-Route::get('/about', 'HomeController@aboutTest')->name('about');
-Route::get('/property', 'HomeController@propertydetails')->name('property');
-
-
-
-

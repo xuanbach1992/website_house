@@ -11,7 +11,7 @@ class User extends Authenticatable
     use Notifiable;
 
     protected $fillable = [
-        'id', 'name', 'email', 'password', 'phone', 'address','provider',
+        'id', 'name', 'email', 'password', 'phone', 'address', 'provider',
     ];
 
     protected $hidden = [
@@ -21,14 +21,22 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
     public function orders()
     {
         return $this->hasMany('App\Order');
     }
-//    public function houses(){
-//        return $this->belongsToMany(House::class,'orders','user_id','house_id');
-//    }
-public function star(){
+    public function houses(){
+        return $this->belongsTo(House::class);
+    }
+
+    public function star()
+    {
         return $this->hasMany('App\Star');
-}
+    }
+
+    public function comment()
+    {
+        return $this->hasMany('App\Comment');
+    }
 }
