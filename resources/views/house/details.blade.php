@@ -41,16 +41,16 @@
                 <div class="card-body">
                     <form action="{{route('house.book.notify',$house->id)}}" method="post">
                         @csrf
-                        <div class="ml-2"
+                        <div class="ml-2 col-md-12"
                              style="text-align: left; font-size: 40px; font-weight: bold; float: left">{{number_format($house->price)}}
                             đ /đêm
                         </div>
-                        <div class="ml-2">
-                            <input type="date" class="mr-2" name="checkin" style="border-radius: 10px">
+                        <div class="ml-2 row">
+                            <input type="date" class="mr-5 col-5" name="checkin" style="border-radius: 10px">
                             @if($errors->has('checkin'))
                                 <span class="text-danger">{{$errors->first('checkin')}}</span>
                             @endif
-                            <input type="date" class="ml-2" name="checkout" style="border-radius: 10px">
+                            <input type="date" class="mr-l col-5" name="checkout" style="border-radius: 10px">
                             @if($errors->has('checkout'))
                                 <span class="text-danger">{{$errors->first('checkout')}}</span>
                             @endif
@@ -63,7 +63,7 @@
                                 @endif
 
                             @endforeach
-                            <div class="col-md-12 mt-2">
+                            <div class="col-md-12 mt-3">
                                 <button type="submit" style="font-size:25px" class="btn btn-primary btn-sm">Đặt phòng
                                 </button>
                             </div>
