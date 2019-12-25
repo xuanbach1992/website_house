@@ -28,17 +28,23 @@
                         <td>{{\Carbon\Carbon::create($order->check_out)->format('d/m/Y')}}</td>
                         <td>{{number_format($order->pay_money)}} đ</td>
                         <td>
-                            @if($order->status===\App\StatusHouseInterface::HOANTHANH)
-                               Đã kết thúc
-                            @elseif($order->status===\App\StatusHouseInterface::DATTHANHCONG)
+                            @if(\Carbon\Carbon::create($order->check_in)->timestamp
+                           >=\Carbon\Carbon::parse(\Carbon\Carbon::now('Asia/Ho_Chi_Minh'))->timestamp)
                                 Chưa đến ngày
                                 <a href="{{route('order.house.delete',$order->id)}}" class="btn btn-danger"
-                                onclick="return confirm('Không thể hủy nhà trước ngày thuê 1 ngày, bạn chắc chứ?')"
+                                   onclick="return confirm('Không thể hủy nhà trước ngày thuê 1 ngày, bạn chắc chứ?')"
                                 >Hủy</a>
-                                @elseif($order->status===\App\StatusHouseInterface::DANGTHUE)
-                                Đang trong thời gian thuê
-                                <a href="{{route('user.checkin.house',$order->id)}}" onclick="return confirm('check in')"
-                                >Check In</a>
+                            @elseif((\Carbon\Carbon::create($order->check_in)->timestamp <=
+                                       \Carbon\Carbon::parse(\Carbon\Carbon::now('Asia/Ho_Chi_Minh'))->timestamp))
+                                @if((\Carbon\Carbon::create($order->check_out)->timestamp >=
+                                       \Carbon\Carbon::parse(\Carbon\Carbon::now('Asia/Ho_Chi_Minh'))->timestamp))
+                                    Đang trong thời gian thuê
+                                    <a href="{{route('user.checkin.house',$order->id)}}"
+                                       onclick="return confirm('check in')"
+                                    >Check in</a>
+                                @else
+                                    Đã kết thúc
+                                @endif
                             @endif
                         </td>
                     <tr>

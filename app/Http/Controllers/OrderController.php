@@ -7,7 +7,7 @@ use App\Notification;
 use App\Notifications\AcceptRentHouse;
 use App\Notifications\NoAcceptRent;
 use App\Order;
-use App\StatusHouseInterface;
+use App\StatusInterface;
 use App\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -35,7 +35,7 @@ class OrderController extends Controller
         $order->house_id = $house_id;
 //                $email_host=User::find($order->user_id)->email;
         $order->user_id = $notification[0]->notifiable_id;
-        $order->status = StatusHouseInterface::DATTHANHCONG;
+        $order->status = StatusInterface::DATTHUETHANHCONG;
         $order->save();
         \auth()->user()->notify(new AcceptRentHouse($house_id, $email_receive, $house_title, $dataNotification->checkin, $dataNotification->checkout));
         toastr()->success('đang gửi thông báo cho người thuê');
@@ -107,6 +107,29 @@ class OrderController extends Controller
                     $message->to('hiepken95@gmail.com', 'Visitor')->subject('Thông tin!');
                 });
             return back();
+        }
+    }
+
+    public function functionAlwaysRun()
+    {
+        $orders = Order::all();
+        $timeNow = Carbon::now('Asia/Ho_Chi_Minh');
+        foreach ($orders as $order) {
+            $nowTimestamp = Carbon::parse($timeNow)->timestamp;
+            $checkInTimestamp = Carbon::parse($order->check_in)->timestamp;
+            $checkoutTimestamp = Carbon::parse($order->check_out)->timestamp;
+            if ($nowTimestamp >= $checkInTimestamp) {
+                if ($nowTimestamp <= $checkoutTimestamp) {
+                    $order->status = StatusInterface::VANDANGTHUE;
+                    $order->save();
+                } else {
+                    $order->status = StatusInterface::DAHOANTHANH;
+                    $order->save();
+                }
+            } else {
+                $order->status = StatusInterface::DATTHUETHANHCONG;
+                $order->save();
+            }
         }
     }
 

@@ -269,5 +269,6 @@
 <script src="{{asset('sourceAdmin/dist/js/pages/dashboard.js')}}"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="{{asset('sourceAdmin/dist/js/demo.js')}}"></script>
+{!! toastr()->render() !!}
 </body>
 </html>

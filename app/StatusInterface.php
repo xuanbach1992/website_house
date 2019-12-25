@@ -9,13 +9,16 @@
 namespace App;
 
 
-interface StatusHouseInterface
+interface StatusInterface
 {
-    const DACHECKIN = 1;
-    const CHECKOUT = 2;
+    const NHANPHONG = 1;
+    const TRAPHONG = 2;
+
     const CHOXACNHAN = 3;
-    const DATTHANHCONG = 4;
-    const HOANTHANH = 5;
-    const DANGTHUE = 6;
+
+    const DATTHUETHANHCONG = 4;
+    const DAHOANTHANH = 5;
+    const VANDANGTHUE = 6;
+
     const KHONGCHECKIN = 7;
 }

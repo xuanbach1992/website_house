@@ -14,7 +14,7 @@ use App\Notifications\SendNotificationToHouseHost;
 use App\Order;
 use App\RoomCategory;
 use App\Star;
-use App\StatusHouseInterface;
+use App\StatusInterface;
 use App\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -318,13 +318,13 @@ class HouseController extends Controller
         $house = $this->house->findOrFail($id);
         switch ($request->status) {
             case 1 :
-                $house->status = StatusHouseInterface::DACHECKIN;
+                $house->status = StatusInterface::NHANPHONG;
                 break;
             case 2 :
-                $house->status = StatusHouseInterface::CHECKOUT;
+                $house->status = StatusInterface::TRAPHONG;
                 break;
             case 3 :
-                $house->status = StatusHouseInterface::CHOXACNHAN;
+                $house->status = StatusInterface::CHOXACNHAN;
                 break;
         }
         $house->save();
@@ -376,24 +376,23 @@ class HouseController extends Controller
     {
         $user_id = Auth::user()->id;
         $orders = Order::where('user_id', '=', $user_id)
-            ->orderBy('status', 'ASC')
+            ->orderBy('id', 'DESC')
             ->get();
         foreach ($orders as $order) {
             $timeNow = Carbon::now('Asia/Ho_Chi_Minh');
-            $nowTimestamp = Carbon::parse($timeNow)->timestamp;
+            $nowTimestamp = Carbon::parse(Carbon::now('Asia/Ho_Chi_Minh'))->timestamp;
             $checkInTimestamp = Carbon::parse($order->check_in)->timestamp;
             $checkoutTimestamp = Carbon::parse($order->check_out)->timestamp;
-//            dd($nowTimestamp-$checkoutTimestamp);
             if ($nowTimestamp >= $checkInTimestamp) {
                 if ($nowTimestamp <= $checkoutTimestamp) {
-                    $order->status = StatusHouseInterface::DANGTHUE;
+                    $order->status = StatusInterface::VANDANGTHUE;
                     $order->save();
                 } else {
-                    $order->status = StatusHouseInterface::HOANTHANH;
+                    $order->status = StatusInterface::DAHOANTHANH;
                     $order->save();
                 }
             } else {
-                $order->status = StatusHouseInterface::DATTHANHCONG;
+                $order->status = StatusInterface::DATTHUETHANHCONG;
                 $order->save();
             }
         }
@@ -404,8 +403,10 @@ class HouseController extends Controller
     {
         $order = Order::findOrFail($order_id);
         $house=House::findOrFail($order->house_id);
-        $house->status=StatusHouseInterface::DACHECKIN;
+        $house->status=StatusInterface::NHANPHONG;
         $house->save();
+        $order->status=StatusInterface::VANDANGTHUE;
+        $order->save();
         toastr()->success('xin chao quy khach da den thue nha');
         return back();
     }
@@ -414,7 +415,9 @@ class HouseController extends Controller
     {
         $order = Order::findOrFail($order_id);
         $house=House::findOrFail($order->house_id);
-        $house->status=StatusHouseInterface::CHECKOUT;
+        $house->status=StatusInterface::TRAPHONG;
+        $order->status=StatusInterface::DATTHUETHANHCONG ;
+        $order->save();
         $house->save();
         toastr()->success('Xin chao va hen gap lai');
         return back();

@@ -57,7 +57,7 @@
                         </div>
                         <div>
                             @foreach($orders as $order)
-                                @if($order->house_id===$house->id&&$order->status==\App\StatusHouseInterface::DATTHANHCONG)
+                                @if($order->house_id===$house->id&&$order->status==\App\StatusInterface::DATTHUETHANHCONG)
                                     <span class="text text-danger">** Đã được thuê {{\Carbon\Carbon::create($order->check_in)->format('d/m/Y')}}
                                         đến ngày {{\Carbon\Carbon::create($order->check_out)->format('d/m/Y')}}</span>
                                     <br>
@@ -96,17 +96,21 @@
         <div class="col-md-9 mt-5 row">
             <h4><b style="color: #0037ff ">{{$house->name}}</b></h4>
             @foreach($orders as $order)
-                @if(($order->status === \App\StatusHouseInterface::DANGTHUE)&&
-                    ($order->user_id===\Illuminate\Support\Facades\Auth::user()->id))
-                    @if($house->status!==\App\StatusHouseInterface::DACHECKIN)
+                @if( ($order->user_id===\Illuminate\Support\Facades\Auth::user()->id)&&
+                    ($house->status!==\App\StatusInterface::NHANPHONG)&&
+                            (\Carbon\Carbon::create($order->check_in)->timestamp
+                           <=\Carbon\Carbon::parse(\Carbon\Carbon::now('Asia/Ho_Chi_Minh'))->timestamp))
+                    @if((\Carbon\Carbon::create($order->check_out)->timestamp
+                          >=\Carbon\Carbon::parse(\Carbon\Carbon::now('Asia/Ho_Chi_Minh'))->timestamp))
                         <a class="col-lg-4 offset-3 btn-success pt-1 pl-4"
                            href="{{route('user.checkin.house',$order->id)}}" onclick="return confirm('check in')"
                         >check in</a>
                     @else
                         <a class="col-lg-4 offset-3 btn-warning pt-1 pl-4"
-                           href="{{route('user.checkout.house',$order->id)}}" onclick="return confirm('Ban muon tra phong` phai ko?')"
+                           href="{{route('user.checkout.house',$order->id)}}"
+                           onclick="return confirm('Ban muon tra phong` phai ko?')"
                         >check out</a>
-                        @endif
+                    @endif
                 @endif
             @endforeach
         </div>

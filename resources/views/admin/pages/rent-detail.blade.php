@@ -18,7 +18,7 @@
                 </thead>
                 <tbody>
                 @foreach($orders as $key=>$order)
-                    @if($order->status===\App\StatusHouseInterface::DATTHANHCONG)
+                    @if($order->status===\App\StatusInterface::DATTHUETHANHCONG)
                         <tr>
                             <th scope="row"> {{$key+1}} </th>
                             <td>{{\App\User::find($order->user_id)->email}}</td>
