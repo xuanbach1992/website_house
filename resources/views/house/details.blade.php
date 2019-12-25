@@ -336,14 +336,14 @@
                                                         @csrf
                                                         <div class="row">
                                                             <div class="col-md-1">
-                                                                @if(!$user->images)
+                                                                @if(!$house->user->images)
                                                                     <img src="source/images/avatar.jpeg"
                                                                          style="border-radius: 300px;display: block; margin-left: auto; margin-right: auto"
                                                                          class="img-circle"
                                                                          width="31" height="31">
                                                                 @else
                                                                     <img
-                                                                        src="{{ asset('storage/rooms/'. $user->images) }}"
+                                                                        src="{{ asset('storage/rooms/'. $house->user->images) }}"
                                                                         style="border-radius: 300px;display: block; margin-left: auto; margin-right: auto"
                                                                         class="img-circle"
                                                                         width="31" height="31">
