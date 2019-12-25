@@ -59,7 +59,7 @@
                             @foreach($orders as $order)
                                 @if($order->house_id===$house->id&&$order->status==\App\StatusHouseInterface::THANHCONG)
                                     <span class="text text-danger">** Đã được thuê {{\Carbon\Carbon::create($order->check_in)->format('d/m/Y')}}
-                                        đến ngày {{\Carbon\Carbon::create($order->check_out)->format('d/m/Y')}}</span>
+                                        đến ngày {{\Carbon\Carbon::create($order->check_out)->format('d/m/Y')}}</span><br>
                                 @endif
 
                             @endforeach
