@@ -28,12 +28,12 @@
                         <td>{{$order->check_out}}</td>
                         <td>{{number_format($order->pay_money)}} đ</td>
                         <td>
-                            @if($order->status===\App\StatusHouseInterface::KETTHUC)
+                            @if($order->status==1)
                                 Đã thuê xong
-                            @elseif($order->status===\App\StatusHouseInterface::THANHCONG)
+                            @elseif($order->status==0)
                                 Đang sẵn sàng
                                 <a href="{{route('order.house.delete',$order->id)}}" class="btn btn-danger"
-                                onclick="return confirm('Không thể hủy nhà trước ngày thuê 1 ngày, bạn chắc chứ?')"
+                                onclick="return confirm('Bạn muốn hủy thuê nhà không')"
                                 >Hủy</a>
                             @endif
                         </td>

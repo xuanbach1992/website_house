@@ -264,36 +264,104 @@
                                 <div class="mt-5">
                                     <h3><b>Tất Cả Đánh Giá </b></h3>
                                     @foreach($listStar as $star)
-                                        @if($star->house_id==$house->id)
-                                            <div class="row">
-                                                <div class="col-md-1 mt-3">
-                                                    @if(!$star->user->images)
-                                                        <img src="source/images/avatar.jpeg"
-                                                             style="border-radius: 300px;display: block; margin-left: auto; margin-right: auto"
-                                                             class="img-circle" alt="" width="50" height="50">
-                                                    @else
-                                                        <img
-                                                            src="{{ asset('storage/rooms/'. $star->user->images) }}"
-                                                            style="border-radius: 300px;display: block; margin-left: auto; margin-right: auto"
-                                                            class="img-circle" alt="" width="50" height="50">
-                                                    @endif
-                                                </div>
-                                                <div class="col-md-10 mt-3 ml-3">
-                                                    {{$star->user->name}}
-                                                </div>
+                                        <div class="row">
+                                            <div class="col-md-1 mt-3">
+                                                @if(!$star->user->images)
+                                                    <img src="source/images/avatar.jpeg"
+                                                         style="border-radius: 300px;display: block; margin-left: auto; margin-right: auto"
+                                                         class="img-circle" alt="" width="50" height="50">
+                                                @else
+                                                    <img
+                                                        src="{{ asset('storage/rooms/'. $star->user->images) }}"
+                                                        style="border-radius: 300px;display: block; margin-left: auto; margin-right: auto"
+                                                        class="img-circle" alt="" width="50" height="50">
+                                                @endif
                                             </div>
-                                            @for($i=1;$i<=$star->number;$i++)
-                                                <div class="fa fa-star"
-                                                     style="color: #ff9705"></div>
-                                            @endfor
-                                            <div>
-                                                <p>{{$star->content}}</p>
-                                                {{--@include('house.commentsDisplay', ['comments' => $house->comments, 'house_id' => $house->id])--}}
+                                            <div class="col-md-10 mt-3 ml-3">
+                                                {{$star->user->name}}
+                                            </div>
+                                        </div>
+                                        @for($i=1;$i<=$star->number;$i++)
+                                            <div class="fa fa-star"
+                                                 style="color: #ff9705"></div>
+                                        @endfor
+                                        <div>
+                                            <p>{{$star->content}}</p>
+                                            {{--@include('house.commentsDisplay', ['comments' => $house->comments, 'house_id' => $house->id])--}}
+
+
+                                            <div class="text_container">
+                                                <h3 style="background-color: #3490dc;color:
+                                            white;border-radius: 25px; margin:2px 2px;padding:4px 6px;height: 25px;
+                                             border: none;text-align: center;text-decoration: none;display: inline-block;
+                                             font-size: 16px;cursor: pointer;"
+                                                >Reply
+                                                </h3>
+                                                <div class="col-md-12 ml-5">
+                                                    @foreach($listComment as $comment)
+                                                        @if($comment->star_id===$star->id)
+                                                            <div class="row">
+                                                                <div class="col-md-1">
+                                                                    @if(!$comment->user->images)
+                                                                        <img src="source/images/avatar.jpeg"
+                                                                             style="border-radius: 300px;display: block; margin-left: auto; margin-right: auto"
+                                                                             alt=""
+                                                                             width="40"
+                                                                             height="40">
+                                                                    @else
+                                                                        <img
+                                                                            src="{{ asset('storage/rooms/'. $comment->user->images) }}"
+                                                                            style="border-radius: 300px;display: block; margin-left: auto; margin-right: auto"
+                                                                            alt="" width="40"
+                                                                            height="40">
+                                                                    @endif
+                                                                </div>
+                                                                <div class="col-md-9">
+                                                                    <p>
+                                                                        <b style="color: darkblue;font-size: 25px">{{$comment->user->name}}</b>
+                                                                        &nbsp;&nbsp;&nbsp;{{$comment->body}}
+                                                                    </p>
+                                                                </div>
+                                                            </div>
+                                                            <hr>
+                                                        @endif
+                                                    @endforeach
+                                                    <form action="{{route('house.comment',$star->id)}}"
+                                                          method="post">
+                                                        @csrf
+                                                        <div class="row">
+                                                            <div class="col-md-1">
+                                                                @if(!$user->images)
+                                                                    <img src="source/images/avatar.jpeg"
+                                                                         style="border-radius: 300px;display: block; margin-left: auto; margin-right: auto"
+                                                                         class="img-circle"
+                                                                         width="31" height="31">
+                                                                @else
+                                                                    <img
+                                                                        src="{{ asset('storage/rooms/'. $user->images) }}"
+                                                                        style="border-radius: 300px;display: block; margin-left: auto; margin-right: auto"
+                                                                        class="img-circle"
+                                                                        width="31" height="31">
+                                                                @endif</div>
+                                                            <div class="col-md-10">
+                                                                <input class="form-control" type="text"
+                                                                       style="border-radius: 30px;height: 30px"
+                                                                       name="body">
+                                                                <button style="display: none"
+                                                                        type="submit">
+                                                                    <img
+                                                                        src="https://img.icons8.com/small/20/000000/filled-sent.png">
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                    </form>
+                                                </div>
                                             </div>
                                             <hr>
-                                        @endif
-                                    @endforeach
-                                    {{ $listStar->links() }}
+
+                                            @endforeach
+                                            {{ $listStar->links() }}
+                                        </div>
 
                                 </div>
                             </div>
@@ -307,30 +375,20 @@
     <!--Thông tin chủ nhà-->
 
 @endsection
-{{--@section('script')--}}
-{{--    <script>--}}
-{{--        $(function () {--}}
-{{--            let listStart = $(".list_start .fa");--}}
-{{--            listRatingText = {--}}
-{{--                1: 'Không thích',--}}
-{{--                2: 'Tạm được',--}}
-{{--                3: 'Bình thường',--}}
-{{--                4: 'Rất tôt',--}}
-{{--                5: 'Tuyệt vời quá'--}}
-{{--            };--}}
-{{--            listStart.mouseover(function () {--}}
-{{--                let $this = $(this);--}}
-{{--                let number = $this.attr('data-key');--}}
-{{--                listStart.removeClass('rating_active');--}}
+@section('script')
+    <script>
 
-{{--                $.each(listStart, function (key, value) {--}}
-{{--                    if (key + 1 <= number) {--}}
-{{--                        $(this).addClass('rating_active')--}}
-{{--                    }--}}
-{{--                });--}}
-{{--                $(".list_text").text('').text(listRatingText[number]).show();--}}
 
-{{--            });--}}
-{{--        });--}}
-{{--    </script>--}}
-{{--@stop--}}
+        $(document).ready(function () {
+            $('.text_container').addClass("hidden");
+
+            $('.text_container').click(function () {
+                var $this = $(this);
+                if ($this.hasClass("hidden")) {
+                    $(this).removeClass("hidden").addClass("visible");
+
+                }
+            });
+        });
+    </script>
+@stop

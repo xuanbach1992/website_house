@@ -1,7 +1,5 @@
 <?php
-
 namespace App\Http\Controllers;
-
 use App\House;
 use App\Notification;
 use App\Notifications\AcceptRentHouse;
@@ -13,20 +11,17 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
-
 class OrderController extends Controller
 {
     public function __construct()
     {
         //
     }
-
     public function acceptRentHouse($notificationId)
     {
         $notification = Notification::where('uid', $notificationId)->get();
         $dataNotification = json_decode($notification[0]->data);
         $house_id = $dataNotification->house_id;
-
         $order = new Order();
         $email_receive = $dataNotification->sender; //email nguoi nhan
         $house_title = $dataNotification->house_title;
@@ -34,17 +29,12 @@ class OrderController extends Controller
         $order->check_out = $dataNotification->checkout;
         $order->pay_money = $dataNotification->total_price;
         $order->house_id = $house_id;
-
 //                $email_host=User::find($order->user_id)->email;
-
         $order->user_id = $notification[0]->notifiable_id;
-
         $order->status = StatusHouseInterface::THANHCONG;
-
         $order->save();
         \auth()->user()->notify(new AcceptRentHouse($house_id, $email_receive, $house_title, $dataNotification->checkin, $dataNotification->checkout));
         toastr()->success('đang gửi thông báo cho người thuê');
-
 //              cho notification da doc bang cach xoa notification day
 //                Mail::send('house.content', array('content' => 'Chủ nhà đồng ý cho thuê nhà'),
 //                    function ($message) {
@@ -56,22 +46,17 @@ class OrderController extends Controller
 //            }
 //        }
     }
-
     public function noAcceptRentHouse($notificationId)
     {
         $notifications = Notification::all();
-
         foreach ($notifications as $notification) {
             if ($notification->uid == $notificationId) {
-
                 $dataNotification = json_decode($notification->data);
                 $house_id = $dataNotification->house_id;
                 $email_host = $dataNotification->sender;//email nguoi nhan
-
                 $house_title = $dataNotification->house_title;
                 $checkin = $dataNotification->checkin;
                 $checkout = $dataNotification->checkout;
-
                 $notification->delete();
                 Auth::user()->notify(new NoAcceptRent($house_id, $email_host, $house_title, $checkin, $checkout));
                 //gửi email
@@ -86,11 +71,9 @@ class OrderController extends Controller
             }
         }
     }
-
     public function isReadNotification($notificationId)
     {
         $notifications = Notification::all();
-
         foreach ($notifications as $notification) {
             if ($notification->uid == $notificationId) {
                 $notification->delete();
@@ -98,13 +81,10 @@ class OrderController extends Controller
             }
         }
     }
-
     public function unRentHouse($id)
     {
         $order = Order::findOrFail($id);
-
         $email_host = User::findOrFail($order->user_id)->email;
-
         $timeNow = Carbon::now('Asia/Ho_Chi_Minh');
         $nowTimestamp = Carbon::parse($timeNow)->timestamp;
         $timeCheckin = Carbon::create($order->check_in);
@@ -127,7 +107,6 @@ class OrderController extends Controller
         }
         return redirect()->route('admin.house.rented');
     }
-
     public function showRentDetailByHouse($house_id)
     {
         $house_name = House::find($house_id)->name;

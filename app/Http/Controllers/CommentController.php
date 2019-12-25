@@ -2,18 +2,35 @@
 
 namespace App\Http\Controllers;
 
-use App\Comments;
+use App\Comment;
+
+use App\House;
+use App\Star;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CommentController extends Controller
 {
-    public function store(Request $request)
+
+    protected $house;
+
+    public function __construct(House $house)
     {
-        $input = $request->all();
-        $input['user_id'] = auth()->user()->id;
+        $this->house=$house;
+    }
 
-        Comments::create($input);
+    public function replyStar(Request $request,$id)
+    {
 
-        return back();
+        $user = Auth::user();
+      $star = Star::find($id);
+      $comment = new Comment();
+      $comment->body=$request->body;
+      $comment->user_id = $user->id;
+      $comment->star_id=$star->id;
+      $comment->save();
+
+      return redirect()->route('house.detail',$star->house_id);
+
     }
 }

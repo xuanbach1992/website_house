@@ -14,6 +14,4 @@ interface StatusHouseInterface
     const CHUACHOTHUE = 1;
     const DACHOTHUE = 2;
     const CHOXACNHAN = 3;
-    const THANHCONG = 4;
-    const KETTHUC = 5;
 }
