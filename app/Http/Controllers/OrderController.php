@@ -50,7 +50,7 @@ class OrderController extends Controller
     {
         $notification = Notification::where('uid', $notificationId)->get();
 
-        $dataNotification = json_decode($notification->data);
+        $dataNotification = json_decode($notification[0]->data);
         $house_id = $dataNotification->house_id;
         $email_host = $dataNotification->sender;//email nguoi nhan
 

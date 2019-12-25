@@ -140,7 +140,7 @@
                             <li class="nav-item">
                                 <a href="{{route('admin.house')}}" class="nav-link active">
                                     <i class="far fa fa-home nav-icon"></i>
-                                    <p>Nhà Của Tôi</p>admin.house.rented
+                                    <p>Nhà Của Tôi</p>
                                 </a>
                             </li>
                             <li class="nav-item">
