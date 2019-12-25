@@ -67,7 +67,7 @@ class OrderController extends Controller
         $checkin = $dataNotification->checkin;
         $checkout = $dataNotification->checkout;
 
-        $notification->delete();
+        $notification[0]->delete();
         Auth::user()->notify(new NoAcceptRent($house_id, $email_host, $house_title, $checkin, $checkout));
         //gửi email
         Mail::send('house.content', array('content' => 'Chủ nhà không đồng ý vì bạn quá xấu tính'),
@@ -81,7 +81,7 @@ class OrderController extends Controller
     public function isReadNotification($notificationId)
     {
         $notification = Notification::where('uid', $notificationId)->get();
-        $notification->delete();
+        $notification[0]->delete();
         return redirect()->route('admin.notify.show');
 
     }
