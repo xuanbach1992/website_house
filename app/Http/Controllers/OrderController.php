@@ -86,9 +86,9 @@ class OrderController extends Controller
         $order = Order::findOrFail($id);
         $email_host = User::findOrFail($order->user_id)->email;
         $timeNow = Carbon::now('Asia/Ho_Chi_Minh');
-        $nowTimestamp = strtotime($timeNow);
+        $nowTimestamp = Carbon::parse($timeNow)->timestamp;
         $timeCheckin = Carbon::create($order->check_in);
-        $checkInTimestamp = strtotime($timeCheckin);
+        $checkInTimestamp = Carbon::parse($timeCheckin)->timestamp;
         if ($checkInTimestamp - $nowTimestamp >= 86400) {
             $order->delete();
             toastr()->success('huy thue nha thanh cong');

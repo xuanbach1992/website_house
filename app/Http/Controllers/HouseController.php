@@ -375,7 +375,10 @@ class HouseController extends Controller
     public function showRented()
     {
         $user_id = Auth::user()->id;
-        $orders = Order::where('user_id', $user_id)->get();
+        $orders = Order::where('user_id','=', $user_id)
+            ->orderBy('status','ASC')
+            ->get();
+
         foreach ($orders as $order) {
             $timeNow = Carbon::now('Asia/Ho_Chi_Minh');
             $nowTimestamp = strtotime($timeNow);
