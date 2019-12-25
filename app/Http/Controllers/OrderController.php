@@ -48,38 +48,32 @@ class OrderController extends Controller
     }
     public function noAcceptRentHouse($notificationId)
     {
-        $notifications = Notification::all();
-        foreach ($notifications as $notification) {
-            if ($notification->uid == $notificationId) {
-                $dataNotification = json_decode($notification->data);
-                $house_id = $dataNotification->house_id;
-                $email_host = $dataNotification->sender;//email nguoi nhan
-                $house_title = $dataNotification->house_title;
-                $checkin = $dataNotification->checkin;
-                $checkout = $dataNotification->checkout;
-                $notification->delete();
-                Auth::user()->notify(new NoAcceptRent($house_id, $email_host, $house_title, $checkin, $checkout));
-                //gửi email
-                Mail::send('house.content', array('content' => 'Chủ nhà không đồng ý vì bạn quá xấu tính'),
-                    function ($message) {
-                        $message->to('hiepken95@gmail.com', 'Visitor')->subject('Thông báo thuê nhà!');
-                    });
-                toastr()->info('gui thong bao den cho nguoi thue nha');
-                return redirect()->route('admin.notify.show');
-            } else {
-                return abort(404, "not found");
-            }
-        }
+        $notification = Notification::where('uid', $notificationId)->get();
+
+        $dataNotification = json_decode($notification->data);
+        $house_id = $dataNotification->house_id;
+        $email_host = $dataNotification->sender;//email nguoi nhan
+
+        $house_title = $dataNotification->house_title;
+        $checkin = $dataNotification->checkin;
+        $checkout = $dataNotification->checkout;
+
+        $notification[0]->delete();
+        Auth::user()->notify(new NoAcceptRent($house_id, $email_host, $house_title, $checkin, $checkout));
+        //gửi email
+        Mail::send('house.content', array('content' => 'Chủ nhà không đồng ý vì bạn quá xấu tính'),
+            function ($message) {
+                $message->to('hiepken95@gmail.com', 'Visitor')->subject('Thông báo thuê nhà!');
+            });
+        toastr()->info('gui thong bao den cho nguoi thue nha');
+        return redirect()->route('admin.notify.show');
+
     }
     public function isReadNotification($notificationId)
     {
-        $notifications = Notification::all();
-        foreach ($notifications as $notification) {
-            if ($notification->uid == $notificationId) {
-                $notification->delete();
-                return redirect()->route('admin.notify.show');
-            }
-        }
+        $notification = Notification::where('uid', $notificationId)->get();
+        $notification[0]->delete();
+        return redirect()->route('admin.notify.show');
     }
     public function unRentHouse($id)
     {

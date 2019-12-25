@@ -287,7 +287,9 @@
                                         @endfor
                                         <div>
                                             <p>{{$star->content}}</p>
-                                            {{--@include('house.commentsDisplay', ['comments' => $house->comments, 'house_id' => $house->id])--}}
+                                            <span style="font-size:15px">
+                                                {{$star->created_at->diffForHumans(\Carbon\Carbon::now('Asia/Ho_Chi_Minh'))}}
+                                            </span>
 
 
                                             <div class="text_container">
@@ -321,6 +323,9 @@
                                                                         <b style="color: darkblue;font-size: 25px">{{$comment->user->name}}</b>
                                                                         &nbsp;&nbsp;&nbsp;{{$comment->body}}
                                                                     </p>
+                                                                    <span style="font-size:15px">
+                                                                        {{$comment->created_at->diffForHumans(\Carbon\Carbon::now('Asia/Ho_Chi_Minh'))}}
+                                                                    </span>
                                                                 </div>
                                                             </div>
                                                             <hr>
