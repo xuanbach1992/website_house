@@ -1,20 +1,20 @@
 @extends('welcome')
 
 @section('content')
-
+<div style="border: 1px solid rgba(69,46,255,0.25);border-radius: 15px">
     <form action="{!! route('search') !!}" method="get">
         <div class="realestate-filter">
             <div class="container">
                 <div class="realestate-filter-wrap nav">
-{{--                    <a href="#for-rent" class="active" data-toggle="tab" id="rent-tab" aria-controls="rent"--}}
-{{--                       aria-selected="true">Tìm kiếm</a>--}}
+                    {{--                    <a href="#for-rent" class="active" data-toggle="tab" id="rent-tab" aria-controls="rent"--}}
+                    {{--                       aria-selected="true">Tìm kiếm</a>--}}
                     {{--                    <a href="#for-sale" class="" data-toggle="tab" id="sale-tab" aria-controls="sale"--}}
                     {{--                       aria-selected="false">Đã cho thuê</a>--}}
                 </div>
             </div>
         </div>
 
-        <div class="realestate-tabpane pb-5 " id="demo">
+        <div class="realestate-tabpane pb-5 " style="background-color: #e3dbdbf0;border-top-left-radius: 15px;border-top-right-radius: 15px" id="demo">
             <div class="container tab-content">
                 <!--for-rent-->
                 <div class="tab-pane active" id="for-rent" role="tabpanel" aria-labelledby="rent-tab">
@@ -78,7 +78,7 @@
                     <!--nút submit-->
                     <div class="row">
                         <div class="col-md-4">
-                            <button type="submit" class="btn btn-black py-3 btn-block">Search...</button>
+                            <button type="submit" class="btn  py-3 btn-block" style="background-color: rgba(14,35,255,0.66);border-radius:15px;color: white">Search...</button>
                         </div>
                     </div>
                 </div>
@@ -87,12 +87,12 @@
         </div>
     </form>
 
-    <div class="site-section bg-black">
+    <div class="site-section " style="background-color:#f6efefa6;border-bottom-left-radius: 15px;border-bottom-right-radius: 15px">
         <div class="container">
             <div class="row">
                 @foreach($houses as $key => $house)
-                    {{--                    {{dd($value->images[0])}}--}}
-                    <div class="col-md-4 mb-5">
+
+                    <div class="col-md-4 mb-5" >
                         <div class="media-38289">
                             <a href="{{route('house.detail',$house->id)}}" class="d-block">
                                 <img
@@ -101,11 +101,11 @@
                             <div class="text">
                                 <div class="d-flex justify-content-between mb-3">
                                     <div class="sq d-flex align-items-center"><span
-                                            class="wrap-icon icon-fullscreen"></span> <a
+                                            class="fullscreenwrap-icon icon-"></span> <a
                                             href="{{route('house.detail',$house->id)}}"
                                             style="color: white">{{$house->name}}</a></div>
                                 </div>
-                                <div class="fa fa-money" ><span class="col-md-6 mt-1">{{$house->price}} đ</span>
+                                <div class="fa fa-money"><span class="col-md-6 mt-1">{{$house->price}} đ</span>
                                 </div>
                                 <div class="bed d-flex align-items-center"><span
                                         class="wrap-icon icon-bed"></span> <span>{{$house->bedrooms}}</span>
@@ -115,77 +115,14 @@
                                 </div>
 
                             </div>
-                            {{--<div>--}}
-                            {{--<button class="btn btn-warning btn-sm">Cancel</button>--}}
-                            {{--</div>--}}
+
                         </div>
                     </div>
                 @endforeach
-                <div class="col-12 mt-5 text-center pagination-39291">
-                    <span class="active">1</span>
-                    <a href="#">2</a>
-                    <a href="#">3</a>
-                    <a href="#">4</a>
-                </div>
             </div>
         </div>
 
-        <div class="site-section bg-primary">
-            <div class="container block-13">
-                <div class="nonloop-block-13 owl-carousel">
-                    <div class="testimonial-38920 d-flex align-items-start">
-                        <div class="pic mr-4"><img src="source/images/person_1.jpg" alt=""></div>
-                        <div>
-                            <span class="meta">Business Man</span>
-                            <h3 class="mb-4">Josh Long</h3>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nemo sapiente unde
-                                pariatur id, hic
-                                quos nihil nulla veritatis!</p>
-                            <div class="mt-4">
-                                <span class="icon-star text-white"></span>
-                                <span class="icon-star text-white"></span>
-                                <span class="icon-star text-white"></span>
-                                <span class="icon-star text-white"></span>
-                            </div>
-                        </div>
-                    </div>
 
-                    <div class="testimonial-38920 d-flex align-items-start">
-                        <div class="pic mr-4"><img src="source/images/person_1.jpg" alt=""></div>
-                        <div>
-                            <span class="meta">Business Woman</span>
-                            <h3 class="mb-4">Jean Doe</h3>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nemo sapiente unde
-                                pariatur id, hic
-                                quos nihil nulla veritatis!</p>
-                            <div class="mt-4">
-                                <span class="icon-star text-white"></span>
-                                <span class="icon-star text-white"></span>
-                                <span class="icon-star text-white"></span>
-                                <span class="icon-star text-white"></span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="testimonial-38920 d-flex align-items-start">
-                        <div class="pic mr-4"><img src="source/images/person_1.jpg" alt=""></div>
-                        <div>
-                            <span class="meta">Business Woman</span>
-                            <h3 class="mb-4">Jean Doe</h3>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nemo sapiente unde
-                                pariatur id, hic
-                                quos nihil nulla veritatis!</p>
-                            <div class="mt-4">
-                                <span class="icon-star text-white"></span>
-                                <span class="icon-star text-white"></span>
-                                <span class="icon-star text-white"></span>
-                                <span class="icon-star text-white"></span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
     </div>
-
+</div>
 @endsection
