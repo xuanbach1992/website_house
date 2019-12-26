@@ -28,7 +28,11 @@
     <link rel="stylesheet" href="{{asset('sourceAdmin/plugins/summernote/summernote-bs4.css')}}">
     <!-- Google Font: Source Sans Pro -->
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
-
+    <style>
+        .btn{
+            border-radius: 45px !important;
+        }
+    </style>
     <script src="{{asset('https://code.jquery.com/jquery-3.1.1.min.js')}}"></script>
     <script src="{{asset('https://code.highcharts.com/highcharts.js')}}"></script>
     <script src="{{asset('https://code.highcharts.com/modules/exporting.js')}}"></script>
@@ -163,7 +167,7 @@
                             <li class="nav-item">
                                 <a href="{{route('admin.house.rented')}}" class="nav-link">
                                     <i class="far fa fa-home nav-icon"></i>
-                                    <p>Nhà đã thuê</p>
+                                    <p>Lịch sử thuê nhà</p>
                                 </a>
                             </li>
                         </ul>
@@ -269,5 +273,6 @@
 <script src="{{asset('sourceAdmin/dist/js/pages/dashboard.js')}}"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="{{asset('sourceAdmin/dist/js/demo.js')}}"></script>
+{!! toastr()->render() !!}
 </body>
 </html>
