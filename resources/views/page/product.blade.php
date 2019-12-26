@@ -14,7 +14,7 @@
             </div>
         </div>
 
-        <div class="realestate-tabpane pb-5 " style="background-color: #e3dbdbf0;border-top-left-radius: 15px;border-top-right-radius: 15px" id="demo">
+        <div class="realestate-tabpane pb-5 " style="background-color: #9a8f8f;border-top-left-radius: 15px;border-top-right-radius: 15px" id="demo">
             <div class="container tab-content">
                 <!--for-rent-->
                 <div class="tab-pane active" id="for-rent" role="tabpanel" aria-labelledby="rent-tab">
@@ -100,18 +100,19 @@
                                     class="img-fluid" style="width: 400px;height: 250px"></a>
                             <div class="text">
                                 <div class="d-flex justify-content-between mb-3">
-                                    <div class="sq d-flex align-items-center"><span
-                                            class="fullscreenwrap-icon icon-"></span> <a
+                                    <div class="sq d-flex align-items-center">
+                                        <a
                                             href="{{route('house.detail',$house->id)}}"
-                                            style="color: white">{{$house->name}}</a></div>
+                                            style="color: white;font-size:30px" >{{$house->name}}</a></div>
                                 </div>
-                                <div class="fa fa-money"><span class="col-md-6 mt-1">{{$house->price}} đ</span>
+                                <div class="fa fa-money" style="font-size:40px"><span class="col-md-6 mt-1">{{number_format($house->price)}} đ</span>
                                 </div>
-                                <div class="bed d-flex align-items-center"><span
-                                        class="wrap-icon icon-bed"></span> <span>{{$house->bedrooms}}</span>
+                                <div class="bed d-flex align-items-center">
+                                    <span class="fa fa-bed" style="font-size:40px"></span>
+                                    <span style="font-size:40px">&nbsp&nbsp{{$house->bedrooms}}</span>
                                 </div>
-                                <div class="bath d-flex align-items-center"><span
-                                        class="wrap-icon icon-bath"></span> <span>{{$house->bathroom}}</span>
+                                <div class="bath d-flex align-items-center">  <span class="fa fa-bath" style="font-size:40px"></span>
+                                    <span style="font-size:40px">&nbsp&nbsp{{$house->bathroom}}</span>
                                 </div>
 
                             </div>
