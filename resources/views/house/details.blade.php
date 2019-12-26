@@ -57,9 +57,10 @@
                         </div>
                         <div>
                             @foreach($orders as $order)
-                                @if($order->house_id===$house->id&&$order->status==\App\StatusHouseInterface::THANHCONG)
+                                @if($order->house_id===$house->id&&$order->status==\App\StatusInterface::DATTHUETHANHCONG)
                                     <span class="text text-danger">** Đã được thuê {{\Carbon\Carbon::create($order->check_in)->format('d/m/Y')}}
-                                        đến ngày {{\Carbon\Carbon::create($order->check_out)->format('d/m/Y')}}</span><br>
+                                        đến ngày {{\Carbon\Carbon::create($order->check_out)->format('d/m/Y')}}</span>
+                                    <br>
                                 @endif
 
                             @endforeach
@@ -94,15 +95,29 @@
     <div class="col-md-7">
         <div class="col-md-9 mt-5 row">
             <h4><b style="color: #0037ff ">{{$house->name}}</b></h4>
-            {{--            <b class="offset-1">Trạng thái :</b>--}}
-            {{--            @if(\App\StatusHouseInterface::CHUACHOTHUE == $house->status)--}}
-            {{--                <option>Chưa cho thuê</option>--}}
-            {{--            @elseif(\App\StatusHouseInterface::DACHOTHUE == $house->status)--}}
-            {{--                <option>Đã cho thuê</option>--}}
-            {{--            @else--}}
-            {{--                <option>Chờ xác nhận</option>--}}
-            {{--            @endif--}}
+            @foreach($orders as $order)
+                @if( ($order->user_id===\Illuminate\Support\Facades\Auth::user()->id)&&
+                            (\Carbon\Carbon::create($order->check_in)->timestamp
+                           <=\Carbon\Carbon::parse(\Carbon\Carbon::now('Asia/Ho_Chi_Minh'))->timestamp)&&
+                   (\Carbon\Carbon::create($order->check_out)->timestamp
+                          >=\Carbon\Carbon::parse(\Carbon\Carbon::now('Asia/Ho_Chi_Minh'))->timestamp)
+                          )
+                    @if($order->status==\App\StatusInterface::DATTHUETHANHCONG&&
+            $house->status =\App\StatusInterface::SANSANG)
 
+                        <a class="col-lg-4 offset-2 btn-success pt-1"
+                           href="{{route('user.checkin.house',$order->id)}}"
+                           style="border-radius: 30px;padding-left:40px" onclick="return confirm('check in')"
+                        >check in</a>
+                    @elseif($order->status==\App\StatusInterface::NHANPHONG&&
+            $house->status =\App\StatusInterface::NHANPHONG)
+                        <a class="col-lg-4 offset-2 btn-warning pt-1"style="border-radius: 30px;padding-left:40px"
+                           href="{{route('user.checkout.house',$order->id)}}"
+                           onclick="return confirm('Ban muon tra phong` phai ko?')"
+                        >check out</a>
+                    @endif
+                @endif
+            @endforeach
         </div>
         <hr>
 
@@ -116,39 +131,39 @@
 
             <div>
                 <h5><span class="fa fa-map-marker"> Địa chỉ : {{$house->address}} -
-                            @foreach($listCities as $city)
+                    @foreach($listCities as $city)
                             @if($house->cities_id == $city->id)
                                 {{$city->name}}
                             @endif
                         @endforeach
-                        </span></h5>
+                </span></h5>
             </div>
             <div>
                 <h5>
-                    <span class="far fa fa-home nav-icon"> Kiểu nhà :
-                                @foreach($listHouseCategory as $houseType)
-                            @if($house->cities_id == $houseType->id)
-                                {{$houseType->name}} - 800 m2 -
-                            @endif
-                        @endforeach
-                        @foreach($listRoomCategory as $roomType)
-                            @if($house->cities_id == $roomType->id)
-                                {{$roomType->name}} - 50 m2 - Nguyên căn
-                            @endif
-                        @endforeach
-                        </span></h5>
+            <span class="far fa fa-home nav-icon"> Kiểu nhà :
+                        @foreach($listHouseCategory as $houseType)
+                    @if($house->cities_id == $houseType->id)
+                        {{$houseType->name}} - 800 m2 -
+                    @endif
+                @endforeach
+                @foreach($listRoomCategory as $roomType)
+                    @if($house->cities_id == $roomType->id)
+                        {{$roomType->name}} - 50 m2 - Nguyên căn
+                    @endif
+                @endforeach
+                </span></h5>
             </div>
 
             <div>
                 <h5><span class="fa fa-s15"> Phòng tắm :
-                                {{$house->bathroom}}
-                        </span></h5>
+                        {{$house->bathroom}}
+                </span></h5>
             </div>
 
             <div>
                 <h5><span class="fa fa-bed"> Phòng ngủ :
-                                {{$house->bedrooms}}
-                        </span></h5>
+                        {{$house->bedrooms}}
+                </span></h5>
             </div>
             <br>
             <div>
@@ -201,10 +216,10 @@
                                 <hr>
                                 <div class="compolent_rating_content" style="display: flex;align-items:center">
                                     <div class="rating_item" style="width: 20%;margin: 0 20px">
-                                                <span class="fa fa-star"
-                                                      style="font-size: 60px;color: #ff9705;margin: 0 auto; text-align: center;">
-                                                    {{round($starMedium,2)}}
-                                                </span>
+                                        <span class="fa fa-star"
+                                              style="font-size: 60px;color: #ff9705;margin: 0 auto; text-align: center;">
+                                            {{round($starMedium,2)}}
+                                        </span>
                                     </div>
 
                                     <div class="list_rating" style="width: 60%;padding: 20px">
@@ -214,9 +229,9 @@
                                                     {{$i }} <span class="fa fa-star"></span>
                                                 </div>
                                                 <div style="width: 70%;margin: 0 20px;">
-                                                    <span
-                                                        style="width: 100%;height: 8px;display: block;border: 1px solid #dedede;border-radius: 5px;background-color:#dedede "><b
-                                                            style="width: 50%;background-color: #f25800;display: block;height: 100%;border-radius: 5px"></b></span>
+                                            <span
+                                                style="width: 100%;height: 8px;display: block;border: 1px solid #dedede;border-radius: 5px;background-color:#dedede "><b
+                                                    style="width: 50%;background-color: #f25800;display: block;height: 100%;border-radius: 5px"></b></span>
                                                 </div>
                                                 <div style="width: 10%;">
                                                     <a href="">10 </a>
@@ -283,15 +298,15 @@
                                         <div>
                                             <p>{{$star->content}}</p>
                                             <span style="font-size:15px">
-                                                {{$star->created_at->diffForHumans(\Carbon\Carbon::now('Asia/Ho_Chi_Minh'))}}
-                                            </span>
+                                        {{$star->created_at->diffForHumans(\Carbon\Carbon::now('Asia/Ho_Chi_Minh'))}}
+                                    </span>
 
 
                                             <div class="text_container">
                                                 <h3 style="background-color: #3490dc;color:
-                                            white;border-radius: 25px; margin:2px 2px;padding:4px 6px;height: 25px;
-                                             border: none;text-align: center;text-decoration: none;display: inline-block;
-                                             font-size: 16px;cursor: pointer;"
+                                    white;border-radius: 25px; margin:2px 2px;padding:4px 6px;height: 25px;
+                                     border: none;text-align: center;text-decoration: none;display: inline-block;
+                                     font-size: 16px;cursor: pointer;"
                                                 >Reply
                                                 </h3>
                                                 <div class="col-md-12 ml-5">
@@ -315,8 +330,8 @@
                                                                         &nbsp;&nbsp;&nbsp;{{$comment->body}}
                                                                     </p>
                                                                     <span style="font-size:15px">
-                                                                        {{$comment->created_at->diffForHumans(\Carbon\Carbon::now('Asia/Ho_Chi_Minh'))}}
-                                                                    </span>
+                                                                {{$comment->created_at->diffForHumans(\Carbon\Carbon::now('Asia/Ho_Chi_Minh'))}}
+                                                            </span>
                                                                 </div>
                                                             </div>
                                                             <hr>

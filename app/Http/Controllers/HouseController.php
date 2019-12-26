@@ -14,7 +14,7 @@ use App\Notifications\SendNotificationToHouseHost;
 use App\Order;
 use App\RoomCategory;
 use App\Star;
-use App\StatusHouseInterface;
+use App\StatusInterface;
 use App\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -47,7 +47,7 @@ class HouseController extends Controller
         $this->city = $city;
         $this->district = $district;
         $this->star = $star;
-        $this->comment=$comment;
+        $this->comment = $comment;
     }
 
     //code vẽ biểu đồ
@@ -56,20 +56,32 @@ class HouseController extends Controller
         $user_id = Auth::user()->id;
         $houses = House::where('user_id', $user_id)->get();
         $listHouseCategory = $this->houseCategory->all();
-        $range = \Carbon\Carbon::now('Asia/Ho_Chi_Minh')->subDays(1);
-        $orderMonth = Order::select(
+        $rangeDay = \Carbon\Carbon::now('Asia/Ho_Chi_Minh');
+        $rangeMonth = \Carbon\Carbon::now('Asia/Ho_Chi_Minh')->subMonth(2);
+        $orderDay = Order::select(
             DB::raw('day(check_in) as getDays'),
             DB::raw('SUM(pay_money) as moneyInDays')
         )
             ->Join('houses', 'house_id', '=', 'houses.id')
             ->where('houses.user_id', '=', $user_id)
-            ->where('check_out', '<=', $range)
+            ->where('check_out', '<=', $rangeDay)
             ->groupBy('getDays')
             ->orderBy('getDays')
+            ->get();
+        $orderMonth = Order::select(
+            DB::raw('month(check_in) as getMonth'),
+            DB::raw('SUM(pay_money) as moneyInMonth')
+        )
+            ->Join('houses', 'house_id', '=', 'houses.id')
+            ->where('houses.user_id', '=', $user_id)
+            ->where('check_out', '>=', $rangeMonth)
+            ->groupBy('getMonth')
+            ->orderBy('getMonth')
             ->get();
         return view('admin.pages.house-management', [
             'houses' => $houses,
             'listHouseCategory' => $listHouseCategory,
+            'orderDay' => $orderDay,
             'orderMonth' => $orderMonth,
         ]);
     }
@@ -111,6 +123,7 @@ class HouseController extends Controller
         $house->district_id = $request->district_id;
         $house->bedrooms = $request->bedrooms;
         $house->bathroom = $request->bathroom;
+        $house->status = StatusInterface::SANSANG;
         $house->description = $request->description;
         $house->price = $request->price;
         $house->user_id = Auth::user()->id;
@@ -230,7 +243,7 @@ class HouseController extends Controller
         $starMedium = 0;
         $house_id = $house->id;
         $stars = Star::where('house_id', $house_id)->get();
-        $listStar = $this->star->where('house_id',$house_id)->orderBy('id','desc')->paginate(5);
+        $listStar = $this->star->where('house_id', $house_id)->orderBy('id', 'desc')->paginate(5);
         if ($stars !== null) {
             $countStar = 0;
             $allStarInHouseDetail = 0;
@@ -241,7 +254,7 @@ class HouseController extends Controller
             $starMedium = $allStarInHouseDetail / $countStar;
         }
 
-        $listComment=$this->comment->where('house_id',$house_id)->orderBy('id','asc')->get();
+        $listComment = $this->comment->where('house_id', $house_id)->orderBy('id', 'asc')->get();
 
 
         return view('house.details', compact(
@@ -250,7 +263,7 @@ class HouseController extends Controller
             'orders',
             'listRoomCategory',
             'listHouseCategory',
-            'listDistrict', 'listStar', 'starMedium','listComment','user'));
+            'listDistrict', 'listStar', 'starMedium', 'listComment', 'user'));
     }
 
     /**
@@ -318,13 +331,16 @@ class HouseController extends Controller
         $house = $this->house->findOrFail($id);
         switch ($request->status) {
             case 1 :
-                $house->status = StatusHouseInterface::CHUACHOTHUE;
-                break;
-            case 2 :
-                $house->status = StatusHouseInterface::DACHOTHUE;
+                $house->status = StatusInterface::SANSANG;
                 break;
             case 3 :
-                $house->status = StatusHouseInterface::CHOXACNHAN;
+                $house->status = StatusInterface::CHUANHANPHONG;
+                break;
+            case 4 :
+                $house->status = StatusInterface::NHANPHONG;
+                break;
+            case 5 :
+                $house->status = StatusInterface::TRAPHONG;
                 break;
         }
         $house->save();
@@ -375,21 +391,37 @@ class HouseController extends Controller
     public function showRented()
     {
         $user_id = Auth::user()->id;
-        $orders = Order::where('user_id','=', $user_id)
-            ->orderBy('status','ASC')
+        $orders = Order::where('user_id', '=', $user_id)
+            ->orderBy('check_out', 'DESC')
             ->get();
+            return view('admin.pages.rented', compact('orders'));
+    }
 
-        foreach ($orders as $order) {
-            $timeNow = Carbon::now('Asia/Ho_Chi_Minh');
-            $nowTimestamp = strtotime($timeNow);
-            $timeCheckout = Carbon::create($order->check_out);
-            $checkoutTimestamp = strtotime($timeCheckout);
-//            $timeDifference = $timeNow->diffInDays($timeCheckout);
-            if ($checkoutTimestamp - $nowTimestamp <= 0) {
-                $order->status = StatusHouseInterface::KETTHUC;
-                $order->save();
-            }
-        }
-        return view('admin.pages.rented', compact('orders'));
+    public function userCheckinHouse($order_id)
+    {
+        $order = Order::findOrFail($order_id);
+        $house = House::findOrFail($order->house_id);
+        $order->status = StatusInterface::NHANPHONG;
+        $order->save();
+
+//        dd($order->status, $house->status);
+        $house->status = StatusInterface::NHANPHONG;
+        $house->save();
+
+
+        toastr()->success('xin chao quy khach da den thue nha');
+        return back();
+    }
+
+    public function userCheckoutHouse($order_id)
+    {
+        $order = Order::findOrFail($order_id);
+        $house = House::findOrFail($order->house_id);
+        $house->status = StatusInterface::SANSANG;
+        $house->save();
+        $order->status = StatusInterface::DAHOANTHANH;
+        $order->save();
+        toastr()->success('Xin chao va hen gap lai');
+        return back();
     }
 }

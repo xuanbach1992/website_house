@@ -23,7 +23,11 @@
     {{--<link rel="stylesheet" href="{{asset('source/css/owl.theme.default.min.css')}}">--}}
     {{--<link rel="stylesheet" href="{{asset('source/fonts/flaticon/font/flaticon.css')}}">--}}
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-
+    <style>
+        .btn{
+            border-radius: 45px !important;
+        }
+    </style>
     <!-- MAIN CSS -->
     <link rel="stylesheet" href="{{asset('source/css/style.css')}}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
