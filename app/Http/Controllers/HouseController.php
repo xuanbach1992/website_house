@@ -56,20 +56,32 @@ class HouseController extends Controller
         $user_id = Auth::user()->id;
         $houses = House::where('user_id', $user_id)->get();
         $listHouseCategory = $this->houseCategory->all();
-        $range = \Carbon\Carbon::now('Asia/Ho_Chi_Minh')->subDays(1);
-        $orderMonth = Order::select(
+        $rangeDay = \Carbon\Carbon::now('Asia/Ho_Chi_Minh');
+        $rangeMonth = \Carbon\Carbon::now('Asia/Ho_Chi_Minh')->subMonth(2);
+        $orderDay = Order::select(
             DB::raw('day(check_in) as getDays'),
             DB::raw('SUM(pay_money) as moneyInDays')
         )
             ->Join('houses', 'house_id', '=', 'houses.id')
             ->where('houses.user_id', '=', $user_id)
-            ->where('check_out', '<=', $range)
+            ->where('check_out', '<=', $rangeDay)
             ->groupBy('getDays')
             ->orderBy('getDays')
+            ->get();
+        $orderMonth = Order::select(
+            DB::raw('month(check_in) as getMonth'),
+            DB::raw('SUM(pay_money) as moneyInMonth')
+        )
+            ->Join('houses', 'house_id', '=', 'houses.id')
+            ->where('houses.user_id', '=', $user_id)
+            ->where('check_out', '>=', $rangeMonth)
+            ->groupBy('getMonth')
+            ->orderBy('getMonth')
             ->get();
         return view('admin.pages.house-management', [
             'houses' => $houses,
             'listHouseCategory' => $listHouseCategory,
+            'orderDay' => $orderDay,
             'orderMonth' => $orderMonth,
         ]);
     }
@@ -322,7 +334,7 @@ class HouseController extends Controller
                 $house->status = StatusInterface::SANSANG;
                 break;
             case 3 :
-                $house->status = StatusInterface::TRONGTHOIGIANTHUE;
+                $house->status = StatusInterface::CHUANHANPHONG;
                 break;
             case 4 :
                 $house->status = StatusInterface::NHANPHONG;

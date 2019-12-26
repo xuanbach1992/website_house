@@ -15,13 +15,12 @@ interface StatusInterface
 
     const DATTHUETHANHCONG = 2;
 
-    const TRONGTHOIGIANTHUE = 3;
+    const CHUANHANPHONG = 3;
 
     const NHANPHONG = 4;
     const TRAPHONG = 5;
     const DAHOANTHANH = 6;
 
-    const KHONGNHANPHONG = 7;
-    const CHOXACNHAN = 8;
+    const CHOXACNHAN = 7;
 
 }
