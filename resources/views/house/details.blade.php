@@ -102,15 +102,16 @@
                    (\Carbon\Carbon::create($order->check_out)->timestamp
                           >=\Carbon\Carbon::parse(\Carbon\Carbon::now('Asia/Ho_Chi_Minh'))->timestamp)
                           )
-                    @if($order->status==\App\StatusInterface::DATTHUETHANHCONG)
+                    @if($order->status==\App\StatusInterface::DATTHUETHANHCONG&&
+            $house->status =\App\StatusInterface::SANSANG)
 
-                        <a class="col-lg-4 offset-3 btn-success pt-1 pl-4"
-                           href="{{route('user.checkin.house',$order->id)}}" onclick="return confirm('check in')"
+                        <a class="col-lg-4 offset-2 btn-success pt-1"
+                           href="{{route('user.checkin.house',$order->id)}}"
+                           style="border-radius: 30px;padding-left:40px" onclick="return confirm('check in')"
                         >check in</a>
-                    @elseif($order->status==\App\StatusInterface::NHANPHONG)
-                        {{--                @else--}}
-                        {{--                    @if--}}
-                        <a class="col-lg-4 offset-3 btn-warning pt-1 pl-4"
+                    @elseif($order->status==\App\StatusInterface::NHANPHONG&&
+            $house->status =\App\StatusInterface::NHANPHONG)
+                        <a class="col-lg-4 offset-2 btn-warning pt-1"style="border-radius: 30px;padding-left:40px"
                            href="{{route('user.checkout.house',$order->id)}}"
                            onclick="return confirm('Ban muon tra phong` phai ko?')"
                         >check out</a>

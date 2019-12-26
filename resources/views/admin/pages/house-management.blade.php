@@ -3,7 +3,7 @@
 @section('contentAdmin')
     <div id="container" data-order="{{ $orderMonth }}"></div>
     <div class="card mt-4" style="width: 100%">
-        <div class="card-header"><h5>Quản lý nhà</h5></div>
+        <div class="card-header"><h5>Danh sách nhà cho thuê</h5></div>
         <div class="card-body">
             <table class="table">
                 <thead class="thead-dark">

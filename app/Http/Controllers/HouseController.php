@@ -377,37 +377,23 @@ class HouseController extends Controller
     {
         $user_id = Auth::user()->id;
         $orders = Order::where('user_id', '=', $user_id)
-            ->orderBy('id', 'DESC')
+            ->orderBy('check_out', 'DESC')
             ->get();
-        foreach ($orders as $order) {
-            $timeNow = Carbon::now('Asia/Ho_Chi_Minh');
-            $nowTimestamp = Carbon::parse(Carbon::now('Asia/Ho_Chi_Minh'))->timestamp;
-            $checkInTimestamp = Carbon::parse($order->check_in)->timestamp;
-            $checkoutTimestamp = Carbon::parse($order->check_out)->timestamp;
-            if ($nowTimestamp >= $checkInTimestamp) {
-                if ($nowTimestamp <= $checkoutTimestamp) {
-                    $order->status = StatusInterface::TRONGTHOIGIANTHUE;
-                    $order->save();
-                } else {
-                    $order->status = StatusInterface::DAHOANTHANH;
-                    $order->save();
-                }
-            } else {
-                $order->status = StatusInterface::DATTHUETHANHCONG;
-                $order->save();
-            }
-        }
-        return view('admin.pages.rented', compact('orders'));
+            return view('admin.pages.rented', compact('orders'));
     }
 
     public function userCheckinHouse($order_id)
     {
         $order = Order::findOrFail($order_id);
-        $house=House::findOrFail($order->house_id);
-        $house->status=StatusInterface::NHANPHONG;
-        $house->save();
-        $order->status=StatusInterface::NHANPHONG;
+        $house = House::findOrFail($order->house_id);
+        $order->status = StatusInterface::NHANPHONG;
         $order->save();
+
+//        dd($order->status, $house->status);
+        $house->status = StatusInterface::NHANPHONG;
+        $house->save();
+
+
         toastr()->success('xin chao quy khach da den thue nha');
         return back();
     }
@@ -415,11 +401,11 @@ class HouseController extends Controller
     public function userCheckoutHouse($order_id)
     {
         $order = Order::findOrFail($order_id);
-        $house=House::findOrFail($order->house_id);
-        $house->status=StatusInterface::TRAPHONG;
-        $order->status=StatusInterface::DAHOANTHANH ;
-        $order->save();
+        $house = House::findOrFail($order->house_id);
+        $house->status = StatusInterface::SANSANG;
         $house->save();
+        $order->status = StatusInterface::DAHOANTHANH;
+        $order->save();
         toastr()->success('Xin chao va hen gap lai');
         return back();
     }
