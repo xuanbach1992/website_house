@@ -319,13 +319,16 @@ class HouseController extends Controller
         $house = $this->house->findOrFail($id);
         switch ($request->status) {
             case 1 :
-                $house->status = StatusInterface::NHANPHONG;
-                break;
-            case 2 :
-                $house->status = StatusInterface::TRAPHONG;
+                $house->status = StatusInterface::SANSANG;
                 break;
             case 3 :
-                $house->status = StatusInterface::CHOXACNHAN;
+                $house->status = StatusInterface::TRONGTHOIGIANTHUE;
+                break;
+            case 4 :
+                $house->status = StatusInterface::NHANPHONG;
+                break;
+            case 5 :
+                $house->status = StatusInterface::TRAPHONG;
                 break;
         }
         $house->save();
