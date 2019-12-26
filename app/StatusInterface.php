@@ -11,14 +11,17 @@ namespace App;
 
 interface StatusInterface
 {
-    const NHANPHONG = 1;
-    const TRAPHONG = 2;
+    const SANSANG =1;
 
-    const CHOXACNHAN = 3;
+    const DATTHUETHANHCONG = 2;
 
-    const DATTHUETHANHCONG = 4;
-    const DAHOANTHANH = 5;
-    const VANDANGTHUE = 6;
+    const TRONGTHOIGIANTHUE = 3;
 
-    const KHONGCHECKIN = 7;
+    const NHANPHONG = 4;
+    const TRAPHONG = 5;
+    const DAHOANTHANH = 6;
+
+    const KHONGNHANPHONG = 7;
+    const CHOXACNHAN = 8;
+
 }

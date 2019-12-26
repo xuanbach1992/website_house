@@ -21,6 +21,7 @@ class OrderController extends Controller
         //
     }
 
+    //chu nha chap nhan thue nha
     public function acceptRentHouse($notificationId)
     {
         $notification = Notification::where('uid', $notificationId)->get();
@@ -50,7 +51,7 @@ class OrderController extends Controller
 //            }
 //        }
     }
-
+//chhu nha khong dong y
     public function noAcceptRentHouse($notificationId)
     {
         $notification = Notification::where('uid', $notificationId)->get();
@@ -74,15 +75,15 @@ class OrderController extends Controller
         return redirect()->route('admin.notify.show');
 
     }
-
+//doc thong bao va xoa thong bao
     public function isReadNotification($notificationId)
     {
         $notification = Notification::where('uid', $notificationId)->get();
         $notification[0]->delete();
         return redirect()->route('admin.notify.show');
     }
-
-    public function unRentHouse($id)
+//huy thue nha
+    public function destroyOrderRentHouse($id)
     {
         $order = Order::findOrFail($id);
         $email_host = User::findOrFail($order->user_id)->email;
@@ -110,29 +111,30 @@ class OrderController extends Controller
         }
     }
 
-    public function functionAlwaysRun()
-    {
-        $orders = Order::all();
-        $timeNow = Carbon::now('Asia/Ho_Chi_Minh');
-        foreach ($orders as $order) {
-            $nowTimestamp = Carbon::parse($timeNow)->timestamp;
-            $checkInTimestamp = Carbon::parse($order->check_in)->timestamp;
-            $checkoutTimestamp = Carbon::parse($order->check_out)->timestamp;
-            if ($nowTimestamp >= $checkInTimestamp) {
-                if ($nowTimestamp <= $checkoutTimestamp) {
-                    $order->status = StatusInterface::VANDANGTHUE;
-                    $order->save();
-                } else {
-                    $order->status = StatusInterface::DAHOANTHANH;
-                    $order->save();
-                }
-            } else {
-                $order->status = StatusInterface::DATTHUETHANHCONG;
-                $order->save();
-            }
-        }
-    }
+//    public function functionAlwaysRun()
+//    {
+//        $orders = Order::all();
+//        $timeNow = Carbon::now('Asia/Ho_Chi_Minh');
+//        foreach ($orders as $order) {
+//            $nowTimestamp = Carbon::parse($timeNow)->timestamp;
+//            $checkInTimestamp = Carbon::parse($order->check_in)->timestamp;
+//            $checkoutTimestamp = Carbon::parse($order->check_out)->timestamp;
+//            if ($nowTimestamp >= $checkInTimestamp) {
+//                if ($nowTimestamp <= $checkoutTimestamp) {
+//                    $order->status = StatusInterface::VANDANGTHUE;
+//                    $order->save();
+//                } else {
+//                    $order->status = StatusInterface::DAHOANTHANH;
+//                    $order->save();
+//                }
+//            } else {
+//                $order->status = StatusInterface::DATTHUETHANHCONG;
+//                $order->save();
+//            }
+//        }
+//    }
 
+//hien thi chi tiet danh sach thue theo ngoi nha
     public function showRentDetailByHouse($house_id)
     {
         $house_name = House::find($house_id)->name;

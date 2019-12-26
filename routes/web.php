@@ -38,7 +38,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
     Route::get('/edit/{id}', 'HouseController@showEdit')->name('house.showEdit');
     Route::post('/edit/{id}', 'HouseController@updateStatus')->name('house.update');
     Route::get('/delete/{id}', 'HouseController@delete')->name('house.delete');
-    Route::get('/un-rent-house/{id}', 'OrderController@unRentHouse')->name('order.house.delete');
+    Route::get('/un-rent-house/{id}', 'OrderController@destroyOrderRentHouse')->name('order.house.delete');
     Route::get('/rent-detail/{id}', 'OrderController@showRentDetailByHouse')->name('house.show.rent.detail');
 });
 //đăng nhập bằng facebook

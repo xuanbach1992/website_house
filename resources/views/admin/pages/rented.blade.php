@@ -28,16 +28,19 @@
                         <td>{{\Carbon\Carbon::create($order->check_out)->format('d/m/Y')}}</td>
                         <td>{{number_format($order->pay_money)}} đ</td>
                         <td>
+{{--                            {{dd((\Carbon\Carbon::create($order->check_out)->timestamp >=--}}
+{{--                                       \Carbon\Carbon::parse(\Carbon\Carbon::now('Asia/Ho_Chi_Minh'))->timestamp)&&--}}
+{{--                                       $order->status===\App\StatusInterface::DATTHUETHANHCONG)}}--}}
                             @if(\Carbon\Carbon::create($order->check_in)->timestamp
                            >=\Carbon\Carbon::parse(\Carbon\Carbon::now('Asia/Ho_Chi_Minh'))->timestamp)
                                 Chưa đến ngày
                                 <a href="{{route('order.house.delete',$order->id)}}" class="btn btn-danger"
                                    onclick="return confirm('Không thể hủy nhà trước ngày thuê 1 ngày, bạn chắc chứ?')"
                                 >Hủy</a>
-                            @elseif((\Carbon\Carbon::create($order->check_in)->timestamp <=
-                                       \Carbon\Carbon::parse(\Carbon\Carbon::now('Asia/Ho_Chi_Minh'))->timestamp))
+                            @else
                                 @if((\Carbon\Carbon::create($order->check_out)->timestamp >=
-                                       \Carbon\Carbon::parse(\Carbon\Carbon::now('Asia/Ho_Chi_Minh'))->timestamp))
+                                       \Carbon\Carbon::parse(\Carbon\Carbon::now('Asia/Ho_Chi_Minh'))->timestamp)&&
+                                       $order->status===\App\StatusInterface::DATTHUETHANHCONG)
                                     Đang trong thời gian thuê
                                     <a href="{{route('user.checkin.house',$order->id)}}"
                                        onclick="return confirm('check in')"

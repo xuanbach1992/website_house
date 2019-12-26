@@ -111,6 +111,7 @@ class HouseController extends Controller
         $house->district_id = $request->district_id;
         $house->bedrooms = $request->bedrooms;
         $house->bathroom = $request->bathroom;
+        $house->status = StatusInterface::SANSANG;
         $house->description = $request->description;
         $house->price = $request->price;
         $house->user_id = Auth::user()->id;
@@ -385,7 +386,7 @@ class HouseController extends Controller
             $checkoutTimestamp = Carbon::parse($order->check_out)->timestamp;
             if ($nowTimestamp >= $checkInTimestamp) {
                 if ($nowTimestamp <= $checkoutTimestamp) {
-                    $order->status = StatusInterface::VANDANGTHUE;
+                    $order->status = StatusInterface::TRONGTHOIGIANTHUE;
                     $order->save();
                 } else {
                     $order->status = StatusInterface::DAHOANTHANH;
@@ -405,7 +406,7 @@ class HouseController extends Controller
         $house=House::findOrFail($order->house_id);
         $house->status=StatusInterface::NHANPHONG;
         $house->save();
-        $order->status=StatusInterface::VANDANGTHUE;
+        $order->status=StatusInterface::NHANPHONG;
         $order->save();
         toastr()->success('xin chao quy khach da den thue nha');
         return back();
@@ -416,7 +417,7 @@ class HouseController extends Controller
         $order = Order::findOrFail($order_id);
         $house=House::findOrFail($order->house_id);
         $house->status=StatusInterface::TRAPHONG;
-        $order->status=StatusInterface::DATTHUETHANHCONG ;
+        $order->status=StatusInterface::DAHOANTHANH ;
         $order->save();
         $house->save();
         toastr()->success('Xin chao va hen gap lai');
