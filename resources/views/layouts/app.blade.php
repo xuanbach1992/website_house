@@ -48,7 +48,7 @@
 
 </head>
 
-<body data-spy="scroll" data-target=".site-navbar-target" data-offset="300">
+<body data-spy="scroll" data-target=".site-navbar-target" data-offset="300" style="background-color: ">
 
 
 <div class="site-wrap" id="home-section">
