@@ -131,26 +131,16 @@
 
             <div>
                 <h5><span class="fa fa-map-marker"> Địa chỉ : {{$house->address}} -
-                    @foreach($listCities as $city)
-                            @if($house->cities_id == $city->id)
-                                {{$city->name}}
-                            @endif
-                        @endforeach
+                        {{$house->district->name}} -
+                        {{$house->cities->name}}
                 </span></h5>
             </div>
             <div>
                 <h5>
             <span class="far fa fa-home nav-icon"> Kiểu nhà :
-                        @foreach($listHouseCategory as $houseType)
-                    @if($house->cities_id == $houseType->id)
-                        {{$houseType->name}} - 800 m2 -
-                    @endif
-                @endforeach
-                @foreach($listRoomCategory as $roomType)
-                    @if($house->cities_id == $roomType->id)
-                        {{$roomType->name}} - 50 m2 - Nguyên căn
-                    @endif
-                @endforeach
+                {{$house->houseCategory->name}}
+                {{$house->roomCategory->name}}
+                        - 50 m2 - Nguyên căn
                 </span></h5>
             </div>
 
