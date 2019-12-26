@@ -15,6 +15,7 @@
                     <th scope="col">Ngày trả</th>
                     <th scope="col">Tiền đã trả</th>
                     <th scope="col">Tình trạng</th>
+                    <th scope="col">Chức năng</th>
                     <th></th>
                 </tr>
                 </thead>
@@ -32,9 +33,11 @@
                                 Đã thuê xong
                             @elseif($order->status===\App\StatusHouseInterface::THANHCONG)
                                 Đang sẵn sàng
-                                <a href="{{route('order.house.delete',$order->id)}}" class="btn btn-danger"
-                                onclick="return confirm('Không thể hủy nhà trước ngày thuê 1 ngày, bạn chắc chứ?')"
-                                >Hủy</a>
+                        </td>
+                        <td>
+                            <a href="{{route('order.house.delete',$order->id)}}" class="btn btn-danger"
+                               onclick="return confirm('Không thể hủy nhà trước ngày thuê 1 ngày, bạn chắc chứ?')"
+                            >Hủy</a>
                             @endif
                         </td>
                     <tr>
