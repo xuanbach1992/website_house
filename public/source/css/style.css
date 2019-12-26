@@ -90,7 +90,7 @@ html {
   color: #7b7b7b; }
 
 .font-gray-9 {
-  color: #636363 #4d4d4d; }
+  color: #636363; }
 
 .font-gray-10 {
   color: #353535; }
@@ -290,11 +290,11 @@ h1, h2, h3, h4, h5,
     padding: 4em 0; }
 
 .site-footer {
-  padding: 4em 0;
-  background: #000; }
+  padding:2em 0 !important;
+  background:#02264c; }
   @media (min-width: 768px) {
     .site-footer {
-      padding: 8em 0; } }
+      padding: 4em 0; } }
   .site-footer .border-top {
     border-top: 1px solid rgba(255, 255, 255, 0.1) !important; }
   .site-footer p {
