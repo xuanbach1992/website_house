@@ -15,7 +15,7 @@
                     <h5 class="card-title text-center">Sign In</h5>
                     <form method="POST" action="{{ route('login') }}">
                         @csrf
-                        <div class="form-label-group">
+                        <div class="form-label-group  input-group">
                             <input type="email" style="width: 97%" id="inputEmail" placeholder="Email"
                                    class="form-control @error('email') is-invalid @enderror" name="email"
                                    value="{{ old('email') }}" required autocomplete="email" autofocus>
@@ -30,9 +30,14 @@
                             <input type="password" placeholder="Password"
                                    class="form-control password_show @error('password') is-invalid @enderror"
                                    name="password" required autocomplete="current-password">
-                            <span class="input-group-addon">
+
+                            <div class="input-group-append">
+                              <span class="input-group-text">
                                     <a href=""><i class="fa fa-eye-slash" aria-hidden="true"></i></a>
                                 </span>
+                            </div>
+
+
 
                             @error('password')
                             <span class="invalid-feedback" role="alert">
