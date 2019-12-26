@@ -15,6 +15,7 @@
                     <th scope="col">Ngày trả</th>
                     <th scope="col">Tiền đã trả</th>
                     <th scope="col">Tình trạng</th>
+                    <th scope="col">Chức năng</th>
                     <th></th>
                 </tr>
                 </thead>
