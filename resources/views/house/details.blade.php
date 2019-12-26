@@ -110,8 +110,8 @@
                            style="border-radius: 30px;padding-left:40px" onclick="return confirm('check in')"
                         >check in</a>
                     @elseif($order->status==\App\StatusInterface::NHANPHONG&&
-            $house->status =\App\StatusInterface::NHANPHONG)
-                        <a class="col-lg-4 offset-2 btn-warning pt-1"style="border-radius: 30px;padding-left:40px"
+                $house->status =\App\StatusInterface::NHANPHONG)
+                        <a class="col-lg-4 offset-2 btn-warning pt-1" style="border-radius: 30px;padding-left:40px"
                            href="{{route('user.checkout.house',$order->id)}}"
                            onclick="return confirm('Ban muon tra phong` phai ko?')"
                         >check out</a>
@@ -241,37 +241,42 @@
                                     </div>
 
                                 </div>
-                                <hr>
+                                @foreach($orders as $order)
 
-                                <form action="{{route('house.rating',$house->id)}}" method="post">
-                                    @csrf
-                                    <div style="display: flex; margin-top: 15px;font-size: 15px" class="hide">
-                                        <p style="margin-bottom: 0">Đánh Giá Của Bạn:</p>
+                                    @if($order->user_id===\Illuminate\Support\Facades\Auth::user()->id &&
+$order->status===\App\StatusInterface::DAHOANTHANH)
+                                        <hr>
 
-                                        <div style="margin:0;padding:0;" id="rating">
-                                            <input type="radio" id="star5" name="rating" value="5"/>
-                                            <label style="margin:0;padding:0;" class="full" for="star5"></label>
-                                            <input type="radio" id="star4" name="rating" value="4"/>
-                                            <label style="margin:0;padding:0;" class="full" for="star4"></label>
-                                            <input type="radio" id="star3" name="rating" value="3"/>
-                                            <label style="margin:0;padding:0;" class="full" for="star3"></label>
-                                            <input type="radio" id="star2" name="rating" value="2"/>
-                                            <label style="margin:0;padding:0;" class="full" for="star2"></label>
-                                            <input type="radio" id="star1" name="rating" value="1"/>
-                                            <label style="margin:0;padding:0;" class="full"
-                                                   for="star1"></label>
+                                        <form action="{{route('house.rating',$house->id)}}" method="post">
+                                            @csrf
+                                            <div style="display: flex; margin-top: 15px;font-size: 15px" class="hide">
+                                                <p style="margin-bottom: 0">Đánh Giá Của Bạn:</p>
 
-                                        </div>
-                                        <span class="list_text"></span>
+                                                <div style="margin:0;padding:0;" id="rating">
+                                                    <input type="radio" id="star5" name="rating" value="5"/>
+                                                    <label style="margin:0;padding:0;" class="full" for="star5"></label>
+                                                    <input type="radio" id="star4" name="rating" value="4"/>
+                                                    <label style="margin:0;padding:0;" class="full" for="star4"></label>
+                                                    <input type="radio" id="star3" name="rating" value="3"/>
+                                                    <label style="margin:0;padding:0;" class="full" for="star3"></label>
+                                                    <input type="radio" id="star2" name="rating" value="2"/>
+                                                    <label style="margin:0;padding:0;" class="full" for="star2"></label>
+                                                    <input type="radio" id="star1" name="rating" value="1"/>
+                                                    <label style="margin:0;padding:0;" class="full"
+                                                           for="star1"></label>
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <input class="form-control" name="contents">
+                                                <button type="submit"
+                                                        class="btn mt-2 btn-primary js_rating_house">Gửi đánh giá
+                                                </button>
+                                            </div>
+                                        </form>
+                                        @break
+                                    @endif
 
-                                    </div>
-                                    <div>
-                                        <input class="form-control" name="contents">
-                                        <button type="submit"
-                                                class="btn btn-primary js_rating_house">Gửi đánh giá
-                                        </button>
-                                    </div>
-                                </form>
+                                @endforeach
                                 <hr>
                                 <div class="mt-5">
                                     <h3><b>Tất Cả Đánh Giá </b></h3>
