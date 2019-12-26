@@ -1,6 +1,6 @@
 <!--header-->
 <div id="app">
-    <div class="modal fade" id="exampleModalLong_2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
+    <div class="modal fade" id="exampleModalLong_2" role="dialog" aria-labelledby="exampleModalLongTitle"
          aria-hidden="true">
 
         <div class="modal-dialog" role="document">
