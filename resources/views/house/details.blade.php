@@ -311,9 +311,9 @@
                                                         <?php $count += 1 ?>
                                                     @endif
                                                 @endforeach
-                                               @if($count!=0)
+                                                @if($count!=0)
                                                     {{$count}} bình luận
-                                                   @endif
+                                                @endif
                                             </span>
                                             <div class="text_container">
                                                 <h3 style="background-color: #3490dc;color:
@@ -356,11 +356,15 @@
                                                         <div class="row">
                                                             <div class="col-md-1">
                                                                 <img
-                                                                    @if(!$house->user->images)
+                                                                    @guest()
+
+                                                                    @else
+                                                                    @if(\Illuminate\Support\Facades\Auth::user()->images==null)
                                                                     src="source/images/avatar.jpeg"
                                                                     @else
-                                                                    src="{{ asset('storage/rooms/'. $house->user->images) }}"
+                                                                    src="{{ asset('storage/rooms/'. \Illuminate\Support\Facades\Auth::user()->images) }}"
                                                                     @endif
+                                                                    @endguest
                                                                     style="border-radius: 300px;display: block; margin-left: auto; margin-right: auto"
                                                                     class="img-circle" width="31" height="31">
                                                             </div>

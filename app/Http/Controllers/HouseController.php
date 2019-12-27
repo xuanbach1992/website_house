@@ -245,7 +245,7 @@ class HouseController extends Controller
         $starMedium = 0;
         $house_id = $house->id;
         $stars = Star::where('house_id', $house_id)->get();
-        $listStar = $this->star->where('house_id', $house_id)->orderBy('id', 'desc')->paginate(5);
+        $listStar = Star::where('house_id', $house_id)->orderBy('id', 'desc')->paginate(5);
         if ($stars !== null) {
             $countStar = 0;
             $allStarInHouseDetail = 0;
