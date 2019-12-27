@@ -34,6 +34,7 @@
             border-radius: 45px !important;
         }
     </style>
+    <link rel="stylesheet" href="{{asset('source/css/admin.page.css')}}">
     <script src="{{asset('https://code.jquery.com/jquery-3.1.1.min.js')}}"></script>
     <script src="{{asset('https://code.highcharts.com/highcharts.js')}}"></script>
     <script src="{{asset('https://code.highcharts.com/modules/exporting.js')}}"></script>

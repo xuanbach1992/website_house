@@ -132,7 +132,7 @@
 
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link fa fa-bell"
-                                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre
+                                   data-toggle="dropdown"
                                    style="font-size:24px" href="{{route('admin.notify.show')}}" role="button"
                                 >
                                     <span class="caret badge">
