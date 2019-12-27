@@ -27,7 +27,7 @@
                 <form method="post" enctype="multipart/form-data"
                       action="{{route('order.house.delete')}}">
                     @csrf
-                    <input  name="idHouseBooking" readonly="readonly" type="text" class="idHouseBooking">
+                    <input  name="idHouseBooking" style="display:none" readonly="readonly" type="text" class="idHouseBooking">
                     <div class="modal-body">
                         <div>
                             <div style="font-size: 1.25rem" class="pl-3">
