@@ -51,6 +51,7 @@ class OrderController extends Controller
 //            }
 //        }
     }
+
 //chhu nha khong dong y
     public function noAcceptRentHouse($notificationId)
     {
@@ -75,6 +76,7 @@ class OrderController extends Controller
         return redirect()->route('admin.notify.show');
 
     }
+
 //doc thong bao va xoa thong bao
     public function isReadNotification($notificationId)
     {
@@ -82,9 +84,17 @@ class OrderController extends Controller
         $notification[0]->delete();
         return redirect()->route('admin.notify.show');
     }
+
 //huy thue nha
-    public function destroyOrderRentHouse($id)
+    public function destroyOrderRentHouse(Request $request)
     {
+        $id = $request->idHouseBooking;
+        $reasons = [];
+        $reasonOne = $request->reasonOne;
+        $reasonTwo = $request->reasonTwo;
+        $reasonThree = $request->reasonThree;
+        $reasonFour = $request->reasonFour;
+        array_push($reasons, $reasonOne, $reasonTwo, $reasonThree, $reasonFour);
         $order = Order::findOrFail($id);
         $email_host = User::findOrFail($order->user_id)->email;
         $timeNow = Carbon::now('Asia/Ho_Chi_Minh');

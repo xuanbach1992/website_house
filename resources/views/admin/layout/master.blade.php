@@ -13,7 +13,8 @@
     <!-- Ionicons -->
     <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
     <!-- Tempusdominus Bbootstrap 4 -->
-    <link rel="stylesheet" href="{{asset('sourceAdmin/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css')}}">
+    <link rel="stylesheet"
+          href="{{asset('sourceAdmin/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css')}}">
     <!-- iCheck -->
     <link rel="stylesheet" href="{{asset('sourceAdmin/plugins/icheck-bootstrap/icheck-bootstrap.min.css')}}">
     <!-- JQVMap -->
@@ -29,7 +30,7 @@
     <!-- Google Font: Source Sans Pro -->
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
     <style>
-        .btn{
+        .btn {
             border-radius: 45px !important;
         }
     </style>
@@ -120,14 +121,14 @@
             <div class="user-panel mt-3 pb-3 mb-3 d-flex">
                 <div class="image">
                     <a href="{{route('user.edit')}}">
-                    <img  style="width: 150px;height:150px" src="
+                        <img style="width: 150px;height:150px" src="
 
                         @if(!\Illuminate\Support\Facades\Auth::user()->images)
-                       source/images/avatar.jpeg
-                        @else
-                       {{ asset('storage/rooms/'. \Illuminate\Support\Facades\Auth::user()->images) }}
+                            source/images/avatar.jpeg
+@else
+                        {{ asset('storage/rooms/'. \Illuminate\Support\Facades\Auth::user()->images) }}
                         @endif
-                        " class="img-circle elevation-2" alt="User Image"></a>
+                            " class="img-circle elevation-2" alt="User Image"></a>
                 </div>
             </div>
 
@@ -228,7 +229,7 @@
 {{--        <strong>Người tạo : <a href="#">Trần Mạnh Hiệp</a>.</strong>--}}
 {{--    </footer>--}}
 
-    <!-- Control Sidebar -->
+<!-- Control Sidebar -->
     <aside class="control-sidebar control-sidebar-dark">
         <!-- Control sidebar content goes here -->
     </aside>
@@ -244,7 +245,6 @@
 <script>
     $.widget.bridge('uibutton', $.ui.button)
 </script>
-
 
 
 <!-- Bootstrap 4 -->
@@ -273,6 +273,15 @@
 <script src="{{asset('sourceAdmin/dist/js/pages/dashboard.js')}}"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="{{asset('sourceAdmin/dist/js/demo.js')}}"></script>
-{!! toastr()->render() !!}
+<script>
+    $(document).ready(function () {
+        $(".showReasonDelRent").click(function () {
+            let idOrder = $(this).data('id');
+            $('.idHouseBooking').val(idOrder);
+        });
+    });
+</script>
+
+
 </body>
 </html>
