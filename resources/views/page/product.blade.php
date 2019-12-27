@@ -1,7 +1,7 @@
 @extends('welcome')
 
 @section('content')
-<div style="border: 1px solid rgba(69,46,255,0.25);border-radius: 15px">
+<div style="border: 1px solid rgba(69,46,255,0.25)">
     <form action="{!! route('search') !!}" method="get">
         <div class="realestate-filter">
             <div class="container">
@@ -14,7 +14,7 @@
             </div>
         </div>
 
-        <div class="realestate-tabpane pb-5 " style="background-color: #9a8f8f;border-top-left-radius: 15px;border-top-right-radius: 15px" id="demo">
+        <div class="realestate-tabpane pb-5 " style="background-color: #d4d2d2" id="demo">
             <div class="container tab-content">
                 <!--for-rent-->
                 <div class="tab-pane active" id="for-rent" role="tabpanel" aria-labelledby="rent-tab">
