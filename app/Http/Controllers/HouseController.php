@@ -296,13 +296,15 @@ class HouseController extends Controller
         }
         $housesList = $query->get();
         $houses = [];
-
-        $housesOrder = $this->order->where('check_in', '<=', Carbon::create($request->get('check_out')))
-            ->where('check_out', '<=', Carbon::create($request->get('check_in')))
-            ->where('status', '!=', StatusInterface::DAHOANTHANH)
-            ->get();
         $inputCheckIn = $request->get('check_in');
         $inputCheckOut = $request->get('check_out');
+        $housesOrder = $this->order
+            ->where([['check_in', '<=', Carbon::create($inputCheckIn)],['check_out', '>=', Carbon::create($inputCheckIn)]])
+            ->orwhere([['check_in', '<=', Carbon::create($inputCheckOut)],['check_out', '>=', Carbon::create($inputCheckOut)]])
+            ->orwhere([['check_in', '<=', Carbon::create($inputCheckIn)],['check_out', '>=', Carbon::create($inputCheckOut)]])
+            ->where('status', '!=', StatusInterface::DAHOANTHANH)
+            ->get();
+
         for ($j = 0; $j < count($housesList); $j++) {
             array_push($houses, $housesList[$j]);
         }
