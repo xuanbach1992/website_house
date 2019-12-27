@@ -12,8 +12,8 @@ class RoomCategory extends Model
         'id', 'name',
     ];
 
-    public function house()
+    public function houses()
     {
-        return $this->belongsTo('App\House');
+        return $this->hasMany('App\House');
     }
 }
