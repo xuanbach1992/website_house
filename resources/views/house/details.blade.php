@@ -305,9 +305,16 @@
                                             <p>{{$star->content}}</p>
                                             <span style="font-size:15px">
                                         {{$star->created_at->diffForHumans(\Carbon\Carbon::now('Asia/Ho_Chi_Minh'))}}
-                                    </span>
-
-
+                                    </span>&nbsp&nbsp&nbsp&nbsp <?php $count = 0 ?>
+                                            <span class="text_container">@foreach($listComment as $comment)
+                                                    @if($comment->star_id===$star->id)
+                                                        <?php $count += 1 ?>
+                                                    @endif
+                                                @endforeach
+                                               @if($count!=0)
+                                                    {{$count}} bình luận
+                                                   @endif
+                                            </span>
                                             <div class="text_container">
                                                 <h3 style="background-color: #3490dc;color:
                                     white;border-radius: 25px; margin:2px 2px;padding:4px 6px;height: 25px;
