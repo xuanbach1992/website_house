@@ -46,11 +46,13 @@
                             đ /đêm
                         </div>
                         <div class="ml-2 row">
-                            <input type="date" class="mr-5 col-5" name="checkin" style="border-radius: 10px">
+                            <input type="text" class="mr-5 col-5" id="datepickerCheckin" name="checkin"
+                                   style="border-radius: 10px">
                             @if($errors->has('checkin'))
                                 <span class="text-danger">{{$errors->first('checkin')}}</span>
                             @endif
-                            <input type="date" class="mr-l col-5" name="checkout" style="border-radius: 10px">
+                            <input type="text" class="mr-l col-5" id="datepickerCheckout" name="checkout"
+                                   style="border-radius: 10px">
                             @if($errors->has('checkout'))
                                 <span class="text-danger">{{$errors->first('checkout')}}</span>
                             @endif
@@ -311,9 +313,9 @@
                                                         <?php $count += 1 ?>
                                                     @endif
                                                 @endforeach
-                                               @if($count!=0)
+                                                @if($count!=0)
                                                     {{$count}} bình luận
-                                                   @endif
+                                                @endif
                                             </span>
                                             <div class="text_container">
                                                 <h3 style="background-color: #3490dc;color:
@@ -343,7 +345,7 @@
                                                                         &nbsp;&nbsp;&nbsp;{{$comment->body}}
                                                                     </p>
                                                                     <span style="font-size:15px">
-                                                                {{$comment->created_at->diffForHumans(\Carbon\Carbon::now('Asia/Ho_Chi_Minh'))}}
+                                                                {{$comment->created_at->diffForHumans(\Carbon\Carbon::now())}}
                                                             </span>
                                                                 </div>
                                                             </div>
@@ -356,11 +358,15 @@
                                                         <div class="row">
                                                             <div class="col-md-1">
                                                                 <img
-                                                                    @if(!$house->user->images)
+                                                                    @guest()
+
+                                                                    @else
+                                                                    @if(\Illuminate\Support\Facades\Auth::user()->images==null)
                                                                     src="source/images/avatar.jpeg"
                                                                     @else
-                                                                    src="{{ asset('storage/rooms/'. $house->user->images) }}"
+                                                                    src="{{ asset('storage/rooms/'. \Illuminate\Support\Facades\Auth::user()->images) }}"
                                                                     @endif
+                                                                    @endguest
                                                                     style="border-radius: 300px;display: block; margin-left: auto; margin-right: auto"
                                                                     class="img-circle" width="31" height="31">
                                                             </div>
@@ -381,7 +387,7 @@
                                             <hr>
 
                                             @endforeach
-                                            {{ $listStar->links() }}
+                                            {{$listStar->appends(request()->input())->links()}}
                                         </div>
 
                                 </div>
@@ -398,8 +404,6 @@
 @endsection
 @section('script')
     <script>
-
-
         $(document).ready(function () {
             $('.text_container').addClass("hidden");
 
@@ -407,9 +411,14 @@
                 var $this = $(this);
                 if ($this.hasClass("hidden")) {
                     $(this).removeClass("hidden").addClass("visible");
-
                 }
             });
+            $("#datepickerCheckin").datepicker({minDate: new Date(), dateFormat: "dd/mm/yy"});
+            $("#datepickerCheckout").datepicker({minDate: new Date(), dateFormat: "dd/mm/yy"});
         });
     </script>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
 @stop
