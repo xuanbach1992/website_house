@@ -168,6 +168,14 @@ $notify->type==='App\Notifications\AcceptRentHouse')
                                             <a style="color: black" href="{{route('admin.notify.show')}}">
                                                 Xem thông báo
                                             </a><br>
+                                        @elseif(json_decode($notify->data)->receive==\Illuminate\Support\Facades\Auth::user()->email&&
+$notify->type==='App\Notifications\ReplyComment')
+{{--                                            {{dd(json_decode($notify->data)->house_id)}}--}}
+                                            <a style="color: black" href="{{url('/houses/detail/'.json_decode($notify->data)->house_id)}}">
+                                                {{json_decode($notify->data)->sender}} đã phản hổi đánh giá của bạn về ...
+                                               Xem chi tiết
+                                            </a><br>
+                                            <a href="{{route('house.notifi.isread',$notify->uid)}}">Đã đọc</a>
                                         @endif
                                     @endforeach
                                 </div>

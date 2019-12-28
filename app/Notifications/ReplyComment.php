@@ -20,12 +20,14 @@ class ReplyComment extends Notification
     protected $star_id;
     protected $receive;
     protected $time_reply;
-    public function __construct($house_id,$star_id,$receive,$time_reply)
+    protected $sender;
+    public function __construct($house_id,$star_id,$receive,$time_reply,$sender)
     {
         $this->house_id=$house_id;
         $this->star_id=$star_id;
         $this->receive=$receive;
         $this->time_reply=$time_reply;
+        $this->sender=$sender;
     }
 
     /**
@@ -66,6 +68,7 @@ class ReplyComment extends Notification
             'star_id' => $this->star_id,
             'receive' => $this->receive,
             'time' => $this->time_reply,
+            'sender' => $this->sender,
         ];
     }
     public function toArray($notifiable)

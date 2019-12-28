@@ -83,7 +83,7 @@ class OrderController extends Controller
     {
         $notification = Notification::where('uid', $notificationId)->get();
         $notification[0]->delete();
-        return redirect()->route('admin.notify.show');
+        return back();
     }
 
 //huy thue nha
