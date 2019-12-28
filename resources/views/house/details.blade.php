@@ -345,7 +345,7 @@
                                                                         &nbsp;&nbsp;&nbsp;{{$comment->body}}
                                                                     </p>
                                                                     <span style="font-size:15px">
-                                                                {{$comment->created_at->diffForHumans(\Carbon\Carbon::now('Asia/Ho_Chi_Minh'))}}
+                                                                {{$comment->created_at->diffForHumans(\Carbon\Carbon::now())}}
                                                             </span>
                                                                 </div>
                                                             </div>

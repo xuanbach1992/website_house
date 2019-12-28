@@ -18,13 +18,13 @@ class ReplyComment extends Notification
      */
     protected $house_id;
     protected $star_id;
-    protected $user_id;
+    protected $receive;
     protected $time_reply;
-    public function __construct($house_id,$star_id,$user_id,$time_reply)
+    public function __construct($house_id,$star_id,$receive,$time_reply)
     {
         $this->house_id=$house_id;
         $this->star_id=$star_id;
-        $this->user_id=$user_id;
+        $this->receive=$receive;
         $this->time_reply=$time_reply;
     }
 
@@ -64,7 +64,7 @@ class ReplyComment extends Notification
         return [
             'house_id' => $this->house_id,
             'star_id' => $this->star_id,
-            'user_id' => $this->user_id,
+            'receive' => $this->receive,
             'time' => $this->time_reply,
         ];
     }

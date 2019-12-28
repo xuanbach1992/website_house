@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Comment;
 
 use App\House;
+use App\Notifications\ReplyComment;
 use App\Star;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -21,7 +23,7 @@ class CommentController extends Controller
 
     public function replyStar(Request $request, $id)
     {
-
+    dd(Carbon::now());
         $user = Auth::user();
         $star = Star::find($id);
         $comment = new Comment();
@@ -30,8 +32,7 @@ class CommentController extends Controller
         $comment->house_id = $star->house_id;
         $comment->star_id = $star->id;
         $comment->save();
-
+        Auth::user()->notify(new ReplyComment($star->house_id,$id,$star->user->email,$comment->created_at));
         return redirect()->route('house.detail', $star->house_id);
-
     }
 }

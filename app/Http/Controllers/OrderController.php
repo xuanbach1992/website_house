@@ -99,7 +99,7 @@ class OrderController extends Controller
         $order = Order::findOrFail($id);
 
         $sender='bachax1992@gmail.com';
-        $receive='hiepken95@gmail.com';
+            $receive='hiepken95@gmail.com';
         $email_host = User::findOrFail($order->user_id)->email;
         $timeNow = Carbon::now('Asia/Ho_Chi_Minh');
         $nowTimestamp = Carbon::parse($timeNow)->timestamp;
