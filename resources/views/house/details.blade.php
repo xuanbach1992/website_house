@@ -387,8 +387,7 @@
                                             <hr>
 
                                             @endforeach
-                                            {{ $listStar->links() }}
-
+                                            {{$listStar->appends(request()->input())->links()}}
                                         </div>
 
                                 </div>
