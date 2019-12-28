@@ -32,7 +32,7 @@ class CommentController extends Controller
         $comment->star_id = $star->id;
         $comment->save();
         if ($star->user_id != $comment->user_id) {
-            Auth::user()->notify(new ReplyComment($star->house_id, $id, $star->user->email, $comment->created_at,$user->email));
+            Auth::user()->notify(new ReplyComment($star->house_id, $id, $star->user->email,$user->name));
         }
         return redirect()->route('house.detail', $star->house_id);
     }

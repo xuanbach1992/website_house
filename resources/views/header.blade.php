@@ -146,7 +146,7 @@
                                     </span>
                                 </a>
 
-                                <div class="dropdown-menu dropdown-menu-right" style="width: 500px"
+                                <div class="dropdown-menu dropdown-menu-right" style="width: 300px"
                                      aria-labelledby="navbarDropdown">
                                     @foreach(\App\Notification::all() as $notify)
                                         @if(json_decode($notify->data)->receive==\Illuminate\Support\Facades\Auth::user()->email&&
@@ -170,12 +170,11 @@ $notify->type==='App\Notifications\AcceptRentHouse')
                                             </a><br>
                                         @elseif(json_decode($notify->data)->receive==\Illuminate\Support\Facades\Auth::user()->email&&
 $notify->type==='App\Notifications\ReplyComment')
-{{--                                            {{dd(json_decode($notify->data)->house_id)}}--}}
                                             <a style="color: black" href="{{url('/houses/detail/'.json_decode($notify->data)->house_id)}}">
-                                                {{json_decode($notify->data)->sender}} đã phản hổi đánh giá của bạn về ...
-                                               Xem chi tiết
-                                            </a><br>
+                                                {{json_decode($notify->data)->sender}} đã trả lời đánh giá của bạn về ...
+                                            </a>
                                             <a href="{{route('house.notifi.isread',$notify->uid)}}">Đã đọc</a>
+                                            <span style="font-size: 10px;float: right">{{$notify->created_at->diffForHumans(\Carbon\Carbon::now())}}</span>
                                         @endif
                                     @endforeach
                                 </div>
