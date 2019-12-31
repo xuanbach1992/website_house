@@ -263,7 +263,7 @@ class HouseController extends Controller
             'orders',
             'listRoomCategory',
             'listHouseCategory',
-            'listDistrict', 'listStar', 'starMedium', 'listComment', 'user'));
+            'listDistrict', 'listStar', 'starMedium', 'listComment', 'user','allStarInHouseDetail'));
     }
 
     /**

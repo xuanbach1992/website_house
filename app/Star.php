@@ -9,7 +9,7 @@ class Star extends Model
     protected $fillable = ['id','house_id','number','content','user_id'];
 
     public function house(){
-        return $this->hasMany('App\House');
+        return $this->belongsTo('App\House');
     }
 
     public function user(){

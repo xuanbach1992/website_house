@@ -119,6 +119,14 @@
                 @endif
             @endforeach
         </div>
+        <div class="row col-md-12">
+        @for($i=1;$i<=round($starMedium);$i++)
+            <div> <span class="fa fa-star"
+                        style="color: #ff9705"></span></div>
+        @endfor
+       <p>({{$allStarInHouseDetail/$starMedium}}&nbsp;đánh giá)</p>
+        </div>
+
         <hr>
 
         <!--Thông tin chi tiết-->
@@ -215,9 +223,10 @@
                                 <h3><b>Đánh Giá Sản Phẩm</b></h3>
                                 <hr>
                                 <div class="compolent_rating_content" style="display: flex;align-items:center">
-                                    <div class="rating_item" style="width: 20%;margin: 0 20px">
-                                        <span class="fa fa-star"
-                                              style="font-size: 60px;color: #ff9705;margin: 0 auto; text-align: center;">
+                                    <div class="rating_item row" style="width: 40%;margin: 0 20px">
+
+                                        <span class="fa fa-star "
+                                              style="font-size: 90px;color: #ff9705;margin: 0 auto; text-align: center;">
                                             {{round($starMedium,2)}}
                                         </span>
                                     </div>
@@ -250,9 +259,9 @@ $order->status===\App\StatusInterface::DAHOANTHANH)
                                         <form action="{{route('house.rating',$house->id)}}" method="post">
                                             @csrf
                                             <div style="display: flex; margin-top: 15px;font-size: 15px" class="hide">
-                                                <p style="margin-bottom: 0">Đánh Giá Của Bạn:</p>
+                                                <div class="mt-2" style="margin-bottom: 0">Đánh Giá Của Bạn:</div>
 
-                                                <div style="margin:0;padding:0;" id="rating">
+                                                <div  style="margin:0;padding:0;" id="rating">
                                                     <input type="radio" id="star5" name="rating" value="5"/>
                                                     <label style="margin:0;padding:0;" class="full" for="star5"></label>
                                                     <input type="radio" id="star4" name="rating" value="4"/>

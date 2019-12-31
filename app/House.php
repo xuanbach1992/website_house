@@ -51,7 +51,7 @@ class House extends Model
 
     public function star()
     {
-        return $this->belongsTo('App\Star');
+        return $this->hasMany('App\Star');
     }
 
     public function comments()
