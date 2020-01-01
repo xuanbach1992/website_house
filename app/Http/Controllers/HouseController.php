@@ -299,9 +299,9 @@ class HouseController extends Controller
         $inputCheckIn = $request->get('check_in');
         $inputCheckOut = $request->get('check_out');
         $housesOrder = $this->order
-            ->where([['check_in', '<=', Carbon::create($inputCheckIn)], ['check_out', '>=', Carbon::create($inputCheckIn)]])
-            ->orwhere([['check_in', '<=', Carbon::create($inputCheckOut)], ['check_out', '>=', Carbon::create($inputCheckOut)]])
-            ->orwhere([['check_in', '<=', Carbon::create($inputCheckIn)], ['check_out', '>=', Carbon::create($inputCheckOut)]])
+            ->where([['check_in', '<=', Carbon::create($inputCheckIn)], ['check_out', '>', Carbon::create($inputCheckIn)]])
+            ->orwhere([['check_in', '<=', Carbon::create($inputCheckOut)], ['check_out', '>', Carbon::create($inputCheckOut)]])
+            ->orwhere([['check_in', '>=', Carbon::create($inputCheckIn)], ['check_out', '<', Carbon::create($inputCheckOut)]])
             ->where('status', '!=', StatusInterface::DAHOANTHANH)
             ->get();
 
@@ -315,7 +315,6 @@ class HouseController extends Controller
                 }
             }
         }
-//        dd($query->toSql());
         $listCities = $this->city->get();
         return view('page.product', compact(
             'filter',
