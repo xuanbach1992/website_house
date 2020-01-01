@@ -48,7 +48,7 @@
 
 </head>
 
-<body data-spy="scroll" data-target=".site-navbar-target" data-offset="300" style="background-color: ">
+<body data-spy="scroll" data-target=".site-navbar-target" data-offset="300">
 
 
 <div class="site-wrap" id="home-section">
@@ -111,6 +111,7 @@
 <script src="{{asset('js/app.js') }}"></script>
 <script src="{{asset('js/main.js')}}"></script>
 <script src="{{asset('js/ajax.js')}}"></script>
+<script src="{{asset('js/datepicker.js')}}"></script>
 @yield('script')
 {!! toastr()->render() !!}
 </body>

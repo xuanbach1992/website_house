@@ -21,6 +21,7 @@ Route::prefix('/houses')->group(function () {
     Route::get('/searchHouse', 'HouseController@search')->name('search');
     Route::get('/check-in/{id}', 'HouseController@userCheckinHouse')->name('user.checkin.house')->middleware('auth');
     Route::get('/check-out/{id}', 'HouseController@userCheckoutHouse')->name('user.checkout.house')->middleware('auth');
+    Route::get('/find-date/{id}', 'OrderController@getCheckinCheckoutOrderFindByHouse');
 
 });
 Route::prefix('/users')->group(function () {

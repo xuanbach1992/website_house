@@ -13,6 +13,7 @@ use App\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 
 class OrderController extends Controller
@@ -160,11 +161,13 @@ class OrderController extends Controller
         return view('admin.pages.rent-detail', compact('orders', 'house_name'));
     }
 
-    public function getCheckinChechoutOrderFindByHouse($id)
+    public function getCheckinCheckoutOrderFindByHouse($house_id)
     {
-        $dates = $orders = Order::select(
-            DB::raw('check_in as checkin'),DB::raw('check_out as checkout'))
-            ->where('house_id', $id)->get();
+        $dates = Order::select(
+            DB::raw('check_in as checkin'), DB::raw('check_out as checkout'))
+            ->where('house_id', "=", $house_id)
+            ->where('status', "=", StatusInterface::DATTHUETHANHCONG)
+            ->get();
         return response()->json($dates);
     }
 }

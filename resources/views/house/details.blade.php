@@ -46,13 +46,13 @@
                             đ /đêm
                         </div>
                         <div class="ml-2 row">
-                            <input type="text" class="mr-5 col-5" id="datepickerCheckin" placeholder="mm/dd/yyyy"
+                            <input type="text" class="mr-5 col-5 datepickerInput" placeholder="mm/dd/yyyy"
                                    name="checkin"
                                    style="border-radius: 10px">
                             @if($errors->has('checkin'))
                                 <span class="text-danger">{{$errors->first('checkin')}}</span>
                             @endif
-                            <input type="text" class="mr-l col-5" id="datepickerCheckout" placeholder="mm/dd/yyyy"
+                            <input type="text" class="mr-l col-5 datepickerInput" placeholder="mm/dd/yyyy"
                                    name="checkout"
                                    style="border-radius: 10px">
                             @if($errors->has('checkout'))
@@ -398,17 +398,21 @@
                 </div>
             </div>
         </div>
-        <input type="text" id="house_id" value="{{$house->id}}" name="house_id" readonly="readonly" style="display: none">
+        <input type="text" id="house_id" value="{{$house->id}}" name="house_id" readonly="readonly"
+               style="display: none">
     </div>
 
     <!--Thông tin chủ nhà-->
 
 @endsection
 @section('script')
+
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script>
 
         $(document).ready(function () {
-            let house_id =$('#house_id').val();
             $('.text_container').addClass("hidden");
 
             $('.text_container').click(function () {
@@ -417,13 +421,7 @@
                     $(this).removeClass("hidden").addClass("visible");
                 }
             });
-            
-            $("#datepickerCheckin").datepicker({minDate: '+1D', dateFormat: 'MM-dd-yy'});
-            $("#datepickerCheckout").datepicker({minDate: '+1D', dateFormat: 'MM-dd-yy'});
         });
     </script>
-    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
 @stop
