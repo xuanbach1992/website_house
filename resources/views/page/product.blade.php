@@ -67,10 +67,10 @@
                         <div class="col-md-4 form-group">
                             <div class="row">
                                 <div class="col-md-6 form-group">
-                                    <input type="date" name="check_in" class="form-control">
+                                    <input type="text" name="check_in" class="form-control searchDate ">
                                 </div>
                                 <div class="col-md-6 form-group">
-                                    <input type="date" name="check_out" class="form-control">
+                                    <input type="text" name="check_out" class="form-control searchDate">
                                 </div>
                             </div>
                         </div>
@@ -127,3 +127,18 @@
     </div>
 </div>
 @endsection
+@section('script')
+
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+<script>
+    $(document).ready(function () {
+        $(".searchDate").datepicker({
+            minDate: '+1D',
+            dateFormat: 'dd-mm-yy'
+        });
+    });
+</script>
+@stop
