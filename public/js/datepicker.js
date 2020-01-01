@@ -10,11 +10,10 @@ $(document).ready(function () {
             $.each(result, function (index, date) {
                 checkin=date.checkin.slice(0,10);
                 checkout= date.checkout.slice(0,10);
-                for (let d = new Date(checkin); d <= new Date(checkout); d.setDate(d.getDate() + 1)) {
-                    dateRange.push($.datepicker.formatDate('yy-mm-dd', d));
+                for (let i = new Date(checkin); i <= new Date(checkout); i.setDate(i.getDate() + 1)) {
+                    dateRange.push($.datepicker.formatDate('yy-mm-dd', i));
                 }
             });
-
         },
     });
     $(".datepickerInput").datepicker({
