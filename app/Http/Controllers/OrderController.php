@@ -98,8 +98,8 @@ class OrderController extends Controller
         array_push($reasons, $reasonOne, $reasonTwo, $reasonThree, $reasonFour);
         $order = Order::findOrFail($id);
 
-        $sender='bachax1992@gmail.com';
-            $receive='hiepken95@gmail.com';
+        $sender = 'bachax1992@gmail.com';
+        $receive = 'hiepken95@gmail.com';
         $email_host = User::findOrFail($order->user_id)->email;
         $timeNow = Carbon::now('Asia/Ho_Chi_Minh');
         $nowTimestamp = Carbon::parse($timeNow)->timestamp;
@@ -116,7 +116,7 @@ class OrderController extends Controller
 //                    $message->to('hiepken95@gmail.com', 'Visitor')->subject('Thông tin!');
 //                });
 
-            Mail::to($receive)->send(new reject_rent_house_by_customer($sender,$reasons));
+            Mail::to($receive)->send(new reject_rent_house_by_customer($sender, $reasons));
             return redirect()->route('admin.house.rented');
             //notification
         } else {
@@ -158,5 +158,13 @@ class OrderController extends Controller
         $house_name = House::find($house_id)->name;
         $orders = Order::where('house_id', $house_id)->get();
         return view('admin.pages.rent-detail', compact('orders', 'house_name'));
+    }
+
+    public function getCheckinChechoutOrderFindByHouse($id)
+    {
+        $dates = $orders = Order::select(
+            DB::raw('check_in as checkin'),DB::raw('check_out as checkout'))
+            ->where('house_id', $id)->get();
+        return response()->json($dates);
     }
 }
