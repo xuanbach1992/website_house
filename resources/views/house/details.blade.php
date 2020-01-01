@@ -413,8 +413,8 @@
                     $(this).removeClass("hidden").addClass("visible");
                 }
             });
-            $("#datepickerCheckin").datepicker({minDate: new Date(), dateFormat: "dd/mm/yy"});
-            $("#datepickerCheckout").datepicker({minDate: new Date(), dateFormat: "dd/mm/yy"});
+            $("#datepickerCheckin").datepicker({minDate: '+1D', dateFormat: "dd/mm/yy"});
+            $("#datepickerCheckout").datepicker({minDate: '+1D', dateFormat: "dd/mm/yy"});
         });
     </script>
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
