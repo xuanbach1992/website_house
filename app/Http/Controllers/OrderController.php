@@ -32,8 +32,8 @@ class OrderController extends Controller
         $order = new Order();
         $email_receive = $dataNotification->sender; //email nguoi nhan
         $house_title = $dataNotification->house_title;
-        $order->check_in = $dataNotification->checkin;
-        $order->check_out = $dataNotification->checkout;
+        $order->check_in = Carbon::create($dataNotification->checkin);
+        $order->check_out = Carbon::create($dataNotification->checkout);
         $order->pay_money = $dataNotification->total_price;
         $order->house_id = $house_id;
 //                $email_host=User::find($order->user_id)->email;
