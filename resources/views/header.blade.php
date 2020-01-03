@@ -171,12 +171,12 @@ $notify->type==='App\Notifications\AcceptRentHouse')
                                             </a><br>
                                         @elseif(json_decode($notify->data)->receive==\Illuminate\Support\Facades\Auth::user()->email&&
 $notify->type==='App\Notifications\ReplyComment')
-                                            <a id="read_comment" style="color: black"
+                                            <a class="read_comment" style="color: black"
                                                href="{{url('/houses/detail/'.json_decode($notify->data)->house_id)}}">
                                                 {{json_decode($notify->data)->sender}} đã trả lời đánh giá của bạn về
                                                 ...
                                             </a>
-                                            <input type="text" id="notification_id" value="{{$notify->uid}}" readonly="readonly" style="display: none">
+                                            <input type="text" class="notification_id" value="{{$notify->uid}}" readonly="readonly" style="display: none">
                                             <span
                                                 style="font-size: 10px;float: right">{{$notify->created_at->diffForHumans(\Carbon\Carbon::now())}}</span>
                                         @endif
