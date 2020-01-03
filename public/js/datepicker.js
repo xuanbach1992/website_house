@@ -18,7 +18,7 @@ $(document).ready(function () {
     });
     $(".datepickerInput").datepicker({
         minDate: '+1D',
-        dateFormat: 'MM-dd-yy',
+        // dateFormat: 'MM-dd-yy',
         beforeShowDay: function (date) {
             let string = jQuery.datepicker.formatDate('yy-mm-dd', date);
             return [dateRange.indexOf(string) === -1]

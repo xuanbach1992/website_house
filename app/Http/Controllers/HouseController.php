@@ -365,7 +365,7 @@ class HouseController extends Controller
         $email_host = User::find($user_id)->email;//email chu nha
         $orders = Order::where('house_id', $house_id)->get();
         $checkoutConvertMaxHourInDay = date('Y/m/d H:i',strtotime('+23 hour +30 minutes',strtotime($request->checkout)));
-        $checkInTimestampRequest = Carbon::parse($request->checkin)->timestamp;
+        $checkInTimestampRequest = strtotime($request->checkin);
         $checkOutTimestampRequest = Carbon::parse($checkoutConvertMaxHourInDay)->timestamp;
         foreach ($orders as $order) {
             if (!empty($request->get('checkin')) && !empty($request->get('checkout'))) {

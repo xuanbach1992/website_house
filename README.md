@@ -1,18 +1,35 @@
-<p align="center"><img src="https://res.cloudinary.com/dtfbvvkyp/image/upload/v1566331377/laravel-logolockup-cmyk-red.svg" width="400"></p>
-
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
+<p align="center">CodeGym</p>
+<p align="center">CGC8 PHP </p>
+<p align="center">C0819H2 </p>
+<p align="center">PO:A. Phan Văn Luân </p>
+<p align="center">scrum master: A.Dư Thanh Hoàng </p>
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/d/total.svg" alt="Total Downloads"></a>
+<p align="center">Team BTH </p>
+<p align="center">
+
+<a href="https://facebook.com/xuan.bach.7">
+Team Leader: An Xuân Bách</a>
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/v/stable.svg" alt="Latest Stable Version"></a>
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/license.svg" alt="License"></a>
 </p>
 
 ## About Laravel
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+Mô tả:
+Ứng dụng website cho thuê nhà, homestay với các chức năng như:<br>
+* Đăng nhập, đăng kí<br>
+* Đăng thuê nhà đối với người có nhà không sử dụng đến muốn cho thuê<br>
+* Tìm kiếm với người muốn đi thuê theo các tiêu chí địa điểm, tiện ích ,thời gian <br>
+* Phản hồi đánh giá căn nhà đối với người đã thuê<br>
+* Gửi email, thông báo mỗi khi có tương tác giữa khách hàng và chủ nhà<br>
+* Đối với chủ nhà có các giao diện quản trị với ngôi nhà của mình như chỉnh sửa, xem thông tin chi tiết, xem lịch đặt thuê trước<br>
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
+<br>
+<br>
+<br>
+Công nghệ sử dụng
+
+-
 - Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
 - Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
 - Database agnostic [schema migrations](https://laravel.com/docs/migrations).
