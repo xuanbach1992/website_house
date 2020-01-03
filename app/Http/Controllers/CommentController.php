@@ -40,8 +40,10 @@ class CommentController extends Controller
             Auth::user()->notify(new ReplyComment($star->house_id, $id, $star->user->email, $user->name));
         }
         foreach ($comments as $comment) {
-            if ($comment->user_id != $user->id && $star->user_id != $comment->user_id) {
-                Auth::user()->notify(new ReplyComment($star->house_id, $id,$comment->user->email, $user->name));
+            if ($user->id != $comment->user_id
+                && $star->user_id != $comment->user_id
+                && $star->user_id != $comment->user_id) {
+                Auth::user()->notify(new ReplyComment($star->house_id, $id, $comment->user->email, $user->name));
             }
         }
         return redirect()->route('house.detail', $star->house_id);
