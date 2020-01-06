@@ -227,11 +227,11 @@
                                 <h3><b>Đánh Giá Sản Phẩm</b></h3>
                                 <hr>
                                 <div class="compolent_rating_content" style="display: flex;align-items:center">
-                                    <div class="rating_item row" style="width: 40%;margin: 0 20px">
+                                    <div class="rating_item row" style="width: 40%;">
 
-                                        <span class="fa fa-star "
-                                              style="font-size: 90px;color: #ff9705;margin: 0 auto; text-align: center;">
-                                            {{round($starMedium,2)}}
+                                        <span class="fa fa-star col-md-12"
+                                              style="font-size: 60px;color: #ff9705;">
+                                           {{round($starMedium,2)}}
                                         </span>
                                     </div>
 
