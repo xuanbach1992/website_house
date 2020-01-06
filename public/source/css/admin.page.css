@@ -1,0 +1,18 @@
+
+.image {
+    width: 180px!important;
+    height: 180px!important;
+    overflow: hidden!important;
+    border-radius: 50%!important;
+    margin: auto!important;
+}
+.user-panel .image {
+    display: inline-block;
+    padding-left: 0 !important;}
+.image img {
+    width: auto!important;
+    height: 100%!important;
+    position: relative!important;
+    left: 50%!important;
+    transform: translate(-50%, 0);
+}

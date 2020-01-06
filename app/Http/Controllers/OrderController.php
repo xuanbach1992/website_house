@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\House;
+use App\Mail\reject_rent_house_by_customer;
 use App\Notification;
 use App\Notifications\AcceptRentHouse;
 use App\Notifications\NoAcceptRent;
@@ -51,6 +52,7 @@ class OrderController extends Controller
 //            }
 //        }
     }
+
 //chhu nha khong dong y
     public function noAcceptRentHouse($notificationId)
     {
@@ -75,17 +77,29 @@ class OrderController extends Controller
         return redirect()->route('admin.notify.show');
 
     }
+
 //doc thong bao va xoa thong bao
     public function isReadNotification($notificationId)
     {
         $notification = Notification::where('uid', $notificationId)->get();
         $notification[0]->delete();
-        return redirect()->route('admin.notify.show');
+        return back();
     }
+
 //huy thue nha
-    public function destroyOrderRentHouse($id)
+    public function destroyOrderRentHouse(Request $request)
     {
+        $id = $request->idHouseBooking;
+        $reasons = [];
+        $reasonOne = $request->reasonOne;
+        $reasonTwo = $request->reasonTwo;
+        $reasonThree = $request->reasonThree;
+        $reasonFour = $request->reasonFour;
+        array_push($reasons, $reasonOne, $reasonTwo, $reasonThree, $reasonFour);
         $order = Order::findOrFail($id);
+
+        $sender='bachax1992@gmail.com';
+            $receive='hiepken95@gmail.com';
         $email_host = User::findOrFail($order->user_id)->email;
         $timeNow = Carbon::now('Asia/Ho_Chi_Minh');
         $nowTimestamp = Carbon::parse($timeNow)->timestamp;
@@ -94,11 +108,15 @@ class OrderController extends Controller
         if ($checkInTimestamp - $nowTimestamp >= 86400) {
             $order->delete();
             toastr()->success('huy thue nha thanh cong');
+
             //không gửi được email thì chạy php artisan config:cache rồi chạy lại serve
-            Mail::send('house.content', array('content' => 'Bạn đã hủy thuê nhà thành công . Hẹn bạn dịp khác'),
-                function ($message) {
-                    $message->to('hiepken95@gmail.com', 'Visitor')->subject('Thông tin!');
-                });
+//            by hiep
+//            Mail::send('house.content', array('content' => 'Bạn đã hủy thuê nhà thành công . Hẹn bạn dịp khác'),
+//                function ($message) {
+//                    $message->to('hiepken95@gmail.com', 'Visitor')->subject('Thông tin!');
+//                });
+
+            Mail::to($receive)->send(new reject_rent_house_by_customer($sender,$reasons));
             return redirect()->route('admin.house.rented');
             //notification
         } else {

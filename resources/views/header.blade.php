@@ -38,7 +38,6 @@
                             </div>
 
 
-
                             @error('password')
                             <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -133,6 +132,7 @@
 
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link fa fa-bell"
+                                   data-toggle="dropdown"
                                    style="font-size:24px" href="{{route('admin.notify.show')}}" role="button"
                                 >
                                     <span class="caret badge">
@@ -146,29 +146,38 @@
                                     </span>
                                 </a>
 
-{{--                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">--}}
-{{--                                    @foreach(\App\Notification::all() as $notify)--}}
-{{--                                        @if(json_decode($notify->data)->receive==\Illuminate\Support\Facades\Auth::user()->email&&--}}
-{{--$notify->type==='App\Notifications\SendNotificationToHouseHost')--}}
-{{--                                        <a href="{{route('admin.notify.show')}}">--}}
-{{--                                            Yêu cầu thuê phòng từ--}}
-{{--                                            {{json_decode($notify->data)->sender}}--}}
-{{--                                        </a><br>--}}
-{{--                                        @elseif(json_decode($notify->data)->receive==\Illuminate\Support\Facades\Auth::user()->email&&--}}
-{{--$notify->type==='App\Notifications\NoAcceptRent')--}}
-{{--                                        <a href="{{route('admin.notify.show')}}">--}}
-{{--                                            Yêu cầu thuê không được đồng ý từ--}}
-{{--                                            {{json_decode($notify->data)->sender}}--}}
-{{--                                        </a><br>--}}
-{{--                                        @elseif(json_decode($notify->data)->receive==\Illuminate\Support\Facades\Auth::user()->email&&--}}
-{{--$notify->type==='App\Notifications\AcceptRentHouse')--}}
-{{--                                        <a href="{{route('admin.notify.show')}}">--}}
-{{--                                            Bạn được chủ nhà chấp nhận cho thuê--}}
-{{--                                            {{json_decode($notify->data)->sender}}--}}
-{{--                                        </a><br>--}}
-{{--                                        @endif--}}
-{{--                                    @endforeach--}}
-{{--                                </div>--}}
+                                <div class="dropdown-menu dropdown-menu-right" style="width: 300px"
+                                     aria-labelledby="navbarDropdown">
+                                    @foreach(\App\Notification::all() as $notify)
+                                        @if(json_decode($notify->data)->receive==\Illuminate\Support\Facades\Auth::user()->email&&
+$notify->type==='App\Notifications\SendNotificationToHouseHost')
+                                             &nbsp Yêu cầu đặt phòng bởi
+                                            {{json_decode($notify->data)->sender}}
+                                            <a href="{{route('admin.notify.show')}}">
+                                               Xem thông báo
+                                            </a><br>
+                                        @elseif(json_decode($notify->data)->receive==\Illuminate\Support\Facades\Auth::user()->email&&
+$notify->type==='App\Notifications\NoAcceptRent')
+                                            &nbsp Đặt phòng thất bại
+                                            <a style="color: black" href="{{route('admin.notify.show')}}">
+                                                Xem thông báo
+                                            </a><br>
+                                        @elseif(json_decode($notify->data)->receive==\Illuminate\Support\Facades\Auth::user()->email&&
+$notify->type==='App\Notifications\AcceptRentHouse')
+                                            &nbsp Đặt phòng thành công
+                                            <a style="color: black" href="{{route('admin.notify.show')}}">
+                                                Xem thông báo
+                                            </a><br>
+                                        @elseif(json_decode($notify->data)->receive==\Illuminate\Support\Facades\Auth::user()->email&&
+$notify->type==='App\Notifications\ReplyComment')
+                                            <a style="color: black" href="{{url('/houses/detail/'.json_decode($notify->data)->house_id)}}">
+                                                {{json_decode($notify->data)->sender}} đã trả lời đánh giá của bạn về ...
+                                            </a>
+                                            <a href="{{route('house.notifi.isread',$notify->uid)}}">Đã đọc</a>
+                                            <span style="font-size: 10px;float: right">{{$notify->created_at->diffForHumans(\Carbon\Carbon::now())}}</span>
+                                        @endif
+                                    @endforeach
+                                </div>
                             </li>
 
                             <li class="nav-item dropdown">

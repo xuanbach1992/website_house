@@ -46,11 +46,13 @@
                             đ /đêm
                         </div>
                         <div class="ml-2 row">
-                            <input type="date" class="mr-5 col-5" name="checkin" style="border-radius: 10px">
+                            <input type="text" class="mr-5 col-5" id="datepickerCheckin" name="checkin"
+                                   style="border-radius: 10px">
                             @if($errors->has('checkin'))
                                 <span class="text-danger">{{$errors->first('checkin')}}</span>
                             @endif
-                            <input type="date" class="mr-l col-5" name="checkout" style="border-radius: 10px">
+                            <input type="text" class="mr-l col-5" id="datepickerCheckout" name="checkout"
+                                   style="border-radius: 10px">
                             @if($errors->has('checkout'))
                                 <span class="text-danger">{{$errors->first('checkout')}}</span>
                             @endif
@@ -96,35 +98,46 @@
         <div class="col-md-9 mt-5 row">
             <h4><b style="color: #0037ff ">{{$house->name}}</b></h4>
             @foreach($orders as $order)
-                @if( ($order->user_id===\Illuminate\Support\Facades\Auth::user()->id)&&
+                @guest()
+
+                @else
+                    @if( ($order->user_id===\Illuminate\Support\Facades\Auth::user()->id)&&
                             (\Carbon\Carbon::create($order->check_in)->timestamp
                            <=\Carbon\Carbon::parse(\Carbon\Carbon::now('Asia/Ho_Chi_Minh'))->timestamp)&&
                    (\Carbon\Carbon::create($order->check_out)->timestamp
                           >=\Carbon\Carbon::parse(\Carbon\Carbon::now('Asia/Ho_Chi_Minh'))->timestamp)
                           )
-                    @if($order->status==\App\StatusInterface::DATTHUETHANHCONG&&
-            $house->status =\App\StatusInterface::SANSANG)
+                        @if($order->status==\App\StatusInterface::DATTHUETHANHCONG&&
+                $house->status =\App\StatusInterface::SANSANG)
 
-                        <a class="col-lg-4 offset-2 btn-success pt-1"
-                           href="{{route('user.checkin.house',$order->id)}}"
-                           style="border-radius: 30px;padding-left:40px" onclick="return confirm('check in')"
-                        >check in</a>
-                    @elseif($order->status==\App\StatusInterface::NHANPHONG&&
-                $house->status =\App\StatusInterface::NHANPHONG)
-                        <a class="col-lg-4 offset-2 btn-warning pt-1" style="border-radius: 30px;padding-left:40px"
-                           href="{{route('user.checkout.house',$order->id)}}"
-                           onclick="return confirm('Ban muon tra phong` phai ko?')"
-                        >check out</a>
+                            <a class="col-lg-4 offset-2 btn-success pt-1"
+                               href="{{route('user.checkin.house',$order->id)}}"
+                               style="border-radius: 30px;padding-left:40px" onclick="return confirm('check in')"
+                            >check in</a>
+                        @elseif($order->status==\App\StatusInterface::NHANPHONG&&
+                    $house->status =\App\StatusInterface::NHANPHONG)
+                            <a class="col-lg-4 offset-2 btn-warning pt-1" style="border-radius: 30px;padding-left:40px"
+                               href="{{route('user.checkout.house',$order->id)}}"
+                               onclick="return confirm('Ban muon tra phong` phai ko?')"
+                            >check out</a>
+                        @endif
                     @endif
-                @endif
+                @endguest
             @endforeach
         </div>
         <div class="row col-md-12">
-        @for($i=1;$i<=round($starMedium);$i++)
-            <div> <span class="fa fa-star"
-                        style="color: #ff9705"></span></div>
-        @endfor
-       <p>({{$allStarInHouseDetail/$starMedium}}&nbsp;đánh giá)</p>
+            <div> @for($i=1;$i<=floor($starMedium);$i++)
+                    <img src="{{asset('source/images/1.png')}}" width="35px" height="35px" alt="star5">
+                @endfor
+                @if(0.8<=$starMedium-floor($starMedium)&&$starMedium-floor($starMedium)<1)
+                    <img src="{{asset('source/images/1.png')}}" width="35px" height="35px" alt="star5">
+                @elseif(0.3<=$starMedium-floor($starMedium)&&$starMedium-floor($starMedium)<0.8)
+                    <img src="{{asset('source/images/0.5.png')}}" width="35px" height="35px" alt="star5">
+                @endif
+            </div>
+
+
+            <div>&nbsp&nbsp({{ $allStarInHouseDetail/$starMedium}}&nbsp;đánh giá)</div>
         </div>
 
         <hr>
@@ -139,26 +152,16 @@
 
             <div>
                 <h5><span class="fa fa-map-marker"> Địa chỉ : {{$house->address}} -
-                    @foreach($listCities as $city)
-                            @if($house->cities_id == $city->id)
-                                {{$city->name}}
-                            @endif
-                        @endforeach
+                        {{$house->district->name}} -
+                        {{$house->cities->name}}
                 </span></h5>
             </div>
             <div>
                 <h5>
             <span class="far fa fa-home nav-icon"> Kiểu nhà :
-                        @foreach($listHouseCategory as $houseType)
-                    @if($house->cities_id == $houseType->id)
-                        {{$houseType->name}} - 800 m2 -
-                    @endif
-                @endforeach
-                @foreach($listRoomCategory as $roomType)
-                    @if($house->cities_id == $roomType->id)
-                        {{$roomType->name}} - 50 m2 - Nguyên căn
-                    @endif
-                @endforeach
+                {{$house->houseCategory->name}}
+                {{$house->roomCategory->name}}
+                        - 50 m2 - Nguyên căn
                 </span></h5>
             </div>
 
@@ -251,40 +254,50 @@
 
                                 </div>
                                 @foreach($orders as $order)
+                                    @guest()
 
-                                    @if($order->user_id===\Illuminate\Support\Facades\Auth::user()->id &&
-$order->status===\App\StatusInterface::DAHOANTHANH)
-                                        <hr>
+                                    @else
+                                        @if($order->user_id===\Illuminate\Support\Facades\Auth::user()->id &&
+    $order->status===\App\StatusInterface::DAHOANTHANH)
+                                            <hr>
 
-                                        <form action="{{route('house.rating',$house->id)}}" method="post">
-                                            @csrf
-                                            <div style="display: flex; margin-top: 15px;font-size: 15px" class="hide">
-                                                <div class="mt-2" style="margin-bottom: 0">Đánh Giá Của Bạn:</div>
 
-                                                <div  style="margin:0;padding:0;" id="rating">
-                                                    <input type="radio" id="star5" name="rating" value="5"/>
-                                                    <label style="margin:0;padding:0;" class="full" for="star5"></label>
-                                                    <input type="radio" id="star4" name="rating" value="4"/>
-                                                    <label style="margin:0;padding:0;" class="full" for="star4"></label>
-                                                    <input type="radio" id="star3" name="rating" value="3"/>
-                                                    <label style="margin:0;padding:0;" class="full" for="star3"></label>
-                                                    <input type="radio" id="star2" name="rating" value="2"/>
-                                                    <label style="margin:0;padding:0;" class="full" for="star2"></label>
-                                                    <input type="radio" id="star1" name="rating" value="1"/>
-                                                    <label style="margin:0;padding:0;" class="full"
-                                                           for="star1"></label>
+                                            <form action="{{route('house.rating',$house->id)}}" method="post">
+                                                @csrf
+                                                <div style="display: flex; margin-top: 15px;font-size: 15px"
+                                                     class="hide">
+                                                    <div class="mt-2" style="margin-bottom: 0">Đánh Giá Của Bạn:</div>
+
+                                                    <div style="margin:0;padding:0;" id="rating">
+                                                        <input type="radio" id="star5" name="rating" value="5"/>
+                                                        <label style="margin:0;padding:0;" class="full"
+                                                               for="star5"></label>
+                                                        <input type="radio" id="star4" name="rating" value="4"/>
+                                                        <label style="margin:0;padding:0;" class="full"
+                                                               for="star4"></label>
+                                                        <input type="radio" id="star3" name="rating" value="3"/>
+                                                        <label style="margin:0;padding:0;" class="full"
+                                                               for="star3"></label>
+                                                        <input type="radio" id="star2" name="rating" value="2"/>
+                                                        <label style="margin:0;padding:0;" class="full"
+                                                               for="star2"></label>
+                                                        <input type="radio" id="star1" name="rating" value="1"/>
+                                                        <label style="margin:0;padding:0;" class="full"
+                                                               for="star1"></label>
+
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div>
-                                                <input class="form-control" name="contents">
-                                                <button type="submit"
-                                                        class="btn mt-2 btn-primary js_rating_house">Gửi đánh giá
-                                                </button>
-                                            </div>
-                                        </form>
-                                        @break
-                                    @endif
-
+                                                <div>
+                                                    <input class="form-control" name="contents">
+                                                    <button type="submit"
+                                                            class="btn mt-2 btn-primary js_rating_house">Gửi
+                                                        đánh giá
+                                                    </button>
+                                                </div>
+                                            </form>
+                                            @break
+                                        @endif
+                                    @endguest
                                 @endforeach
                                 <hr>
                                 <div class="mt-5">
@@ -299,7 +312,8 @@ $order->status===\App\StatusInterface::DAHOANTHANH)
                                                     src="{{ asset('storage/rooms/'. $star->user->images) }}"
                                                     @endif
                                                     style="border-radius: 300px;display: block; margin-left: auto; margin-right: auto"
-                                                    class="img-circle" alt="avatar_user" width="50" height="50">
+                                                    class="img-circle" alt="avatar_user"
+                                                    width="50" height="50">
                                             </div>
                                             <div class="col-md-10 mt-3 ml-3">
                                                 {{$star->user->name}}
@@ -313,9 +327,16 @@ $order->status===\App\StatusInterface::DAHOANTHANH)
                                             <p>{{$star->content}}</p>
                                             <span style="font-size:15px">
                                         {{$star->created_at->diffForHumans(\Carbon\Carbon::now('Asia/Ho_Chi_Minh'))}}
-                                    </span>
-
-
+                                    </span>&nbsp&nbsp&nbsp&nbsp <?php $count = 0 ?>
+                                            <span class="text_container">@foreach($listComment as $comment)
+                                                    @if($comment->star_id===$star->id)
+                                                        <?php $count += 1 ?>
+                                                    @endif
+                                                @endforeach
+                                                @if($count!=0)
+                                                    {{$count}} bình luận
+                                                @endif
+                                            </span>
                                             <div class="text_container">
                                                 <h3 style="background-color: #3490dc;color:
                                     white;border-radius: 25px; margin:2px 2px;padding:4px 6px;height: 25px;
@@ -335,7 +356,8 @@ $order->status===\App\StatusInterface::DAHOANTHANH)
                                                                         src="{{ asset('storage/rooms/'. $comment->user->images) }}"
                                                                         @endif
                                                                         style="border-radius: 300px;display: block; margin-left: auto; margin-right: auto"
-                                                                        alt="avatar_user" width="40" height="40">
+                                                                        alt="avatar_user"
+                                                                        width="40" height="40">
 
                                                                 </div>
                                                                 <div class="col-md-9">
@@ -343,30 +365,38 @@ $order->status===\App\StatusInterface::DAHOANTHANH)
                                                                         <b style="color: darkblue;font-size: 25px">{{$comment->user->name}}</b>
                                                                         &nbsp;&nbsp;&nbsp;{{$comment->body}}
                                                                     </p>
-                                                                    <span style="font-size:15px">
-                                                                {{$comment->created_at->diffForHumans(\Carbon\Carbon::now('Asia/Ho_Chi_Minh'))}}
+                                                                    <span
+                                                                        style="font-size:15px">
+                                                                {{$comment->created_at->diffForHumans(\Carbon\Carbon::now())}}
                                                             </span>
                                                                 </div>
                                                             </div>
                                                             <hr>
                                                         @endif
                                                     @endforeach
-                                                    <form action="{{route('house.comment',$star->id)}}"
-                                                          method="post">
+                                                    <form
+                                                        action="{{route('house.comment',$star->id)}}"
+                                                        method="post">
                                                         @csrf
                                                         <div class="row">
                                                             <div class="col-md-1">
                                                                 <img
-                                                                    @if(!$house->user->images)
+                                                                    @guest()
+
+                                                                    @else
+                                                                    @if(\Illuminate\Support\Facades\Auth::user()->images==null)
                                                                     src="source/images/avatar.jpeg"
                                                                     @else
-                                                                    src="{{ asset('storage/rooms/'. $house->user->images) }}"
+                                                                    src="{{ asset('storage/rooms/'. \Illuminate\Support\Facades\Auth::user()->images) }}"
                                                                     @endif
+                                                                    @endguest
                                                                     style="border-radius: 300px;display: block; margin-left: auto; margin-right: auto"
-                                                                    class="img-circle" width="31" height="31">
+                                                                    class="img-circle"
+                                                                    width="31" height="31">
                                                             </div>
                                                             <div class="col-md-10">
-                                                                <input class="form-control" type="text"
+                                                                <input class="form-control"
+                                                                       type="text"
                                                                        style="border-radius: 30px;height: 30px"
                                                                        name="body">
                                                                 <button style="display: none"
@@ -382,7 +412,7 @@ $order->status===\App\StatusInterface::DAHOANTHANH)
                                             <hr>
 
                                             @endforeach
-                                            {{ $listStar->links() }}
+                                            {{$listStar->appends(request()->input())->links()}}
                                         </div>
 
                                 </div>
@@ -399,8 +429,6 @@ $order->status===\App\StatusInterface::DAHOANTHANH)
 @endsection
 @section('script')
     <script>
-
-
         $(document).ready(function () {
             $('.text_container').addClass("hidden");
 
@@ -408,9 +436,13 @@ $order->status===\App\StatusInterface::DAHOANTHANH)
                 var $this = $(this);
                 if ($this.hasClass("hidden")) {
                     $(this).removeClass("hidden").addClass("visible");
-
                 }
             });
+            $("#datepickerCheckin").datepicker({minDate: new Date(), dateFormat: "dd/mm/yy"});
+            $("#datepickerCheckout").datepicker({minDate: new Date(), dateFormat: "dd/mm/yy"});
         });
     </script>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 @stop

@@ -32,6 +32,7 @@ class HouseController extends Controller
     protected $district;
     protected $star;
     protected $comment;
+    protected $order;
 
     public function __construct(House $house,
                                 HouseCategory $houseCategory,
@@ -39,7 +40,7 @@ class HouseController extends Controller
                                 Cities $city,
                                 District $district,
                                 Star $star,
-                                Comment $comment)
+                                Comment $comment, Order $order)
     {
         $this->house = $house;
         $this->houseCategory = $houseCategory;
@@ -48,6 +49,7 @@ class HouseController extends Controller
         $this->district = $district;
         $this->star = $star;
         $this->comment = $comment;
+        $this->order = $order;
     }
 
     //code vẽ biểu đồ
@@ -243,7 +245,7 @@ class HouseController extends Controller
         $starMedium = 0;
         $house_id = $house->id;
         $stars = Star::where('house_id', $house_id)->get();
-        $listStar = $this->star->where('house_id', $house_id)->orderBy('id', 'desc')->paginate(5);
+        $listStar = Star::where('house_id', $house_id)->orderBy('id', 'desc')->paginate(5);
         if ($stars !== null) {
             $countStar = 0;
             $allStarInHouseDetail = 0;
@@ -251,7 +253,8 @@ class HouseController extends Controller
                 $allStarInHouseDetail += $star->number;
                 $countStar++;
             }
-            $starMedium = $allStarInHouseDetail / $countStar;
+//            $starMedium = $allStarInHouseDetail / $countStar;
+            $starMedium = 2.4;
         }
 
         $listComment = $this->comment->where('house_id', $house_id)->orderBy('id', 'asc')->get();
@@ -293,21 +296,23 @@ class HouseController extends Controller
             $query = $query->where('district_id', $request->get('district'));
         }
         $housesList = $query->get();
-        $housesOrder = Order::all();
         $houses = [];
         $inputCheckIn = $request->get('check_in');
         $inputCheckOut = $request->get('check_out');
+        $housesOrder = $this->order
+            ->where([['check_in', '<=', Carbon::create($inputCheckIn)],['check_out', '>=', Carbon::create($inputCheckIn)]])
+            ->orwhere([['check_in', '<=', Carbon::create($inputCheckOut)],['check_out', '>=', Carbon::create($inputCheckOut)]])
+            ->orwhere([['check_in', '<=', Carbon::create($inputCheckIn)],['check_out', '>=', Carbon::create($inputCheckOut)]])
+            ->where('status', '!=', StatusInterface::DAHOANTHANH)
+            ->get();
+
         for ($j = 0; $j < count($housesList); $j++) {
             array_push($houses, $housesList[$j]);
         }
         for ($i = 0; $i < count($housesOrder); $i++) {
             for ($j = 0; $j < count($houses); $j++) {
-                if (!empty($inputCheckIn) && !empty($inputCheckOut)) {
-                    if ((Carbon::parse($inputCheckIn)->timestamp >= Carbon::parse($housesOrder[$i]->check_in)->timestamp
-                            || Carbon::parse($inputCheckOut)->timestamp >= Carbon::parse($housesOrder[$i]->check_out)->timestamp)
-                        && $housesOrder[$i]['house_id'] == $houses[$j]['id']) {
-                        array_splice($houses, $j, 1);
-                    }
+                if ($housesOrder[$i]['house_id'] == $houses[$j]['id']) {
+                    array_splice($houses, $j, 1);
                 }
             }
         }
@@ -347,12 +352,14 @@ class HouseController extends Controller
         return redirect()->route('admin.house', $id);
     }
 
-    public function showNotify()
+    public
+    function showNotify()
     {
         return view('admin.pages.notify');
     }
 
-    public function book($house_id, DateCheckinValidate $request)
+    public
+    function book($house_id, DateCheckinValidate $request)
     {
         $house = House::find($house_id);
         $user_id = $house->user_id;
@@ -388,16 +395,18 @@ class HouseController extends Controller
         return redirect('/');
     }
 
-    public function showRented()
+    public
+    function showRented()
     {
         $user_id = Auth::user()->id;
         $orders = Order::where('user_id', '=', $user_id)
             ->orderBy('check_out', 'DESC')
             ->get();
-            return view('admin.pages.rented', compact('orders'));
+        return view('admin.pages.rented', compact('orders'));
     }
 
-    public function userCheckinHouse($order_id)
+    public
+    function userCheckinHouse($order_id)
     {
         $order = Order::findOrFail($order_id);
         $house = House::findOrFail($order->house_id);
@@ -413,7 +422,8 @@ class HouseController extends Controller
         return back();
     }
 
-    public function userCheckoutHouse($order_id)
+    public
+    function userCheckoutHouse($order_id)
     {
         $order = Order::findOrFail($order_id);
         $house = House::findOrFail($order->house_id);

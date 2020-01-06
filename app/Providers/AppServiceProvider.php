@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Notification;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
@@ -35,6 +36,6 @@ class AppServiceProvider extends ServiceProvider
 //        }
 //    }
 //        View::share('countNotice', $countNotice);
-
+        Carbon::setLocale('vi');
     }
 }
