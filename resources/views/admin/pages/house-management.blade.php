@@ -30,17 +30,23 @@
                             <a href="{{route('house.show.rent.detail',$house->id)}}">Chi tiết</a>
                         </td>
                         <td>
-                            <a href="{{route('house.showEdit',$house->id)}}"
-                               @if($house->status==\App\StatusInterface::SANSANG)
-                                   class="text text-success">Đã sẵn sàng
-                            @elseif($house->status==\App\StatusInterface::CHUANHANPHONG)
-                             class="text text-danger">Đến giờ nhưng khách chưa tới
-                            @elseif($house->status==\App\StatusInterface::NHANPHONG)
-                                class="text text-secondary">Khách đã tới
-                            @else
-                               class="text text-danger">Trả phòng
-                            @endif
-                            </a>
+                            <select name="status" class="custom-select mr-sm-2 status_house" data-id="{{$house->id}}">
+                                <option value="{{\App\StatusInterface::NHANPHONG}}"
+                                        @if(\App\StatusInterface::NHANPHONG == $house->status)
+                                        selected
+                                    @endif
+                                >Khách đã tới</option>
+                                <option value="{{\App\StatusInterface::TRAPHONG}}"
+                                        @if(\App\StatusInterface::TRAPHONG == $house->status)
+                                        selected
+                                    @endif
+                                >Khách đã trả phòng</option>
+                                <option value="{{\App\StatusInterface::SANSANG}}"
+                                        @if(\App\StatusInterface::SANSANG == $house->status)
+                                        selected
+                                    @endif
+                                >Sẵn sàng cho thuê</option>
+                            </select>
                         </td>
                         <td>
                             @foreach($listHouseCategory as $houseCategory)

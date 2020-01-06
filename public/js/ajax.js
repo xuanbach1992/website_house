@@ -17,7 +17,7 @@ $(document).ready(function () {
     });
 
     $(".read_comment").click(function () {
-        let id_notification = $('.notification_id').val()
+        let id_notification = $('.notification_id').val();
         $.ajax({
             url: "http://127.0.0.1:8000/houses/is-read/" + id_notification,
             method: "GET",

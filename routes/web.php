@@ -1,6 +1,8 @@
 <?php
+
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
+
 //route khoong qua controller
 //Route::get('/', function () {
 //    return view('page.product');
@@ -37,7 +39,8 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
     Route::get('/notify', 'HouseController@showNotify')->name('admin.notify.show');
     Route::get('/rented', 'HouseController@showRented')->name('admin.house.rented');
     Route::get('/edit/{id}', 'HouseController@showEdit')->name('house.showEdit');
-    Route::post('/edit/{id}', 'HouseController@updateStatus')->name('house.update');
+    Route::post('/edit/{id}', 'HouseController@update')->name('house.update');
+    Route::post('/editStatus/{id}', 'HouseController@updateStatus');
     Route::get('/delete/{id}', 'HouseController@delete')->name('house.delete');
     Route::post('/un-rent-house', 'OrderController@destroyOrderRentHouse')->name('order.house.delete');
     Route::get('/rent-detail/{id}', 'OrderController@showRentDetailByHouse')->name('house.show.rent.detail');
@@ -47,11 +50,11 @@ Route::get('/redirect/{social}', 'SocialAuthController@redirect');
 Route::get('/callback/{social}', 'SocialAuthController@callback');
 //search
 Route::get('/getDataByCitiesId', 'DistrictController@getDataByCitiesId')->name('getDataByCitiesId');
-Route::get('/property','HomeController@propertyDetails')->name('property');
-route::post('/rating/{id}','RatingController@saveRating')->name('house.rating')->middleware('auth');
-route::post('/comment/{id}','CommentController@replyStar')->name('house.comment')->middleware('auth');
+Route::get('/property', 'HomeController@propertyDetails')->name('property');
+route::post('/rating/{id}', 'RatingController@saveRating')->name('house.rating')->middleware('auth');
+route::post('/comment/{id}', 'CommentController@replyStar')->name('house.comment')->middleware('auth');
 //code template
 //Route::get('/','HomeController@index')->name('index');
-Route::get('/contact','HomeController@contactTest')->name('contact');
-Route::get('/blog','HomeController@blogTest')->name('blog');
-Route::get('/about','HomeController@aboutTest')->name('about');
+Route::get('/contact', 'HomeController@contactTest')->name('contact');
+Route::get('/blog', 'HomeController@blogTest')->name('blog');
+Route::get('/about', 'HomeController@aboutTest')->name('about');

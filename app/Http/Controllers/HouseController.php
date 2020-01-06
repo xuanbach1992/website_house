@@ -202,7 +202,6 @@ class HouseController extends Controller
             $house->price = $request->price;
 //        dd($request->status);
             $house->save();
-            toastr()->success('update success', 'message');
             return redirect()->route('house.detail');
         } else {
             abort(403, "ban khong co quyen");
@@ -266,7 +265,7 @@ class HouseController extends Controller
             'orders',
             'listRoomCategory',
             'listHouseCategory',
-            'listDistrict', 'listStar', 'starMedium', 'listComment', 'user','allStarInHouseDetail'));
+            'listDistrict', 'listStar', 'starMedium', 'listComment', 'user', 'allStarInHouseDetail'));
     }
 
     /**
@@ -332,23 +331,11 @@ class HouseController extends Controller
      */
     public function updateStatus(Request $request, $id)
     {
-        $house = $this->house->findOrFail($id);
-        switch ($request->status) {
-            case 1 :
-                $house->status = StatusInterface::SANSANG;
-                break;
-            case 3 :
-                $house->status = StatusInterface::CHUANHANPHONG;
-                break;
-            case 4 :
-                $house->status = StatusInterface::NHANPHONG;
-                break;
-            case 5 :
-                $house->status = StatusInterface::TRAPHONG;
-                break;
+        if ($request->ajax()) {
+            $house = $this->house->findOrFail($id);
+            $house->status =$request->status;
+                $house->save();
         }
-        $house->save();
-        return redirect()->route('admin.house', $id);
     }
 
     public
@@ -365,7 +352,7 @@ class HouseController extends Controller
         $house_title = $house->name;
         $email_host = User::find($user_id)->email;//email chu nha
         $orders = Order::where('house_id', $house_id)->get();
-        $checkoutConvertMaxHourInDay = date('Y/m/d H:i',strtotime('+23 hour +30 minutes',strtotime($request->checkout)));
+        $checkoutConvertMaxHourInDay = date('Y/m/d H:i', strtotime('+23 hour +30 minutes', strtotime($request->checkout)));
         $checkInTimestampRequest = strtotime($request->checkin);
         $checkOutTimestampRequest = Carbon::parse($checkoutConvertMaxHourInDay)->timestamp;
         foreach ($orders as $order) {
@@ -383,7 +370,7 @@ class HouseController extends Controller
                 }
             }
         }
-        $daysDifference=ceil(($checkOutTimestampRequest-$checkInTimestampRequest)/86400);
+        $daysDifference = ceil(($checkOutTimestampRequest - $checkInTimestampRequest) / 86400);
         $totalPrice = $daysDifference * House::find($house_id)->price;
 
         toastr()->warning('đặt phòng, đang chờ chủ nhà xác nhận', 'message');

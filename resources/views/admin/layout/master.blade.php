@@ -6,6 +6,8 @@
     <title>Admin | Dashboard</title>
     <base href="{{asset('')}}">
 
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
     <!-- Tell the browser to be responsive to screen width -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Font Awesome -->
@@ -35,6 +37,9 @@
         }
     </style>
     <link rel="stylesheet" href="{{asset('source/css/admin.page.css')}}">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
     <script src="{{asset('https://code.jquery.com/jquery-3.1.1.min.js')}}"></script>
     <script src="{{asset('https://code.highcharts.com/highcharts.js')}}"></script>
     <script src="{{asset('https://code.highcharts.com/modules/exporting.js')}}"></script>
@@ -274,6 +279,7 @@
 <script src="{{asset('sourceAdmin/dist/js/pages/dashboard.js')}}"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="{{asset('sourceAdmin/dist/js/demo.js')}}"></script>
+<script src="{{asset('js/ajax.page.user.js')}}"></script>
 <script>
     $(document).ready(function () {
         $(".showReasonDelRent").click(function () {
@@ -284,5 +290,35 @@
 </script>
 
 
+<script>
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+
+    function changeCity(id) {
+        $.ajax({
+            method: "GET",
+            url: 'http://127.0.0.1:8000/getDataByCitiesId',
+            dataType: "json",
+            data: {
+                id: id,
+            },
+            success: function (res) {
+                $('#district_id').empty();
+                $.each(res.data, function (i, item) {
+                    $('#district_id').append($('<option>', {
+                        value: item.id,
+                        text: item.name
+                    }));
+                });
+            },
+            error: function (res) {
+                alert(res.message);
+            }
+        })
+    }
+</script>
 </body>
 </html>
