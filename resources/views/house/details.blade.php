@@ -220,8 +220,10 @@
         <!--Code bản đồ mới-->
 
         <div class="row">
-            <div class="col-md-5">Địa chỉ trên bản đồ : <input id="address" > </div>
-            <div id="googleMap" style="width: 500px;height: 380px"></div>
+            <div class="col-md-10 offset-1">Địa chỉ trên bản đồ :
+                <input id="address" style="width: 500px" readonly="readonly" value="{{$house->address.' - '.$house->district->name." - ".$house->cities->name}}" >
+            </div>
+            <div class="col-md-10 offset-1" id="googleMap" style="width: 500px;height: 380px"></div>
 
         </div>
 
@@ -453,47 +455,46 @@
                     $(this).removeClass("hidden").addClass("visible");
                 }
             });
-
-            addressMap.init();
+            houseMap.init();
         });
+            let houseMap = {
+                autoComplete:'',
+                map:'',
+                init:function () {
+                    let mapProp = {
+                        center:new google.maps.LatLng(51.508742, -0.120850),
+                        zoom:5,
+                        mapTypeId:google.maps.MapTypeId.ROADMAP
+                    };
 
-        let addressMap = {
-            autoComplete:'',
-            map:'',
-            init:function () {
-                let mapProp = {
-                    center:new google.maps.LatLng(51.508742, -0.120850),
-                    zoom:5,
-                    mapTypeId:google.maps.MapTypeId.ROADMAP
-                };
+                    houseMap.map = new google.maps.Map(document.getElementById("googleMap"), mapProp);
 
-                addressMap.map = new google.maps.Map(document.getElementById("googleMap"), mapProp);
-                let input = document.getElementById('address');
-                // console.log(document.getElementById('address'));
-                addressMap.autocomplete = new google.maps.places.Autocomplete(input);
+                        let input = document.getElementById('address');
 
-                addressMap.autocomplete.addListener('place_changed', function () {
-                    let lat_auto = addressMap.autocomplete.getPlace().geometry.location.lat();
-                    let lng_auto = addressMap.autocomplete.getPlace().geometry.location.lng();
-                    addressMap.drawMarker(lat_auto,lng_auto);
-                });
-            },
-            drawMarker:function (lat,lng) {
-                let loc = {
-                    lat: parseFloat(lat),
-                    lng: parseFloat(lng)
-                };
+                    houseMap.autocomplete = new google.maps.places.Autocomplete(input);
 
-                addressMap.map.setCenter(loc);
-                let marker = new google.maps.Marker({
-                    position:loc,
-                    animation:google.maps.Animation.Bounce
-                });
-                marker.setMap(addressMap.map);
+                    houseMap.autocomplete.addListener('place_changed', function () {
+                        var lat_auto = houseMap.autocomplete.getPlace().geometry.location.lat();
+                        var lng_auto = houseMap.autocomplete.getPlace().geometry.location.lng();
+                        houseMap.drawMarker(lat_auto,lng_auto);
+                    });
+                },
+                drawMarker:function (lat,lng) {
+                    let loc = {
+                        lat: parseFloat(lat),
+                        lng: parseFloat(lng)
+                    };
 
-                console.log(lat,lng);
-            }
-        };
+                    houseMap.map.setCenter(loc);
+                    let marker = new google.maps.Marker({
+                        position:loc,
+                        animation:google.maps.Animation.Bounce
+                    });
+                    marker.setMap(houseMap.map);
+
+                }
+            };
+
     </script>
     <script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyDRcNqM8iIP7Se2H3LMoc6dC6vkn1-FyZA&libraries=places"></script>
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
