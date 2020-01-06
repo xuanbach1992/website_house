@@ -38,8 +38,8 @@ $notify->type==='App\Notifications\SendNotificationToHouseHost')
                                 {{ json_decode($notify->data)->sender}}
                             </td>
                             <td> {{ json_decode($notify->data)->house_title}}</td>
-                            <td>{{\Carbon\Carbon::create(json_decode($notify->data)->checkin)->format('d/m/Y')}}</td>
-                            <td>{{\Carbon\Carbon::create(json_decode($notify->data)->checkout)->format('d/m/Y')}}</td>
+                            <td>{{json_decode($notify->data)->checkin}}</td>
+                            <td>{{json_decode($notify->data)->checkout}}</td>
                             <td> Tổng tiền : <br>{{ number_format(json_decode($notify->data)->total_price)}} đ</td>
                             <td>
                                 <a href="{{route('house.notifi.accept',$notify->uid)}}" class="btn btn-primary">Chấp
@@ -57,8 +57,8 @@ $notify->type==='App\Notifications\AcceptRentHouse')
                                 {{ json_decode($notify->data)->sender}}
                             </td>
                             <td> {{ json_decode($notify->data)->house_title}}</td>
-                            <td>{{\Carbon\Carbon::create(json_decode($notify->data)->checkin)->format('d/m/Y')}}</td>
-                            <td>{{\Carbon\Carbon::create(json_decode($notify->data)->checkout)->format('d/m/Y')}}</td>
+                            <td>{{json_decode($notify->data)->checkin}}</td>
+                            <td>{{json_decode($notify->data)->checkout}}</td>
                             <td>thành công
                             </td>
                             <td>
@@ -75,8 +75,8 @@ $notify->type==='App\Notifications\NoAcceptRent')
                                 {{ json_decode($notify->data)->sender}}
                             </td>
                             <td> {{ json_decode($notify->data)->house_title}}</td>
-                            <td>{{\Carbon\Carbon::create(json_decode($notify->data)->checkin)->format('d/m/Y')}}</td>
-                            <td>{{\Carbon\Carbon::create(json_decode($notify->data)->checkout)->format('d/m/Y')}}</td>
+                            <td>{{json_decode($notify->data)->checkin}}</td>
+                            <td>{{json_decode($notify->data)->checkout}}</td>
                             <td>Thất bại
                             </td>
                             <td>

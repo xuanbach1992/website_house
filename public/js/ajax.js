@@ -16,38 +16,22 @@ $(document).ready(function () {
         }
     });
 
-    $("#login-button").click(function () {
-        let Femail = $("input[name='email']").val();
-        let Fpassword = $("input[name='password']").val();
+    $(".read_comment").click(function () {
+        let id_notification = $('.notification_id').val()
+        $.ajax({
+            url: "http://127.0.0.1:8000/houses/is-read/" + id_notification,
+            method: "GET",
+            success:function () {
 
-        console.log(Femail);
-        // $.ajax({
-        //     headers: {
-        //         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        //     },
-        //     url: 'http://127.0.0.1:8000/login',
-        //     type: 'POST',
-        //     data: {
-        //         email: Femail,
-        //         password: Fpassword
-        //     },
-        //     dataType: 'JSON',
-        //     success: function (data) {
-        //         window.location.reload();
-        //         // $(this).attr("data-dismiss", "modal");
-        //         // let err = JSON.parse(data.responseText);
-        //     },
-        //     errors: function (error) {
-        //         alert('dsadasd')
-        //     }
-        // });
+            }
+        })
     })
 });
-$(document).scroll(function() {
+$(document).scroll(function () {
     var y = $(document).scrollTop(), //get page y value
         header = $(".informationHouseHost"); // your div id
-    if(y >= 400)  {
-        header.css({position: "fixed", "top" : "10%", "left" : "55%"});
+    if (y >= 400) {
+        header.css({position: "fixed", "top": "10%", "left": "55%"});
     } else {
         header.css("position", "static");
     }
