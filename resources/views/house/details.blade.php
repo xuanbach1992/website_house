@@ -126,6 +126,21 @@
                 @endguest
             @endforeach
         </div>
+        <div class="row col-md-12">
+            <div> @for($i=1;$i<=floor($starMedium);$i++)
+                    <img src="{{asset('source/images/1.png')}}" width="35px" height="35px" alt="star5">
+                @endfor
+                @if(0.8<=$starMedium-floor($starMedium)&&$starMedium-floor($starMedium)<1)
+                    <img src="{{asset('source/images/1.png')}}" width="35px" height="35px" alt="star5">
+                @elseif(0.3<=$starMedium-floor($starMedium)&&$starMedium-floor($starMedium)<0.8)
+                    <img src="{{asset('source/images/0.5.png')}}" width="35px" height="35px" alt="star5">
+                @endif
+            </div>
+
+
+            <div>&nbsp&nbsp({{ $allStarInHouseDetail/$starMedium}}&nbsp;đánh giá)</div>
+        </div>
+
         <hr>
 
         <!--Thông tin chi tiết-->
@@ -212,10 +227,11 @@
                                 <h3><b>Đánh Giá Sản Phẩm</b></h3>
                                 <hr>
                                 <div class="compolent_rating_content" style="display: flex;align-items:center">
-                                    <div class="rating_item" style="width: 20%;margin: 0 20px">
-                                        <span class="fa fa-star"
-                                              style="font-size: 60px;color: #ff9705;margin: 0 auto; text-align: center;">
-                                            {{round($starMedium,2)}}
+                                    <div class="rating_item row" style="width: 40%;">
+
+                                        <span class="fa fa-star col-md-12"
+                                              style="font-size: 60px;color: #ff9705;">
+                                           {{round($starMedium,2)}}
                                         </span>
                                     </div>
 
@@ -246,11 +262,12 @@
     $order->status===\App\StatusInterface::DAHOANTHANH)
                                             <hr>
 
+
                                             <form action="{{route('house.rating',$house->id)}}" method="post">
                                                 @csrf
                                                 <div style="display: flex; margin-top: 15px;font-size: 15px"
                                                      class="hide">
-                                                    <p style="margin-bottom: 0">Đánh Giá Của Bạn:</p>
+                                                    <div class="mt-2" style="margin-bottom: 0">Đánh Giá Của Bạn:</div>
 
                                                     <div style="margin:0;padding:0;" id="rating">
                                                         <input type="radio" id="star5" name="rating" value="5"/>
@@ -268,12 +285,14 @@
                                                         <input type="radio" id="star1" name="rating" value="1"/>
                                                         <label style="margin:0;padding:0;" class="full"
                                                                for="star1"></label>
+
                                                     </div>
                                                 </div>
                                                 <div>
                                                     <input class="form-control" name="contents">
                                                     <button type="submit"
-                                                            class="btn mt-2 btn-primary js_rating_house">Gửi đánh giá
+                                                            class="btn mt-2 btn-primary js_rating_house">Gửi
+                                                        đánh giá
                                                     </button>
                                                 </div>
                                             </form>
@@ -294,7 +313,8 @@
                                                     src="{{ asset('storage/rooms/'. $star->user->images) }}"
                                                     @endif
                                                     style="border-radius: 300px;display: block; margin-left: auto; margin-right: auto"
-                                                    class="img-circle" alt="avatar_user" width="50" height="50">
+                                                    class="img-circle" alt="avatar_user"
+                                                    width="50" height="50">
                                             </div>
                                             <div class="col-md-10 mt-3 ml-3">
                                                 {{$star->user->name}}
@@ -337,7 +357,8 @@
                                                                         src="{{ asset('storage/rooms/'. $comment->user->images) }}"
                                                                         @endif
                                                                         style="border-radius: 300px;display: block; margin-left: auto; margin-right: auto"
-                                                                        alt="avatar_user" width="40" height="40">
+                                                                        alt="avatar_user"
+                                                                        width="40" height="40">
 
                                                                 </div>
                                                                 <div class="col-md-9">
@@ -345,7 +366,8 @@
                                                                         <b style="color: darkblue;font-size: 25px">{{$comment->user->name}}</b>
                                                                         &nbsp;&nbsp;&nbsp;{{$comment->body}}
                                                                     </p>
-                                                                    <span style="font-size:15px">
+                                                                    <span
+                                                                        style="font-size:15px">
                                                                 {{$comment->created_at->diffForHumans(\Carbon\Carbon::now())}}
                                                             </span>
                                                                 </div>
@@ -353,8 +375,9 @@
                                                             <hr>
                                                         @endif
                                                     @endforeach
-                                                    <form action="{{route('house.comment',$star->id)}}"
-                                                          method="post">
+                                                    <form
+                                                        action="{{route('house.comment',$star->id)}}"
+                                                        method="post">
                                                         @csrf
                                                         <div class="row">
                                                             <div class="col-md-1">
@@ -369,10 +392,12 @@
                                                                     @endif
                                                                     @endguest
                                                                     style="border-radius: 300px;display: block; margin-left: auto; margin-right: auto"
-                                                                    class="img-circle" width="31" height="31">
+                                                                    class="img-circle"
+                                                                    width="31" height="31">
                                                             </div>
                                                             <div class="col-md-10">
-                                                                <input class="form-control" type="text"
+                                                                <input class="form-control"
+                                                                       type="text"
                                                                        style="border-radius: 30px;height: 30px"
                                                                        name="body">
                                                                 <button style="display: none"
@@ -421,5 +446,11 @@
             });
         });
     </script>
+
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+
 
 @stop
