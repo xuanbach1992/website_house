@@ -125,7 +125,7 @@
                         @endif
                         @else
 
-                            <li><a href="{{route('admin.house')}}" class="nav-link">Trang cá nhân</a></li>
+                            <li><a href="{{route('admin.house')}}" class="nav-link">Trang Quản Lý</a></li>
 
                             <li><a href="{{route('house.showFormCreate')}}" class="nav-link">Cho Thuê Nhà</a></li>
 
@@ -195,7 +195,7 @@ $notify->type==='App\Notifications\ReplyComment')
                                     <a class="dropdown-item"
                                        href="{{route('admin.house')}}">
 
-                                        {{ __('Trang cá nhân') }}
+                                        {{ __('Trang Quản Lý') }}
                                     </a>
                                     <a class="dropdown-item"
                                        href="{{ route('user.edit')}}"

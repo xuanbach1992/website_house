@@ -253,6 +253,7 @@
         <div class="row">
             <div class="col-md-5">Địa chỉ trên bản đồ : </div>
             <div id="googleMap" style="width: 500px;height: 380px"></div>
+            <input id="address" >
         </div>
 
         <!--End-->
