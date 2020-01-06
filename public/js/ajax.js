@@ -25,7 +25,7 @@ $(document).ready(function () {
 
             }
         })
-    })
+    });
     $('.bookDetail').click(function () {
         let checkin = $('.checkin').val();
         let checkout = $('.checkout').val();
