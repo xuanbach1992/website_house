@@ -30,8 +30,8 @@
                         @endif
                     </div>
                     <div class="col-md-12 row">
-                        <div class="col-md-3 row">
-                            <div class="form-group">
+                        <div class="col-md-3">
+                            <div class="form-group"style="margin-top: 11px">
                                 <h6>Trạng thái : </h6>
                                 <select name="status" class="custom-select mr-sm-2">
                                     <option value="{{\App\StatusInterface::NHANPHONG}}"
@@ -55,7 +55,7 @@
                                 </select>
                             </div>
                         </div>
-                        <div class="col-md-3 row">
+                        <div class="col-md-3">
                             <div class="form-group">
                                 <label><h6>Số lượng phòng ngủ : </h6></label>
                                 <input type="number" class="form-control
@@ -68,7 +68,7 @@
                                 @endif
                             </div>
                         </div>
-                        <div class="col-md-3 row">
+                        <div class="col-md-3">
                             <div class="form-group">
                                 <label><h6>Số lượng phòng tắm : </h6></label>
                                 <input type="number" class="form-control
@@ -82,7 +82,7 @@
                             </div>
 
                         </div>
-                        <div class="col-md-3 row">
+                        <div class="col-md-3">
                             <div class="form-group">
                                 <label><h6>Giá tiền theo đêm : </h6></label>
                                 <input type="number" class="form-control
