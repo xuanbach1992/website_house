@@ -1,53 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyDRcNqM8iIP7Se2H3LMoc6dC6vkn1-FyZA&libraries=places"></script>
-    <script>
-        $(document).ready(function () {
-            objShop.init();
-        });
 
-        let objShop = {
-            autoComplete:'',
-            map:'',
-            init:function () {
-                let mapProp = {
-                    center:new google.maps.LatLng(51.508742, -0.120850),
-                    zoom:5,
-                    mapTypeId:google.maps.MapTypeId.ROADMAP
-                };
-
-                objShop.map = new google.maps.Map(document.getElementById("googleMap"), mapProp);
-                let input = document.getElementById('address');
-                // console.log(document.getElementById('address'));
-                objShop.autocomplete = new google.maps.places.Autocomplete(input);
-
-                objShop.autocomplete.addListener('place_changed', function () {
-                    var lat_auto = objShop.autocomplete.getPlace().geometry.location.lat();
-                    var lng_auto = objShop.autocomplete.getPlace().geometry.location.lng();
-                    objShop.drawMarker(lat_auto,lng_auto);
-                });
-                @if(!$user)
-                objShop.drawMarker('{!! $shop->lat !!}','{!! $shop->lng!!}');
-                @endif
-            },
-            drawMarker:function (lat,lng) {
-                let loc = {
-                    lat: parseFloat(lat),
-                    lng: parseFloat(lng)
-                };
-
-                objShop.map.setCenter(loc);
-                let marker = new google.maps.Marker({
-                    position:loc,
-                    animation:google.maps.Animation.Bounce
-                });
-                marker.setMap(objShop.map);
-
-                console.log(lat,lng);
-            }
-        };
-    </script>
 
     <div class="col-md-7">
         <div id="demo" class="carousel "> <!--cho slide vào class để ảnh tự động chạy-->
@@ -266,9 +220,9 @@
         <!--Code bản đồ mới-->
 
         <div class="row">
-            <div class="col-md-5">Địa chỉ trên bản đồ : </div>
+            <div class="col-md-5">Địa chỉ trên bản đồ : <input id="address" > </div>
             <div id="googleMap" style="width: 500px;height: 380px"></div>
-            <input id="address" >
+
         </div>
 
         <!--End-->
@@ -499,9 +453,52 @@
                     $(this).removeClass("hidden").addClass("visible");
                 }
             });
-        });
-    </script>
 
+            addressMap.init();
+        });
+
+        let addressMap = {
+            autoComplete:'',
+            map:'',
+            init:function () {
+                let mapProp = {
+                    center:new google.maps.LatLng(51.508742, -0.120850),
+                    zoom:5,
+                    mapTypeId:google.maps.MapTypeId.ROADMAP
+                };
+
+                addressMap.map = new google.maps.Map(document.getElementById("googleMap"), mapProp);
+                let input = document.getElementById('address');
+                // console.log(document.getElementById('address'));
+                addressMap.autocomplete = new google.maps.places.Autocomplete(input);
+
+                addressMap.autocomplete.addListener('place_changed', function () {
+                    var lat_auto = addressMap.autocomplete.getPlace().geometry.location.lat();
+                    var lng_auto = addressMap.autocomplete.getPlace().geometry.location.lng();
+                    addressMap.drawMarker(lat_auto,lng_auto);
+                });
+                @if(!$user)
+                addressMap.drawMarker('{!! $shop->lat !!}','{!! $shop->lng!!}');
+                @endif
+            },
+            drawMarker:function (lat,lng) {
+                let loc = {
+                    lat: parseFloat(lat),
+                    lng: parseFloat(lng)
+                };
+
+                addressMap.map.setCenter(loc);
+                let marker = new google.maps.Marker({
+                    position:loc,
+                    animation:google.maps.Animation.Bounce
+                });
+                marker.setMap(addressMap.map);
+
+                console.log(lat,lng);
+            }
+        };
+    </script>
+    <script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyDRcNqM8iIP7Se2H3LMoc6dC6vkn1-FyZA&libraries=places"></script>
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
