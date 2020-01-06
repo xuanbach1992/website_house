@@ -473,13 +473,10 @@
                 addressMap.autocomplete = new google.maps.places.Autocomplete(input);
 
                 addressMap.autocomplete.addListener('place_changed', function () {
-                    var lat_auto = addressMap.autocomplete.getPlace().geometry.location.lat();
-                    var lng_auto = addressMap.autocomplete.getPlace().geometry.location.lng();
+                    let lat_auto = addressMap.autocomplete.getPlace().geometry.location.lat();
+                    let lng_auto = addressMap.autocomplete.getPlace().geometry.location.lng();
                     addressMap.drawMarker(lat_auto,lng_auto);
                 });
-                @if(!$user)
-                addressMap.drawMarker('{!! $shop->lat !!}','{!! $shop->lng!!}');
-                @endif
             },
             drawMarker:function (lat,lng) {
                 let loc = {
