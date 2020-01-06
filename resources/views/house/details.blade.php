@@ -1,53 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyDRcNqM8iIP7Se2H3LMoc6dC6vkn1-FyZA&libraries=places"></script>
-    <script>
-        $(document).ready(function () {
-            objShop.init();
-        });
 
-        let objShop = {
-            autoComplete:'',
-            map:'',
-            init:function () {
-                let mapProp = {
-                    center:new google.maps.LatLng(51.508742, -0.120850),
-                    zoom:5,
-                    mapTypeId:google.maps.MapTypeId.ROADMAP
-                };
-
-                objShop.map = new google.maps.Map(document.getElementById("googleMap"), mapProp);
-                let input = document.getElementById('address');
-                // console.log(document.getElementById('address'));
-                objShop.autocomplete = new google.maps.places.Autocomplete(input);
-
-                objShop.autocomplete.addListener('place_changed', function () {
-                    var lat_auto = objShop.autocomplete.getPlace().geometry.location.lat();
-                    var lng_auto = objShop.autocomplete.getPlace().geometry.location.lng();
-                    objShop.drawMarker(lat_auto,lng_auto);
-                });
-                @if(!$user)
-                objShop.drawMarker('{!! $shop->lat !!}','{!! $shop->lng!!}');
-                @endif
-            },
-            drawMarker:function (lat,lng) {
-                let loc = {
-                    lat: parseFloat(lat),
-                    lng: parseFloat(lng)
-                };
-
-                objShop.map.setCenter(loc);
-                let marker = new google.maps.Marker({
-                    position:loc,
-                    animation:google.maps.Animation.Bounce
-                });
-                marker.setMap(objShop.map);
-
-                console.log(lat,lng);
-            }
-        };
-    </script>
 
     <div class="col-md-7">
         <div id="demo" class="carousel "> <!--cho slide vào class để ảnh tự động chạy-->
@@ -266,9 +220,21 @@
         <!--Code bản đồ mới-->
 
         <div class="row">
-            <div class="col-md-5">Địa chỉ trên bản đồ : </div>
-            <div id="googleMap" style="width: 500px;height: 380px"></div>
-            <input id="address" >
+            <div class="col-md-10 offset-1" >Địa chỉ trên bản đồ :
+                <button id="showMap" class="btn btn-outline-primary">Click</button>
+            </div>
+            <div class="col-lg-8 houseMap" style="float: right;display: none">
+                <div class="mapouter">
+                    <div class="gmap_canvas">
+                        <iframe width="600" height="500" id="gmap_canvas"
+                                src="https://maps.google.com/maps?q={{$house->address.' - '.$house->district->name." - ".$house->cities->name}}=&z=13&ie=UTF8&iwloc=&output=embed"
+                                frameborder="0"
+                                scrolling="no" marginheight="0" marginwidth="0">
+                            <a href="https://www.embedgooglemap.net"></a>
+                        </iframe>
+                    </div>
+                </div>
+            </div>
         </div>
 
         <!--End-->
@@ -499,9 +465,52 @@
                     $(this).removeClass("hidden").addClass("visible");
                 }
             });
-        });
-    </script>
+           $('#showMap').click(function () {
+               $('.houseMap').show();
 
+           });
+        });
+        // let houseMap = {
+        //     autoComplete: '',
+        //     map: '',
+        //     init: function () {
+        //         let mapProp = {
+        //             center: new google.maps.LatLng(21.1683767, 105.9003105),
+        //             zoom: 10,
+        //             mapTypeId: google.maps.MapTypeId.ROADMAP
+        //         };
+        //
+        //         houseMap.map = new google.maps.Map(document.getElementById("googleMap"), mapProp);
+        //
+        //         let input = document.getElementById('address');
+        //
+        //         houseMap.autocomplete = new google.maps.places.Autocomplete(input);
+        //
+        //         houseMap.autocomplete.addListener('place_changed', function () {
+        //             var lat_auto = houseMap.autocomplete.getPlace().geometry.location.lat();
+        //             var lng_auto = houseMap.autocomplete.getPlace().geometry.location.lng();
+        //             houseMap.drawMarker(lat_auto, lng_auto);
+        //         });
+        //     },
+        //     drawMarker: function (lat, lng) {
+        //         let loc = {
+        //             lat: parseFloat(lat),
+        //             lng: parseFloat(lng)
+        //         };
+        //
+        //         houseMap.map.setCenter(loc);
+        //         let marker = new google.maps.Marker({
+        //             position: loc,
+        //             animation: google.maps.Animation.Bounce
+        //         });
+        //         marker.setMap(houseMap.map);
+        //
+        //     }
+        // };
+
+    </script>
+    <script
+        src="http://maps.googleapis.com/maps/api/js?key=AIzaSyDRcNqM8iIP7Se2H3LMoc6dC6vkn1-FyZA&libraries=places"></script>
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
