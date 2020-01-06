@@ -299,9 +299,9 @@ class HouseController extends Controller
         $inputCheckIn = $request->get('check_in');
         $inputCheckOut = $request->get('check_out');
         $housesOrder = $this->order
-            ->where([['check_in', '<=', Carbon::create($inputCheckIn)],['check_out', '>=', Carbon::create($inputCheckIn)]])
-            ->orwhere([['check_in', '<=', Carbon::create($inputCheckOut)],['check_out', '>=', Carbon::create($inputCheckOut)]])
-            ->orwhere([['check_in', '<=', Carbon::create($inputCheckIn)],['check_out', '>=', Carbon::create($inputCheckOut)]])
+            ->where([['check_in', '<=', Carbon::create($inputCheckIn)], ['check_out', '>', Carbon::create($inputCheckIn)]])
+            ->orwhere([['check_in', '<=', Carbon::create($inputCheckOut)], ['check_out', '>', Carbon::create($inputCheckOut)]])
+            ->orwhere([['check_in', '>=', Carbon::create($inputCheckIn)], ['check_out', '<', Carbon::create($inputCheckOut)]])
             ->where('status', '!=', StatusInterface::DAHOANTHANH)
             ->get();
 
@@ -315,7 +315,6 @@ class HouseController extends Controller
                 }
             }
         }
-//        dd($query->toSql());
         $listCities = $this->city->get();
         return view('page.product', compact(
             'filter',
@@ -358,15 +357,16 @@ class HouseController extends Controller
     }
 
     public
-    function book($house_id, DateCheckinValidate $request)
+    function book($house_id, Request $request)
     {
         $house = House::find($house_id);
         $user_id = $house->user_id;
         $house_title = $house->name;
         $email_host = User::find($user_id)->email;//email chu nha
         $orders = Order::where('house_id', $house_id)->get();
-        $checkInTimestampRequest = Carbon::parse($request->get('checkin'))->timestamp;
-        $checkOutTimestampRequest = Carbon::parse($request->get('checkout'))->timestamp;
+        $checkoutConvertMaxHourInDay = date('Y/m/d H:i',strtotime('+23 hour +30 minutes',strtotime($request->checkout)));
+        $checkInTimestampRequest = strtotime($request->checkin);
+        $checkOutTimestampRequest = Carbon::parse($checkoutConvertMaxHourInDay)->timestamp;
         foreach ($orders as $order) {
             if (!empty($request->get('checkin')) && !empty($request->get('checkout'))) {
                 if (
@@ -382,9 +382,9 @@ class HouseController extends Controller
                 }
             }
         }
-        $checkin = Carbon::create($request->checkin);
-        $checkout = Carbon::create($request->checkout);
-        $totalPrice = ($checkin->diffInDays($checkout)) * House::find($house_id)->price;
+        $daysDifference=ceil(($checkOutTimestampRequest-$checkInTimestampRequest)/86400);
+        $totalPrice = $daysDifference * House::find($house_id)->price;
+
         toastr()->warning('đặt phòng, đang chờ chủ nhà xác nhận', 'message');
         \auth()->user()->notify(new SendNotificationToHouseHost($house_id, $email_host, $house_title, $request->checkin, $request->checkout, $totalPrice));
 //        Mail::send('house.content', array('content' => 'Yêu cầu xác nhận thuê nhà từ khách hàng'),

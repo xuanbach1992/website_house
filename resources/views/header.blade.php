@@ -125,7 +125,8 @@
                         @endif
                         @else
 
-                            {{--                            <li><a href="{{route('admin.index')}}" class="nav-link">Admin</a></li>--}}
+                            <li><a href="{{route('admin.house')}}" class="nav-link">Trang cá nhân</a></li>
+
                             <li><a href="{{route('house.showFormCreate')}}" class="nav-link">Cho Thuê Nhà</a></li>
 
                             {{--                            {{dd(\App\Notification::all())}}--}}
@@ -151,10 +152,10 @@
                                     @foreach(\App\Notification::all() as $notify)
                                         @if(json_decode($notify->data)->receive==\Illuminate\Support\Facades\Auth::user()->email&&
 $notify->type==='App\Notifications\SendNotificationToHouseHost')
-                                             &nbsp Yêu cầu đặt phòng bởi
+                                            &nbsp Yêu cầu đặt phòng bởi
                                             {{json_decode($notify->data)->sender}}
                                             <a href="{{route('admin.notify.show')}}">
-                                               Xem thông báo
+                                                Xem thông báo
                                             </a><br>
                                         @elseif(json_decode($notify->data)->receive==\Illuminate\Support\Facades\Auth::user()->email&&
 $notify->type==='App\Notifications\NoAcceptRent')
@@ -170,11 +171,14 @@ $notify->type==='App\Notifications\AcceptRentHouse')
                                             </a><br>
                                         @elseif(json_decode($notify->data)->receive==\Illuminate\Support\Facades\Auth::user()->email&&
 $notify->type==='App\Notifications\ReplyComment')
-                                            <a style="color: black" href="{{url('/houses/detail/'.json_decode($notify->data)->house_id)}}">
-                                                {{json_decode($notify->data)->sender}} đã trả lời đánh giá của bạn về ...
+                                            <a class="read_comment" style="color: black"
+                                               href="{{url('/houses/detail/'.json_decode($notify->data)->house_id)}}">
+                                                {{json_decode($notify->data)->sender}} đã trả lời đánh giá của bạn về
+                                                ...
                                             </a>
-                                            <a href="{{route('house.notifi.isread',$notify->uid)}}">Đã đọc</a>
-                                            <span style="font-size: 10px;float: right">{{$notify->created_at->diffForHumans(\Carbon\Carbon::now())}}</span>
+                                            <input type="text" class="notification_id" value="{{$notify->uid}}" readonly="readonly" style="display: none">
+                                            <span
+                                                style="font-size: 10px;float: right">{{$notify->created_at->diffForHumans(\Carbon\Carbon::now())}}</span>
                                         @endif
                                     @endforeach
                                 </div>
