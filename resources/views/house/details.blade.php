@@ -43,40 +43,35 @@
                 <div class="card-body">
                     <form action="{{route('house.book.notify',$house->id)}}" method="post">
                         @csrf
-                        <div class="ml-2 col-md-12"
-                             style="text-align: left; font-size: 40px; font-weight: bold; float: left">{{number_format($house->price)}}
+                        <div class="ml-2 col-md-12 "
+                             style="text-align: left; font-size: 40px; font-weight: bold; float: left">
+                            <label class="price">{{number_format($house->price)}}</label>
+                            <input type="text" class="priceInput" value="{{$house->price}}" readonly="readonly"
+                                   style="display: none">
                             đ /đêm
                         </div>
                         <div class="ml-2 row">
-                            <input type="text" class="mr-5 col-5 datepickerInput" placeholder="mm/dd/yyyy"
+                            <input type="text" class="mr-5 col-5 datepickerInput checkin" placeholder="mm/dd/yyyy"
                                    name="checkin"
                                    style="border-radius: 10px">
                             @if($errors->has('checkin'))
                                 <span class="text-danger">{{$errors->first('checkin')}}</span>
                             @endif
-                            <input type="text" class="mr-l col-5 datepickerInput" placeholder="mm/dd/yyyy"
+                            <input type="text" class="mr-l col-5 datepickerInput checkout" placeholder="mm/dd/yyyy"
                                    name="checkout"
                                    style="border-radius: 10px">
                             @if($errors->has('checkout'))
                                 <span class="text-danger">{{$errors->first('checkout')}}</span>
                             @endif
                         </div>
-                        <div>
-                            @foreach($orders as $order)
-                                @if($order->house_id===$house->id&&$order->status==\App\StatusInterface::DATTHUETHANHCONG)
-                                    <span class="text text-danger">** Đã được thuê {{\Carbon\Carbon::create($order->check_in)->format('d/m/Y')}}
-                                        đến ngày {{\Carbon\Carbon::create($order->check_out)->format('d/m/Y')}}</span>
-                                    <br>
-                                @endif
+                        <div id="after_booking_button" class="mt-4">
 
-                            @endforeach
-                            <div class="col-md-12 mt-3">
-                                <button type="submit" style="font-size:25px" class="btn btn-primary btn-sm">Đặt phòng
-                                </button>
-                            </div>
                         </div>
-                        {{--                                        <input type="text" value="{{$house->user->email}}" name="email" readonly="readonly" style="display: none">--}}
-                        {{--                                        <input type="text" value="{{$house->name}}" name="title" readonly="readonly" style="display: none">--}}
+                        <div class="col-md-12 mt-3">
+                            <button type="button" style="font-size:25px" class="btn btn-primary btn-sm bookDetail">Chi
+                                tiết đặt phòng
+                            </button>
+                        </div>
                         <hr>
                         <div class="row">
                             <div class="col-lg-6"><img
@@ -220,7 +215,7 @@
         <!--Code bản đồ mới-->
 
         <div class="row">
-            <div class="col-md-10 offset-1" >Địa chỉ trên bản đồ :
+            <div class="col-md-10 offset-1">Địa chỉ trên bản đồ :
                 <button id="showMap" class="btn btn-outline-primary">Click</button>
             </div>
             <div class="col-lg-8 houseMap" style="float: right;display: none">
@@ -453,7 +448,6 @@
 @endsection
 @section('script')
 
-
     <script>
 
         $(document).ready(function () {
@@ -465,10 +459,10 @@
                     $(this).removeClass("hidden").addClass("visible");
                 }
             });
-           $('#showMap').click(function () {
-               $('.houseMap').show();
+            $('#showMap').click(function () {
+                $('.houseMap').show();
+            });
 
-           });
         });
         // let houseMap = {
         //     autoComplete: '',
@@ -509,8 +503,6 @@
         // };
 
     </script>
-    <script
-        src="http://maps.googleapis.com/maps/api/js?key=AIzaSyDRcNqM8iIP7Se2H3LMoc6dC6vkn1-FyZA&libraries=places"></script>
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>

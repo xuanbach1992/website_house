@@ -108,5 +108,6 @@
     <orderEntry type="library" name="dropzone" level="application" />
     <orderEntry type="library" name="jquery-ui" level="application" />
     <orderEntry type="library" name="jquery-1.12.4" level="application" />
+    <orderEntry type="library" name="numeral" level="application" />
   </component>
 </module>
