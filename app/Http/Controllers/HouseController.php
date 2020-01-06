@@ -253,8 +253,8 @@ class HouseController extends Controller
                 $allStarInHouseDetail += $star->number;
                 $countStar++;
             }
-//            $starMedium = $allStarInHouseDetail / $countStar;
-            $starMedium = 2.4;
+            $starMedium = $allStarInHouseDetail / $countStar;
+
         }
 
         $listComment = $this->comment->where('house_id', $house_id)->orderBy('id', 'asc')->get();
