@@ -3,14 +3,12 @@
 <p align="center">C0819H2 </p>
 <p align="center">PO:A. Phan Văn Luân </p>
 <p align="center">scrum master: A.Dư Thanh Hoàng </p>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/d/total.svg" alt="Total Downloads"></a>
 <p align="center">Team BTH </p>
 <p align="center">
 
-<a href="https://facebook.com/xuan.bach.7">
-Team Leader: An Xuân Bách</a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/v/stable.svg" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/license.svg" alt="License"></a>
+<a href="https://facebook.com/xuan.bach.7">Team Leader: An Xuân Bách</a>
+<a href="https://i.topcv.vn/tranmanhhiep?ref=1865999">Team Member: Trần Mạnh Hiệp</a>
+
 </p>
 
 ## About Laravel
@@ -27,9 +25,17 @@ Mô tả:
 <br>
 <br>
 <br>
-Công nghệ sử dụng
+Công nghệ sử dụng :
 
--
+- Framework Laravel, Authentication(đăng ký và đăng nhập), Notifications(thông báo tới người dùng)
+- Toastr laravel : hiển thị cảnh báo cho người dùng
+- Laravel Socialite : Đăng nhập facebook
+- [Dropzone.js] (https://www.dropzonejs.com/) : upload file
+- [Date picker] (https://jqueryui.com/datepicker/) : Chọn ngày tháng
+- [Basic bar] (https://www.highcharts.com/demo/bar-basic) : Thống kê thu nhập vẽ biểu đồ
+- API google map 
+- Apache/2.4.34 - PHP:7.2.9
+
 - Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
 - Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
 - Database agnostic [schema migrations](https://laravel.com/docs/migrations).
