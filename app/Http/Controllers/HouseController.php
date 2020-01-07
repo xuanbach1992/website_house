@@ -196,7 +196,6 @@ class HouseController extends Controller
         }
     }
 
-    //chưa sủ dụng được
     public function update(HouseValidationRequest $request, $id)
     {
         $house = $this->house->findOrFail($id);
