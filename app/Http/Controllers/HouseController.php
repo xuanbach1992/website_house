@@ -9,6 +9,9 @@ use App\House;
 use App\HouseCategory;
 use App\Http\Requests\DateCheckinValidate;
 use App\Http\Requests\HouseValidationRequest;
+use App\Http\Services\CitiesServicesInterface;
+use App\Http\Services\HouseServicesInterface;
+use App\Http\Services\Imple\CitiesServices;
 use App\Image;
 use App\Notifications\SendNotificationToHouseHost;
 use App\Order;
@@ -33,6 +36,8 @@ class HouseController extends Controller
     protected $star;
     protected $comment;
     protected $order;
+    protected $houseServicesInterface;
+    protected $citiesServicesInterface;
 
     public function __construct(House $house,
                                 HouseCategory $houseCategory,
@@ -40,7 +45,10 @@ class HouseController extends Controller
                                 Cities $city,
                                 District $district,
                                 Star $star,
-                                Comment $comment, Order $order)
+                                Comment $comment,
+                                Order $order,
+                                HouseServicesInterface $houseServicesInterface,
+                                CitiesServicesInterface $citiesServicesInterface)
     {
         $this->house = $house;
         $this->houseCategory = $houseCategory;
@@ -50,6 +58,8 @@ class HouseController extends Controller
         $this->star = $star;
         $this->comment = $comment;
         $this->order = $order;
+        $this->houseServicesInterface = $houseServicesInterface;
+        $this->citiesServicesInterface = $citiesServicesInterface;
     }
 
     //code vẽ biểu đồ
@@ -90,9 +100,10 @@ class HouseController extends Controller
 
     public function listHouses()
     {
-        $houses = $this->house->all();
-        $listCities = $this->city->all();
-        return view('page.product', [
+        $listCities = $this->citiesServicesInterface->getAll();
+        $houses = $this->houseServicesInterface->getAll();
+
+        return view('page.product',[
             'houses' => $houses,
             'listCities' => $listCities
         ]);
@@ -185,7 +196,6 @@ class HouseController extends Controller
         }
     }
 
-    //chưa sủ dụng được
     public function update(HouseValidationRequest $request, $id)
     {
         $house = $this->house->findOrFail($id);
@@ -333,19 +343,17 @@ class HouseController extends Controller
     {
         if ($request->ajax()) {
             $house = $this->house->findOrFail($id);
-            $house->status =$request->status;
-                $house->save();
+            $house->status = $request->status;
+            $house->save();
         }
     }
 
-    public
-    function showNotify()
+    public function showNotify()
     {
         return view('admin.pages.notify');
     }
 
-    public
-    function book($house_id, Request $request)
+    public function book($house_id, Request $request)
     {
         $house = House::find($house_id);
         $user_id = $house->user_id;
@@ -382,8 +390,7 @@ class HouseController extends Controller
         return redirect('/');
     }
 
-    public
-    function showRented()
+    public function showRented()
     {
         $user_id = Auth::user()->id;
         $orders = Order::where('user_id', '=', $user_id)
@@ -392,8 +399,7 @@ class HouseController extends Controller
         return view('admin.pages.rented', compact('orders'));
     }
 
-    public
-    function userCheckinHouse($order_id)
+    public function userCheckinHouse($order_id)
     {
         $order = Order::findOrFail($order_id);
         $house = House::findOrFail($order->house_id);
@@ -409,8 +415,7 @@ class HouseController extends Controller
         return back();
     }
 
-    public
-    function userCheckoutHouse($order_id)
+    public function userCheckoutHouse($order_id)
     {
         $order = Order::findOrFail($order_id);
         $house = House::findOrFail($order->house_id);
