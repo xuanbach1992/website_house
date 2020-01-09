@@ -30,8 +30,13 @@ class User extends Authenticatable
         return $this->belongsTo(House::class);
     }
 
-    public function star()
+    public function stars()
     {
         return $this->hasMany('App\Star');
+    }
+
+    public function comments()
+    {
+        return $this->hasMany('App\Comment');
     }
 }

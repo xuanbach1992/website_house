@@ -24,8 +24,17 @@ class DateCheckinValidate extends FormRequest
     public function rules()
     {
         return [
-            'checkin' => 'required|after:today|before:checkout',
-            'checkout' => 'required|after:checkin'
+            'checkin' => 'required|after:today',
+            'checkout' => 'required|after:today'
+        ];
+    }
+    public function messages()
+    {
+        return [
+            'checkin.required' => 'Ngày thuê không được bỏ trống',
+            'checkout.required' => 'Ngày trả phòng không được bỏ trống',
+            'checkin.after'=>'Ngày thuê phải sau ngày hôm nay',
+            'checkout.after'=>'Ngày trả phải sau ngày hôm nay',
         ];
     }
 }

@@ -2,9 +2,15 @@
 
 namespace App\Providers;
 
-use App\Notification;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\View;
+use App\Http\Repository\CitiesRepositoryInterface;
+use App\Http\Repository\Eloquent\CitiesEloquentRepository;
+use App\Http\Repository\Eloquent\HouseEloquentRepository;
+use App\Http\Repository\HouseRepositoryInterface;
+use App\Http\Services\CitiesServicesInterface;
+use App\Http\Services\HouseServicesInterface;
+use App\Http\Services\Imple\CitiesServices;
+use App\Http\Services\Imple\HouseServices;
+use Carbon\Carbon;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -35,6 +41,12 @@ class AppServiceProvider extends ServiceProvider
 //        }
 //    }
 //        View::share('countNotice', $countNotice);
+        Carbon::setLocale('vi');
 
+        $this->app->singleton(HouseServicesInterface::class,HouseServices::class);
+        $this->app->singleton(HouseRepositoryInterface::class,HouseEloquentRepository::class);
+
+        $this->app->singleton(CitiesServicesInterface::class,CitiesServices::class);
+        $this->app->singleton(CitiesRepositoryInterface::class,CitiesEloquentRepository::class);
     }
 }

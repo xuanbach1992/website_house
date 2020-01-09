@@ -6,6 +6,8 @@
     <title>Admin | Dashboard</title>
     <base href="{{asset('')}}">
 
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
     <!-- Tell the browser to be responsive to screen width -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Font Awesome -->
@@ -29,6 +31,14 @@
     <link rel="stylesheet" href="{{asset('sourceAdmin/plugins/summernote/summernote-bs4.css')}}">
     <!-- Google Font: Source Sans Pro -->
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+    <style>
+        .btn {
+            border-radius: 45px !important;
+        }
+    </style>
+    <link rel="stylesheet" href="{{asset('source/css/admin.page.css')}}">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
     <script src="{{asset('https://code.jquery.com/jquery-3.1.1.min.js')}}"></script>
     <script src="{{asset('https://code.highcharts.com/highcharts.js')}}"></script>
@@ -48,9 +58,6 @@
             </li>
             <li class="nav-item d-none d-sm-inline-block">
                 <a href="#" class="nav-link">Home</a>
-            </li>
-            <li class="nav-item d-none d-sm-inline-block">
-                <a href="#" class="nav-link">Contact</a>
             </li>
         </ul>
 
@@ -111,24 +118,23 @@
             <img src="sourceAdmin/dist/img/AdminLTELogo.png" alt="AdminLTE Logo"
                  class="brand-image img-circle elevation-3"
                  style="opacity: .8">
-            <span class="brand-text font-weight-light">Trang Quản Lý</span>
+            <span class="brand-text">{{\Illuminate\Support\Facades\Auth::user()->name}} Pages</span>
         </a>
+
         <!-- Sidebar -->
         <div class="sidebar">
             <!-- Sidebar user panel (optional) -->
             <div class="user-panel mt-3 pb-3 mb-3 d-flex">
                 <div class="image">
-                    <img  style="width: 150px;height:150px" src="
-                    @if(auth()->user()->images!=null)
-                    {{asset('/storage/rooms/'.auth()->user()->images)}}
-                    @else
-                        sourceAdmin/dist/img/defaultAvatar.png
-                    @endif
-                        " class="img-circle elevation-2" alt="User Image">
-                </div>
-                <div class="info">
-                    <a href="{{route('user.edit')}}"
-                       class="d-block">{{\Illuminate\Support\Facades\Auth::user()->name}}</a>
+                    <a href="{{route('user.edit')}}">
+                        <img style="width: 150px;height:150px" src="
+
+                        @if(!\Illuminate\Support\Facades\Auth::user()->images)
+                            source/images/avatar.jpeg
+@else
+                        {{ asset('storage/rooms/'. \Illuminate\Support\Facades\Auth::user()->images) }}
+                        @endif
+                            " class="img-circle elevation-2" alt="User Image"></a>
                 </div>
             </div>
 
@@ -168,14 +174,14 @@
                             <li class="nav-item">
                                 <a href="{{route('admin.house.rented')}}" class="nav-link">
                                     <i class="far fa fa-home nav-icon"></i>
-                                    <p>Nhà đã thuê</p>
+                                    <p>Lịch sử thuê nhà</p>
                                 </a>
                             </li>
                         </ul>
                     </li>
 
 
-                    <li class="nav-header">Web người dùng</li>
+                    <li class="nav-header">Website</li>
                     <li class="nav-item">
                         <a href="{{route('index')}}" class="nav-link">
                             <i class="nav-icon fas fa-link"></i>
@@ -225,11 +231,11 @@
         <!-- /.content -->
     </div>
     <!-- /.content-wrapper -->
-    <footer class="main-footer">
-        <strong>Người tạo : <a href="#">Trần Mạnh Hiệp</a>.</strong>
-    </footer>
+{{--    <footer class="main-footer">--}}
+{{--        <strong>Người tạo : <a href="#">Trần Mạnh Hiệp</a>.</strong>--}}
+{{--    </footer>--}}
 
-    <!-- Control Sidebar -->
+<!-- Control Sidebar -->
     <aside class="control-sidebar control-sidebar-dark">
         <!-- Control sidebar content goes here -->
     </aside>
@@ -245,7 +251,6 @@
 <script>
     $.widget.bridge('uibutton', $.ui.button)
 </script>
-
 
 
 <!-- Bootstrap 4 -->
@@ -274,5 +279,46 @@
 <script src="{{asset('sourceAdmin/dist/js/pages/dashboard.js')}}"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="{{asset('sourceAdmin/dist/js/demo.js')}}"></script>
+<script src="{{asset('js/ajax.page.user.js')}}"></script>
+<script>
+    $(document).ready(function () {
+        $(".showReasonDelRent").click(function () {
+            let idOrder = $(this).data('id');
+            $('.idHouseBooking').val(idOrder);
+        });
+    });
+</script>
+
+
+<script>
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+
+    function changeCity(id) {
+        $.ajax({
+            method: "GET",
+            url: 'http://127.0.0.1:8000/getDataByCitiesId',
+            dataType: "json",
+            data: {
+                id: id,
+            },
+            success: function (res) {
+                $('#district_id').empty();
+                $.each(res.data, function (i, item) {
+                    $('#district_id').append($('<option>', {
+                        value: item.id,
+                        text: item.name
+                    }));
+                });
+            },
+            error: function (res) {
+                alert(res.message);
+            }
+        })
+    }
+</script>
 </body>
 </html>

@@ -16,12 +16,12 @@ class House extends Model
 
     public function houseCategory()
     {
-        return $this->hasMany('App\HouseCategory');
+        return $this->belongsTo('App\HouseCategory','house_category_id');
     }
 
     public function roomCategory()
     {
-        return $this->hasMany('App\RoomCategory');
+        return $this->belongsTo('App\RoomCategory');
     }
 
     public function cities()
@@ -51,7 +51,7 @@ class House extends Model
 
     public function star()
     {
-        return $this->belongsTo('App\Star');
+        return $this->hasMany('App\Star');
     }
 
     public function comments()

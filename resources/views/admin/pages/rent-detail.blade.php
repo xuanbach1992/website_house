@@ -18,13 +18,13 @@
                 </thead>
                 <tbody>
                 @foreach($orders as $key=>$order)
-                    @if($order->status===\App\StatusHouseInterface::THANHCONG)
+                    @if($order->status===\App\StatusInterface::DATTHUETHANHCONG)
                         <tr>
                             <th scope="row"> {{$key+1}} </th>
                             <td>{{\App\User::find($order->user_id)->email}}</td>
-                            <td>{{$order->check_in}}</td>
-                            <td>{{$order->check_out}}</td>
-                            <td>{{$order->pay_money}}</td>
+                            <td>{{\Carbon\Carbon::create($order->check_in)->format('d/m/Y')}}</td>
+                            <td>{{\Carbon\Carbon::create($order->check_out)->format('d/m/Y')}}</td>
+                            <td>{{number_format($order->pay_money)}}đ</td>
                             <td></td>
                         <tr>
                 @endif

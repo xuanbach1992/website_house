@@ -1,6 +1,6 @@
 <!--header-->
 <div id="app">
-    <div class="modal fade" id="exampleModalLong_2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
+    <div class="modal fade" id="exampleModalLong_2" role="dialog" aria-labelledby="exampleModalLongTitle"
          aria-hidden="true">
 
         <div class="modal-dialog" role="document">
@@ -15,7 +15,7 @@
                     <h5 class="card-title text-center">Sign In</h5>
                     <form method="POST" action="{{ route('login') }}">
                         @csrf
-                        <div class="form-label-group">
+                        <div class="form-label-group  input-group">
                             <input type="email" style="width: 97%" id="inputEmail" placeholder="Email"
                                    class="form-control @error('email') is-invalid @enderror" name="email"
                                    value="{{ old('email') }}" required autocomplete="email" autofocus>
@@ -30,9 +30,13 @@
                             <input type="password" placeholder="Password"
                                    class="form-control password_show @error('password') is-invalid @enderror"
                                    name="password" required autocomplete="current-password">
-                            <span class="input-group-addon">
+
+                            <div class="input-group-append">
+                              <span class="input-group-text">
                                     <a href=""><i class="fa fa-eye-slash" aria-hidden="true"></i></a>
                                 </span>
+                            </div>
+
 
                             @error('password')
                             <span class="invalid-feedback" role="alert">
@@ -121,15 +125,17 @@
                         @endif
                         @else
 
-                            {{--                            <li><a href="{{route('admin.index')}}" class="nav-link">Admin</a></li>--}}
+                            <li><a href="{{route('admin.house')}}" class="nav-link">Trang Quản Lý</a></li>
+
                             <li><a href="{{route('house.showFormCreate')}}" class="nav-link">Cho Thuê Nhà</a></li>
 
                             {{--                            {{dd(\App\Notification::all())}}--}}
 
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link fa fa-bell"
-                                   style="font-size:24px" href="#" role="button"
-                                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                   data-toggle="dropdown"
+                                   style="font-size:24px" href="{{route('admin.notify.show')}}" role="button"
+                                >
                                     <span class="caret badge">
 <?php $countNotice = 0 ?>
                                         @foreach (\App\Notification::all() as $notice)
@@ -141,26 +147,38 @@
                                     </span>
                                 </a>
 
-                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                <div class="dropdown-menu dropdown-menu-right" style="width: 300px"
+                                     aria-labelledby="navbarDropdown">
                                     @foreach(\App\Notification::all() as $notify)
                                         @if(json_decode($notify->data)->receive==\Illuminate\Support\Facades\Auth::user()->email&&
 $notify->type==='App\Notifications\SendNotificationToHouseHost')
-                                        <a href="{{route('admin.notify.show')}}">
-                                            Yêu cầu thuê phòng từ
+                                            &nbsp Yêu cầu đặt phòng bởi
                                             {{json_decode($notify->data)->sender}}
-                                        </a><br>
+                                            <a href="{{route('admin.notify.show')}}">
+                                                Xem thông báo
+                                            </a><br>
                                         @elseif(json_decode($notify->data)->receive==\Illuminate\Support\Facades\Auth::user()->email&&
 $notify->type==='App\Notifications\NoAcceptRent')
-                                        <a href="{{route('admin.notify.show')}}">
-                                            Yêu cầu thuê không được đồng ý từ
-                                            {{json_decode($notify->data)->sender}}
-                                        </a><br>
+                                            &nbsp Đặt phòng thất bại
+                                            <a style="color: black" href="{{route('admin.notify.show')}}">
+                                                Xem thông báo
+                                            </a><br>
                                         @elseif(json_decode($notify->data)->receive==\Illuminate\Support\Facades\Auth::user()->email&&
 $notify->type==='App\Notifications\AcceptRentHouse')
-                                        <a href="{{route('admin.notify.show')}}">
-                                            Bạn được chủ nhà chấp nhận cho thuê
-                                            {{json_decode($notify->data)->sender}}
-                                        </a><br>
+                                            &nbsp Đặt phòng thành công
+                                            <a style="color: black" href="{{route('admin.notify.show')}}">
+                                                Xem thông báo
+                                            </a><br>
+                                        @elseif(json_decode($notify->data)->receive==\Illuminate\Support\Facades\Auth::user()->email&&
+$notify->type==='App\Notifications\ReplyComment')
+                                            <a class="read_comment" style="color: black"
+                                               href="{{url('/houses/detail/'.json_decode($notify->data)->house_id)}}">
+                                                {{json_decode($notify->data)->sender}} đã trả lời đánh giá của bạn về
+                                                ...
+                                            </a>
+                                            <input type="text" class="notification_id" value="{{$notify->uid}}" readonly="readonly" style="display: none">
+                                            <span
+                                                style="font-size: 10px;float: right">{{$notify->created_at->diffForHumans(\Carbon\Carbon::now())}}</span>
                                         @endif
                                     @endforeach
                                 </div>
@@ -177,7 +195,7 @@ $notify->type==='App\Notifications\AcceptRentHouse')
                                     <a class="dropdown-item"
                                        href="{{route('admin.house')}}">
 
-                                        {{ __('Trang cá nhân') }}
+                                        {{ __('Trang Quản Lý') }}
                                     </a>
                                     <a class="dropdown-item"
                                        href="{{ route('user.edit')}}"

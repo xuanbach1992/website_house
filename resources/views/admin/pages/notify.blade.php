@@ -17,8 +17,10 @@
                         @foreach(\App\Notification::all() as $key=> $notify)
                             @if(json_decode($notify->data)->receive==\Illuminate\Support\Facades\Auth::user()->email&&
 $notify->type==='App\Notifications\SendNotificationToHouseHost')
-                                Tổng tiền
-                            @endif
+                                Nội dung
+{{--                            @else--}}
+{{--                                Chú thích--}}
+                                @endif
                         @endforeach
                     </th>
                     <th scope="col">Ghi chú</th>
@@ -36,9 +38,9 @@ $notify->type==='App\Notifications\SendNotificationToHouseHost')
                                 {{ json_decode($notify->data)->sender}}
                             </td>
                             <td> {{ json_decode($notify->data)->house_title}}</td>
-                            <td> {{ json_decode($notify->data)->checkin}}</td>
-                            <td> {{ json_decode($notify->data)->checkout}}</td>
-                            <td> {{ json_decode($notify->data)->total_price}}</td>
+                            <td>{{json_decode($notify->data)->checkin}}</td>
+                            <td>{{json_decode($notify->data)->checkout}}</td>
+                            <td> Tổng tiền : <br>{{ number_format(json_decode($notify->data)->total_price)}} đ</td>
                             <td>
                                 <a href="{{route('house.notifi.accept',$notify->uid)}}" class="btn btn-primary">Chấp
                                     nhận</a>&nbsp;&nbsp;
@@ -55,12 +57,12 @@ $notify->type==='App\Notifications\AcceptRentHouse')
                                 {{ json_decode($notify->data)->sender}}
                             </td>
                             <td> {{ json_decode($notify->data)->house_title}}</td>
-                            <td> {{ json_decode($notify->data)->checkin}}</td>
-                            <td> {{ json_decode($notify->data)->checkout}}</td>
-                            <td>
+                            <td>{{json_decode($notify->data)->checkin}}</td>
+                            <td>{{json_decode($notify->data)->checkout}}</td>
+                            <td>thành công
                             </td>
                             <td>
-                                <a href="{{route('house.notifi.isread',$notify->uid)}}">Chủ nhà đồng ý cho thuê</a>
+                                <a href="{{route('house.notifi.isread',$notify->uid)}}">Thuê nhà thành công</a>
                             </td>
 
                     @elseif(json_decode($notify->data)->receive==\Illuminate\Support\Facades\Auth::user()->email&&
@@ -73,13 +75,12 @@ $notify->type==='App\Notifications\NoAcceptRent')
                                 {{ json_decode($notify->data)->sender}}
                             </td>
                             <td> {{ json_decode($notify->data)->house_title}}</td>
-                            <td> {{ json_decode($notify->data)->checkin}}</td>
-                            <td> {{ json_decode($notify->data)->checkout}}</td>
-                            <td>
+                            <td>{{json_decode($notify->data)->checkin}}</td>
+                            <td>{{json_decode($notify->data)->checkout}}</td>
+                            <td>Thất bại
                             </td>
                             <td>
-                                <a href="{{route('house.notifi.isread',$notify->uid)}}">Chủ nhà không đồng ý cho
-                                    thuê</a>
+                                <a href="{{route('house.notifi.isread',$notify->uid)}}">Thất bại</a>
                             </td>
                             @endif
                         </tr>
