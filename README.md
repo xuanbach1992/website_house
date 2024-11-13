@@ -1,17 +1,3 @@
-<p align="center">CodeGym</p>
-<p align="center">CGC8 PHP </p>
-<p align="center">C0819H2 </p>
-<p align="center">PO:A. Phan Văn Luân </p>
-<p align="center">scrum master: A.Dư Thanh Hoàng </p>
-<p align="center">Team BTH </p>
-<p align="center">
-
-<a href="https://i.topcv.vn/anxuanbach?ref=2557756">Team Leader: An Xuân Bách</a><br>
-<a href="https://i.topcv.vn/tranmanhhiep?ref=1865999">Member: Trần Mạnh Hiệp</a><br>
-<a href="https://i.topcv.vn/nguyenvantuan?ref=2559182">Member: Nguyễn Văn Tuấn</a></p>
-
-</p>
-
 ## Chi tiết dự án
 
 <b>Mô tả</b>:
